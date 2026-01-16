@@ -277,65 +277,97 @@
     </div>
   </div>
 
-  <script>
-    const PHOTOS_JSON = "photos.json";
-    const INTERVAL = 4500;
+ <script>
+  const PHOTOS_JSON = "photos.json";
+  const INTERVAL = 4500;
 
-    let photos = [];
-    let currentIndex = 0;
-    let timer = null;
+  let photos = [];
+  let currentIndex = 0;
+  let timer = null;
 
-    const heroImage = document.getElementById("heroImage");
-    const thumbGrid = document.getElementById("thumbGrid");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const playPauseBtn = document.getElementById("playPauseBtn");
+  const heroImage = document.getElementById("heroImage");
+  const thumbGrid = document.getElementById("thumbGrid");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const playPauseBtn = document.getElementById("playPauseBtn");
 
-    function showPhoto(index) {
-      currentIndex = (index + photos.length) % photos.length;
-      heroImage.src = photos[currentIndex];
-      document.querySelectorAll(".thumbs img").forEach(img => img.classList.remove("active"));
-      const active = document.querySelector(`img[data-idx="${currentIndex}"]`);
-      if (active) active.classList.add("active");
-    }
+  function showPhoto(index) {
+    if (!photos.length) return;
 
-    function nextPhoto() { showPhoto(currentIndex + 1); }
-    function prevPhoto() { showPhoto(currentIndex - 1); }
+    currentIndex = (index + photos.length) % photos.length;
+    heroImage.src = photos[currentIndex];
 
-    function startSlideshow() {
-      timer = setInterval(nextPhoto, INTERVAL);
-      playPauseBtn.textContent = "Pause";
-    }
+    document
+      .querySelectorAll(".thumbs img")
+      .forEach(img => img.classList.remove("active"));
 
-    function toggleSlideshow() {
-      if (timer) {
-        clearInterval(timer);
-        timer = null;
-        playPauseBtn.textContent = "Play";
-      } else {
-        startSlideshow();
-      }
-    }
+    const active = document.querySelector(
+      `img[data-idx="${currentIndex}"]`
+    );
+    if (active) active.classList.add("active");
+  }
 
-    prevBtn.onclick = prevPhoto;
-    nextBtn.onclick = nextPhoto;
-    playPauseBtn.onclick = toggleSlideshow;
+  function nextPhoto() {
+    showPhoto(currentIndex + 1);
+  }
 
-    async function init() {
-      const res = await fetch(PHOTOS_JSON);
+  function prevPhoto() {
+    showPhoto(currentIndex - 1);
+  }
+
+  function startSlideshow() {
+    timer = setInterval(nextPhoto, INTERVAL);
+    playPauseBtn.textContent = "Pause";
+  }
+
+  function stopSlideshow() {
+    clearInterval(timer);
+    timer = null;
+    playPauseBtn.textContent = "Play";
+  }
+
+  function toggleSlideshow() {
+    timer ? stopSlideshow() : startSlideshow();
+  }
+
+  prevBtn.addEventListener("click", prevPhoto);
+  nextBtn.addEventListener("click", nextPhoto);
+  playPauseBtn.addEventListener("click", toggleSlideshow);
+
+  async function init() {
+    try {
+      const res = await fetch(PHOTOS_JSON, { cache: "no-store" });
       photos = await res.json();
+
       photos.forEach((src, idx) => {
         const img = document.createElement("img");
         img.src = src;
-        img.dataset.idx = idx;
-        img.onclick = () => showPhoto(idx);
+        img.setAttribute("data-idx", idx);
+
+        /* PERFORMANCE IMPROVEMENTS */
+        img.loading = "lazy";     // thumbnails load only when needed
+        img.decoding = "async";   // non-blocking decode
+
+        img.addEventListener("click", () => {
+          showPhoto(idx);
+          if (timer) {
+            stopSlideshow();
+            startSlideshow();
+          }
+        });
+
         thumbGrid.appendChild(img);
       });
+
       showPhoto(0);
       startSlideshow();
+    } catch (e) {
+      console.warn("photos.json not found or invalid");
     }
+  }
 
-    init();
-  </script>
+  init();
+</script>
+
 </body>
 </html>
