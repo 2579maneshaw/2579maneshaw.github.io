@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Attractions | Enchanted Villa of Windsor Hills</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Theme parks, shopping, golf, and more near Enchanted Villa of Windsor Hills — plan your routes and build the perfect Disney day." />
+  <meta name="description" content="Theme parks, shopping, golf, and more near Enchanted Villa of Windsor Hills — plan routes from Windsor Hills and build the perfect Disney day." />
 
   <style>
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#222;}
@@ -18,6 +18,7 @@
 
     h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
     p{color:#333;line-height:1.65;margin:0 0 12px;}
+
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
     @media (max-width: 860px){.grid{grid-template-columns:1fr;}}
 
@@ -36,10 +37,48 @@
 
     .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
     .list li{margin:6px 0;}
-    .list a{color:#111;}
+
+    /* Turn links into in-page route buttons (keep your look) */
+    .routeBtn{
+      appearance:none;
+      border:0;
+      background:transparent;
+      padding:0;
+      margin:0;
+      color:#111;
+      font: inherit;
+      text-decoration: underline;
+      cursor:pointer;
+    }
+    .routeBtn:hover{opacity:0.75;}
+
     .mapWrap{border-radius:16px;overflow:hidden;border:1px solid #eee;background:#f3f3f3;}
-    iframe{width:100%;height:420px;border:0;}
+    iframe{width:100%;height:520px;border:0;display:block;}
+    @media (max-width: 860px){iframe{height:420px;}}
+
     .mini{font-size:0.95rem;color:#555;margin-top:10px;}
+
+    .mapTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .mapTitle{margin:0;font-size:1.25rem;}
+    .mapSub{margin:4px 0 0;color:#555;font-size:0.95rem;line-height:1.45;}
+    .pill{
+      display:inline-block;
+      padding:8px 10px;
+      border:1px solid #eee;
+      background:#fafafa;
+      border-radius:999px;
+      font-size:0.92rem;
+      color:#111;
+      white-space:nowrap;
+    }
+
     .footer{text-align:center;margin-top:40px;color:#666;font-size:0.92rem;}
   </style>
 </head>
@@ -64,52 +103,107 @@
     <h1>Local Attractions</h1>
     <p>
       Build a smoother park plan with smarter travel — including a <strong>midday break</strong> when the heat hits.
-      Use the links below to open the fastest route in your Maps app.
+      Tap any attraction below and your map will instantly update with directions from the Windsor Hills gate area.
     </p>
 
     <div class="grid">
       <div class="card">
         <h2>Theme Parks</h2>
         <ul class="list">
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Magic+Kingdom+Park">Magic Kingdom</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=EPCOT">EPCOT</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Disney's+Hollywood+Studios">Hollywood Studios</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Disney's+Animal+Kingdom+Theme+Park">Animal Kingdom</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Universal+Studios+Florida">Universal Studios Florida</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Universal's+Islands+of+Adventure">Islands of Adventure</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=SeaWorld+Orlando">SeaWorld Orlando</a></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('Magic Kingdom Park')">Magic Kingdom</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('EPCOT')">EPCOT</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute(`Disney's Hollywood Studios`)">Hollywood Studios</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute(`Disney's Animal Kingdom Theme Park`)">Animal Kingdom</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('Universal Studios Florida')">Universal Studios Florida</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute(`Universal's Islands of Adventure`)">Islands of Adventure</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('SeaWorld Orlando')">SeaWorld Orlando</button></li>
         </ul>
       </div>
 
       <div class="card">
         <h2>Shopping, Golf, and More</h2>
         <ul class="list">
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Disney+Springs">Disney Springs</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=Orlando+Vineland+Premium+Outlets">Vineland Premium Outlets</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=2579+Maneshaw+Ln+Kissimmee+FL+34747&destination=ChampionsGate+Golf+Club">Golf: ChampionsGate</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=mini+golf+near+Windsor+Hills+Kissimmee">Mini Golf nearby</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=beach+day+trip+from+Kissimmee+FL">Beaches (best day trip options)</a></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('Disney Springs')">Disney Springs</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('Orlando Vineland Premium Outlets')">Vineland Premium Outlets</button></li>
+          <li><button class="routeBtn" type="button" onclick="setRoute('ChampionsGate Golf Club')">Golf: ChampionsGate</button></li>
+
+          <!-- Searches: keep as links but still avoid your address; use Windsor Hills as the query anchor -->
+          <li>
+            <a class="routeBtn" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=mini+golf+near+Windsor+Hills+Resort+Kissimmee+FL">
+              Mini Golf nearby
+            </a>
+          </li>
+          <li>
+            <a class="routeBtn" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=beach+day+trip+from+Kissimmee+FL">
+              Beaches (best day trip options)
+            </a>
+          </li>
         </ul>
       </div>
     </div>
 
-    <div class="card" style="margin-top:16px;">
-      <h2>Map Centered on Enchanted Villa of Windsor Hills</h2>
-      <p>Use this to visualize how quickly you can return for a midday break.</p>
+    <!-- MAP SECTION (single embedded map that updates in-place) -->
+    <div class="card" id="mapSection" style="margin-top:16px;">
+      <div class="mapTop">
+        <div>
+          <h2 class="mapTitle">Route Map</h2>
+          <p class="mapSub" id="mapSubtitle">
+            Showing directions from Windsor Hills Resort (Gate) to Magic Kingdom
+          </p>
+        </div>
+        <span class="pill" id="originPill">Origin: Windsor Hills Resort (Gate)</span>
+      </div>
+
       <div class="mapWrap">
         <iframe
+          id="routeMap"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=2579+Maneshaw+Ln+Kissimmee+FL+34747&z=12&output=embed"
-          title="Map centered on Enchanted Villa of Windsor Hills">
+          src=""
+          title="Directions from Windsor Hills Resort to selected attraction">
         </iframe>
       </div>
+
       <p class="mini">
-        Want a faster plan: pick a park, set a midday break time, and commit to returning for a reset.
+        Pro tip: pick your park, choose a <strong>midday break</strong> window, and actually come back to reset.
+        You’ll feel the difference by fireworks.
       </p>
     </div>
 
     <div class="footer">Enchanted Villa of Windsor Hills</div>
   </div>
+
+  <script>
+    // Keep origin generic for privacy (no address, no street number).
+    // This is stable in Google Maps and avoids exposing your exact location.
+    const ORIGIN_LABEL = "Windsor Hills Resort (Gate)";
+    const ORIGIN_QUERY = "Windsor Hills Resort Kissimmee FL";
+
+    const DEFAULT_DEST = "Magic Kingdom Park";
+
+    const map = document.getElementById("routeMap");
+    const subtitle = document.getElementById("mapSubtitle");
+    const originPill = document.getElementById("originPill");
+
+    originPill.textContent = "Origin: " + ORIGIN_LABEL;
+
+    function buildEmbedDirectionsUrl(origin, destination) {
+      const o = encodeURIComponent(origin);
+      const d = encodeURIComponent(destination);
+      // Free public embed; no API key required.
+      return `https://www.google.com/maps?output=embed&saddr=${o}&daddr=${d}`;
+    }
+
+    function setRoute(destinationLabel) {
+      map.src = buildEmbedDirectionsUrl(ORIGIN_QUERY, destinationLabel);
+      subtitle.textContent = `Showing directions from ${ORIGIN_LABEL} to ${destinationLabel}`;
+      document.getElementById("mapSection").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Init default route
+    setRoute(DEFAULT_DEST);
+  </script>
 </body>
 </html>
