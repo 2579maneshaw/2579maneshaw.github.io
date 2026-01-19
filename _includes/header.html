@@ -1,9 +1,9 @@
 <header class="siteHeader">
   <div class="headerInner">
 
-    <!-- LEFT: Brand + subtitle + nav stacked -->
+    <!-- LEFT: logo + title + subtitle + nav -->
     <div class="headerLeft">
-      <a class="brandBlock" href="{{ '/home.html' | relative_url }}" style="text-decoration:none; color:inherit;">
+      <a class="brandBlock" href="{{ '/home.html' | relative_url }}">
         <picture class="brandLogo">
           <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
           <img
@@ -15,26 +15,27 @@
           />
         </picture>
 
+        <!-- TEXT COLUMN -->
         <div class="brandText">
           <div class="brandName">Enchanted Villa of Windsor Hills</div>
-          <div class="brandTagline">The Pause Between the Parks.</div>
+          <div class="brandTagline"><em>The Pause Between the Parks.</em></div>
+
+          <!-- NAV IS NOW UNDER TITLE (NOT LOGO) -->
+          <nav class="mainNav" aria-label="Primary navigation">
+            <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
+            <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
+            <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
+            <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
+            <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
+          </nav>
         </div>
       </a>
-
-      <!-- NAV MOVED HERE -->
-      <nav class="mainNav navBelowTitle" aria-label="Primary navigation">
-        <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
-        <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
-        <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
-        <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
-        <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
-      </nav>
     </div>
 
     <!-- RIGHT: CTA -->
     <div class="headerRight">
       <a
-        class="btn headerCta"
+        class="headerCta"
         href="https://www.signaturevillasorlando.com/listing/400961"
         target="_blank"
         rel="noopener"
