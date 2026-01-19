@@ -1,38 +1,28 @@
 <header class="siteHeader">
   <div class="headerInner">
 
-    <!-- LEFT: logo + title/subtitle + nav UNDER subtitle -->
-    <div class="headerLeft">
-      <a class="brandBlock" href="{{ '/home.html' | relative_url }}">
-        <picture class="brandLogo">
-          <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
-          <img
-            src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
-            alt="Enchanted Villa of Windsor Hills logo"
-            width="200"
-            height="187"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+    <!-- Logo (left column) -->
+    <a class="brandLogoLink" href="{{ '/home.html' | relative_url }}" aria-label="Go to Home">
+      <picture class="brandLogo">
+        <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
+        <img
+          src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
+          alt="Enchanted Villa of Windsor Hills logo"
+          width="200"
+          height="187"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+    </a>
 
-        <div class="brandText">
-          <div class="brandName">Enchanted Villa of Windsor Hills</div>
-          <div class="brandTagline"><em>The Pause Between the Parks.</em></div>
-
-          <!-- IMPORTANT: Ensure there are NO empty <a> tags in here -->
-          <nav class="mainNav" aria-label="Primary navigation">
-            <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
-            <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
-            <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
-            <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
-            <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
-          </nav>
-        </div>
-      </a>
+    <!-- Title + subtitle (middle column, row 1) -->
+    <div class="brandText">
+      <div class="brandName">Enchanted Villa of Windsor Hills</div>
+      <div class="brandTagline"><em>The Pause Between the Parks.</em></div>
     </div>
 
-    <!-- RIGHT: global CTA -->
+    <!-- CTA (right column) -->
     <div class="headerRight">
       <a
         class="headerCta"
@@ -43,6 +33,15 @@
         Check Availability
       </a>
     </div>
+
+    <!-- Nav (middle column, row 2 — directly under subtitle) -->
+    <nav class="mainNav" aria-label="Primary navigation">
+      <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
+      <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
+      <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
+      <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
+      <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
+    </nav>
 
   </div>
 </header>
