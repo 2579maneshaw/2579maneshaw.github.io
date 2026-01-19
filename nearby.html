@@ -1,240 +1,213 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Nearby | Enchanted Villa of Windsor Hills</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Nearby restaurants, groceries, and essentials near Enchanted Villa of Windsor Hills — including gluten-free and vegan-friendly options within 8 miles." />
+---
+layout: default
+title: Nearby
+nav: nearby
+description: Nearby restaurants, groceries, and essentials near Enchanted Villa of Windsor Hills — including gluten-free and vegan-friendly options within 8 miles.
+---
 
-  <style>
-    * { box-sizing: border-box; }
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#222;}
-    .wrap{max-width:1020px;margin:0 auto;padding:22px 16px 60px;}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
-    .brand-logo{display:block;max-width:160px;width:100%;height:auto;}
-    nav{display:flex;gap:10px;flex-wrap:wrap;}
-    nav a{text-decoration:none;color:#111;font-size:0.95rem;padding:10px 12px;border-radius:999px;border:1px solid #eee;background:#fafafa;}
-    nav a:hover{background:#f2f2f2;}
-    nav a.active{background:#111;color:#fff;border-color:#111;}
+<style>
+  /* Page-specific (Nearby) styles only */
+  .wrap{max-width:1020px;margin:0 auto;padding:22px 16px 60px;}
 
-    h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
-    p{color:#333;line-height:1.65;margin:0 0 12px;}
+  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
+  p{color:#333;line-height:1.65;margin:0 0 12px;}
 
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-    @media (max-width: 860px){.grid{grid-template-columns:1fr;}}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width: 860px){.grid{grid-template-columns:1fr;}}
 
-    .card{position:relative;border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,0.05);overflow:hidden;}
-    .card::after{
-      content:"Enchanted Villa of Windsor Hills";
-      position:absolute;
-      right:-40px; bottom:18px;
-      transform: rotate(-10deg);
-      font-size: 0.85rem;
-      color: rgba(0,0,0,0.14);
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-      pointer-events:none;
-    }
+  .card{position:relative;border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,0.05);overflow:hidden;}
+  .card::after{
+    content:"Enchanted Villa of Windsor Hills";
+    position:absolute;
+    right:-40px; bottom:18px;
+    transform: rotate(-10deg);
+    font-size: 0.85rem;
+    color: rgba(0,0,0,0.14);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    pointer-events:none;
+  }
 
-    h2{margin:0 0 10px;font-size:1.25rem;letter-spacing:-0.02em;}
-    .mini{font-size:0.95rem;color:#555;margin-top:10px;}
-    .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
-    .list li{margin:6px 0;}
-    .list a{color:#111;text-decoration:underline;text-underline-offset:3px;}
+  h2{margin:0 0 10px;font-size:1.25rem;letter-spacing:-0.02em;}
+  .mini{font-size:0.95rem;color:#555;margin-top:10px;}
+  .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
+  .list li{margin:6px 0;}
+  .list a{color:#111;text-decoration:underline;text-underline-offset:3px;}
 
-    .filters{
-      display:flex;gap:10px;flex-wrap:wrap;
-      margin: 8px 0 16px;
-    }
-    .pill{
-      border:1px solid #eee;
-      background:#fafafa;
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:0.95rem;
-      cursor:pointer;
-      user-select:none;
-    }
-    .pill.active{
-      background:#111;color:#fff;border-color:#111;
-    }
+  .filters{
+    display:flex;gap:10px;flex-wrap:wrap;
+    margin: 8px 0 16px;
+  }
+  .pill{
+    border:1px solid #eee;
+    background:#fafafa;
+    padding:10px 12px;
+    border-radius:999px;
+    font-size:0.95rem;
+    cursor:pointer;
+    user-select:none;
+  }
+  .pill.active{
+    background:#111;color:#fff;border-color:#111;
+  }
 
-    .sectionBlock{display:none;}
-    .sectionBlock.active{display:block;}
+  .sectionBlock{display:none;}
+  .sectionBlock.active{display:block;}
 
-    .mapWrap{border-radius:16px;overflow:hidden;border:1px solid #eee;background:#f3f3f3;}
-    iframe{width:100%;height:420px;border:0;}
+  .mapWrap{border-radius:16px;overflow:hidden;border:1px solid #eee;background:#f3f3f3;}
+  iframe{width:100%;height:420px;border:0;}
 
-    .footer{text-align:center;margin-top:40px;color:#666;font-size:0.92rem;}
-  </style>
-</head>
+  .footer{text-align:center;margin-top:40px;color:#666;font-size:0.92rem;}
+</style>
 
-<body>
-  <div class="wrap">
-    <div class="topbar">
-      <picture>
-        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
-        <img src="photos/EVWHlogo-600w.jpg" alt="Enchanted Villa of Windsor Hills logo" class="brand-logo" width="160" height="149" decoding="async" loading="eager">
-      </picture>
+<div class="wrap">
+  <h1>Nearby Restaurants and Convenience</h1>
+  <p>
+    These quick links help you find food and essentials fast — perfect for a <strong>midday break</strong> or a late-night run.
+    Use the filters to view popular categories, including <strong>gluten-free</strong> and <strong>vegan-friendly</strong> options within 8 miles.
+  </p>
 
-      <nav aria-label="Site navigation">
-        <a href="home.html">Home</a>
-        <a href="index.html">Our Villa</a>
-        <a class="active" href="nearby.html">Nearby</a>
-        <a href="attractions.html">Attractions</a>
-        <a href="windsor-hills.html">Windsor Hills</a>
-      </nav>
-    </div>
-
-    <h1>Nearby Restaurants and Convenience</h1>
-    <p>
-      These quick links help you find food and essentials fast — perfect for a <strong>midday break</strong> or a late-night run.
-      Use the filters to view popular categories, including <strong>gluten-free</strong> and <strong>vegan-friendly</strong> options within 8 miles.
-    </p>
-
-    <!-- FILTERS -->
-    <div class="filters" role="tablist" aria-label="Nearby filters">
-      <button class="pill active" type="button" data-target="tab-popular" role="tab" aria-selected="true">Popular</button>
-      <button class="pill" type="button" data-target="tab-groceries" role="tab" aria-selected="false">Groceries & Essentials</button>
-      <button class="pill" type="button" data-target="tab-glutenfree" role="tab" aria-selected="false">Gluten-free (8 mi)</button>
-      <button class="pill" type="button" data-target="tab-vegan" role="tab" aria-selected="false">Vegan-friendly (8 mi)</button>
-    </div>
-
-    <!-- POPULAR -->
-    <div id="tab-popular" class="sectionBlock active" role="tabpanel">
-      <div class="grid">
-        <div class="card">
-          <h2>Food Favorites</h2>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bayridge+Sushi+near+Windsor+Hills+Kissimmee">Bayridge Sushi</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sickies+Garage+Burgers+%26+Brews+near+Windsor+Hills+Kissimmee">Sickies Garage Burgers &amp; Brews</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kob%C3%A9+Japanese+Steakhouse+near+Windsor+Hills+Kissimmee">Kob&eacute; Japanese Steakhouse (hibachi + sushi)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=best+pizza+near+Windsor+Hills+Kissimmee">Pizza nearby</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=tacos+near+Windsor+Hills+Kissimmee">Tacos nearby</a></li>
-          </ul>
-          <p class="mini">Tip: for the fastest “midday break” meals, filter by “Open now” in Maps.</p>
-        </div>
-
-        <div class="card">
-          <h2>Quick Coffee + Treats</h2>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=coffee+near+Windsor+Hills+Kissimmee">Coffee nearby</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=donuts+near+Windsor+Hills+Kissimmee">Donuts nearby</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=ice+cream+near+Windsor+Hills+Kissimmee">Ice cream nearby</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- GROCERIES -->
-    <div id="tab-groceries" class="sectionBlock" role="tabpanel">
-      <div class="grid">
-        <div class="card">
-          <h2>Groceries</h2>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Target+near+Windsor+Hills+Kissimmee">Target</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Walmart+near+Windsor+Hills+Kissimmee">Walmart</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Publix+near+Windsor+Hills+Kissimmee">Publix</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Aldi+near+Windsor+Hills+Kissimmee">ALDI</a></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>Essentials</h2>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=CVS+near+Windsor+Hills+Kissimmee">CVS</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Walgreens+near+Windsor+Hills+Kissimmee">Walgreens</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=urgent+care+near+Windsor+Hills+Kissimmee">Urgent Care</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gas+station+near+Windsor+Hills+Kissimmee">Gas Stations</a></li>
-          </ul>
-          <p class="mini">Forgot something? “Near me” works great once you’re on-site.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- GLUTEN-FREE (8 miles) -->
-    <div id="tab-glutenfree" class="sectionBlock" role="tabpanel">
-      <div class="grid">
-        <div class="card">
-          <h2>Gluten-free Friendly (within 8 miles)</h2>
-          <p>These links open Maps searches pre-filtered around Windsor Hills. Use “Ratings” and “Open now” for the fastest wins.</p>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free restaurants near Windsor Hills</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+pizza+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free pizza near Windsor Hills</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+breakfast+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free breakfast near Windsor Hills</a></li>
-          </ul>
-          <p class="mini">If you have celiac or strict needs, always confirm cross-contact policies.</p>
-        </div>
-
-        <div class="card">
-          <h2>Helpful Search Shortcuts</h2>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+bakery+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free bakeries (8 mi)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=celiac+safe+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">“Celiac safe” restaurants (8 mi)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+delivery+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free delivery (8 mi)</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- VEGAN (8 miles) -->
-    <div id="tab-vegan" class="sectionBlock" role="tabpanel">
-      <div class="grid">
-        <div class="card">
-          <h2>Vegan Friendly (within 8 miles)</h2>
-          <p>Best way to find options fast: filter by “Vegan” keywords in reviews and check menus online.</p>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">Vegan restaurants near Windsor Hills</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=plant-based+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">Plant-based restaurants (8 mi)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+friendly+breakfast+near+Windsor+Hills+Kissimmee&radius=12875">Vegan-friendly breakfast (8 mi)</a></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>Vegan Friendly Fast Food</h2>
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+options+near+Windsor+Hills+Kissimmee&radius=12875">“Vegan options” near Windsor Hills (8 mi)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+delivery+near+Windsor+Hills+Kissimmee&radius=12875">Vegan delivery (8 mi)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+friendly+pizza+near+Windsor+Hills+Kissimmee&radius=12875">Vegan-friendly pizza (8 mi)</a></li>
-          </ul>
-          <p class="mini">Tip: “Vegan-friendly” usually means some options, not fully vegan kitchens.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:16px;">
-      <h2>Map View (Windsor Hills Area)</h2>
-      <p>Use this map to spot what’s closest for a quick grocery run or midday break meal.</p>
-      <div class="mapWrap">
-        <iframe
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=Windsor%20Hills%20Resort%20Kissimmee%20FL&z=13&output=embed"
-          title="Map centered near Windsor Hills Resort">
-        </iframe>
-      </div>
-    </div>
-
-    <div class="footer">Enchanted Villa of Windsor Hills</div>
+  <!-- FILTERS -->
+  <div class="filters" role="tablist" aria-label="Nearby filters">
+    <button class="pill active" type="button" data-target="tab-popular" role="tab" aria-selected="true">Popular</button>
+    <button class="pill" type="button" data-target="tab-groceries" role="tab" aria-selected="false">Groceries &amp; Essentials</button>
+    <button class="pill" type="button" data-target="tab-glutenfree" role="tab" aria-selected="false">Gluten-free (8 mi)</button>
+    <button class="pill" type="button" data-target="tab-vegan" role="tab" aria-selected="false">Vegan-friendly (8 mi)</button>
   </div>
 
-  <script>
-    // Simple tab switcher
-    const pills = Array.from(document.querySelectorAll(".pill"));
-    const panels = Array.from(document.querySelectorAll(".sectionBlock"));
+  <!-- POPULAR -->
+  <div id="tab-popular" class="sectionBlock active" role="tabpanel">
+    <div class="grid">
+      <div class="card">
+        <h2>Food Favorites</h2>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bayridge+Sushi+near+Windsor+Hills+Kissimmee">Bayridge Sushi</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sickies+Garage+Burgers+%26+Brews+near+Windsor+Hills+Kissimmee">Sickies Garage Burgers &amp; Brews</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kob%C3%A9+Japanese+Steakhouse+near+Windsor+Hills+Kissimmee">Kob&eacute; Japanese Steakhouse (hibachi + sushi)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=best+pizza+near+Windsor+Hills+Kissimmee">Pizza nearby</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=tacos+near+Windsor+Hills+Kissimmee">Tacos nearby</a></li>
+        </ul>
+        <p class="mini">Tip: for the fastest “midday break” meals, filter by “Open now” in Maps.</p>
+      </div>
 
-    function activate(targetId) {
-      panels.forEach(p => p.classList.toggle("active", p.id === targetId));
-      pills.forEach(b => {
-        const on = b.dataset.target === targetId;
-        b.classList.toggle("active", on);
-        b.setAttribute("aria-selected", on ? "true" : "false");
-      });
-    }
+      <div class="card">
+        <h2>Quick Coffee + Treats</h2>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=coffee+near+Windsor+Hills+Kissimmee">Coffee nearby</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=donuts+near+Windsor+Hills+Kissimmee">Donuts nearby</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=ice+cream+near+Windsor+Hills+Kissimmee">Ice cream nearby</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    pills.forEach(btn => {
-      btn.addEventListener("click", () => activate(btn.dataset.target));
+  <!-- GROCERIES -->
+  <div id="tab-groceries" class="sectionBlock" role="tabpanel">
+    <div class="grid">
+      <div class="card">
+        <h2>Groceries</h2>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Target+near+Windsor+Hills+Kissimmee">Target</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Walmart+near+Windsor+Hills+Kissimmee">Walmart</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Publix+near+Windsor+Hills+Kissimmee">Publix</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Aldi+near+Windsor+Hills+Kissimmee">ALDI</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Essentials</h2>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=CVS+near+Windsor+Hills+Kissimmee">CVS</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Walgreens+near+Windsor+Hills+Kissimmee">Walgreens</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=urgent+care+near+Windsor+Hills+Kissimmee">Urgent Care</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gas+station+near+Windsor+Hills+Kissimmee">Gas Stations</a></li>
+        </ul>
+        <p class="mini">Forgot something? “Near me” works great once you’re on-site.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLUTEN-FREE (8 miles) -->
+  <div id="tab-glutenfree" class="sectionBlock" role="tabpanel">
+    <div class="grid">
+      <div class="card">
+        <h2>Gluten-free Friendly (within 8 miles)</h2>
+        <p>These links open Maps searches pre-filtered around Windsor Hills. Use “Ratings” and “Open now” for the fastest wins.</p>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free restaurants near Windsor Hills</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+pizza+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free pizza near Windsor Hills</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+breakfast+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free breakfast near Windsor Hills</a></li>
+        </ul>
+        <p class="mini">If you have celiac or strict needs, always confirm cross-contact policies.</p>
+      </div>
+
+      <div class="card">
+        <h2>Helpful Search Shortcuts</h2>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+bakery+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free bakeries (8 mi)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=celiac+safe+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">“Celiac safe” restaurants (8 mi)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=gluten-free+delivery+near+Windsor+Hills+Kissimmee&radius=12875">Gluten-free delivery (8 mi)</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEGAN (8 miles) -->
+  <div id="tab-vegan" class="sectionBlock" role="tabpanel">
+    <div class="grid">
+      <div class="card">
+        <h2>Vegan Friendly (within 8 miles)</h2>
+        <p>Best way to find options fast: filter by “Vegan” keywords in reviews and check menus online.</p>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">Vegan restaurants near Windsor Hills</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=plant-based+restaurants+near+Windsor+Hills+Kissimmee&radius=12875">Plant-based restaurants (8 mi)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+friendly+breakfast+near+Windsor+Hills+Kissimmee&radius=12875">Vegan-friendly breakfast (8 mi)</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Vegan Friendly Fast Food</h2>
+        <ul class="list">
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+options+near+Windsor+Hills+Kissimmee&radius=12875">“Vegan options” near Windsor Hills (8 mi)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+delivery+near+Windsor+Hills+Kissimmee&radius=12875">Vegan delivery (8 mi)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=vegan+friendly+pizza+near+Windsor+Hills+Kissimmee&radius=12875">Vegan-friendly pizza (8 mi)</a></li>
+        </ul>
+        <p class="mini">Tip: “Vegan-friendly” usually means some options, not fully vegan kitchens.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h2>Map View (Windsor Hills Area)</h2>
+    <p>Use this map to spot what’s closest for a quick grocery run or midday break meal.</p>
+    <div class="mapWrap">
+      <iframe
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Windsor%20Hills%20Resort%20Kissimmee%20FL&z=13&output=embed"
+        title="Map centered near Windsor Hills Resort">
+      </iframe>
+    </div>
+  </div>
+
+  <div class="footer">Enchanted Villa of Windsor Hills</div>
+</div>
+
+<script>
+  // Simple tab switcher
+  const pills = Array.from(document.querySelectorAll(".pill"));
+  const panels = Array.from(document.querySelectorAll(".sectionBlock"));
+
+  function activate(targetId) {
+    panels.forEach(p => p.classList.toggle("active", p.id === targetId));
+    pills.forEach(b => {
+      const on = b.dataset.target === targetId;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
     });
-  </script>
-</body>
-</html>
+  }
+
+  pills.forEach(btn => {
+    btn.addEventListener("click", () => activate(btn.dataset.target));
+  });
+</script>
