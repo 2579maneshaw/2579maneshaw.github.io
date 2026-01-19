@@ -2,228 +2,189 @@
 layout: default
 title: Enchanted Villa of Windsor Hills | Disney Midday Break Retreat
 description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. Close enough for a Disney midday break, steps from Windsor Hills amenities.
+nav: home
 ---
 
 <section class="heroCopy" aria-label="Intro">
   <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
   <p class="subline"><strong>Close enough to the Disney parks for a midday break.</strong></p>
 
-  <!-- rest of your home page content here -->
-</section>
-
-
-  <div class="wrap">
-      
-    <section class="heroCopy" aria-label="Intro">
-      <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
-      <p class="subline">
-        <strong>Close enough to the Disney parks for a midday break.</strong> 
-      </p>
-
-      <div class="chips" aria-label="Highlights">
-        <span class="chip">Midday break friendly</span>
-        <span class="chip">Steps to Windsor Hills amenities</span>
-        <span class="chip">Private screened splash pool</span>
-        <span class="chip">Spa inspired calm</span>
-      </div>
-
-      <div class="ctaRow">
-        <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
-        <a class="btn ghost" href="index.html">View Our Villa Photos</a>
-      </div>
-    </section>
-
-    <section class="grid2">
-      <div class="card">
-        <h2>Our Villa</h2>
-        <p>
-          Designed for families who want the best of both worlds: the excitement of the parks, and a peaceful place to truly recharge.
-        </p>
-
-        <ul class="bullets">
-          <li>Private screened in splash pool with year round pool heat included</li>
-          <li>Spa inspired interiors built for rest and calm evenings</li>
-          <li>Multiple ensuite bedrooms for comfort and privacy</li>
-          <li>Walkable to the Windsor Hills clubhouse and waterpark</li>
-          <li>Quick access to Disney for a midday break during hot park days</li>
-        </ul>
-
-        <div class="ctaRow">
-          <a class="btn primary" href="index.html">Explore the Villa</a>
-          <a class="btn ghost" href="nearby.html">See Nearby Convenience</a>
-        </div>
-
-        <div class="welcomeNote">
-          <strong>All guests are warmly welcome.</strong><br/>
-          Enchanted Villa of Windsor Hills is a Christian owned property, and a portion of our profits is thoughtfully dedicated to charitable and faith based giving.
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Villa Gallery</h2>
-        <p>Full photo experience is on the Our Villa page. Click for larger view.</p>
-        <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
-      </div>
-    </section>
-
-    <section class="grid2" style="margin-top:18px;">
-      <div class="card">
-        <h2>Windsor Hills Resort</h2>
-        <p>
-          One of the most loved resort communities near Disney. Enjoy the amenities when you want energy, and come back to your calm when you want rest.
-        </p>
-
-        <ul class="bullets">
-          <li>Gated community with 24 hour security</li>
-          <li>Resort style lagoon pool, waterpark, and splash areas</li>
-          <li>Clubhouse, fitness center, arcade, and movie theater</li>
-          <li>Playgrounds, sports courts, and walking paths</li>
-        </ul>
-
-        <div class="ctaRow">
-          <a class="btn primary" href="windsor-hills.html">Explore Windsor Hills</a>
-          <a class="btn ghost" href="attractions.html">Plan Your Park Days</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Resort Gallery</h2>
-        <p>More resort details are on the Windsor Hills page. Click for larger view.</p>
-        <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
-      </div>
-    </section>
-
-    <div class="footer">Enchanted Villa of Windsor Hills</div>
+  <div class="chips" aria-label="Highlights">
+    <span class="chip">Midday break friendly</span>
+    <span class="chip">Steps to Windsor Hills amenities</span>
+    <span class="chip">Private screened splash pool</span>
+    <span class="chip">Spa inspired calm</span>
   </div>
 
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <div class="lightboxInner">
-      <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
-      <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
-      <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
-      <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
+  <div class="ctaRow">
+    <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
+    <a class="btn ghost" href="index.html">View Our Villa Photos</a>
+  </div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h2>Our Villa</h2>
+    <p>Designed for families who want the best of both worlds: the excitement of the parks, and a peaceful place to truly recharge.</p>
+
+    <ul class="bullets">
+      <li>Private screened in splash pool with year round pool heat included</li>
+      <li>Spa inspired interiors built for rest and calm evenings</li>
+      <li>Multiple ensuite bedrooms for comfort and privacy</li>
+      <li>Walkable to the Windsor Hills clubhouse and waterpark</li>
+      <li>Quick access to Disney for a midday break during hot park days</li>
+    </ul>
+
+    <div class="ctaRow">
+      <a class="btn primary" href="index.html">Explore the Villa</a>
+      <a class="btn ghost" href="nearby.html">See Nearby Convenience</a>
+    </div>
+
+    <div class="welcomeNote">
+      <strong>All guests are warmly welcome.</strong><br/>
+      Enchanted Villa of Windsor Hills is a Christian owned property, and a portion of our profits is thoughtfully dedicated to charitable and faith based giving.
     </div>
   </div>
 
-  <script>
-    // Separate lists so you can easily add photos to each gallery without editing home.html.
-    // Create these files in your repo root (same folder as home.html):
-    // - villa-photos.webp.json
-    // - resort-photos.webp.json
-    // Optional jpg fallbacks if you want:
-    // - villa-photos.json
-    // - resort-photos.json
-    const VILLA_JSON = "villa-photos.webp.json";
-    const RESORT_JSON = "resort-photos.webp.json";
+  <div class="card">
+    <h2>Villa Gallery</h2>
+    <p>Full photo experience is on the Our Villa page. Click for larger view.</p>
+    <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
+  </div>
+</section>
 
-    function withJpgFallback(src, imgEl) {
-      imgEl.onerror = () => {
-        if (src && src.toLowerCase().endsWith(".webp")) {
-          imgEl.onerror = null;
-          imgEl.src = src.replace(/\.webp$/i, ".jpg");
-        }
-      };
-    }
+<section class="grid2" style="margin-top:18px;">
+  <div class="card">
+    <h2>Windsor Hills Resort</h2>
+    <p>One of the most loved resort communities near Disney. Enjoy the amenities when you want energy, and come back to your calm when you want rest.</p>
 
-    async function loadList(preferred, fallback) {
-      try {
-        const res = await fetch(preferred, { cache: "no-store" });
-        if (!res.ok) throw new Error("preferred not ok");
-        return await res.json();
-      } catch (e) {
-        if (!fallback) throw e;
-        const res2 = await fetch(fallback, { cache: "no-store" });
-        return await res2.json();
+    <ul class="bullets">
+      <li>Gated community with 24 hour security</li>
+      <li>Resort style lagoon pool, waterpark, and splash areas</li>
+      <li>Clubhouse, fitness center, arcade, and movie theater</li>
+      <li>Playgrounds, sports courts, and walking paths</li>
+    </ul>
+
+    <div class="ctaRow">
+      <a class="btn primary" href="windsor-hills.html">Explore Windsor Hills</a>
+      <a class="btn ghost" href="attractions.html">Plan Your Park Days</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Resort Gallery</h2>
+    <p>More resort details are on the Windsor Hills page. Click for larger view.</p>
+    <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightboxInner">
+    <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
+    <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
+    <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
+    <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
+  </div>
+</div>
+
+<script>
+  const VILLA_JSON = "villa-photos.webp.json";
+  const RESORT_JSON = "resort-photos.webp.json";
+
+  function withJpgFallback(src, imgEl) {
+    imgEl.onerror = () => {
+      if (src && src.toLowerCase().endsWith(".webp")) {
+        imgEl.onerror = null;
+        imgEl.src = src.replace(/\.webp$/i, ".jpg");
       }
+    };
+  }
+
+  async function loadList(preferred, fallback) {
+    try {
+      const res = await fetch(preferred, { cache: "no-store" });
+      if (!res.ok) throw new Error("preferred not ok");
+      return await res.json();
+    } catch (e) {
+      if (!fallback) throw e;
+      const res2 = await fetch(fallback, { cache: "no-store" });
+      return await res2.json();
     }
+  }
 
-    // Lightbox state
-    let lbList = [];
-    let lbIndex = 0;
+  let lbList = [];
+  let lbIndex = 0;
 
-    const lightbox = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbPrev = document.getElementById("lbPrev");
-    const lbNext = document.getElementById("lbNext");
-    const lbClose = document.getElementById("lbClose");
+  const lightbox = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbPrev = document.getElementById("lbPrev");
+  const lbNext = document.getElementById("lbNext");
+  const lbClose = document.getElementById("lbClose");
 
-    function openLightbox(list, index) {
-      lbList = list || [];
-      lbIndex = index || 0;
-      if (!lbList.length) return;
+  function openLightbox(list, index) {
+    lbList = list || [];
+    lbIndex = index || 0;
+    if (!lbList.length) return;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    showLb(lbIndex);
+  }
 
-      lightbox.classList.add("open");
-      lightbox.setAttribute("aria-hidden", "false");
-      showLb(lbIndex);
-    }
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+  }
 
-    function closeLightbox() {
-      lightbox.classList.remove("open");
-      lightbox.setAttribute("aria-hidden", "true");
-    }
+  function showLb(i) {
+    if (!lbList.length) return;
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIndex];
+    withJpgFallback(lbList[lbIndex], lbImg);
+  }
 
-    function showLb(i) {
-      if (!lbList.length) return;
-      lbIndex = (i + lbList.length) % lbList.length;
-      lbImg.src = lbList[lbIndex];
-      withJpgFallback(lbList[lbIndex], lbImg);
-    }
+  function lbNextPhoto(){ showLb(lbIndex + 1); }
+  function lbPrevPhoto(){ showLb(lbIndex - 1); }
 
-    function lbNextPhoto() { showLb(lbIndex + 1); }
-    function lbPrevPhoto() { showLb(lbIndex - 1); }
+  lbNext.addEventListener("click", lbNextPhoto);
+  lbPrev.addEventListener("click", lbPrevPhoto);
+  lbClose.addEventListener("click", closeLightbox);
 
-    lbNext.addEventListener("click", lbNextPhoto);
-    lbPrev.addEventListener("click", lbPrevPhoto);
-    lbClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
 
-    // Close when clicking backdrop
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") lbNextPhoto();
+    if (e.key === "ArrowLeft") lbPrevPhoto();
+  });
+
+  function addMiniGallery(containerId, photos) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = "";
+    photos.forEach((src, idx) => {
+      const img = document.createElement("img");
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.src = src;
+      img.alt = "Enchanted Villa preview photo";
+      withJpgFallback(src, img);
+      img.addEventListener("click", () => openLightbox(photos, idx));
+      el.appendChild(img);
     });
+  }
 
-    // Keyboard support
-    document.addEventListener("keydown", (e) => {
-      if (!lightbox.classList.contains("open")) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") lbNextPhoto();
-      if (e.key === "ArrowLeft") lbPrevPhoto();
-    });
-
-    function addMiniGallery(containerId, photos) {
-      const el = document.getElementById(containerId);
-      if (!el) return;
-
-      el.innerHTML = "";
-
-      photos.forEach((src, idx) => {
-        const img = document.createElement("img");
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.src = src;
-        img.alt = "Enchanted Villa preview photo";
-        withJpgFallback(src, img);
-
-        // Click to open lightbox and browse left/right
-        img.addEventListener("click", () => openLightbox(photos, idx));
-
-        el.appendChild(img);
-      });
+  async function initHome() {
+    try {
+      const villaPhotos = await loadList(VILLA_JSON, "villa-photos.json");
+      const resortPhotos = await loadList(RESORT_JSON, "resort-photos.json");
+      addMiniGallery("villaMiniGallery", villaPhotos);
+      addMiniGallery("resortMiniGallery", resortPhotos);
+    } catch (e) {
+      console.warn("Could not load gallery JSON files.", e);
     }
+  }
 
-    async function initHome() {
-      try {
-        const villaPhotos = await loadList(VILLA_JSON, "villa-photos.json");
-        const resortPhotos = await loadList(RESORT_JSON, "resort-photos.json");
-
-        addMiniGallery("villaMiniGallery", villaPhotos);
-        addMiniGallery("resortMiniGallery", resortPhotos);
-      } catch (e) {
-        console.warn("Could not load gallery JSON files.", e);
-      }
-    }
-
-    initHome();
-  </script>
-</body>
-</html>
+  initHome();
+</script>
