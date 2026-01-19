@@ -1,7 +1,7 @@
 <header class="siteHeader">
   <div class="headerInner">
 
-    <!-- LEFT: logo + title + subtitle + nav -->
+    <!-- LEFT: logo + title/subtitle + nav UNDER subtitle -->
     <div class="headerLeft">
       <a class="brandBlock" href="{{ '/home.html' | relative_url }}">
         <picture class="brandLogo">
@@ -12,15 +12,15 @@
             width="200"
             height="187"
             loading="eager"
+            decoding="async"
           />
         </picture>
 
-        <!-- TEXT COLUMN -->
         <div class="brandText">
           <div class="brandName">Enchanted Villa of Windsor Hills</div>
           <div class="brandTagline"><em>The Pause Between the Parks.</em></div>
 
-          <!-- NAV IS NOW UNDER TITLE (NOT LOGO) -->
+          <!-- IMPORTANT: Ensure there are NO empty <a> tags in here -->
           <nav class="mainNav" aria-label="Primary navigation">
             <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
             <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
@@ -32,7 +32,7 @@
       </a>
     </div>
 
-    <!-- RIGHT: CTA -->
+    <!-- RIGHT: global CTA -->
     <div class="headerRight">
       <a
         class="headerCta"
