@@ -78,11 +78,28 @@
       max-width: 900px;
     }
 
+    /* Tags (not button-y) */
     .chips { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
     .chip {
-      font-size:0.92rem; color:#111;
-      background:#fff; border:1px solid #e9e9e9;
-      padding:8px 12px; border-radius:999px;
+      font-size:0.92rem;
+      color:#333;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 0;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      opacity: 0.95;
+    }
+    .chip::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#111;
+      opacity: 0.55;
+      flex: 0 0 auto;
     }
 
     .ctaRow { margin-top: 16px; display:flex; gap:10px; flex-wrap:wrap; }
@@ -129,6 +146,17 @@
 
     /* Featured + strip gallery */
     .galleryWrap { display:flex; flex-direction:column; gap:12px; }
+    .featuredBtn {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .featuredBtn:focus { outline: 2px solid #111; outline-offset: 3px; }
+
     .featuredImg {
       width:100%;
       height: 330px;
@@ -136,8 +164,21 @@
       border:1px solid #eee;
       object-fit: cover;
       background:#f3f3f3;
+      display:block;
     }
     @media (max-width: 720px) { .featuredImg { height: 260px; } }
+
+    .zoomHint {
+      position:absolute;
+      right:12px;
+      bottom:12px;
+      font-size:0.92rem;
+      background: rgba(0,0,0,0.55);
+      color:#fff;
+      padding:8px 10px;
+      border-radius: 999px;
+      pointer-events:none;
+    }
 
     .miniGallery {
       display:flex;
@@ -173,6 +214,79 @@
     }
 
     .footer { text-align:center; margin-top: 44px; color:#666; font-size:0.92rem; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.84);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .lightbox.open { display:flex; }
+
+    .lightboxInner {
+      width: min(1100px, 100%);
+      position: relative;
+    }
+
+    .lightboxImg {
+      width: 100%;
+      max-height: calc(100vh - 120px);
+      object-fit: contain;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      display:block;
+    }
+
+    .lbTopRow {
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+    }
+
+    .lbBtn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.92);
+      color:#111;
+      font-size: 0.95rem;
+    }
+    .lbBtn:hover { background: #fff; }
+
+    .lbNav {
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display:flex;
+      gap:10px;
+      width: 100%;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events: none;
+    }
+    .lbArrow {
+      pointer-events: auto;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 0;
+      cursor: pointer;
+      background: rgba(255,255,255,0.92);
+      font-size: 1.1rem;
+      color:#111;
+    }
+    .lbArrow:hover { background:#fff; }
   </style>
 </head>
 
@@ -218,7 +332,7 @@
         <strong>Close enough to the Disney parks for a midday break</strong> so every Disney day feels just as magical as the first.
       </p>
 
-      <div class="chips" aria-label="Highlights chips">
+      <div class="chips" aria-label="Highlights">
         <span class="chip">Midday break friendly</span>
         <span class="chip">Steps to Windsor Hills amenities</span>
         <span class="chip">Private screened splash pool</span>
@@ -259,10 +373,13 @@
 
       <div class="card">
         <h2>Villa Gallery</h2>
-        <p>Tap a photo to preview. Full photo experience is on the Our Villa page.</p>
+        <p>Tap a photo to preview. Click the large photo to view full screen and swipe or use arrows.</p>
 
         <div class="galleryWrap">
-          <img id="villaFeatured" class="featuredImg" src="" alt="Featured villa photo" decoding="async" />
+          <button class="featuredBtn" id="villaFeaturedBtn" type="button" aria-label="Open villa photos full screen">
+            <img id="villaFeatured" class="featuredImg" src="" alt="Featured villa photo" decoding="async" />
+            <span class="zoomHint">View Photos</span>
+          </button>
           <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
         </div>
       </div>
@@ -290,10 +407,13 @@
 
       <div class="card">
         <h2>Resort Gallery</h2>
-        <p>More resort details are on the Windsor Hills page.</p>
+        <p>Click the large photo to view full screen and swipe or use arrows.</p>
 
         <div class="galleryWrap">
-          <img id="resortFeatured" class="featuredImg" src="" alt="Featured resort photo" decoding="async" />
+          <button class="featuredBtn" id="resortFeaturedBtn" type="button" aria-label="Open resort photos full screen">
+            <img id="resortFeatured" class="featuredImg" src="" alt="Featured resort photo" decoding="async" />
+            <span class="zoomHint">View Photos</span>
+          </button>
           <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
         </div>
       </div>
@@ -302,12 +422,44 @@
     <div class="footer">Enchanted Villa of Windsor Hills</div>
   </div>
 
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="lightboxInner">
+      <div class="lbTopRow">
+        <div id="lbCounter">Photo</div>
+        <button id="lbClose" class="lbBtn" type="button" aria-label="Close viewer">Close ✕</button>
+      </div>
+
+      <img id="lbImg" class="lightboxImg" src="" alt="Full size photo" decoding="async" />
+
+      <div class="lbNav" aria-label="Lightbox navigation">
+        <button id="lbPrev" class="lbArrow" type="button" aria-label="Previous photo">◀</button>
+        <button id="lbNext" class="lbArrow" type="button" aria-label="Next photo">▶</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const PHOTOS_JSON = "photos.webp.json";
 
     // Change these anytime (indexes in your photos.webp.json)
     const VILLA_PICK = [0,1,2,3,4,5,6,7];
     const RESORT_PICK = [8,9,10,11,12,13,14,15];
+
+    let ALL_PHOTOS = [];
+    let currentSet = [];
+    let currentSetName = "";
+    let lbIndex = 0;
+
+    const villaFeatured = document.getElementById("villaFeatured");
+    const resortFeatured = document.getElementById("resortFeatured");
+
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbClose = document.getElementById("lbClose");
+    const lbPrev = document.getElementById("lbPrev");
+    const lbNext = document.getElementById("lbNext");
+    const lbCounter = document.getElementById("lbCounter");
 
     function withJpgFallback(src, imgEl) {
       imgEl.onerror = () => {
@@ -324,14 +476,84 @@
       withJpgFallback(src, featuredEl);
     }
 
-    function addMiniGallery(containerId, photos, picks, featuredElId) {
+    function openLightbox(setArr, startIndex, setName) {
+      currentSet = setArr.slice();
+      currentSetName = setName || "Photos";
+      lbIndex = startIndex || 0;
+
+      lb.classList.add("open");
+      document.body.style.overflow = "hidden";
+      renderLightbox();
+    }
+
+    function closeLightbox() {
+      lb.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function renderLightbox() {
+      if (!currentSet.length) return;
+      const src = currentSet[lbIndex];
+
+      lbImg.src = src;
+      withJpgFallback(src, lbImg);
+
+      lbCounter.textContent = `${currentSetName} • ${lbIndex + 1} of ${currentSet.length}`;
+    }
+
+    function nextLb() {
+      if (!currentSet.length) return;
+      lbIndex = (lbIndex + 1) % currentSet.length;
+      renderLightbox();
+    }
+
+    function prevLb() {
+      if (!currentSet.length) return;
+      lbIndex = (lbIndex - 1 + currentSet.length) % currentSet.length;
+      renderLightbox();
+    }
+
+    // Close when clicking outside image area
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    lbClose.addEventListener("click", closeLightbox);
+    lbNext.addEventListener("click", nextLb);
+    lbPrev.addEventListener("click", prevLb);
+
+    // Keyboard
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextLb();
+      if (e.key === "ArrowLeft") prevLb();
+    });
+
+    // Swipe support (touch)
+    let touchStartX = null;
+    lbImg.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    lbImg.addEventListener("touchend", (e) => {
+      if (touchStartX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const delta = endX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(delta) < 40) return;
+      delta < 0 ? nextLb() : prevLb();
+    }, { passive: true });
+
+    function addMiniGallery(containerId, photos, picks, featuredEl, setName) {
       const el = document.getElementById(containerId);
-      const featuredEl = document.getElementById(featuredElId);
       if (!el) return;
 
-      // Set default featured image to the first pick
-      const firstSrc = photos[picks[0]];
-      setFeatured(featuredEl, firstSrc);
+      // Build set array in the order of picks
+      const setArr = picks.map(i => photos[i]).filter(Boolean);
+
+      // Default featured
+      setFeatured(featuredEl, setArr[0]);
 
       picks.forEach((i, idx) => {
         const src = photos[i];
@@ -347,24 +569,39 @@
         if (idx === 0) img.classList.add("active");
 
         img.addEventListener("click", () => {
-          // active state
           el.querySelectorAll("img").forEach(x => x.classList.remove("active"));
           img.classList.add("active");
-          // update featured
           setFeatured(featuredEl, src);
         });
 
         el.appendChild(img);
       });
+
+      // Clicking featured opens lightbox at current featured index
+      return setArr;
     }
 
     async function initHome() {
       try {
         const res = await fetch(PHOTOS_JSON, { cache: "no-store" });
-        const photos = await res.json();
+        ALL_PHOTOS = await res.json();
 
-        addMiniGallery("villaMiniGallery", photos, VILLA_PICK, "villaFeatured");
-        addMiniGallery("resortMiniGallery", photos, RESORT_PICK, "resortFeatured");
+        const villaSet = addMiniGallery("villaMiniGallery", ALL_PHOTOS, VILLA_PICK, villaFeatured, "Villa Photos");
+        const resortSet = addMiniGallery("resortMiniGallery", ALL_PHOTOS, RESORT_PICK, resortFeatured, "Resort Photos");
+
+        // Featured click handlers: open at current featured position
+        document.getElementById("villaFeaturedBtn").addEventListener("click", () => {
+          const currentSrc = villaFeatured.getAttribute("src");
+          const start = Math.max(0, villaSet.indexOf(currentSrc));
+          openLightbox(villaSet, start, "Villa Photos");
+        });
+
+        document.getElementById("resortFeaturedBtn").addEventListener("click", () => {
+          const currentSrc = resortFeatured.getAttribute("src");
+          const start = Math.max(0, resortSet.indexOf(currentSrc));
+          openLightbox(resortSet, start, "Resort Photos");
+        });
+
       } catch (e) {
         console.warn("Could not load photos list for mini galleries.");
       }
