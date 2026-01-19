@@ -18,37 +18,16 @@
 
       <div class="brandText">
         <div class="brandName">Enchanted Villa of Windsor Hills</div>
-        <div class="brandTagline">
-          Rejuvenate your body. Restore your mind.<br>
-          Make every Disney day feels just as magical as the first.
-        </div>
+        <div class="brandTagline">The Pause Between the Parks</div>
       </div>
     </div>
 
     <nav class="mainNav" aria-label="Primary navigation">
-      <a href="home.html" data-nav="home">Home</a>
-      <a href="index.html" data-nav="villa">Our Villa</a>
-      <a href="nearby.html" data-nav="nearby">Nearby</a>
-      <a href="attractions.html" data-nav="attractions">Attractions</a>
-      <a href="windsor-hills.html" data-nav="windsor">Windsor Hills</a>
+      <a href="{{ '/home.html' | relative_url }}" class="{% if page.nav == 'home' %}active{% endif %}">Home</a>
+      <a href="{{ '/index.html' | relative_url }}" class="{% if page.nav == 'villa' %}active{% endif %}">Our Villa</a>
+      <a href="{{ '/nearby.html' | relative_url }}" class="{% if page.nav == 'nearby' %}active{% endif %}">Nearby</a>
+      <a href="{{ '/attractions.html' | relative_url }}" class="{% if page.nav == 'attractions' %}active{% endif %}">Attractions</a>
+      <a href="{{ '/windsor-hills.html' | relative_url }}" class="{% if page.nav == 'windsor' %}active{% endif %}">Windsor Hills</a>
     </nav>
   </div>
 </header>
-
-<script>
-  // Auto-highlight the active page in the shared header
-  (function () {
-    const map = {
-      "home.html": "home",
-      "index.html": "villa",
-      "nearby.html": "nearby",
-      "attractions.html": "attractions",
-      "windsor-hills.html": "windsor"
-    };
-    const path = (location.pathname.split("/").pop() || "home.html").toLowerCase();
-    const key = map[path];
-    if (!key) return;
-    const link = document.querySelector('.mainNav a[data-nav="' + key + '"]');
-    if (link) link.classList.add("active");
-  })();
-</script>
