@@ -3,15 +3,9 @@
 ================================ */
 * { box-sizing: border-box; }
 
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
+html, body { width: 100%; overflow-x: hidden; }
 
-img, svg, video, canvas {
-  max-width: 100%;
-  height: auto;
-}
+img, svg, video, canvas { max-width: 100%; height: auto; }
 
 body {
   margin: 0;
@@ -20,7 +14,7 @@ body {
   color: #222;
 }
 
-/* Global page wrapper used by _layouts/default.html */
+/* Wrapper used by _layouts/default.html */
 .pageWrap{
   max-width: 1100px;
   width: 100%;
@@ -28,94 +22,88 @@ body {
   padding: 18px 16px 60px;
 }
 
-/* optional legacy wrapper */
-.wrap {
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 18px 16px 60px;
-}
-
 /* ===============================
-   HEADER
+   HEADER (Grid layout)
 ================================ */
 .siteHeader {
   border-bottom: 1px solid #eee;
   background: #fff;
 }
 
-.headerInner {
+.headerInner{
   max-width: 1100px;
   margin: 0 auto;
   padding: 16px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
+
+  display: grid;
+  grid-template-columns: 200px 1fr auto; /* logo | content | CTA */
+  grid-template-rows: auto auto;         /* title row | nav row */
+  column-gap: 18px;
+  row-gap: 10px;
+
+  align-items: start;
 }
 
-/* LEFT side */
-.headerLeft {
-  display: flex;
-  min-width: 0;
-}
-
-/* Brand row: logo + text */
-.brandBlock {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
+/* Logo sits in column 1 and spans both rows */
+.brandLogoLink{
+  grid-column: 1;
+  grid-row: 1 / span 2;
   text-decoration: none;
   color: inherit;
-  min-width: 0;
-}
-
-.brandLogo {
-  flex: 0 0 auto;
   display: block;
 }
 
-/* FORCE title + subtitle + nav to stack vertically */
-.brandText {
+.brandLogo { display:block; }
+
+/* Title/subtitle in column 2 row 1 */
+.brandText{
+  grid-column: 2;
+  grid-row: 1;
+
   display: flex;
-  flex-direction: column;   /* <-- critical */
-  align-items: flex-start;  /* <-- critical */
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   min-width: 0;
 }
 
-.brandName {
-  font-size: 1.85rem;
-  font-weight: 700;
+.brandName{
+  font-size: 1.9rem;
+  font-weight: 800;
   letter-spacing: -0.03em;
-  color: #111;
   line-height: 1.05;
+  color: #111;
   margin: 0;
 }
 
-.brandTagline {
+.brandTagline{
+  margin: 0;
   font-size: 1rem;
   color: #555;
   line-height: 1.25;
-  margin: 0;               /* <-- prevents weird inline shifting */
 }
 
-/* NAV under subtitle */
-.mainNav {
+/* Nav under subtitle (column 2 row 2) */
+.mainNav{
+  grid-column: 2;
+  grid-row: 2;
+
   display: flex;
-  flex-direction: row;     /* <-- keeps buttons horizontal */
-  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 6px;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+
   padding: 0;
+  margin: 0;
 }
 
-/* SAFETY: hide any accidental empty nav links (the “blank button”) */
-.mainNav a:empty {
-  display: none !important;
-}
+/* Hide any accidental empty/blank links (safety) */
+.mainNav a[href=""],
+.mainNav a:not([href]){ display:none !important; }
 
-.mainNav a {
+/* Nav pill styles */
+.mainNav a{
   text-decoration: none;
   font-size: 0.95rem;
   color: #111;
@@ -128,43 +116,41 @@ body {
   justify-content: center;
 }
 
-.mainNav a:hover {
-  background: #f2f2f2;
-}
+.mainNav a:hover{ background: #f2f2f2; }
 
-.mainNav a.active {
+.mainNav a.active{
   background: #111;
   color: #fff;
   border-color: #111;
 }
 
-/* RIGHT side CTA */
-.headerRight {
-  padding-top: 6px;
-  flex: 0 0 auto;
+/* CTA in column 3 row 1 */
+.headerRight{
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
 }
 
-.headerCta {
+.headerCta{
   display: inline-block;
-  background: #2f5fd0; /* logo-matched blue */
+  background: #2f5fd0; /* blue that matches logo vibe */
   color: #fff;
   padding: 12px 22px;
   border-radius: 999px;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
   border: 1px solid rgba(0,0,0,0.12);
   white-space: nowrap;
 }
 
-.headerCta:hover {
-  background: #244bb0;
-}
+.headerCta:hover{ background: #244bb0; }
 
 /* ===============================
-   SHARED REUSABLE UI
+   REUSABLE UI
 ================================ */
-.card {
+.card{
   border: 1px solid #eee;
   border-radius: 16px;
   padding: 16px;
@@ -173,42 +159,53 @@ body {
   min-width: 0;
 }
 
-.footer {
+.footer{
   text-align: center;
   margin-top: 40px;
   color: #666;
   font-size: 0.92rem;
 }
 
-/* Prevent “skinny left column” grid issues */
+/* Grid helper */
 .grid2{
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 18px;
   align-items: start;
 }
-.grid2 > * { min-width: 0; }
+.grid2 > *{ min-width: 0; }
 
-/* ===============================
-   MOBILE
-================================ */
-@media (max-width: 860px) {
-  .headerInner {
-    flex-direction: column;
-    align-items: flex-start;
+@media (max-width: 860px){
+  .grid2{ grid-template-columns: 1fr; }
+
+  .headerInner{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
   }
 
-  .headerRight {
-    width: 100%;
-    padding-top: 10px;
+  .brandLogoLink{
+    grid-column: 1;
+    grid-row: 1;
   }
 
-  .headerCta {
+  .brandText{
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .mainNav{
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .headerRight{
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: start;
+  }
+
+  .headerCta{
     width: 100%;
     text-align: center;
-  }
-
-  .grid2 {
-    grid-template-columns: 1fr;
   }
 }
