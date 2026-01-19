@@ -1,14 +1,13 @@
 <header class="siteHeader">
   <div class="headerInner">
-    <div class="brandBlock">
-      <picture>
-        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
+    <a class="brandBlock" href="{{ '/home.html' | relative_url }}" style="text-decoration:none; color:inherit;">
+      <picture class="brandLogo">
+        <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
         <img
-          src="photos/EVWHlogo-600w.jpg"
-          srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
+          src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
+          srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
           sizes="200px"
           alt="Enchanted Villa of Windsor Hills logo"
-          class="brandLogo"
           width="200"
           height="187"
           loading="eager"
@@ -20,14 +19,14 @@
         <div class="brandName">Enchanted Villa of Windsor Hills</div>
         <div class="brandTagline">The Pause Between the Parks</div>
       </div>
-    </div>
+    </a>
 
     <nav class="mainNav" aria-label="Primary navigation">
-      <a href="{{ '/home.html' | relative_url }}" class="{% if page.nav == 'home' %}active{% endif %}">Home</a>
-      <a href="{{ '/index.html' | relative_url }}" class="{% if page.nav == 'villa' %}active{% endif %}">Our Villa</a>
-      <a href="{{ '/nearby.html' | relative_url }}" class="{% if page.nav == 'nearby' %}active{% endif %}">Nearby</a>
-      <a href="{{ '/attractions.html' | relative_url }}" class="{% if page.nav == 'attractions' %}active{% endif %}">Attractions</a>
-      <a href="{{ '/windsor-hills.html' | relative_url }}" class="{% if page.nav == 'windsor' %}active{% endif %}">Windsor Hills</a>
+      <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
+      <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
+      <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
+      <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
+      <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
     </nav>
   </div>
 </header>
