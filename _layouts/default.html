@@ -1,13 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  {% include head.html %}
+  <meta charset="UTF-8" />
+  <title>{{ page.title }}</title>
+  <meta name="description" content="{{ page.description }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
+
 <body>
   {% include header.html %}
-  <main class="wrap">
+  <div class="wrap">
     {{ content }}
-  </main>
-  {% include footer.html %}
+  </div>
 </body>
 </html>
