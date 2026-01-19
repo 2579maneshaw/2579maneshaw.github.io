@@ -1,17 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>{{ page.title }}</title>
-  <meta name="description" content="{{ page.description }}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/style.css" />
+  {% include head.html %}
 </head>
-
 <body>
   {% include header.html %}
-  <div class="wrap">
+  <main class="wrap">
     {{ content }}
-  </div>
+  </main>
+
+  <footer class="footer">Enchanted Villa of Windsor Hills</footer>
 </body>
 </html>
