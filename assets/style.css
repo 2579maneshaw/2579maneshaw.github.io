@@ -1,113 +1,218 @@
-/* Global page wrapper used by _layouts/default.html */
-.pageWrap{
+/* ===============================
+   GLOBAL RESET + BASE
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===============================
+   PAGE WRAPPER
+================================ */
+.pageWrap {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
   padding: 18px 16px 60px;
 }
 
-* { box-sizing: border-box; }
-html, body { width: 100%; overflow-x: hidden; }
-img, svg, video, canvas { max-width: 100%; height: auto; }
-
-body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#fff; color:#222; }
-
-/* Header */
-.siteHeader { border-bottom: 1px solid #eee; background: #fff; }
-
-/* KEY FIX: keep header content centered like the page (no massive empty middle) */
-.headerInner{
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
+/* ===============================
+   HEADER
+================================ */
+.siteHeader {
+  border-bottom: 1px solid #eee;
+  background: #fff;
 }
 
-/* Brand block */
-.brandBlock{
+.headerInner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* LEFT STACK */
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* BRAND ROW */
+.brandBlock {
   display: flex;
   align-items: center;
   gap: 14px;
-  min-width: 0;
   text-decoration: none;
   color: inherit;
 }
 
-.brandLogo { flex: 0 0 auto; display:block; }
-.brandLogoImg { display:block; }
+.brandLogo {
+  flex-shrink: 0;
+}
 
-.brandText { line-height: 1.15; min-width: 0; }
-.brandName{
-  font-size: 1.9rem;      /* a bit bigger */
-  font-weight: 800;
+.brandText {
+  min-width: 0;
+}
+
+.brandName {
+  font-size: 1.8rem;
+  font-weight: 700;
   letter-spacing: -0.03em;
   color: #111;
 }
-.brandTagline{
-  margin-top: 6px;
-  font-size: 1.02rem;     /* a bit bigger */
-  line-height: 1.25;
+
+.brandTagline {
+  margin-top: 4px;
+  font-size: 1rem;
+  font-style: italic;
   color: #555;
+  opacity: 0.9;
 }
 
-/* Nav */
-.mainNav{
+/* ===============================
+   NAV (UNDER TITLE)
+================================ */
+.mainNav {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-left: auto;      /* pushes nav to the right without creating “space-between emptiness” */
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
-.mainNav a{
+.mainNav a {
   text-decoration: none;
   font-size: 0.95rem;
   color: #111;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid #eee;
+  border: 1px solid #e6e6e6;
   background: #fafafa;
-}
-.mainNav a:hover{ background: #f2f2f2; }
-.mainNav a.active{ background:#111; color:#fff; border-color:#111; }
-
-@media (max-width: 860px){
-  .mainNav{ width: 100%; margin-left: 0; justify-content: flex-start; }
+  transition: all 0.2s ease;
 }
 
-/* Home + shared grid helpers */
-.grid2{
+.mainNav a:hover {
+  background: #f2f2f2;
+}
+
+.mainNav a.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* ===============================
+   HEADER RIGHT CTA
+================================ */
+.headerRight {
+  flex-shrink: 0;
+}
+
+.headerCta {
+  background: #2f5fd0; /* logo-matching blue */
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.headerCta:hover {
+  background: #244bb0;
+}
+
+/* ===============================
+   CONTENT CARDS / SECTIONS
+================================ */
+.card {
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+  min-width: 0;
+}
+
+/* ===============================
+   GRID HELPERS
+================================ */
+.grid2 {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 18px;
   align-items: start;
 }
-@media (max-width: 860px){
-  .grid2{ grid-template-columns: 1fr; }
-}
-.grid2 > *{ min-width: 0; }
 
-/* Reusable page bits */
-.card{
+.grid2 > * {
   min-width: 0;
-  border:1px solid #eee;
-  border-radius:16px;
-  padding:16px;
-  background:#fff;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.05);
 }
 
-/* Footer include */
-.siteFooter{ border-top: 1px solid #eee; background:#fff; }
-.footerInner{
+@media (max-width: 860px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.siteFooter {
+  margin-top: 40px;
+  padding: 24px 16px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+.footerInner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 18px 16px;
   text-align: center;
-  color:#666;
-  font-size:0.92rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ===============================
+   MOBILE ADJUSTMENTS
+================================ */
+@media (max-width: 860px) {
+  .headerInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerRight {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .headerCta {
+    width: 100%;
+    text-align: center;
+  }
 }
