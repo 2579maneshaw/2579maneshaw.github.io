@@ -1,5 +1,6 @@
 <header class="siteHeader">
   <div class="headerInner">
+    <!-- LEFT: Brand -->
     <a class="brandBlock" href="{{ '/home.html' | relative_url }}">
       <picture class="brandLogo">
         <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
@@ -22,12 +23,77 @@
       </div>
     </a>
 
-    <nav class="mainNav" aria-label="Primary navigation">
+    <!-- CENTER: Nav -->
+    <nav class="mainNav mainNavCentered" aria-label="Primary navigation">
       <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
       <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
       <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
       <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
       <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
     </nav>
+
+    <!-- RIGHT: Check Availability -->
+    <div class="headerCTA">
+      <a class="checkAvailBtn"
+         href="https://www.signaturevillasorlando.com/listing/400961"
+         target="_blank"
+         rel="noopener">
+        Check Availability
+      </a>
+    </div>
   </div>
+
+  <!-- Header-only CSS (keeps the change isolated to the header) -->
+  <style>
+    /* 3-column header: left brand, centered nav, right CTA */
+    .headerInner{
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+
+    /* Center the nav inside the middle column */
+    .mainNavCentered{
+      justify-content: center;
+      margin-left: 0 !important; /* overrides any previous margin-left:auto behavior */
+    }
+
+    /* Right-side CTA button */
+    .headerCTA{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .checkAvailBtn{
+      display: inline-block;
+      text-decoration: none;
+      background: #111;
+      color: #fff;
+      border: 1px solid #111;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .checkAvailBtn:hover{
+      background: #2a2a2a;
+      border-color: #2a2a2a;
+    }
+
+    /* Mobile: stack brand, nav, button nicely */
+    @media (max-width: 860px){
+      .headerInner{
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .mainNavCentered{
+        justify-content: flex-start;
+      }
+      .headerCTA{
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </header>
