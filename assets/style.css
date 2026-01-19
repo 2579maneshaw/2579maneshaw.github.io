@@ -24,6 +24,11 @@ body {
 
 /* ===============================
    HEADER (Grid layout)
+   Goal:
+   - Logo left
+   - Title + subtitle in middle (row 1)
+   - CTA to the right of the title (row 1)
+   - Nav directly under subtitle (row 2) in ONE horizontal line
 ================================ */
 .siteHeader {
   border-bottom: 1px solid #eee;
@@ -36,15 +41,17 @@ body {
   padding: 16px;
 
   display: grid;
-  grid-template-columns: 200px 1fr auto; /* logo | content | CTA */
-  grid-template-rows: auto auto;         /* title row | nav row */
+
+  /* Give the middle column priority so nav doesn't wrap */
+  grid-template-columns: 200px minmax(0, 1fr) 220px; /* logo | content | CTA */
+  grid-template-rows: auto auto;                    /* title row | nav row */
   column-gap: 18px;
   row-gap: 10px;
 
   align-items: start;
 }
 
-/* Logo sits in column 1 and spans both rows */
+/* Logo spans both rows */
 .brandLogoLink{
   grid-column: 1;
   grid-row: 1 / span 2;
@@ -55,7 +62,7 @@ body {
 
 .brandLogo { display:block; }
 
-/* Title/subtitle in column 2 row 1 */
+/* Title/subtitle */
 .brandText{
   grid-column: 2;
   grid-row: 1;
@@ -83,27 +90,56 @@ body {
   line-height: 1.25;
 }
 
-/* Nav under subtitle (column 2 row 2) */
+/* CTA sits to the right of the TITLE (same row) */
+.headerRight{
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+}
+
+.headerCta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #2f5fd0; /* logo-matching blue */
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  white-space: nowrap;
+}
+
+.headerCta:hover{ background: #244bb0; }
+
+/* Nav directly under subtitle — FORCE ONE LINE */
 .mainNav{
-  grid-column: 2;
+  grid-column: 2 / span 2; /* use both center + CTA columns for nav width */
   grid-row: 2;
 
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;       /* CRITICAL: prevents vertical stacking */
   gap: 10px;
   align-items: center;
   justify-content: flex-start;
 
-  padding: 0;
+  overflow-x: auto;        /* if screen is tight, scroll horizontally */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+
+  padding: 2px 0 6px;
   margin: 0;
 }
 
-/* Hide any accidental empty/blank links (safety) */
+/* Safety: hide any accidental empty links */
 .mainNav a[href=""],
 .mainNav a:not([href]){ display:none !important; }
 
-/* Nav pill styles */
 .mainNav a{
+  flex: 0 0 auto;          /* CRITICAL: keeps pills from shrinking weirdly */
   text-decoration: none;
   font-size: 0.95rem;
   color: #111;
@@ -114,6 +150,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 }
 
 .mainNav a:hover{ background: #f2f2f2; }
@@ -123,29 +160,6 @@ body {
   color: #fff;
   border-color: #111;
 }
-
-/* CTA in column 3 row 1 */
-.headerRight{
-  grid-column: 3;
-  grid-row: 1;
-  align-self: start;
-  justify-self: end;
-}
-
-.headerCta{
-  display: inline-block;
-  background: #2f5fd0; /* blue that matches logo vibe */
-  color: #fff;
-  padding: 12px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.95rem;
-  border: 1px solid rgba(0,0,0,0.12);
-  white-space: nowrap;
-}
-
-.headerCta:hover{ background: #244bb0; }
 
 /* ===============================
    REUSABLE UI
@@ -175,17 +189,21 @@ body {
 }
 .grid2 > *{ min-width: 0; }
 
+/* ===============================
+   MOBILE
+================================ */
 @media (max-width: 860px){
   .grid2{ grid-template-columns: 1fr; }
 
   .headerInner{
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
   }
 
   .brandLogoLink{
     grid-column: 1;
     grid-row: 1;
+    justify-self: start;
   }
 
   .brandText{
@@ -193,19 +211,18 @@ body {
     grid-row: 2;
   }
 
-  .mainNav{
-    grid-column: 1;
-    grid-row: 3;
-  }
-
   .headerRight{
     grid-column: 1;
-    grid-row: 4;
+    grid-row: 3;
     justify-self: start;
   }
 
+  .mainNav{
+    grid-column: 1;
+    grid-row: 4;
+  }
+
   .headerCta{
-    width: 100%;
-    text-align: center;
+    width: auto;
   }
 }
