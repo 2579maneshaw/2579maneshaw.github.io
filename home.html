@@ -15,23 +15,9 @@
     .wrap { max-width: 1100px; width:100%; margin: 0 auto; padding: 26px 18px 64px; }
 
     /* Top brand + nav */
-    .topbar {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-
-    .brandLockup {
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width: 0;
-    }
-
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .brandLockup { display:flex; align-items:center; gap:14px; min-width: 0; }
     .brand-logo { display:block; width:100%; max-width:170px; height:auto; }
-
     .brandText { line-height:1.12; min-width:0; }
     .brandName { margin:0; font-size:1.15rem; letter-spacing:-0.02em; }
     .brandTag { margin:6px 0 0; color:#555; font-size:0.96rem; }
@@ -60,7 +46,6 @@
       border: 1px solid #eee;
       box-shadow: 0 14px 32px rgba(0,0,0,0.06);
     }
-
     .headline {
       margin:0;
       font-size: 2.25rem;
@@ -69,7 +54,6 @@
       color:#111;
       max-width: 920px;
     }
-
     .subline {
       margin: 12px 0 0;
       font-size: 1.08rem;
@@ -114,12 +98,7 @@
     .btn.ghost:hover { background:#f7f7f7; }
 
     /* Sections */
-    .sectionTitle {
-      margin: 26px 0 10px;
-      font-size: 1.35rem;
-      letter-spacing:-0.02em;
-      color:#111;
-    }
+    .sectionTitle { margin: 26px 0 10px; font-size: 1.35rem; letter-spacing:-0.02em; color:#111; }
 
     .featureGrid {
       display:grid;
@@ -228,11 +207,7 @@
     }
     .lightbox.open { display:flex; }
 
-    .lightboxInner {
-      width: min(1100px, 100%);
-      position: relative;
-    }
-
+    .lightboxInner { width: min(1100px, 100%); position: relative; }
     .lightboxImg {
       width: 100%;
       max-height: calc(100vh - 120px);
@@ -242,7 +217,6 @@
       border: 1px solid rgba(255,255,255,0.12);
       display:block;
     }
-
     .lbTopRow {
       display:flex;
       justify-content: space-between;
@@ -252,7 +226,6 @@
       color: rgba(255,255,255,0.9);
       font-size: 0.95rem;
     }
-
     .lbBtn {
       border: 0;
       cursor: pointer;
@@ -407,7 +380,7 @@
 
       <div class="card">
         <h2>Resort Gallery</h2>
-        <p>Click the large photo to view full screen and swipe or use arrows.</p>
+        <p>Tap a photo to preview. Click the large photo to view full screen and swipe or use arrows.</p>
 
         <div class="galleryWrap">
           <button class="featuredBtn" id="resortFeaturedBtn" type="button" aria-label="Open resort photos full screen">
@@ -440,13 +413,13 @@
   </div>
 
   <script>
-    const PHOTOS_JSON = "photos.webp.json";
+    // JSON files you asked for
+    const VILLA_WEBP_JSON = "villa-photos.webp.json";
+    const VILLA_JPG_JSON  = "villa-photos.json";
+    const RESORT_WEBP_JSON = "resort-photos.webp.json";
+    const RESORT_JPG_JSON  = "resort-photos.json";
 
-    // Change these anytime (indexes in your photos.webp.json)
-    const VILLA_PICK = [0,1,2,3,4,5,6,7];
-    const RESORT_PICK = [8,9,10,11,12,13,14,15];
-
-    let ALL_PHOTOS = [];
+    // Lightbox state
     let currentSet = [];
     let currentSetName = "";
     let lbIndex = 0;
@@ -468,6 +441,21 @@
           imgEl.src = src.replace(/\.webp$/i, ".jpg");
         }
       };
+    }
+
+    async function fetchJsonPreferWebp(webpJson, jpgJson) {
+      // Try WEBP JSON first, fall back to JPG JSON
+      try {
+        const res = await fetch(webpJson, { cache: "no-store" });
+        if (!res.ok) throw new Error("webp json not ok");
+        const data = await res.json();
+        if (!Array.isArray(data) || !data.length) throw new Error("webp json empty");
+        return data;
+      } catch (_) {
+        const res2 = await fetch(jpgJson, { cache: "no-store" });
+        const data2 = await res2.json();
+        return Array.isArray(data2) ? data2 : [];
+      }
     }
 
     function setFeatured(featuredEl, src) {
@@ -497,7 +485,6 @@
 
       lbImg.src = src;
       withJpgFallback(src, lbImg);
-
       lbCounter.textContent = `${currentSetName} • ${lbIndex + 1} of ${currentSet.length}`;
     }
 
@@ -513,7 +500,7 @@
       renderLightbox();
     }
 
-    // Close when clicking outside image area
+    // Close when clicking outside image
     lb.addEventListener("click", (e) => {
       if (e.target === lb) closeLightbox();
     });
@@ -530,7 +517,7 @@
       if (e.key === "ArrowLeft") prevLb();
     });
 
-    // Swipe support (touch)
+    // Swipe support
     let touchStartX = null;
     lbImg.addEventListener("touchstart", (e) => {
       touchStartX = e.changedTouches[0].clientX;
@@ -545,20 +532,20 @@
       delta < 0 ? nextLb() : prevLb();
     }, { passive: true });
 
-    function addMiniGallery(containerId, photos, picks, featuredEl, setName) {
-      const el = document.getElementById(containerId);
-      if (!el) return;
+    function buildGallery(containerId, featuredId, buttonId, photos, setName) {
+      const strip = document.getElementById(containerId);
+      const featured = document.getElementById(featuredId);
+      const btn = document.getElementById(buttonId);
 
-      // Build set array in the order of picks
-      const setArr = picks.map(i => photos[i]).filter(Boolean);
+      if (!strip || !featured || !btn) return;
+
+      strip.innerHTML = "";
+      if (!photos.length) return;
 
       // Default featured
-      setFeatured(featuredEl, setArr[0]);
+      setFeatured(featured, photos[0]);
 
-      picks.forEach((i, idx) => {
-        const src = photos[i];
-        if (!src) return;
-
+      photos.forEach((src, idx) => {
         const img = document.createElement("img");
         img.loading = "lazy";
         img.decoding = "async";
@@ -569,41 +556,30 @@
         if (idx === 0) img.classList.add("active");
 
         img.addEventListener("click", () => {
-          el.querySelectorAll("img").forEach(x => x.classList.remove("active"));
+          strip.querySelectorAll("img").forEach(x => x.classList.remove("active"));
           img.classList.add("active");
-          setFeatured(featuredEl, src);
+          setFeatured(featured, src);
         });
 
-        el.appendChild(img);
+        strip.appendChild(img);
       });
 
-      // Clicking featured opens lightbox at current featured index
-      return setArr;
+      btn.addEventListener("click", () => {
+        const currentSrc = featured.getAttribute("src");
+        const start = Math.max(0, photos.indexOf(currentSrc));
+        openLightbox(photos, start, setName);
+      });
     }
 
     async function initHome() {
       try {
-        const res = await fetch(PHOTOS_JSON, { cache: "no-store" });
-        ALL_PHOTOS = await res.json();
+        const villaPhotos = await fetchJsonPreferWebp(VILLA_WEBP_JSON, VILLA_JPG_JSON);
+        const resortPhotos = await fetchJsonPreferWebp(RESORT_WEBP_JSON, RESORT_JPG_JSON);
 
-        const villaSet = addMiniGallery("villaMiniGallery", ALL_PHOTOS, VILLA_PICK, villaFeatured, "Villa Photos");
-        const resortSet = addMiniGallery("resortMiniGallery", ALL_PHOTOS, RESORT_PICK, resortFeatured, "Resort Photos");
-
-        // Featured click handlers: open at current featured position
-        document.getElementById("villaFeaturedBtn").addEventListener("click", () => {
-          const currentSrc = villaFeatured.getAttribute("src");
-          const start = Math.max(0, villaSet.indexOf(currentSrc));
-          openLightbox(villaSet, start, "Villa Photos");
-        });
-
-        document.getElementById("resortFeaturedBtn").addEventListener("click", () => {
-          const currentSrc = resortFeatured.getAttribute("src");
-          const start = Math.max(0, resortSet.indexOf(currentSrc));
-          openLightbox(resortSet, start, "Resort Photos");
-        });
-
+        buildGallery("villaMiniGallery", "villaFeatured", "villaFeaturedBtn", villaPhotos, "Villa Photos");
+        buildGallery("resortMiniGallery", "resortFeatured", "resortFeaturedBtn", resortPhotos, "Resort Photos");
       } catch (e) {
-        console.warn("Could not load photos list for mini galleries.");
+        console.warn("Could not load gallery JSON files.");
       }
     }
 
