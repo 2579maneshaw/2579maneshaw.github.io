@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enchanted Villa of Windsor Hills | Family-Friendly Disney Retreat</title>
+  <meta name="description" content="Enchanted Villa of Windsor Hills is a calm, family-friendly retreat near Disney, designed for parents to relax after full park days." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #222;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 18px 60px;
+    }
+
+    /* Brand Header */
+    .brand {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .brand .logo {
+      width: min(260px, 70vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 2.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      margin: 12px auto 0;
+      max-width: 860px;
+      line-height: 1.45;
+    }
+
+    .tagline .headline {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #111;
+      letter-spacing: -0.01em;
+    }
+
+    .tagline .subhead {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.08rem;
+      color: #444;
+    }
+
+    /* Slideshow */
+    .hero {
+      margin: 22px auto 10px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f3f3f3;
+      position: relative;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+      background: #eee;
+    }
+
+    @media (max-width: 720px) {
+      .hero img {
+        height: 320px;
+      }
+
+      .brand h1 {
+        font-size: 1.75rem;
+      }
+
+      .tagline .headline {
+        font-size: 1.35rem;
+      }
+    }
+
+    .controls {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      gap: 10px;
+    }
+
+    .controls button {
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.9);
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .controls button:hover {
+      background: #ffffff;
+    }
+
+    /* Thumbnail strip (single row, scrollable, 5 visible) */
+    .thumbs {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      margin: 12px 0 28px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+    }
+
+    .thumbs img {
+      flex: 0 0 calc((100% - (10px * 4)) / 5);
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      opacity: 0.9;
+      border: 2px solid transparent;
+      background: #eee;
+    }
+
+    .thumbs img:hover {
+      opacity: 1;
+    }
+
+    .thumbs img.active {
+      border-color: #111;
+      opacity: 1;
+    }
+
+    /* Content */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section p {
+      line-height: 1.7;
+      font-size: 1.05rem;
+      color: #333;
+      margin: 0 0 14px;
+    }
+
+    .statement {
+      margin-top: 10px;
+      margin-bottom: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #fafafa;
+      border: 1px solid #eee;
+    }
+
+    .statement .kicker {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .statement .strong {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .highlights {
+      margin: 18px 0 26px;
+      padding-left: 18px;
+      font-size: 1.03rem;
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      margin-top: 22px;
+    }
+
+    .cta a {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+    }
+
+    .cta a:hover {
+      background: #2a2a2a;
+    }
+
+    /* Notice */
+    .notice {
+      margin-top: 22px;
+      font-size: 0.98rem;
+      color: #444;
+      background: #fafafa;
+      border: 1px solid #eee;
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 46px;
+      font-size: 0.92rem;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Brand -->
+    <div class="brand">
+      <img class="logo" src="photos/EVWHlogo.jpg" alt="Enchanted Villa of Windsor Hills logo" />
+      <h1>Enchanted Villa of Windsor Hills</h1>
+
+      <p class="tagline">
+        <span class="headline">Rejuvenate your body. Restore your mind.</span>
+        <span class="subhead">So every Disney day feels just as magical as the first.</span>
+      </p>
+    </div>
+
+    <!-- Slideshow (UNCHANGED) -->
+    <div class="hero">
+      <img id="heroImage" src="" alt="Enchanted Villa of Windsor Hills photo" />
+      <div class="controls">
+        <button id="prevBtn">◀ Prev</button>
+        <button id="playPauseBtn">Pause</button>
+        <button id="nextBtn">Next ▶</button>
+      </div>
+    </div>
+
+    <!-- Thumbnails (UNCHANGED) -->
+    <div id="thumbGrid" class="thumbs"></div>
+
+    <!-- Content -->
+    <div class="section">
+
+      <div class="statement">
+        <div class="kicker">Disney is about wonder and excitement.</div>
+        <p class="strong">Our villa is where the energy settles, the family resets, and the magic carries on.</p>
+      </div>
+
+      <p>
+        After full days of rides, parades, and nonstop fun, your family deserves more than a place to crash.
+        Enchanted Villa of Windsor Hills was designed as a calm, family-friendly retreat that helps you recharge
+        so tomorrow feels just as exciting as today.
+      </p>
+
+      <p>
+        Parents can unwind in spa-inspired spaces, enjoy a quiet evening by the private splash pool, and wake up refreshed.
+        Kids get Disney-inspired touches and easy access to Windsor Hills’ resort amenities.
+        It’s the best of both worlds: the thrills of the parks and the comfort of a home that actually lets you rest.
+      </p>
+
+      <p>
+        Located just steps from the Windsor Hills clubhouse and waterpark, you’re close to the action while still enjoying
+        a peaceful place to breathe, connect, and sleep well.
+      </p>
+
+      <ul class="highlights">
+        <li>Private screened-in splash pool with year-round pool heat included</li>
+        <li>Spa-inspired interiors designed for rest and relaxation</li>
+        <li>Multiple ensuite bedrooms for comfort and privacy</li>
+        <li>Walkable access to Windsor Hills clubhouse and waterpark</li>
+        <li>Family-friendly layout with open-concept living spaces</li>
+        <li>Minutes from Disney parks and attractions</li>
+      </ul>
+
+      <div class="cta">
+        <a href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
+          Check Availability
+        </a>
+      </div>
+
+      <div class="notice">
+        <strong>Please note:</strong>
+        Between 01/05/2026 – 02/06/2026, the Windsor Hills clubhouse waterslides and splash pad
+        will be closed for scheduled restoration.
+      </div>
+
+      <div class="footer">Enchanted Villa of Windsor Hills</div>
+    </div>
+  </div>
+
+  <!-- Script (kept the image section behavior the same; includes lazy thumbs + webp->jpg hero fallback) -->
+  <script>
+    const PHOTOS_JSON = "photos.webp.json";
+    const INTERVAL = 4500;
+
+    let photos = [];
+    let currentIndex = 0;
+    let timer = null;
+
+    const heroImage = document.getElementById("heroImage");
+    const thumbGrid = document.getElementById("thumbGrid");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    function showPhoto(index) {
+      if (!photos.length) return;
+
+      currentIndex = (index + photos.length) % photos.length;
+
+      // WebP first; fallback to JPG if needed
+      heroImage.onerror = () => {
+        heroImage.onerror = null;
+        heroImage.src = photos[currentIndex].replace(".webp", ".jpg");
+      };
+      heroImage.src = photos[currentIndex];
+
+      thumbGrid.querySelectorAll("img").forEach(img => img.classList.remove("active"));
+      const active = thumbGrid.querySelector(`img[data-idx="${currentIndex}"]`);
+      if (active) active.classList.add("active");
+    }
+
+    function nextPhoto() { showPhoto(currentIndex + 1); }
+    function prevPhoto() { showPhoto(currentIndex - 1); }
+
+    function startSlideshow() {
+      timer = setInterval(nextPhoto, INTERVAL);
+      playPauseBtn.textContent = "Pause";
+    }
+
+    function stopSlideshow() {
+      clearInterval(timer);
+      timer = null;
+      playPauseBtn.textContent = "Play";
+    }
+
+    function toggleSlideshow() {
+      timer ? stopSlideshow() : startSlideshow();
+    }
+
+    prevBtn.addEventListener("click", prevPhoto);
+    nextBtn.addEventListener("click", nextPhoto);
+    playPauseBtn.addEventListener("click", toggleSlideshow);
+
+    async function init() {
+      try {
+        const res = await fetch(PHOTOS_JSON, { cache: "no-store" });
+        photos = await res.json();
+
+        photos.forEach((src, idx) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.setAttribute("data-idx", idx);
+
+          // Performance: thumbnails load only when needed
+          img.loading = "lazy";
+          img.decoding = "async";
+
+          img.addEventListener("click", () => {
+            showPhoto(idx);
+            if (timer) {
+              stopSlideshow();
+              startSlideshow();
+            }
+          });
+
+          thumbGrid.appendChild(img);
+        });
+
+        showPhoto(0);
+        startSlideshow();
+      } catch (e) {
+        console.warn("photos.json not found or invalid");
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
