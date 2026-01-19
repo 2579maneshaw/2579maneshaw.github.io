@@ -1,9 +1,10 @@
 <header class="siteHeader">
   <div class="headerInner">
-    <a class="brandBlock" href="{{ '/home.html' | relative_url }}" style="text-decoration:none; color:inherit;">
+    <a class="brandBlock" href="{{ '/home.html' | relative_url }}">
       <picture class="brandLogo">
         <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
         <img
+          class="brandLogoImg"
           src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
           srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
           sizes="200px"
@@ -17,7 +18,7 @@
 
       <div class="brandText">
         <div class="brandName">Enchanted Villa of Windsor Hills</div>
-        <div class="brandTagline">The Pause Between the Parks so you can make </br> every day at Disney as good as the first.</div>
+        <div class="brandTagline">The Pause Between the Parks</div>
       </div>
     </a>
 
@@ -30,4 +31,3 @@
     </nav>
   </div>
 </header>
-
