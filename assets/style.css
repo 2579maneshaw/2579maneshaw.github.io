@@ -42,30 +42,24 @@ img {
 }
 
 .headerInner {
-  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 32px;
+  gap: 24px;
 }
 
-/* LEFT STACK */
+/* LEFT SIDE */
 .headerLeft {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  min-width: 0;
 }
 
-/* BRAND ROW */
 .brandBlock {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 16px;
   text-decoration: none;
   color: inherit;
 }
@@ -74,33 +68,31 @@ img {
   flex-shrink: 0;
 }
 
+/* TITLE COLUMN */
 .brandText {
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .brandName {
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   color: #111;
 }
 
 .brandTagline {
-  margin-top: 4px;
   font-size: 1rem;
-  font-style: italic;
   color: #555;
-  opacity: 0.9;
 }
 
-/* ===============================
-   NAV (UNDER TITLE)
-================================ */
+/* NAV — NOW NATURALLY UNDER TITLE */
 .mainNav {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  margin-top: 6px;
 }
 
 .mainNav a {
@@ -111,7 +103,6 @@ img {
   border-radius: 999px;
   border: 1px solid #e6e6e6;
   background: #fafafa;
-  transition: all 0.2s ease;
 }
 
 .mainNav a:hover {
@@ -124,82 +115,26 @@ img {
   border-color: #111;
 }
 
-/* ===============================
-   HEADER RIGHT CTA
-================================ */
+/* RIGHT CTA */
 .headerRight {
-  flex-shrink: 0;
+  padding-top: 6px;
 }
 
 .headerCta {
-  background: #2f5fd0; /* logo-matching blue */
-  color: #ffffff;
+  background: #2f5fd0; /* logo-matched blue */
+  color: #fff;
   padding: 12px 22px;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
-  white-space: nowrap;
-  transition: background 0.2s ease;
 }
 
 .headerCta:hover {
   background: #244bb0;
 }
 
-/* ===============================
-   CONTENT CARDS / SECTIONS
-================================ */
-.card {
-  border: 1px solid #eee;
-  border-radius: 16px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.05);
-  min-width: 0;
-}
-
-/* ===============================
-   GRID HELPERS
-================================ */
-.grid2 {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  gap: 18px;
-  align-items: start;
-}
-
-.grid2 > * {
-  min-width: 0;
-}
-
-@media (max-width: 860px) {
-  .grid2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ===============================
-   FOOTER
-================================ */
-.siteFooter {
-  margin-top: 40px;
-  padding: 24px 16px;
-  border-top: 1px solid #eee;
-  background: #fafafa;
-}
-
-.footerInner {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* ===============================
-   MOBILE ADJUSTMENTS
-================================ */
+/* MOBILE */
 @media (max-width: 860px) {
   .headerInner {
     flex-direction: column;
@@ -208,7 +143,6 @@ img {
 
   .headerRight {
     width: 100%;
-    margin-top: 12px;
   }
 
   .headerCta {
@@ -216,3 +150,5 @@ img {
     text-align: center;
   }
 }
+
+
