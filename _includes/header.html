@@ -3,17 +3,12 @@
     <!-- LEFT: Brand -->
     <a class="brandBlock" href="{{ '/home.html' | relative_url }}">
       <picture class="brandLogo">
-        <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
         <img
-          class="brandLogoImg"
           src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
-          srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
-          sizes="200px"
           alt="Enchanted Villa of Windsor Hills logo"
-          width="200"
-          height="187"
+          width="140"
+          height="130"
           loading="eager"
-          decoding="async"
         />
       </picture>
 
@@ -23,7 +18,7 @@
       </div>
     </a>
 
-    <!-- CENTER: Nav -->
+    <!-- CENTER: Navigation -->
     <nav class="mainNav mainNavCentered" aria-label="Primary navigation">
       <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
       <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
@@ -32,64 +27,81 @@
       <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
     </nav>
 
-    <!-- RIGHT: Check Availability -->
+    <!-- RIGHT: CTA -->
     <div class="headerCTA">
-      <a class="checkAvailBtn"
-         href="https://www.signaturevillasorlando.com/listing/400961"
-         target="_blank"
-         rel="noopener">
+      <a
+        class="checkAvailBtn"
+        href="https://www.signaturevillasorlando.com/listing/400961"
+        target="_blank"
+        rel="noopener">
         Check Availability
       </a>
     </div>
   </div>
 
-  <!-- Header-only CSS (keeps the change isolated to the header) -->
+  <!-- Header-only CSS -->
   <style>
-    /* 3-column header: left brand, centered nav, right CTA */
+    /* Layout */
     .headerInner{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 24px;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto minmax(420px, 1fr) auto;
       align-items: center;
-      gap: 18px;
+      column-gap: 24px;
     }
 
-    /* Center the nav inside the middle column */
+    /* Brand */
+    .brandBlock{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      white-space: nowrap;
+    }
+
+    /* Nav stays horizontal */
     .mainNavCentered{
+      display: flex;
+      flex-direction: row;
       justify-content: center;
-      margin-left: 0 !important; /* overrides any previous margin-left:auto behavior */
+      gap: 12px;
+      flex-wrap: nowrap;
     }
 
-    /* Right-side CTA button */
+    /* CTA */
     .headerCTA{
       display: flex;
-      justify-content: flex-end;
       align-items: center;
     }
+
+    /* Blue button matching logo */
     .checkAvailBtn{
-      display: inline-block;
-      text-decoration: none;
-      background: #111;
+      background: #1f5fbf; /* logo blue */
       color: #fff;
-      border: 1px solid #111;
-      padding: 10px 14px;
+      border: 1px solid #1f5fbf;
+      padding: 10px 16px;
       border-radius: 999px;
       font-size: 0.95rem;
-      line-height: 1;
+      text-decoration: none;
       white-space: nowrap;
     }
     .checkAvailBtn:hover{
-      background: #2a2a2a;
-      border-color: #2a2a2a;
+      background: #174aa0;
+      border-color: #174aa0;
     }
 
-    /* Mobile: stack brand, nav, button nicely */
-    @media (max-width: 860px){
+    /* Mobile */
+    @media (max-width: 960px){
       .headerInner{
         grid-template-columns: 1fr;
-        gap: 12px;
+        row-gap: 14px;
       }
       .mainNavCentered{
         justify-content: flex-start;
+        flex-wrap: wrap;
       }
       .headerCTA{
         justify-content: flex-start;
