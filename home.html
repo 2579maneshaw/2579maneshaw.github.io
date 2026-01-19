@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enchanted Villa of Windsor Hills | Disney Midday Break Retreat</title>
+  <meta name="description" content="Where the energy settles, the family resets, and the magic carries on. Close enough for a Disney midday break, steps from Windsor Hills amenities." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#fff; color:#222; }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 22px 16px 60px; }
+
+    /* Top brand + nav */
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+    .brandLockup { display:flex; align-items:center; gap:14px; }
+    .brand-logo { display:block; width:100%; max-width:220px; height:auto; }
+
+    .brandText { line-height:1.1; }
+    .brandName { margin:0; font-size:1.25rem; letter-spacing:-0.02em; }
+    .brandTag { margin:6px 0 0; color:#444; font-size:0.98rem; }
+
+    nav { display:flex; gap:10px; flex-wrap:wrap; }
+    nav a {
+      text-decoration:none; color:#111; font-size:0.95rem;
+      padding:10px 12px; border-radius:999px; border:1px solid #eee; background:#fafafa;
+    }
+    nav a:hover { background:#f2f2f2; }
+    nav a.active { background:#111; color:#fff; border-color:#111; }
+
+    /* Hero headline block */
+    .heroCopy {
+      margin: 18px 0 18px;
+      padding: 18px 18px;
+      border-radius: 16px;
+      background: #f7f7f7;
+      border: 1px solid #eee;
+    }
+    .headline {
+      margin:0;
+      font-size: 2.05rem;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      color:#111;
+    }
+    .subline {
+      margin: 10px 0 0;
+      font-size: 1.05rem;
+      color:#333;
+      line-height:1.55;
+      max-width: 860px;
+    }
+    .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+    .chip {
+      font-size:0.92rem; color:#111;
+      background:#fff; border:1px solid #e9e9e9;
+      padding:8px 12px; border-radius:999px;
+    }
+
+    /* Sections */
+    .grid2 { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:18px; align-items:start; }
+    @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+
+    .card {
+      border:1px solid #eee; border-radius:16px; padding:16px;
+      background:#fff; box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+    }
+    .card h2 { margin:0 0 10px; font-size:1.35rem; letter-spacing:-0.02em; }
+    .card p { margin:0 0 10px; color:#333; line-height:1.65; }
+
+    .bullets { margin:10px 0 0; padding-left: 18px; color:#333; line-height:1.75; }
+    .bullets li { margin: 6px 0; }
+
+    /* Small scrolling gallery */
+    .miniGallery {
+      display:flex; gap:10px; overflow-x:auto; padding-bottom:6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .miniGallery img {
+      height: 120px; width: 180px; object-fit: cover;
+      border-radius: 14px; border: 1px solid #eee; background:#f3f3f3;
+      flex: 0 0 auto;
+    }
+
+    /* CTA */
+    .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-block; text-decoration:none;
+      padding: 12px 18px; border-radius: 12px;
+      font-size: 1rem; border:1px solid #111;
+    }
+    .btn.primary { background:#111; color:#fff; }
+    .btn.primary:hover { background:#2a2a2a; border-color:#2a2a2a; }
+    .btn.ghost { background:#fff; color:#111; border-color:#e6e6e6; }
+    .btn.ghost:hover { background:#f7f7f7; }
+
+    /* Faith statement */
+    .welcomeNote {
+      margin-top: 14px;
+      border-radius: 14px;
+      background:#fafafa;
+      border:1px solid #eee;
+      padding: 14px;
+      color:#333;
+      line-height:1.6;
+      font-size:0.98rem;
+    }
+
+    .footer { text-align:center; margin-top: 40px; color:#666; font-size:0.92rem; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brandLockup">
+        <picture>
+          <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
+          <img
+            src="photos/EVWHlogo-600w.jpg"
+            srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
+            sizes="220px"
+            alt="Enchanted Villa of Windsor Hills logo"
+            class="brand-logo"
+            width="220"
+            height="205"
+            decoding="async"
+            loading="eager"
+          />
+        </picture>
+
+        <div class="brandText">
+          <p class="brandName"><strong>Enchanted Villa of Windsor Hills</strong></p>
+          <p class="brandTag">Family friendly Disney retreat</p>
+        </div>
+      </div>
+
+      <nav aria-label="Site navigation">
+        <a class="active" href="home.html">Home</a>
+        <a href="index.html">Our Villa</a>
+        <a href="nearby.html">Nearby</a>
+        <a href="attractions.html">Attractions</a>
+        <a href="windsor-hills.html">Windsor Hills</a>
+      </nav>
+    </div>
+
+    <section class="heroCopy" aria-label="Intro">
+      <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
+      <p class="subline">
+        Rejuvenate your body. Restore your mind.
+        <strong>Close enough to the Disney parks for a midday break</strong> — so every Disney day feels just as magical as the first.
+      </p>
+
+      <div class="chips" aria-label="Highlights chips">
+        <span class="chip">Midday break friendly</span>
+        <span class="chip">Steps to Windsor Hills amenities</span>
+        <span class="chip">Private screened splash pool</span>
+        <span class="chip">Spa inspired calm</span>
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
+        <a class="btn ghost" href="index.html">View Our Villa Photos</a>
+      </div>
+    </section>
+
+    <section class="grid2">
+      <div class="card">
+        <h2>Our Villa</h2>
+        <p>
+          Designed for families who want the best of both worlds: the excitement of the parks, and a peaceful place to truly recharge.
+        </p>
+
+        <ul class="bullets">
+          <li>Private screened in splash pool with year round pool heat included</li>
+          <li>Spa inspired interiors built for rest and calm evenings</li>
+          <li>Multiple ensuite bedrooms for comfort and privacy</li>
+          <li>Walkable to the Windsor Hills clubhouse and waterpark</li>
+          <li>Quick access to Disney for a midday break during hot park days</li>
+        </ul>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="index.html">Explore the Villa</a>
+          <a class="btn ghost" href="nearby.html">See Nearby Convenience</a>
+        </div>
+
+        <div class="welcomeNote">
+          <strong>All guests are warmly welcome.</strong><br/>
+          Enchanted Villa of Windsor Hills is a Christian owned property, and a portion of our profits is thoughtfully dedicated to charitable and faith based giving.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Villa Gallery</h2>
+        <p>Quick scroll previews. Full photo experience is on the Our Villa page.</p>
+        <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
+      </div>
+    </section>
+
+    <section class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h2>Windsor Hills Resort</h2>
+        <p>
+          One of the most loved resort communities near Disney. Enjoy the amenities when you want energy, and come back to your calm when you want rest.
+        </p>
+
+        <ul class="bullets">
+          <li>Gated community with 24 hour security</li>
+          <li>Resort style lagoon pool, waterpark, and splash areas</li>
+          <li>Clubhouse, fitness center, arcade, and movie theater</li>
+          <li>Playgrounds, sports courts, and walking paths</li>
+        </ul>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="windsor-hills.html">Explore Windsor Hills</a>
+          <a class="btn ghost" href="attractions.html">Plan Your Park Days</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Resort Gallery</h2>
+        <p>More resort details are on the Windsor Hills page.</p>
+        <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
+      </div>
+    </section>
+
+    <div class="footer">Enchanted Villa of Windsor Hills</div>
+  </div>
+
+  <script>
+    // Uses your optimized list (webp) but will still work even if some are jpg.
+    const PHOTOS_JSON = "photos.webp.json";
+
+    // Pick images by index (change these numbers anytime to match your folder content)
+    // Tip: put villa interior shots in the first group; resort shots in the second group.
+    const VILLA_PICK = [0,1,2,3,4,5,6,7];
+    const RESORT_PICK = [8,9,10,11,12,13,14,15];
+
+    function withJpgFallback(src, imgEl) {
+      // If a .webp fails, swap to same filename but .jpg
+      imgEl.onerror = () => {
+        if (src.toLowerCase().endsWith(".webp")) {
+          imgEl.onerror = null;
+          imgEl.src = src.replace(/\.webp$/i, ".jpg");
+        }
+      };
+    }
+
+    function addMiniGallery(containerId, photos, picks) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+
+      picks.forEach(i => {
+        if (!photos[i]) return;
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.src = photos[i];
+        img.alt = "Enchanted Villa preview photo";
+        withJpgFallback(photos[i], img);
+        el.appendChild(img);
+      });
+    }
+
+    async function initHome() {
+      try {
+        const res = await fetch(PHOTOS_JSON, { cache: "no-store" });
+        const photos = await res.json();
+        addMiniGallery("villaMiniGallery", photos, VILLA_PICK);
+        addMiniGallery("resortMiniGallery", photos, RESORT_PICK);
+      } catch (e) {
+        console.warn("Could not load photos list for mini galleries.");
+      }
+    }
+
+    initHome();
+  </script>
+</body>
+</html>
