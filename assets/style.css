@@ -1,73 +1,39 @@
-/* Global resets */
-* { box-sizing: border-box; }
-html, body { width: 100%; overflow-x: hidden; }
-img, svg, video, canvas { max-width: 100%; height: auto; }
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
-  color: #222;
-}
-
-/* Global page wrapper used by _layouts/default.html */
-.pageWrap{
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 18px 16px 60px;
-}
-
-/* IMPORTANT: prevent flex/grid children from forcing skinny columns */
-.pageWrap,
-.headerInner,
-.brandBlock,
-.brandText,
-.card,
-.grid2,
-.grid2 > * {
-  min-width: 0;
-}
-
-/* Prevent long text/links from breaking layouts */
-a, p, li, h1, h2, h3 {
-  overflow-wrap: anywhere;
-}
-
 /* Header */
 .siteHeader { border-bottom: 1px solid #eee; background: #fff; }
-.headerInner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 14px 18px;
+
+/* Full-width header bar */
+.headerInner{
+  width: 100%;
+  max-width: none;          /* <-- critical */
+  margin: 0;                /* <-- critical */
+  padding: 14px 28px;       /* more breathing room */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
-.brandBlock { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.brandBlock { display: flex; align-items: center; gap: 14px; min-width: 0; }
 .brandLogo { flex: 0 0 auto; display:block; }
 .brandText { line-height: 1.15; min-width:0; }
 
-.brandName {
+.brandName{
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #111;
+  color:#111;
 }
-
-.brandTagline {
+.brandTagline{
   margin-top: 4px;
   font-size: 0.95rem;
   line-height: 1.25;
-  color: #555;
+  color:#555;
   max-width: 520px;
 }
 
 .mainNav { display: flex; gap: 10px; flex-wrap: wrap; justify-content:flex-end; }
-.mainNav a {
+.mainNav a{
   text-decoration: none;
   font-size: 0.95rem;
   color: #111;
@@ -79,44 +45,7 @@ a, p, li, h1, h2, h3 {
 .mainNav a:hover { background: #f2f2f2; }
 .mainNav a.active { background:#111; color:#fff; border-color:#111; }
 
-@media (max-width: 860px) {
-  .headerInner { justify-content: flex-start; }
-  .mainNav { width: 100%; justify-content: flex-start; }
-}
-
-/* Reusable card */
-.card {
-  border:1px solid #eee;
-  border-radius:16px;
-  padding:16px;
-  background:#fff;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.05);
-  min-width: 0;
-}
-
-/* Shared 2-column grid used on Home */
-.grid2{
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  gap: 18px;
-  align-items: start;
-}
 @media (max-width: 860px){
-  .grid2{ grid-template-columns: 1fr; }
-}
-.grid2 > *{ min-width: 0; }
-
-/* Footer include styles */
-.siteFooter {
-  border-top: 1px solid #eee;
-  background: #fff;
-  margin-top: 40px;
-}
-.footerInner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 22px 16px;
-  text-align: center;
-  color: #666;
-  font-size: 0.92rem;
+  .headerInner{ padding: 14px 16px; justify-content:flex-start; }
+  .mainNav{ width: 100%; justify-content:flex-start; }
 }
