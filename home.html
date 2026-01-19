@@ -3,90 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <title>Enchanted Villa of Windsor Hills | Disney Midday Break Retreat</title>
-  <meta name="description" content="Where the energy settles, the family resets, and the magic carries on. Close enough for a Disney midday break, steps from Windsor Hills amenities." />
+  <meta name="description" content="Enchanted Villa of Windsor Hills — The Pause Between the Parks. Close enough for a Disney midday break, steps from Windsor Hills amenities." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
     * { box-sizing: border-box; }
-    html, body { width: 100%; }
-    img { max-width: 100%; height: auto; }
+    html, body { width: 100%; overflow-x: hidden; }
+    img, svg, video, canvas { max-width: 100%; height: auto; }
+    .card, .wrap, .heroCopy { min-width: 0; }
 
     body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#fff; color:#222; }
-    .wrap { max-width: 1100px; width:100%; margin: 0 auto; padding: 26px 18px 64px; }
+    .wrap { max-width: 1100px; width:100%; margin: 0 auto; padding: 18px 16px 60px; }
 
-    /* Top brand + nav */
-    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-    .brandLockup { display:flex; align-items:center; gap:14px; min-width: 0; }
-    .brand-logo { display:block; width:100%; max-width:170px; height:auto; }
-    .brandText { line-height:1.12; min-width:0; }
-    .brandName { margin:0; font-size:1.15rem; letter-spacing:-0.02em; }
-    .brandTag { margin:6px 0 0; color:#555; font-size:0.96rem; }
-
-    nav { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-    nav a {
-      text-decoration:none; color:#111; font-size:0.95rem;
-      padding:10px 12px; border-radius:999px;
-      border:1px solid #eee; background:#fafafa;
+    /* Consistent header (shared across all pages) */
+    .siteHeader { border-bottom: 1px solid #eee; background: #fff; }
+    .headerInner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
-    nav a:hover { background:#f2f2f2; }
-    nav a.active { background:#111; color:#fff; border-color:#111; }
+    .brandBlock { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brandLogo { flex: 0 0 auto; display:block; }
+    .brandText { line-height: 1.15; min-width:0; }
+    .brandName { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; color: #111; }
+    .brandTagline { margin-top: 4px; font-size: 0.92rem; color: #555; }
+
+    .mainNav { display: flex; gap: 10px; flex-wrap: wrap; justify-content:flex-end; }
+    .mainNav a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      color: #111;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #eee;
+      background: #fafafa;
+    }
+    .mainNav a:hover { background: #f2f2f2; }
+    .mainNav a.active { background:#111; color:#fff; border-color:#111; }
 
     @media (max-width: 860px) {
-      .topbar { justify-content:flex-start; }
-      nav { justify-content:flex-start; }
-      .brand-logo { max-width: 150px; }
+      .headerInner { justify-content: flex-start; }
+      .mainNav { width: 100%; justify-content: flex-start; }
     }
 
-    /* Hero */
-    .hero {
-      margin-top: 18px;
-      border-radius: 18px;
-      padding: 22px;
-      background: radial-gradient(1200px 500px at 20% 0%, #f4fbff 0%, #ffffff 55%, #fff7ee 100%);
+    /* Hero headline block */
+    .heroCopy {
+      margin: 18px 0 18px;
+      padding: 18px 18px;
+      border-radius: 16px;
+      background: #f7f7f7;
       border: 1px solid #eee;
-      box-shadow: 0 14px 32px rgba(0,0,0,0.06);
     }
     .headline {
       margin:0;
-      font-size: 2.25rem;
+      font-size: 2.0rem;
       letter-spacing: -0.03em;
-      line-height: 1.08;
+      line-height: 1.1;
       color:#111;
-      max-width: 920px;
     }
     .subline {
-      margin: 12px 0 0;
-      font-size: 1.08rem;
+      margin: 10px 0 0;
+      font-size: 1.05rem;
       color:#333;
-      line-height:1.6;
+      line-height:1.55;
       max-width: 900px;
     }
 
-    /* Tags (not button-y) */
-    .chips { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+    /* FIX: chips should NOT look like buttons */
+    .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
     .chip {
       font-size:0.92rem;
-      color:#333;
-      background: transparent;
-      border: 0;
-      padding: 0;
-      border-radius: 0;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      opacity: 0.95;
+      color:#2b2b2b;
+      background: transparent;       /* no pill background */
+      border: 0;                     /* no border */
+      padding: 0;                    /* no button padding */
     }
-    .chip::before{
-      content:"";
-      width:7px;
-      height:7px;
-      border-radius:999px;
-      background:#111;
-      opacity: 0.55;
-      flex: 0 0 auto;
+    .chip::before {
+      content: "•";
+      margin-right: 8px;
+      color: #111;
     }
 
-    .ctaRow { margin-top: 16px; display:flex; gap:10px; flex-wrap:wrap; }
+    /* Sections */
+    .grid2 { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:18px; align-items:start; }
+    @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+
+    .card {
+      border:1px solid #eee; border-radius:16px; padding:16px;
+      background:#fff; box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+    }
+    .card h2 { margin:0 0 10px; font-size:1.35rem; letter-spacing:-0.02em; }
+    .card p { margin:0 0 10px; color:#333; line-height:1.65; }
+
+    .bullets { margin:10px 0 0; padding-left: 18px; color:#333; line-height:1.75; }
+    .bullets li { margin: 6px 0; }
+
+    /* Small scrolling gallery */
+    .miniGallery {
+      display:flex; gap:10px; overflow-x:auto; padding-bottom:6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .miniGallery img {
+      height: 120px; width: 180px; object-fit: cover;
+      border-radius: 14px; border: 1px solid #eee; background:#f3f3f3;
+      flex: 0 0 auto;
+      cursor: pointer;
+    }
+
+    /* CTA */
+    .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
     .btn {
       display:inline-block; text-decoration:none;
       padding: 12px 18px; border-radius: 12px;
@@ -96,89 +126,6 @@
     .btn.primary:hover { background:#2a2a2a; border-color:#2a2a2a; }
     .btn.ghost { background:#fff; color:#111; border-color:#e6e6e6; }
     .btn.ghost:hover { background:#f7f7f7; }
-
-    /* Sections */
-    .sectionTitle { margin: 26px 0 10px; font-size: 1.35rem; letter-spacing:-0.02em; color:#111; }
-
-    .featureGrid {
-      display:grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap:18px;
-      align-items:start;
-    }
-    @media (max-width: 920px) { .featureGrid { grid-template-columns: 1fr; } }
-
-    .card {
-      border:1px solid #eee;
-      border-radius:16px;
-      padding:16px;
-      background:#fff;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
-      min-width:0;
-    }
-
-    .card h2 { margin:0 0 10px; font-size:1.25rem; letter-spacing:-0.02em; }
-    .card p { margin:0 0 10px; color:#333; line-height:1.65; }
-
-    .bullets { margin:10px 0 0; padding-left: 18px; color:#333; line-height:1.75; }
-    .bullets li { margin: 6px 0; }
-
-    /* Featured + strip gallery */
-    .galleryWrap { display:flex; flex-direction:column; gap:12px; }
-    .featuredBtn {
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-    }
-    .featuredBtn:focus { outline: 2px solid #111; outline-offset: 3px; }
-
-    .featuredImg {
-      width:100%;
-      height: 330px;
-      border-radius: 16px;
-      border:1px solid #eee;
-      object-fit: cover;
-      background:#f3f3f3;
-      display:block;
-    }
-    @media (max-width: 720px) { .featuredImg { height: 260px; } }
-
-    .zoomHint {
-      position:absolute;
-      right:12px;
-      bottom:12px;
-      font-size:0.92rem;
-      background: rgba(0,0,0,0.55);
-      color:#fff;
-      padding:8px 10px;
-      border-radius: 999px;
-      pointer-events:none;
-    }
-
-    .miniGallery {
-      display:flex;
-      gap:10px;
-      overflow-x:auto;
-      padding-bottom:6px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .miniGallery img {
-      height: 110px;
-      width: 170px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid #eee;
-      background:#f3f3f3;
-      flex: 0 0 auto;
-      cursor: pointer;
-      opacity: 0.92;
-    }
-    .miniGallery img:hover { opacity: 1; }
-    .miniGallery img.active { outline: 2px solid #111; outline-offset: 2px; opacity: 1; }
 
     /* Faith statement */
     .welcomeNote {
@@ -192,104 +139,88 @@
       font-size:0.98rem;
     }
 
-    .footer { text-align:center; margin-top: 44px; color:#666; font-size:0.92rem; }
+    .footer { text-align:center; margin-top: 40px; color:#666; font-size:0.92rem; }
 
-    /* Lightbox */
+    /* Lightbox for hero + clicking through photos */
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.84);
+      background: rgba(0,0,0,0.88);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 18px;
       z-index: 9999;
+      padding: 18px;
     }
     .lightbox.open { display:flex; }
-
-    .lightboxInner { width: min(1100px, 100%); position: relative; }
-    .lightboxImg {
-      width: 100%;
-      max-height: calc(100vh - 120px);
-      object-fit: contain;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      display:block;
+    .lightboxInner {
+      position: relative;
+      width: min(1100px, 100%);
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .lbTopRow {
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom: 10px;
-      color: rgba(255,255,255,0.9);
-      font-size: 0.95rem;
+    .lightboxImg {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 14px;
+      background: #111;
     }
     .lbBtn {
-      border: 0;
-      cursor: pointer;
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: rgba(255,255,255,0.92);
-      color:#111;
-      font-size: 0.95rem;
-    }
-    .lbBtn:hover { background: #fff; }
-
-    .lbNav {
-      position:absolute;
+      position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      display:flex;
-      gap:10px;
-      width: 100%;
-      justify-content: space-between;
-      padding: 0 10px;
-      pointer-events: none;
-    }
-    .lbArrow {
-      pointer-events: auto;
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
       border: 0;
-      cursor: pointer;
       background: rgba(255,255,255,0.92);
-      font-size: 1.1rem;
-      color:#111;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
     }
-    .lbArrow:hover { background:#fff; }
+    .lbPrev { left: 8px; }
+    .lbNext { right: 8px; }
+    .lbClose {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      border: 0;
+      background: rgba(255,255,255,0.92);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-
-    <div class="topbar">
-      <div class="brandLockup">
+  <!-- Consistent header -->
+  <header class="siteHeader">
+    <div class="headerInner">
+      <div class="brandBlock">
         <picture>
           <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
           <img
             src="photos/EVWHlogo-600w.jpg"
             srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
-            sizes="170px"
+            sizes="64px"
             alt="Enchanted Villa of Windsor Hills logo"
-            class="brand-logo"
-            width="170"
-            height="158"
-            decoding="async"
+            class="brandLogo"
+            width="64"
+            height="60"
             loading="eager"
+            decoding="async"
           />
         </picture>
 
         <div class="brandText">
-          <p class="brandName"><strong>Enchanted Villa of Windsor Hills</strong></p>
-          <p class="brandTag">Family friendly Disney retreat</p>
+          <div class="brandName">Enchanted Villa of Windsor Hills</div>
+          <div class="brandTagline">The Pause Between the Parks</div>
         </div>
       </div>
 
-      <nav aria-label="Site navigation">
+      <nav class="mainNav" aria-label="Primary navigation">
         <a class="active" href="home.html">Home</a>
         <a href="index.html">Our Villa</a>
         <a href="nearby.html">Nearby</a>
@@ -297,8 +228,11 @@
         <a href="windsor-hills.html">Windsor Hills</a>
       </nav>
     </div>
+  </header>
 
-    <section class="hero" aria-label="Intro">
+  <div class="wrap">
+
+    <section class="heroCopy" aria-label="Intro">
       <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
       <p class="subline">
         Rejuvenate your body. Restore your mind.
@@ -318,9 +252,9 @@
       </div>
     </section>
 
-    <h2 class="sectionTitle">Our Villa</h2>
-    <section class="featureGrid" aria-label="Our Villa section">
+    <section class="grid2">
       <div class="card">
+        <h2>Our Villa</h2>
         <p>
           Designed for families who want the best of both worlds: the excitement of the parks, and a peaceful place to truly recharge.
         </p>
@@ -346,21 +280,14 @@
 
       <div class="card">
         <h2>Villa Gallery</h2>
-        <p>Tap a photo to preview. Click the large photo to view full screen and swipe or use arrows.</p>
-
-        <div class="galleryWrap">
-          <button class="featuredBtn" id="villaFeaturedBtn" type="button" aria-label="Open villa photos full screen">
-            <img id="villaFeatured" class="featuredImg" src="" alt="Featured villa photo" decoding="async" />
-            <span class="zoomHint">View Photos</span>
-          </button>
-          <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
-        </div>
+        <p>Quick scroll previews. Full photo experience is on the Our Villa page.</p>
+        <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
       </div>
     </section>
 
-    <h2 class="sectionTitle">Windsor Hills Resort</h2>
-    <section class="featureGrid" aria-label="Windsor Hills section">
+    <section class="grid2" style="margin-top:18px;">
       <div class="card">
+        <h2>Windsor Hills Resort</h2>
         <p>
           One of the most loved resort communities near Disney. Enjoy the amenities when you want energy, and come back to your calm when you want rest.
         </p>
@@ -380,15 +307,8 @@
 
       <div class="card">
         <h2>Resort Gallery</h2>
-        <p>Tap a photo to preview. Click the large photo to view full screen and swipe or use arrows.</p>
-
-        <div class="galleryWrap">
-          <button class="featuredBtn" id="resortFeaturedBtn" type="button" aria-label="Open resort photos full screen">
-            <img id="resortFeatured" class="featuredImg" src="" alt="Featured resort photo" decoding="async" />
-            <span class="zoomHint">View Photos</span>
-          </button>
-          <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
-        </div>
+        <p>More resort details are on the Windsor Hills page.</p>
+        <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
       </div>
     </section>
 
@@ -396,43 +316,25 @@
   </div>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightboxInner">
-      <div class="lbTopRow">
-        <div id="lbCounter">Photo</div>
-        <button id="lbClose" class="lbBtn" type="button" aria-label="Close viewer">Close ✕</button>
-      </div>
-
-      <img id="lbImg" class="lightboxImg" src="" alt="Full size photo" decoding="async" />
-
-      <div class="lbNav" aria-label="Lightbox navigation">
-        <button id="lbPrev" class="lbArrow" type="button" aria-label="Previous photo">◀</button>
-        <button id="lbNext" class="lbArrow" type="button" aria-label="Next photo">▶</button>
-      </div>
+      <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
+      <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
+      <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
+      <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
     </div>
   </div>
 
   <script>
-    // JSON files you asked for
-    const VILLA_WEBP_JSON = "villa-photos.webp.json";
-    const VILLA_JPG_JSON  = "villa-photos.json";
-    const RESORT_WEBP_JSON = "resort-photos.webp.json";
-    const RESORT_JPG_JSON  = "resort-photos.json";
-
-    // Lightbox state
-    let currentSet = [];
-    let currentSetName = "";
-    let lbIndex = 0;
-
-    const villaFeatured = document.getElementById("villaFeatured");
-    const resortFeatured = document.getElementById("resortFeatured");
-
-    const lb = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbClose = document.getElementById("lbClose");
-    const lbPrev = document.getElementById("lbPrev");
-    const lbNext = document.getElementById("lbNext");
-    const lbCounter = document.getElementById("lbCounter");
+    // Separate lists so you can easily add photos to each gallery without editing home.html.
+    // Create these files in your repo root (same folder as home.html):
+    // - villa-photos.webp.json
+    // - resort-photos.webp.json
+    // Optional jpg fallbacks if you want:
+    // - villa-photos.json
+    // - resort-photos.json
+    const VILLA_JSON = "villa-photos.webp.json";
+    const RESORT_JSON = "resort-photos.webp.json";
 
     function withJpgFallback(src, imgEl) {
       imgEl.onerror = () => {
@@ -443,143 +345,100 @@
       };
     }
 
-    async function fetchJsonPreferWebp(webpJson, jpgJson) {
-      // Try WEBP JSON first, fall back to JPG JSON
+    async function loadList(preferred, fallback) {
       try {
-        const res = await fetch(webpJson, { cache: "no-store" });
-        if (!res.ok) throw new Error("webp json not ok");
-        const data = await res.json();
-        if (!Array.isArray(data) || !data.length) throw new Error("webp json empty");
-        return data;
-      } catch (_) {
-        const res2 = await fetch(jpgJson, { cache: "no-store" });
-        const data2 = await res2.json();
-        return Array.isArray(data2) ? data2 : [];
+        const res = await fetch(preferred, { cache: "no-store" });
+        if (!res.ok) throw new Error("preferred not ok");
+        return await res.json();
+      } catch (e) {
+        if (!fallback) throw e;
+        const res2 = await fetch(fallback, { cache: "no-store" });
+        return await res2.json();
       }
     }
 
-    function setFeatured(featuredEl, src) {
-      if (!featuredEl || !src) return;
-      featuredEl.src = src;
-      withJpgFallback(src, featuredEl);
-    }
+    // Lightbox state
+    let lbList = [];
+    let lbIndex = 0;
 
-    function openLightbox(setArr, startIndex, setName) {
-      currentSet = setArr.slice();
-      currentSetName = setName || "Photos";
-      lbIndex = startIndex || 0;
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbPrev = document.getElementById("lbPrev");
+    const lbNext = document.getElementById("lbNext");
+    const lbClose = document.getElementById("lbClose");
 
-      lb.classList.add("open");
-      document.body.style.overflow = "hidden";
-      renderLightbox();
+    function openLightbox(list, index) {
+      lbList = list || [];
+      lbIndex = index || 0;
+      if (!lbList.length) return;
+
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      showLb(lbIndex);
     }
 
     function closeLightbox() {
-      lb.classList.remove("open");
-      document.body.style.overflow = "";
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
     }
 
-    function renderLightbox() {
-      if (!currentSet.length) return;
-      const src = currentSet[lbIndex];
-
-      lbImg.src = src;
-      withJpgFallback(src, lbImg);
-      lbCounter.textContent = `${currentSetName} • ${lbIndex + 1} of ${currentSet.length}`;
+    function showLb(i) {
+      if (!lbList.length) return;
+      lbIndex = (i + lbList.length) % lbList.length;
+      lbImg.src = lbList[lbIndex];
+      withJpgFallback(lbList[lbIndex], lbImg);
     }
 
-    function nextLb() {
-      if (!currentSet.length) return;
-      lbIndex = (lbIndex + 1) % currentSet.length;
-      renderLightbox();
-    }
+    function lbNextPhoto() { showLb(lbIndex + 1); }
+    function lbPrevPhoto() { showLb(lbIndex - 1); }
 
-    function prevLb() {
-      if (!currentSet.length) return;
-      lbIndex = (lbIndex - 1 + currentSet.length) % currentSet.length;
-      renderLightbox();
-    }
-
-    // Close when clicking outside image
-    lb.addEventListener("click", (e) => {
-      if (e.target === lb) closeLightbox();
-    });
-
+    lbNext.addEventListener("click", lbNextPhoto);
+    lbPrev.addEventListener("click", lbPrevPhoto);
     lbClose.addEventListener("click", closeLightbox);
-    lbNext.addEventListener("click", nextLb);
-    lbPrev.addEventListener("click", prevLb);
 
-    // Keyboard
-    document.addEventListener("keydown", (e) => {
-      if (!lb.classList.contains("open")) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") nextLb();
-      if (e.key === "ArrowLeft") prevLb();
+    // Close when clicking backdrop
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
     });
 
-    // Swipe support
-    let touchStartX = null;
-    lbImg.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].clientX;
-    }, { passive: true });
+    // Keyboard support
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") lbNextPhoto();
+      if (e.key === "ArrowLeft") lbPrevPhoto();
+    });
 
-    lbImg.addEventListener("touchend", (e) => {
-      if (touchStartX === null) return;
-      const endX = e.changedTouches[0].clientX;
-      const delta = endX - touchStartX;
-      touchStartX = null;
-      if (Math.abs(delta) < 40) return;
-      delta < 0 ? nextLb() : prevLb();
-    }, { passive: true });
+    function addMiniGallery(containerId, photos) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
 
-    function buildGallery(containerId, featuredId, buttonId, photos, setName) {
-      const strip = document.getElementById(containerId);
-      const featured = document.getElementById(featuredId);
-      const btn = document.getElementById(buttonId);
-
-      if (!strip || !featured || !btn) return;
-
-      strip.innerHTML = "";
-      if (!photos.length) return;
-
-      // Default featured
-      setFeatured(featured, photos[0]);
+      el.innerHTML = "";
 
       photos.forEach((src, idx) => {
         const img = document.createElement("img");
         img.loading = "lazy";
         img.decoding = "async";
         img.src = src;
-        img.alt = "Preview photo";
+        img.alt = "Enchanted Villa preview photo";
         withJpgFallback(src, img);
 
-        if (idx === 0) img.classList.add("active");
+        // Click to open lightbox and browse left/right
+        img.addEventListener("click", () => openLightbox(photos, idx));
 
-        img.addEventListener("click", () => {
-          strip.querySelectorAll("img").forEach(x => x.classList.remove("active"));
-          img.classList.add("active");
-          setFeatured(featured, src);
-        });
-
-        strip.appendChild(img);
-      });
-
-      btn.addEventListener("click", () => {
-        const currentSrc = featured.getAttribute("src");
-        const start = Math.max(0, photos.indexOf(currentSrc));
-        openLightbox(photos, start, setName);
+        el.appendChild(img);
       });
     }
 
     async function initHome() {
       try {
-        const villaPhotos = await fetchJsonPreferWebp(VILLA_WEBP_JSON, VILLA_JPG_JSON);
-        const resortPhotos = await fetchJsonPreferWebp(RESORT_WEBP_JSON, RESORT_JPG_JSON);
+        const villaPhotos = await loadList(VILLA_JSON, "villa-photos.json");
+        const resortPhotos = await loadList(RESORT_JSON, "resort-photos.json");
 
-        buildGallery("villaMiniGallery", "villaFeatured", "villaFeaturedBtn", villaPhotos, "Villa Photos");
-        buildGallery("resortMiniGallery", "resortFeatured", "resortFeaturedBtn", resortPhotos, "Resort Photos");
+        addMiniGallery("villaMiniGallery", villaPhotos);
+        addMiniGallery("resortMiniGallery", resortPhotos);
       } catch (e) {
-        console.warn("Could not load gallery JSON files.");
+        console.warn("Could not load gallery JSON files.", e);
       }
     }
 
