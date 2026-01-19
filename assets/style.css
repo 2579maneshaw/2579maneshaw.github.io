@@ -59,6 +59,21 @@ body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#fff; col
   .headerInner { justify-content: flex-start; }
   .mainNav { width: 100%; justify-content: flex-start; }
 }
+/* Home + shared grid helpers (prevents skinny-left cards) */
+.grid2{
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 860px){
+  .grid2{ grid-template-columns: 1fr; }
+}
+
+/* Critical: allow grid children to shrink correctly */
+.grid2 > *{ min-width: 0; }
+.card{ min-width: 0; }
 
 /* Reusable page bits (keep these if your pages use them) */
 .card {
@@ -66,4 +81,5 @@ body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#fff; col
   background:#fff; box-shadow: 0 10px 26px rgba(0,0,0,0.05);
 }
 .footer { text-align:center; margin-top: 40px; color:#666; font-size:0.92rem; }
+
 
