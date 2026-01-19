@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Windsor Hills Resort Amenities | Enchanted Villa of Windsor Hills</title>
+  <meta name="description" content="Explore Windsor Hills Resort amenities (clubhouse, waterpark, pool, fitness, and more) with the latest details from the official resort amenities page." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root{
+      --ink:#111;
+      --text:#222;
+      --muted:#555;
+      --line:#e9e9e9;
+      --card:#fafafa;
+      --shadow: 0 10px 26px rgba(0,0,0,0.08);
+      --radius:14px;
+    }
+
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:#fff;
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 18px 60px;
+    }
+
+    /* Brand header */
+    .brand{
+      text-align:center;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .brand-logo{
+      display:block;
+      margin:0 auto 10px;
+      width:100%;
+      max-width: 260px;
+      height:auto;
+    }
+
+    @media (max-width:720px){
+      .brand-logo{ max-width: 210px; }
+    }
+
+    .brand-whisper{
+      margin: 8px auto 0;
+      max-width: 640px;
+      font-size: 1.03rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    /* Nav */
+    .nav{
+      margin: 14px auto 10px;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      background:#fff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      transition: transform .05s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .nav a:hover{
+      background:#f6f6f6;
+      border-color:#dcdcdc;
+    }
+
+    .nav a.active{
+      background: var(--ink);
+      color:#fff;
+      border-color: var(--ink);
+    }
+
+    /* Page header */
+    .page-head{
+      margin: 18px auto 10px;
+      text-align:center;
+      max-width: 860px;
+    }
+
+    .page-head h1{
+      margin: 0;
+      font-size: 1.95rem;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .page-head p{
+      margin: 10px auto 0;
+      line-height: 1.65;
+      font-size: 1.05rem;
+      color:#333;
+      max-width: 760px;
+    }
+
+    /* Framed content */
+    .frame-card{
+      margin: 18px auto 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* subtle watermark */
+    .frame-card::before{
+      content: "Enchanted Villa of Windsor Hills";
+      position:absolute;
+      inset: 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 56px);
+      color: rgba(0,0,0,0.06);
+      transform: rotate(-12deg);
+      pointer-events:none;
+      user-select:none;
+      z-index: 0;
+    }
+
+    .frame-topbar{
+      position: relative;
+      z-index: 1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .frame-topbar .left{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+
+    .frame-topbar .title{
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 1.02rem;
+    }
+
+    .frame-topbar .subtitle{
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .frame-topbar .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-block;
+      border: 1px solid var(--line);
+      background:#fff;
+      color: var(--ink);
+      text-decoration:none;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      cursor:pointer;
+      transition: background .2s ease, border-color .2s ease;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      background:#f6f6f6;
+      border-color:#dcdcdc;
+    }
+
+    .btn.primary{
+      background: var(--ink);
+      border-color: var(--ink);
+      color:#fff;
+    }
+
+    .btn.primary:hover{
+      background:#2a2a2a;
+      border-color:#2a2a2a;
+    }
+
+    /* Responsive iframe */
+    .frame-body{
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
+
+    .iframe-wrap{
+      width:100%;
+      aspect-ratio: 16 / 10;
+      min-height: 680px;
+    }
+
+    @media (max-width:720px){
+      .iframe-wrap{
+        aspect-ratio: 16 / 12;
+        min-height: 620px;
+      }
+      .frame-topbar{
+        flex-direction: column;
+        align-items:flex-start;
+      }
+      .frame-topbar .actions{
+        width:100%;
+        justify-content:flex-start;
+      }
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:#fff;
+    }
+
+    /* Fallback notice */
+    .notice{
+      margin: 18px auto 0;
+      font-size: 0.98rem;
+      background: #fafafa;
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: 12px;
+      color: #444;
+      max-width: 860px;
+    }
+
+    .notice strong{ color: var(--ink); }
+
+    .footer{
+      text-align:center;
+      margin-top: 42px;
+      font-size: 0.92rem;
+      color:#666;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Brand -->
+    <div class="brand">
+      <picture>
+        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
+        <img
+          src="photos/EVWHlogo-600w.jpg"
+          srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
+          sizes="(max-width: 720px) 210px, 260px"
+          alt="Enchanted Villa of Windsor Hills logo"
+          class="brand-logo"
+          width="260"
+          height="242"
+          decoding="async"
+        />
+      </picture>
+
+      <div class="brand-whisper">
+        Where the energy settles, the family resets, and the magic carries on.
+      </div>
+    </div>
+
+    <!-- Nav (adjust filenames here if yours differ) -->
+    <nav class="nav" aria-label="Site navigation">
+      <a href="home.html">Home</a>
+      <a href="index.html">Our Villa</a>
+      <a href="nearby.html">Nearby</a>
+      <a href="attractions.html">Local Attractions</a>
+      <a class="active" href="windsor-hills.html">Windsor Hills Resort</a>
+    </nav>
+
+    <!-- Page intro -->
+    <div class="page-head">
+      <h1>Windsor Hills Resort Amenities</h1>
+      <p>
+        Here’s the most up to date resort amenities info, embedded directly so you can keep browsing without leaving our site.
+      </p>
+    </div>
+
+    <!-- Embedded resort page -->
+    <section class="frame-card" aria-label="Windsor Hills amenities embed">
+      <div class="frame-topbar">
+        <div class="left">
+          <div class="title">Official amenities page</div>
+          <div class="subtitle">If the embed is blocked on your device, use the “Open” button.</div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="https://www.windsorhillsresortfl.com/windsor-hills-amenities/" target="_blank" rel="noopener">
+            Open in new tab
+          </a>
+          <button class="btn primary" id="refreshBtn" type="button">Refresh embed</button>
+        </div>
+      </div>
+
+      <div class="frame-body">
+        <div class="iframe-wrap">
+          <!--
+            NOTE:
+            Some sites block being embedded (X-Frame-Options / CSP). If this page shows blank,
+            it’s the destination site blocking iframes. The fallback notice below covers that.
+          -->
+          <iframe
+            id="amenitiesFrame"
+            src="https://www.windsorhillsresortfl.com/windsor-hills-amenities/"
+            title="Windsor Hills Resort Amenities"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fallback + helpful context -->
+    <div class="notice">
+      <strong>If you don’t see the amenities page above:</strong><br>
+      Some websites prevent being displayed inside an embedded frame for security reasons. If the embed appears blank,
+      tap <strong>Open in new tab</strong> to view the official amenities page directly.
+    </div>
+
+    <div class="footer">Enchanted Villa of Windsor Hills</div>
+  </div>
+
+  <script>
+    // Simple refresh button (helpful if iOS/Safari caches iframe aggressively)
+    const refreshBtn = document.getElementById("refreshBtn");
+    const frame = document.getElementById("amenitiesFrame");
+
+    refreshBtn.addEventListener("click", () => {
+      const url = "https://www.windsorhillsresortfl.com/windsor-hills-amenities/";
+      // Bust cache by appending a timestamp query param
+      frame.src = url + (url.includes("?") ? "&" : "?") + "t=" + Date.now();
+    });
+  </script>
+</body>
+</html>
