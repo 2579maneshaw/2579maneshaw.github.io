@@ -8,7 +8,7 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
 <style>
   /* Home-only styles */
   .heroCopy {
-    margin-top: 24px;
+    margin-top: 6px;
     margin-bottom: 18px;
     padding: 18px;
     border-radius: 16px;
@@ -40,24 +40,36 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
   }
   .chip::before { content: "•"; margin-right: 8px; color: #111; }
 
-  .grid2 { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:18px; align-items:start; }
-  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
-
   .bullets { margin:10px 0 0; padding-left: 18px; color:#333; line-height:1.75; }
   .bullets li { margin: 6px 0; }
 
-  .miniGallery { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling: touch; }
+  .miniGallery {
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+  }
   .miniGallery img {
-    height: 120px; width: 180px; object-fit: cover;
-    border-radius: 14px; border: 1px solid #eee; background:#f3f3f3;
-    flex: 0 0 auto; cursor: pointer;
+    height: 120px;
+    width: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    background:#f3f3f3;
+    flex: 0 0 auto;
+    cursor: pointer;
   }
 
   .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
   .btn {
-    display:inline-block; text-decoration:none;
-    padding: 12px 18px; border-radius: 12px;
-    font-size: 1rem; border:1px solid #111;
+    display:inline-block;
+    text-decoration:none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border:1px solid #111;
   }
   .btn.primary { background:#111; color:#fff; }
   .btn.primary:hover { background:#2a2a2a; border-color:#2a2a2a; }
@@ -77,27 +89,53 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
 
   /* Lightbox */
   .lightbox {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.88);
-    display: none; align-items: center; justify-content: center;
-    z-index: 9999; padding: 18px;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 18px;
   }
   .lightbox.open { display:flex; }
   .lightboxInner {
-    position: relative; width: min(1100px, 100%); max-height: 90vh;
-    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    width: min(1100px, 100%);
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .lightboxImg { max-width: 100%; max-height: 90vh; border-radius: 14px; background: #111; }
+  .lightboxImg {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 14px;
+    background: #111;
+  }
   .lbBtn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    border: 0; background: rgba(255,255,255,0.92);
-    padding: 10px 12px; border-radius: 12px; cursor: pointer; font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
   }
   .lbPrev { left: 8px; }
   .lbNext { right: 8px; }
   .lbClose {
-    position: absolute; top: -10px; right: -10px;
-    border: 0; background: rgba(255,255,255,0.92);
-    padding: 10px 12px; border-radius: 12px; cursor: pointer; font-size: 1rem;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
   }
 </style>
 
@@ -114,7 +152,7 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
 
   <div class="ctaRow">
     <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
-    <a class="btn ghost" href="index.html">View Our Villa Photos</a>
+    <a class="btn ghost" href="{{ '/index.html' | relative_url }}">View Our Villa Photos</a>
   </div>
 </section>
 
@@ -132,8 +170,8 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
     </ul>
 
     <div class="ctaRow">
-      <a class="btn primary" href="index.html">Explore the Villa</a>
-      <a class="btn ghost" href="nearby.html">See Nearby Convenience</a>
+      <a class="btn primary" href="{{ '/index.html' | relative_url }}">Explore the Villa</a>
+      <a class="btn ghost" href="{{ '/nearby.html' | relative_url }}">See Nearby Convenience</a>
     </div>
 
     <div class="welcomeNote">
@@ -162,8 +200,8 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
     </ul>
 
     <div class="ctaRow">
-      <a class="btn primary" href="windsor-hills.html">Explore Windsor Hills</a>
-      <a class="btn ghost" href="attractions.html">Plan Your Park Days</a>
+      <a class="btn primary" href="{{ '/windsor-hills.html' | relative_url }}">Explore Windsor Hills</a>
+      <a class="btn ghost" href="{{ '/attractions.html' | relative_url }}">Plan Your Park Days</a>
     </div>
   </div>
 
@@ -173,7 +211,6 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
     <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
   </div>
 </section>
-
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" aria-hidden="true">
@@ -186,8 +223,8 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
 </div>
 
 <script>
-  const VILLA_JSON = "villa-photos.webp.json";
-  const RESORT_JSON = "resort-photos.webp.json";
+  const VILLA_JSON = "{{ '/villa-photos.webp.json' | relative_url }}";
+  const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
 
   function withJpgFallback(src, imgEl) {
     imgEl.onerror = () => {
@@ -273,8 +310,8 @@ description: Enchanted Villa of Windsor Hills — The Pause Between the Parks. C
 
   async function initHome() {
     try {
-      const villaPhotos = await loadList(VILLA_JSON, "villa-photos.json");
-      const resortPhotos = await loadList(RESORT_JSON, "resort-photos.json");
+      const villaPhotos = await loadList(VILLA_JSON, "{{ '/villa-photos.json' | relative_url }}");
+      const resortPhotos = await loadList(RESORT_JSON, "{{ '/resort-photos.json' | relative_url }}");
       addMiniGallery("villaMiniGallery", villaPhotos);
       addMiniGallery("resortMiniGallery", resortPhotos);
     } catch (e) {
