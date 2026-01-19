@@ -1,7 +1,12 @@
-t<meta charset="UTF-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>{{ page.title }}</title>
-<meta name="description" content="{{ page.description }}" />
+<title>{{ page.title }} | Enchanted Villa of Windsor Hills</title>
+
+{% if page.description %}
+<meta name="description" content="{{ page.description }}">
+{% else %}
+<meta name="description" content="Enchanted Villa of Windsor Hills — The Pause Between the Parks. Close enough for a Disney midday break, steps from Windsor Hills amenities.">
+{% endif %}
 
 <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
