@@ -1,26 +1,28 @@
 <header class="siteHeader">
   <div class="headerInner">
-    <!-- LEFT: Logo -->
-    <a class="brandLogoLink" href="{{ '/home.html' | relative_url }}" aria-label="Go to Home">
-      <img
-        class="brandLogoImg"
-        src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
-        alt="Enchanted Villa of Windsor Hills logo"
-        width="140"
-        height="130"
-        loading="eager"
-        decoding="async"
-      />
-    </a>
 
-    <!-- MIDDLE: Title + Nav (nav UNDER title) -->
-    <div class="brandCenter">
-      <a class="brandTitleLink" href="{{ '/home.html' | relative_url }}">
-        <div class="brandName">Enchanted Villa of Windsor Hills</div>
-        <div class="brandTagline">The Pause Between the Parks</div>
+    <!-- LEFT: Brand + subtitle + nav stacked -->
+    <div class="headerLeft">
+      <a class="brandBlock" href="{{ '/home.html' | relative_url }}" style="text-decoration:none; color:inherit;">
+        <picture class="brandLogo">
+          <source type="image/webp" srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
+          <img
+            src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
+            alt="Enchanted Villa of Windsor Hills logo"
+            width="200"
+            height="187"
+            loading="eager"
+          />
+        </picture>
+
+        <div class="brandText">
+          <div class="brandName">Enchanted Villa of Windsor Hills</div>
+          <div class="brandTagline">The Pause Between the Parks.</div>
+        </div>
       </a>
 
-      <nav class="mainNav mainNavUnderTitle" aria-label="Primary navigation">
+      <!-- NAV MOVED HERE -->
+      <nav class="mainNav navBelowTitle" aria-label="Primary navigation">
         <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/home.html' | relative_url }}">Home</a>
         <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Our Villa</a>
         <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
@@ -30,9 +32,9 @@
     </div>
 
     <!-- RIGHT: CTA -->
-    <div class="headerCTA">
+    <div class="headerRight">
       <a
-        class="checkAvailBtn"
+        class="btn headerCta"
         href="https://www.signaturevillasorlando.com/listing/400961"
         target="_blank"
         rel="noopener"
@@ -40,87 +42,6 @@
         Check Availability
       </a>
     </div>
+
   </div>
-
-  <style>
-    /* Header layout: logo | title+nav | CTA */
-    .headerInner{
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      column-gap: 22px;
-    }
-
-    /* Logo */
-    .brandLogoLink{ display:flex; align-items:center; text-decoration:none; }
-    .brandLogoImg{ display:block; }
-
-    /* Center block: title then nav */
-    .brandCenter{
-      min-width: 0;
-      display: grid;
-      grid-template-rows: auto auto;
-      row-gap: 10px;
-      align-items: start;
-    }
-    .brandTitleLink{ text-decoration:none; color:inherit; display:block; }
-
-    .brandName{
-      font-size: 2.1rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color:#111;
-      line-height: 1.05;
-      margin: 0;
-    }
-    .brandTagline{
-      margin-top: 6px;
-      font-size: 1.02rem;
-      color:#444;
-      line-height: 1.25;
-    }
-
-    /* Nav sits UNDER title and stays horizontal */
-    .mainNavUnderTitle{
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      gap: 12px;
-      flex-wrap: wrap; /* wraps nicely if needed */
-    }
-
-    /* Make sure the pills stay pill-shaped and not stretched */
-    .mainNavUnderTitle a{
-      white-space: nowrap;
-    }
-
-    /* CTA */
-    .headerCTA{ display:flex; align-items:center; justify-content:flex-end; }
-    .checkAvailBtn{
-      background: #1f5fbf;   /* logo-ish blue */
-      color: #fff;
-      border: 1px solid #1f5fbf;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .checkAvailBtn:hover{
-      background:#174aa0;
-      border-color:#174aa0;
-    }
-
-    /* Mobile: stack nicely */
-    @media (max-width: 960px){
-      .headerInner{
-        grid-template-columns: 1fr;
-        row-gap: 14px;
-      }
-      .headerCTA{ justify-content:flex-start; }
-    }
-  </style>
 </header>
