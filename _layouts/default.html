@@ -5,10 +5,12 @@
 </head>
 <body>
   {% include header.html %}
-  <main class="wrap">
+
+  <!-- ONE global wrapper for all pages -->
+  <main class="pageWrap">
     {{ content }}
   </main>
 
-  <footer class="footer">Enchanted Villa of Windsor Hills</footer>
+  {% include footer.html %}
 </body>
 </html>
