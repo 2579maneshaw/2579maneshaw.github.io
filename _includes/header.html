@@ -1,34 +1,54 @@
- <!-- Consistent header -->
-  <header class="siteHeader">
-    <div class="headerInner">
-      <div class="brandBlock">
-        <picture>
-          <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
-          <img
-            src="photos/EVWHlogo-600w.jpg"
-            srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
-            sizes="180px"
-            alt="Enchanted Villa of Windsor Hills logo"
-            class="brandLogo"
-            width="180"
-            height="167"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+<header class="siteHeader">
+  <div class="headerInner">
+    <div class="brandBlock">
+      <picture>
+        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
+        <img
+          src="photos/EVWHlogo-600w.jpg"
+          srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
+          sizes="200px"
+          alt="Enchanted Villa of Windsor Hills logo"
+          class="brandLogo"
+          width="200"
+          height="187"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
 
-        <div class="brandText">
-          <div class="brandName">Enchanted Villa of Windsor Hills</div>
-          <div class="brandTagline">Rejuvenate your body. Restore your mind. </br>Make every Disney day feels just as magical as the first.</div>
+      <div class="brandText">
+        <div class="brandName">Enchanted Villa of Windsor Hills</div>
+        <div class="brandTagline">
+          Rejuvenate your body. Restore your mind.<br>
+          Make every Disney day feels just as magical as the first.
         </div>
       </div>
-
-      <nav class="mainNav" aria-label="Primary navigation">
-        <a class="active" href="home.html">Home</a>
-        <a href="index.html">Our Villa</a>
-        <a href="nearby.html">Nearby</a>
-        <a href="attractions.html">Attractions</a>
-        <a href="windsor-hills.html">Windsor Hills</a>
-      </nav>
     </div>
-  </header>
+
+    <nav class="mainNav" aria-label="Primary navigation">
+      <a href="home.html" data-nav="home">Home</a>
+      <a href="index.html" data-nav="villa">Our Villa</a>
+      <a href="nearby.html" data-nav="nearby">Nearby</a>
+      <a href="attractions.html" data-nav="attractions">Attractions</a>
+      <a href="windsor-hills.html" data-nav="windsor">Windsor Hills</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Auto-highlight the active page in the shared header
+  (function () {
+    const map = {
+      "home.html": "home",
+      "index.html": "villa",
+      "nearby.html": "nearby",
+      "attractions.html": "attractions",
+      "windsor-hills.html": "windsor"
+    };
+    const path = (location.pathname.split("/").pop() || "home.html").toLowerCase();
+    const key = map[path];
+    if (!key) return;
+    const link = document.querySelector('.mainNav a[data-nav="' + key + '"]');
+    if (link) link.classList.add("active");
+  })();
+</script>
