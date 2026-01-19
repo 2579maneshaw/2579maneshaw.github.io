@@ -1,32 +1,35 @@
 /* ===============================
-   GLOBAL RESET + BASE
+   GLOBAL BASICS
 ================================ */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   width: 100%;
   overflow-x: hidden;
 }
 
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #ffffff;
+  background: #fff;
   color: #222;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Global page wrapper used by _layouts/default.html */
+.pageWrap{
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 18px 16px 60px;
 }
 
-/* ===============================
-   PAGE WRAPPER
-================================ */
-.pageWrap {
+/* optional legacy wrapper */
+.wrap {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
@@ -51,28 +54,34 @@ img {
   gap: 24px;
 }
 
-/* LEFT SIDE */
+/* LEFT side */
 .headerLeft {
   display: flex;
+  min-width: 0;
 }
 
+/* Brand row: logo + text */
 .brandBlock {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   text-decoration: none;
   color: inherit;
+  min-width: 0;
 }
 
 .brandLogo {
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  display: block;
 }
 
-/* TITLE COLUMN */
+/* FORCE title + subtitle + nav to stack vertically */
 .brandText {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;   /* <-- critical */
+  align-items: flex-start;  /* <-- critical */
   gap: 8px;
+  min-width: 0;
 }
 
 .brandName {
@@ -80,19 +89,30 @@ img {
   font-weight: 700;
   letter-spacing: -0.03em;
   color: #111;
+  line-height: 1.05;
+  margin: 0;
 }
 
 .brandTagline {
   font-size: 1rem;
   color: #555;
+  line-height: 1.25;
+  margin: 0;               /* <-- prevents weird inline shifting */
 }
 
-/* NAV — NOW NATURALLY UNDER TITLE */
+/* NAV under subtitle */
 .mainNav {
   display: flex;
+  flex-direction: row;     /* <-- keeps buttons horizontal */
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 6px;
+  padding: 0;
+}
+
+/* SAFETY: hide any accidental empty nav links (the “blank button”) */
+.mainNav a:empty {
+  display: none !important;
 }
 
 .mainNav a {
@@ -103,6 +123,9 @@ img {
   border-radius: 999px;
   border: 1px solid #e6e6e6;
   background: #fafafa;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mainNav a:hover {
@@ -115,26 +138,60 @@ img {
   border-color: #111;
 }
 
-/* RIGHT CTA */
+/* RIGHT side CTA */
 .headerRight {
   padding-top: 6px;
+  flex: 0 0 auto;
 }
 
 .headerCta {
+  display: inline-block;
   background: #2f5fd0; /* logo-matched blue */
   color: #fff;
   padding: 12px 22px;
   border-radius: 999px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  white-space: nowrap;
 }
 
 .headerCta:hover {
   background: #244bb0;
 }
 
-/* MOBILE */
+/* ===============================
+   SHARED REUSABLE UI
+================================ */
+.card {
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+  min-width: 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #666;
+  font-size: 0.92rem;
+}
+
+/* Prevent “skinny left column” grid issues */
+.grid2{
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+.grid2 > * { min-width: 0; }
+
+/* ===============================
+   MOBILE
+================================ */
 @media (max-width: 860px) {
   .headerInner {
     flex-direction: column;
@@ -143,12 +200,15 @@ img {
 
   .headerRight {
     width: 100%;
+    padding-top: 10px;
   }
 
   .headerCta {
     width: 100%;
     text-align: center;
   }
+
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
 }
-
-
