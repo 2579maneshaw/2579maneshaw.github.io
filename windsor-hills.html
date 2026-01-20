@@ -1,364 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Windsor Hills Resort Amenities | Enchanted Villa of Windsor Hills</title>
-  <meta name="description" content="Explore Windsor Hills Resort amenities (clubhouse, waterpark, pool, fitness, and more) with the latest details from the official resort amenities page." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+---
+layout: default
+title: Windsor Hills
+nav: windsor
+description: Windsor Hills Resort amenities near Enchanted Villa of Windsor Hills — one of the most loved communities near Disney.
+---
 
-  <style>
-    :root{
-      --ink:#111;
-      --text:#222;
-      --muted:#555;
-      --line:#e9e9e9;
-      --card:#fafafa;
-      --shadow: 0 10px 26px rgba(0,0,0,0.08);
-      --radius:14px;
-    }
+<style>
+  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
+  p{color:#333;line-height:1.65;margin:0 0 12px;}
 
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:#fff;
-      color:var(--text);
-    }
+  .grid2{
+    display:grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap:18px;
+    align-items:start;
+    margin-top:18px;
+  }
+  @media (max-width: 980px){ .grid2{ grid-template-columns: 1fr; } }
+  .grid2 > *{min-width:0;}
 
-    .wrap{
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 22px 18px 60px;
-    }
+  .bullets{margin:10px 0 0;padding-left:18px;color:#333;line-height:1.75;}
+  .bullets li{margin:6px 0;}
 
-    /* Brand header */
-    .brand{
-      text-align:center;
-      margin-bottom: 14px;
-      position: relative;
-    }
+  .gallery{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+  @media (max-width: 560px){ .gallery{ grid-template-columns: 1fr; } }
 
-    .brand-logo{
-      display:block;
-      margin:0 auto 10px;
-      width:100%;
-      max-width: 260px;
-      height:auto;
-    }
+  .gallery img{
+    width:100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 14px;
+    border:1px solid #eee;
+    background:#f3f3f3;
+    cursor:pointer;
+  }
 
-    @media (max-width:720px){
-      .brand-logo{ max-width: 210px; }
-    }
+  /* Lightbox */
+  .lightbox{
+    position:fixed; inset:0;
+    background: rgba(0,0,0,0.88);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:18px;
+  }
+  .lightbox.open{display:flex;}
+  .lightboxInner{
+    position:relative;
+    width:min(1100px, 100%);
+    max-height: 90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .lightboxImg{
+    max-width:100%;
+    max-height:90vh;
+    border-radius:14px;
+    background:#111;
+  }
+  .lbBtn{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    border:0;
+    background: rgba(255,255,255,0.92);
+    padding:10px 12px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size: 1rem;
+  }
+  .lbPrev{left:8px;}
+  .lbNext{right:8px;}
+  .lbClose{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    border:0;
+    background: rgba(255,255,255,0.92);
+    padding:10px 12px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size: 1rem;
+  }
 
-    .brand-whisper{
-      margin: 8px auto 0;
-      max-width: 640px;
-      font-size: 1.03rem;
-      line-height: 1.45;
-      color: var(--muted);
-    }
+  .mini{font-size:0.95rem;color:#555;margin-top:10px;}
 
-    /* Nav */
-    .nav{
-      margin: 14px auto 10px;
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:10px;
-    }
+  .mapWrap{
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid #eee;
+    background:#f3f3f3;
+    margin-top:12px;
+  }
+  iframe{width:100%;height:420px;border:0;}
+</style>
 
-    .nav a{
-      text-decoration:none;
-      color: var(--ink);
-      border: 1px solid var(--line);
-      background:#fff;
-      padding: 10px 12px;
-      border-radius: 999px;
-      font-size: 0.98rem;
-      transition: transform .05s ease, background .2s ease, border-color .2s ease;
-    }
+<h1>Windsor Hills Resort</h1>
+<p>
+  Windsor Hills is one of the most popular communities near Disney because it blends resort-level amenities with a quiet, gated feel.
+  You get the fun when you want it — and your calm pause when you don’t.
+</p>
 
-    .nav a:hover{
-      background:#f6f6f6;
-      border-color:#dcdcdc;
-    }
+<div class="grid2">
+  <div class="card">
+    <h2>Amenities</h2>
+    <ul class="bullets">
+      <li>Gated community with 24 hour security</li>
+      <li>Resort-style lagoon pool, waterpark, splash areas</li>
+      <li>Clubhouse, fitness center, arcade, and movie theater</li>
+      <li>Playgrounds, sports courts, and walking paths</li>
+    </ul>
 
-    .nav a.active{
-      background: var(--ink);
-      color:#fff;
-      border-color: var(--ink);
-    }
-
-    /* Page header */
-    .page-head{
-      margin: 18px auto 10px;
-      text-align:center;
-      max-width: 860px;
-    }
-
-    .page-head h1{
-      margin: 0;
-      font-size: 1.95rem;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-
-    .page-head p{
-      margin: 10px auto 0;
-      line-height: 1.65;
-      font-size: 1.05rem;
-      color:#333;
-      max-width: 760px;
-    }
-
-    /* Framed content */
-    .frame-card{
-      margin: 18px auto 0;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* subtle watermark */
-    .frame-card::before{
-      content: "Enchanted Villa of Windsor Hills";
-      position:absolute;
-      inset: 0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 700;
-      font-size: clamp(28px, 5vw, 56px);
-      color: rgba(0,0,0,0.06);
-      transform: rotate(-12deg);
-      pointer-events:none;
-      user-select:none;
-      z-index: 0;
-    }
-
-    .frame-topbar{
-      position: relative;
-      z-index: 1;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 12px 14px;
-      background: #fff;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .frame-topbar .left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-    }
-
-    .frame-topbar .title{
-      font-weight: 700;
-      color: var(--ink);
-      font-size: 1.02rem;
-    }
-
-    .frame-topbar .subtitle{
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .frame-topbar .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .btn{
-      display:inline-block;
-      border: 1px solid var(--line);
-      background:#fff;
-      color: var(--ink);
-      text-decoration:none;
-      padding: 9px 12px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      cursor:pointer;
-      transition: background .2s ease, border-color .2s ease;
-      white-space:nowrap;
-    }
-
-    .btn:hover{
-      background:#f6f6f6;
-      border-color:#dcdcdc;
-    }
-
-    .btn.primary{
-      background: var(--ink);
-      border-color: var(--ink);
-      color:#fff;
-    }
-
-    .btn.primary:hover{
-      background:#2a2a2a;
-      border-color:#2a2a2a;
-    }
-
-    /* Responsive iframe */
-    .frame-body{
-      position: relative;
-      z-index: 1;
-      background: #fff;
-    }
-
-    .iframe-wrap{
-      width:100%;
-      aspect-ratio: 16 / 10;
-      min-height: 680px;
-    }
-
-    @media (max-width:720px){
-      .iframe-wrap{
-        aspect-ratio: 16 / 12;
-        min-height: 620px;
-      }
-      .frame-topbar{
-        flex-direction: column;
-        align-items:flex-start;
-      }
-      .frame-topbar .actions{
-        width:100%;
-        justify-content:flex-start;
-      }
-    }
-
-    iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-      background:#fff;
-    }
-
-    /* Fallback notice */
-    .notice{
-      margin: 18px auto 0;
-      font-size: 0.98rem;
-      background: #fafafa;
-      border: 1px solid var(--line);
-      padding: 14px;
-      border-radius: 12px;
-      color: #444;
-      max-width: 860px;
-    }
-
-    .notice strong{ color: var(--ink); }
-
-    .footer{
-      text-align:center;
-      margin-top: 42px;
-      font-size: 0.92rem;
-      color:#666;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-
-    <!-- Brand -->
-    <div class="brand">
-      <picture>
-        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
-        <img
-          src="photos/EVWHlogo-600w.jpg"
-          srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
-          sizes="(max-width: 720px) 210px, 260px"
-          alt="Enchanted Villa of Windsor Hills logo"
-          class="brand-logo"
-          width="260"
-          height="242"
-          decoding="async"
-        />
-      </picture>
-
-      <div class="brand-whisper">
-        Where the energy settles, the family resets, and the magic carries on.
-      </div>
+    <h2 style="margin-top:16px;">Map</h2>
+    <p class="mini">Centered on Windsor Hills Resort (does not show your exact address).</p>
+    <div class="mapWrap">
+      <iframe
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Windsor%20Hills%20Resort%20Kissimmee%20FL&z=14&output=embed"
+        title="Map centered on Windsor Hills Resort">
+      </iframe>
     </div>
-
-    <!-- Nav (adjust filenames here if yours differ) -->
-    <nav class="nav" aria-label="Site navigation">
-      <a href="home.html">Home</a>
-      <a href="index.html">Our Villa</a>
-      <a href="nearby.html">Nearby</a>
-      <a href="attractions.html">Local Attractions</a>
-      <a class="active" href="windsor-hills.html">Windsor Hills Resort</a>
-    </nav>
-
-    <!-- Page intro -->
-    <div class="page-head">
-      <h1>Windsor Hills Resort Amenities</h1>
-      <p>
-        Here’s the most up to date resort amenities info, embedded directly so you can keep browsing without leaving our site.
-      </p>
-    </div>
-
-    <!-- Embedded resort page -->
-    <section class="frame-card" aria-label="Windsor Hills amenities embed">
-      <div class="frame-topbar">
-        <div class="left">
-          <div class="title">Official amenities page</div>
-          <div class="subtitle">If the embed is blocked on your device, use the “Open” button.</div>
-        </div>
-
-        <div class="actions">
-          <a class="btn" href="https://www.windsorhillsresortfl.com/windsor-hills-amenities/" target="_blank" rel="noopener">
-            Open in new tab
-          </a>
-          <button class="btn primary" id="refreshBtn" type="button">Refresh embed</button>
-        </div>
-      </div>
-
-      <div class="frame-body">
-        <div class="iframe-wrap">
-          <!--
-            NOTE:
-            Some sites block being embedded (X-Frame-Options / CSP). If this page shows blank,
-            it’s the destination site blocking iframes. The fallback notice below covers that.
-          -->
-          <iframe
-            id="amenitiesFrame"
-            src="https://www.windsorhillsresortfl.com/windsor-hills-amenities/"
-            title="Windsor Hills Resort Amenities"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-          ></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fallback + helpful context -->
-    <div class="notice">
-      <strong>If you don’t see the amenities page above:</strong><br>
-      Some websites prevent being displayed inside an embedded frame for security reasons. If the embed appears blank,
-      tap <strong>Open in new tab</strong> to view the official amenities page directly.
-    </div>
-
-    <div class="footer">Enchanted Villa of Windsor Hills</div>
   </div>
 
-  <script>
-    // Simple refresh button (helpful if iOS/Safari caches iframe aggressively)
-    const refreshBtn = document.getElementById("refreshBtn");
-    const frame = document.getElementById("amenitiesFrame");
+  <div class="card">
+    <h2>Resort Gallery</h2>
+    <p class="mini">Click any photo for a larger view. Use ← → keys or arrows to browse.</p>
+    <div id="resortGallery" class="gallery" aria-label="Windsor Hills resort photo gallery"></div>
+  </div>
+</div>
 
-    refreshBtn.addEventListener("click", () => {
-      const url = "https://www.windsorhillsresortfl.com/windsor-hills-amenities/";
-      // Bust cache by appending a timestamp query param
-      frame.src = url + (url.includes("?") ? "&" : "?") + "t=" + Date.now();
-    });
-  </script>
-</body>
-</html>
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightboxInner">
+    <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
+    <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
+    <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
+    <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
+  </div>
+</div>
+
+<script>
+  const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
+  const RESORT_FALLBACK = "{{ '/resort-photos.json' | relative_url }}";
+
+  function withJpgFallback(src, imgEl){
+    imgEl.onerror = () => {
+      if (src && src.toLowerCase().endsWith(".webp")){
+        imgEl.onerror = null;
+        imgEl.src = src.replace(/\.webp$/i, ".jpg");
+      }
+    };
+  }
+
+  async function loadList(preferred, fallback){
+    try{
+      const res = await fetch(preferred, { cache: "no-store" });
+      if(!res.ok) throw new Error("preferred not ok");
+      return await res.json();
+    }catch(e){
+      const res2 = await fetch(fallback, { cache: "no-store" });
+      return await res2.json();
+    }
+  }
+
+  // Lightbox state
+  let lbList = [];
+  let lbIndex = 0;
+
+  const lightbox = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbPrev = document.getElementById("lbPrev");
+  const lbNext = document.getElementById("lbNext");
+  const lbClose = document.getElementById("lbClose");
+
+  function showLb(i){
+    if(!lbList.length) return;
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIndex];
+    withJpgFallback(lbList[lbIndex], lbImg);
+  }
+
+  function openLightbox(list, index){
+    lbList = list || [];
+    lbIndex = index || 0;
+    if(!lbList.length) return;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden","false");
+    showLb(lbIndex);
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden","true");
+  }
+
+  function nextPhoto(){ showLb(lbIndex + 1); }
+  function prevPhoto(){ showLb(lbIndex - 1); }
+
+  lbNext.addEventListener("click", nextPhoto);
+  lbPrev.addEventListener("click", prevPhoto);
+  lbClose.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", (e)=>{ if(e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener("keydown", (e)=>{
+    if(!lightbox.classList.contains("open")) return;
+    if(e.key === "Escape") closeLightbox();
+    if(e.key === "ArrowRight") nextPhoto();
+    if(e.key === "ArrowLeft") prevPhoto();
+  });
+
+  async function init(){
+    try{
+      const photos = await loadList(RESORT_JSON, RESORT_FALLBACK);
+      const gallery = document.getElementById("resortGallery");
+      gallery.innerHTML = "";
+
+      photos.forEach((src, idx)=>{
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.src = src;
+        img.alt = "Windsor Hills resort photo";
+        withJpgFallback(src, img);
+        img.addEventListener("click", ()=> openLightbox(photos, idx));
+        gallery.appendChild(img);
+      });
+    }catch(e){
+      console.warn("Could not load resort photo list.", e);
+    }
+  }
+
+  init();
+</script>
