@@ -1,243 +1,64 @@
 ---
 layout: default
-title: Windsor Hills
+title: Windsor Hills Resort
 nav: windsor
-description: Windsor Hills Resort amenities near Enchanted Villa of Windsor Hills — one of the most loved communities near Disney.
+description: Explore Windsor Hills Resort amenities, clubhouse, waterpark, and community features near Disney.
 ---
 
 <style>
-  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
-  p{color:#333;line-height:1.65;margin:0 0 12px;}
-
-  .grid2{
-    display:grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap:18px;
-    align-items:start;
-    margin-top:18px;
+  h1{
+    margin:18px 0 10px;
+    font-size:1.85rem;
+    letter-spacing:-0.02em;
   }
-  @media (max-width: 980px){ .grid2{ grid-template-columns: 1fr; } }
-  .grid2 > *{min-width:0;}
 
-  .bullets{margin:10px 0 0;padding-left:18px;color:#333;line-height:1.75;}
-  .bullets li{margin:6px 0;}
-
-  .gallery{
-    display:grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap:10px;
-    margin-top:12px;
+  p{
+    color:#333;
+    line-height:1.65;
+    margin:0 0 12px;
+    max-width: 900px;
   }
-  @media (max-width: 560px){ .gallery{ grid-template-columns: 1fr; } }
 
-  .gallery img{
-    width:100%;
-    height: 210px;
-    object-fit: cover;
-    border-radius: 14px;
+  .frameWrap{
+    margin-top:16px;
     border:1px solid #eee;
-    background:#f3f3f3;
-    cursor:pointer;
-  }
-
-  /* Lightbox */
-  .lightbox{
-    position:fixed; inset:0;
-    background: rgba(0,0,0,0.88);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    padding:18px;
-  }
-  .lightbox.open{display:flex;}
-  .lightboxInner{
-    position:relative;
-    width:min(1100px, 100%);
-    max-height: 90vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .lightboxImg{
-    max-width:100%;
-    max-height:90vh;
-    border-radius:14px;
-    background:#111;
-  }
-  .lbBtn{
-    position:absolute;
-    top:50%;
-    transform: translateY(-50%);
-    border:0;
-    background: rgba(255,255,255,0.92);
-    padding:10px 12px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size: 1rem;
-  }
-  .lbPrev{left:8px;}
-  .lbNext{right:8px;}
-  .lbClose{
-    position:absolute;
-    top:-10px;
-    right:-10px;
-    border:0;
-    background: rgba(255,255,255,0.92);
-    padding:10px 12px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size: 1rem;
-  }
-
-  .mini{font-size:0.95rem;color:#555;margin-top:10px;}
-
-  .mapWrap{
     border-radius:16px;
     overflow:hidden;
-    border:1px solid #eee;
     background:#f3f3f3;
-    margin-top:12px;
   }
-  iframe{width:100%;height:420px;border:0;}
+
+  .frameWrap iframe{
+    width:100%;
+    height:80vh; /* Tall enough to feel immersive */
+    border:0;
+    background:#fff;
+  }
+
+  .note{
+    font-size:0.95rem;
+    color:#555;
+    margin-top:10px;
+  }
 </style>
 
 <h1>Windsor Hills Resort</h1>
+
 <p>
-  Windsor Hills is one of the most popular communities near Disney because it blends resort-level amenities with a quiet, gated feel.
-  You get the fun when you want it — and your calm pause when you don’t.
+  Windsor Hills is one of the most sought-after resort communities near Disney,
+  offering a rare balance of fun amenities and a calm, gated environment.
+  Explore the official resort page below without ever leaving our site.
 </p>
 
-<div class="grid2">
-  <div class="card">
-    <h2>Amenities</h2>
-    <ul class="bullets">
-      <li>Gated community with 24 hour security</li>
-      <li>Resort-style lagoon pool, waterpark, splash areas</li>
-      <li>Clubhouse, fitness center, arcade, and movie theater</li>
-      <li>Playgrounds, sports courts, and walking paths</li>
-    </ul>
-
-    <h2 style="margin-top:16px;">Map</h2>
-    <p class="mini">Centered on Windsor Hills Resort (does not show your exact address).</p>
-    <div class="mapWrap">
-      <iframe
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Windsor%20Hills%20Resort%20Kissimmee%20FL&z=14&output=embed"
-        title="Map centered on Windsor Hills Resort">
-      </iframe>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Resort Gallery</h2>
-    <p class="mini">Click any photo for a larger view. Use ← → keys or arrows to browse.</p>
-    <div id="resortGallery" class="gallery" aria-label="Windsor Hills resort photo gallery"></div>
-  </div>
+<div class="frameWrap">
+  <iframe
+    src="https://www.windsorhillsresort.com/"
+    title="Windsor Hills Resort Official Site"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
 </div>
 
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <div class="lightboxInner">
-    <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
-    <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
-    <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
-    <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
-  </div>
-</div>
-
-<script>
-  const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
-  const RESORT_FALLBACK = "{{ '/resort-photos.json' | relative_url }}";
-
-  function withJpgFallback(src, imgEl){
-    imgEl.onerror = () => {
-      if (src && src.toLowerCase().endsWith(".webp")){
-        imgEl.onerror = null;
-        imgEl.src = src.replace(/\.webp$/i, ".jpg");
-      }
-    };
-  }
-
-  async function loadList(preferred, fallback){
-    try{
-      const res = await fetch(preferred, { cache: "no-store" });
-      if(!res.ok) throw new Error("preferred not ok");
-      return await res.json();
-    }catch(e){
-      const res2 = await fetch(fallback, { cache: "no-store" });
-      return await res2.json();
-    }
-  }
-
-  // Lightbox state
-  let lbList = [];
-  let lbIndex = 0;
-
-  const lightbox = document.getElementById("lightbox");
-  const lbImg = document.getElementById("lbImg");
-  const lbPrev = document.getElementById("lbPrev");
-  const lbNext = document.getElementById("lbNext");
-  const lbClose = document.getElementById("lbClose");
-
-  function showLb(i){
-    if(!lbList.length) return;
-    lbIndex = (i + lbList.length) % lbList.length;
-    lbImg.src = lbList[lbIndex];
-    withJpgFallback(lbList[lbIndex], lbImg);
-  }
-
-  function openLightbox(list, index){
-    lbList = list || [];
-    lbIndex = index || 0;
-    if(!lbList.length) return;
-    lightbox.classList.add("open");
-    lightbox.setAttribute("aria-hidden","false");
-    showLb(lbIndex);
-  }
-
-  function closeLightbox(){
-    lightbox.classList.remove("open");
-    lightbox.setAttribute("aria-hidden","true");
-  }
-
-  function nextPhoto(){ showLb(lbIndex + 1); }
-  function prevPhoto(){ showLb(lbIndex - 1); }
-
-  lbNext.addEventListener("click", nextPhoto);
-  lbPrev.addEventListener("click", prevPhoto);
-  lbClose.addEventListener("click", closeLightbox);
-
-  lightbox.addEventListener("click", (e)=>{ if(e.target === lightbox) closeLightbox(); });
-
-  document.addEventListener("keydown", (e)=>{
-    if(!lightbox.classList.contains("open")) return;
-    if(e.key === "Escape") closeLightbox();
-    if(e.key === "ArrowRight") nextPhoto();
-    if(e.key === "ArrowLeft") prevPhoto();
-  });
-
-  async function init(){
-    try{
-      const photos = await loadList(RESORT_JSON, RESORT_FALLBACK);
-      const gallery = document.getElementById("resortGallery");
-      gallery.innerHTML = "";
-
-      photos.forEach((src, idx)=>{
-        const img = document.createElement("img");
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.src = src;
-        img.alt = "Windsor Hills resort photo";
-        withJpgFallback(src, img);
-        img.addEventListener("click", ()=> openLightbox(photos, idx));
-        gallery.appendChild(img);
-      });
-    }catch(e){
-      console.warn("Could not load resort photo list.", e);
-    }
-  }
-
-  init();
-</script>
+<p class="note">
+  This page is shown for convenience so you can explore Windsor Hills amenities
+  while staying within Enchanted Villa of Windsor Hills.
+</p>
