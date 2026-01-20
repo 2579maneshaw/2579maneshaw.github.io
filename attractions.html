@@ -1,209 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Attractions | Enchanted Villa of Windsor Hills</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Theme parks, shopping, golf, and more near Enchanted Villa of Windsor Hills — plan routes from Windsor Hills and build the perfect Disney day." />
+---
+layout: default
+title: Attractions
+nav: attractions
+description: Top attractions near Enchanted Villa of Windsor Hills — The Calm Pause Between the Parks.
+---
 
-  <style>
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#222;}
-    .wrap{max-width:1020px;margin:0 auto;padding:22px 16px 60px;}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
-    .brand-logo{display:block;max-width:160px;width:100%;height:auto;}
-    nav{display:flex;gap:10px;flex-wrap:wrap;}
-    nav a{text-decoration:none;color:#111;font-size:0.95rem;padding:10px 12px;border-radius:999px;border:1px solid #eee;background:#fafafa;}
-    nav a:hover{background:#f2f2f2;}
-    nav a.active{background:#111;color:#fff;border-color:#111;}
+<style>
+  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
+  p{color:#333;line-height:1.65;margin:0 0 12px;}
 
-    h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
-    p{color:#333;line-height:1.65;margin:0 0 12px;}
+  .grid{
+    display:grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap:18px;
+    align-items:start;
+  }
+  @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+  .grid > *{min-width:0;}
 
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-    @media (max-width: 860px){.grid{grid-template-columns:1fr;}}
+  .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
+  .list li{margin:8px 0;}
+  .placeBtn{
+    display:inline-block;
+    border:0;
+    background:transparent;
+    padding:0;
+    margin:0;
+    text-align:left;
+    cursor:pointer;
+    color:#111;
+    text-decoration:underline;
+    text-underline-offset:3px;
+    font-size:1rem;
+  }
 
-    .card{position:relative;border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,0.05);overflow:hidden;}
-    .card::after{
-      content:"Enchanted Villa of Windsor Hills";
-      position:absolute;
-      right:-40px; bottom:18px;
-      transform: rotate(-10deg);
-      font-size: 0.85rem;
-      color: rgba(0,0,0,0.14);
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-      pointer-events:none;
-    }
+  .mini{font-size:0.95rem;color:#555;margin-top:10px;}
 
-    .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
-    .list li{margin:6px 0;}
+  .mapWrap{
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid #eee;
+    background:#f3f3f3;
+  }
+  iframe{width:100%;height:520px;border:0;}
 
-    /* Turn links into in-page route buttons (keep your look) */
-    .routeBtn{
-      appearance:none;
-      border:0;
-      background:transparent;
-      padding:0;
-      margin:0;
-      color:#111;
-      font: inherit;
-      text-decoration: underline;
-      cursor:pointer;
-    }
-    .routeBtn:hover{opacity:0.75;}
+  .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 0;}
+  .pill{
+    border:1px solid #eee;
+    background:#fafafa;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:0.92rem;
+    color:#111;
+  }
+</style>
 
-    .mapWrap{border-radius:16px;overflow:hidden;border:1px solid #eee;background:#f3f3f3;}
-    iframe{width:100%;height:520px;border:0;display:block;}
-    @media (max-width: 860px){iframe{height:420px;}}
+<h1>Attractions Near Windsor Hills</h1>
+<p>
+  Tap any attraction below to update the map with <strong>directions from the Windsor Hills gate</strong>.
+  This keeps your exact address private while still making navigation easy.
+</p>
 
-    .mini{font-size:0.95rem;color:#555;margin-top:10px;}
+<div class="grid">
+  <!-- LEFT: LIST -->
+  <div class="card">
+    <h2>Disney + Theme Parks</h2>
+    <ul class="list" id="placesList">
+      <li><button class="placeBtn" data-dest="Magic Kingdom Park, Orlando, FL">Magic Kingdom</button></li>
+      <li><button class="placeBtn" data-dest="EPCOT, Orlando, FL">EPCOT</button></li>
+      <li><button class="placeBtn" data-dest="Disney's Hollywood Studios, Orlando, FL">Hollywood Studios</button></li>
+      <li><button class="placeBtn" data-dest="Disney's Animal Kingdom Theme Park, Orlando, FL">Animal Kingdom</button></li>
+      <li><button class="placeBtn" data-dest="Disney Springs, Orlando, FL">Disney Springs</button></li>
+    </ul>
 
-    .mapTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .mapTitle{margin:0;font-size:1.25rem;}
-    .mapSub{margin:4px 0 0;color:#555;font-size:0.95rem;line-height:1.45;}
-    .pill{
-      display:inline-block;
-      padding:8px 10px;
-      border:1px solid #eee;
-      background:#fafafa;
-      border-radius:999px;
-      font-size:0.92rem;
-      color:#111;
-      white-space:nowrap;
-    }
-
-    .footer{text-align:center;margin-top:40px;color:#666;font-size:0.92rem;}
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <div class="topbar">
-      <picture>
-        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
-        <img src="photos/EVWHlogo-600w.jpg" alt="Enchanted Villa of Windsor Hills logo" class="brand-logo" width="160" height="149" decoding="async" loading="eager">
-      </picture>
-
-      <nav aria-label="Site navigation">
-        <a href="home.html">Home</a>
-        <a href="index.html">Our Villa</a>
-        <a href="nearby.html">Nearby</a>
-        <a class="active" href="attractions.html">Attractions</a>
-        <a href="windsor-hills.html">Windsor Hills</a>
-      </nav>
+    <div class="pillRow" aria-label="Quick tips">
+      <span class="pill">Midday break friendly</span>
+      <span class="pill">Fastest return: I-4</span>
+      <span class="pill">Gate to door: quick</span>
     </div>
 
-    <h1>Local Attractions</h1>
-    <p>
-      Build a smoother park plan with smarter travel — including a <strong>midday break</strong> when the heat hits.
-      Tap any attraction below and your map will instantly update with directions from the Windsor Hills gate area.
+    <h2 style="margin-top:16px;">Nearby Favorites</h2>
+    <ul class="list">
+      <li><button class="placeBtn" data-dest="Mystic Dunes Golf Club, Celebration, FL">Mystic Dunes Golf Club</button></li>
+      <li><button class="placeBtn" data-dest="Old Town, Kissimmee, FL">Old Town Kissimmee</button></li>
+      <li><button class="placeBtn" data-dest="ICON Park, Orlando, FL">ICON Park</button></li>
+      <li><button class="placeBtn" data-dest="SeaWorld Orlando, Orlando, FL">SeaWorld</button></li>
+      <li><button class="placeBtn" data-dest="Universal CityWalk Orlando, Orlando, FL">Universal CityWalk</button></li>
+    </ul>
+
+    <p class="mini">
+      Tip: If you want the map to open in your phone’s Maps app, you can still use the “Directions” button inside the embedded map.
     </p>
-
-    <div class="grid">
-      <div class="card">
-        <h2>Theme Parks</h2>
-        <ul class="list">
-          <li><button class="routeBtn" type="button" onclick="setRoute('Magic Kingdom Park')">Magic Kingdom</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute('EPCOT')">EPCOT</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute(`Disney's Hollywood Studios`)">Hollywood Studios</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute(`Disney's Animal Kingdom Theme Park`)">Animal Kingdom</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute('Universal Studios Florida')">Universal Studios Florida</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute(`Universal's Islands of Adventure`)">Islands of Adventure</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute('SeaWorld Orlando')">SeaWorld Orlando</button></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>Shopping, Golf, and More</h2>
-        <ul class="list">
-          <li><button class="routeBtn" type="button" onclick="setRoute('Disney Springs')">Disney Springs</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute('Orlando Vineland Premium Outlets')">Vineland Premium Outlets</button></li>
-          <li><button class="routeBtn" type="button" onclick="setRoute('ChampionsGate Golf Club')">Golf: ChampionsGate</button></li>
-
-          <!-- Searches: keep as links but still avoid your address; use Windsor Hills as the query anchor -->
-          <li>
-            <a class="routeBtn" target="_blank" rel="noopener"
-               href="https://www.google.com/maps/search/?api=1&query=mini+golf+near+Windsor+Hills+Resort+Kissimmee+FL">
-              Mini Golf nearby
-            </a>
-          </li>
-          <li>
-            <a class="routeBtn" target="_blank" rel="noopener"
-               href="https://www.google.com/maps/search/?api=1&query=beach+day+trip+from+Kissimmee+FL">
-              Beaches (best day trip options)
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- MAP SECTION (single embedded map that updates in-place) -->
-    <div class="card" id="mapSection" style="margin-top:16px;">
-      <div class="mapTop">
-        <div>
-          <h2 class="mapTitle">Route Map</h2>
-          <p class="mapSub" id="mapSubtitle">
-            Showing directions from Windsor Hills Resort (Gate) to Magic Kingdom
-          </p>
-        </div>
-        <span class="pill" id="originPill">Origin: Windsor Hills Resort (Gate)</span>
-      </div>
-
-      <div class="mapWrap">
-        <iframe
-          id="routeMap"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src=""
-          title="Directions from Windsor Hills Resort to selected attraction">
-        </iframe>
-      </div>
-
-      <p class="mini">
-        Pro tip: pick your park, choose a <strong>midday break</strong> window, and actually come back to reset.
-        You’ll feel the difference by fireworks.
-      </p>
-    </div>
-
-    <div class="footer">Enchanted Villa of Windsor Hills</div>
   </div>
 
-  <script>
-    // Keep origin generic for privacy (no address, no street number).
-    // This is stable in Google Maps and avoids exposing your exact location.
-    const ORIGIN_LABEL = "Windsor Hills Resort (Gate)";
-    const ORIGIN_QUERY = "Windsor Hills Resort Kissimmee FL";
+  <!-- RIGHT: MAP -->
+  <div class="card">
+    <h2>Directions Map</h2>
+    <p class="mini" id="mapLabel">
+      Showing directions from <strong>Windsor Hills Resort Gate</strong>.
+    </p>
 
-    const DEFAULT_DEST = "Magic Kingdom Park";
+    <div class="mapWrap">
+      <iframe
+        id="mapFrame"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Directions from Windsor Hills gate">
+      </iframe>
+    </div>
+  </div>
+</div>
 
-    const map = document.getElementById("routeMap");
-    const subtitle = document.getElementById("mapSubtitle");
-    const originPill = document.getElementById("originPill");
+<script>
+  // Start location (keeps your exact address private)
+  const ORIGIN = "Windsor Hills Resort Gate, Kissimmee, FL";
 
-    originPill.textContent = "Origin: " + ORIGIN_LABEL;
+  // Default destination on load:
+  const DEFAULT_DEST = "Magic Kingdom Park, Orlando, FL";
 
-    function buildEmbedDirectionsUrl(origin, destination) {
-      const o = encodeURIComponent(origin);
-      const d = encodeURIComponent(destination);
-      // Free public embed; no API key required.
-      return `https://www.google.com/maps?output=embed&saddr=${o}&daddr=${d}`;
-    }
+  function makeDirectionsEmbed(origin, destination) {
+    // Uses "q=" for a standard embed, and a directions-style link format via query
+    // This works reliably without exposing your address.
+    const q = encodeURIComponent(`Directions from ${origin} to ${destination}`);
+    return `https://www.google.com/maps?q=${q}&output=embed`;
+  }
 
-    function setRoute(destinationLabel) {
-      map.src = buildEmbedDirectionsUrl(ORIGIN_QUERY, destinationLabel);
-      subtitle.textContent = `Showing directions from ${ORIGIN_LABEL} to ${destinationLabel}`;
-      document.getElementById("mapSection").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+  const mapFrame = document.getElementById("mapFrame");
+  const mapLabel = document.getElementById("mapLabel");
 
-    // Init default route
-    setRoute(DEFAULT_DEST);
-  </script>
-</body>
-</html>
+  function setMapTo(destination) {
+    mapFrame.src = makeDirectionsEmbed(ORIGIN, destination);
+    mapLabel.innerHTML = `Showing directions from <strong>Windsor Hills Resort Gate</strong> to <strong>${destination}</strong>.`;
+  }
+
+  // Wire up buttons
+  document.querySelectorAll(".placeBtn").forEach(btn => {
+    btn.addEventListener("click", () => setMapTo(btn.dataset.dest));
+  });
+
+  // Initial map load
+  setMapTo(DEFAULT_DEST);
+</script>
