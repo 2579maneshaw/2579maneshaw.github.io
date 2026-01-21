@@ -12,7 +12,7 @@ body {
   color: #222;
 }
 
-/* Only constrain real media elements globally */
+/* constrain media (NOT svg) */
 img, video, canvas { max-width: 100%; height: auto; }
 
 /* Page wrapper used by _layouts/default.html */
@@ -24,7 +24,7 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   HEADER
+   HEADER (DESKTOP - unchanged)
 ========================= */
 
 .siteHeader {
@@ -32,51 +32,50 @@ img, video, canvas { max-width: 100%; height: auto; }
   background: #fff;
 }
 
-.headerInner{
+.headerInner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 14px 18px;
 
-  display: grid;
-  grid-template-columns: auto 1fr auto; /* logo | center | right */
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   gap: 18px;
 }
 
-/* Logo block */
+/* logo */
 .brandBlock { display: block; text-decoration: none; color: inherit; }
 .brandLogo { display: block; }
 
-/* Center section: title + subtitle + nav */
-.headerCenter{
+/* middle: title/subtitle/nav stacked */
+.headerMid{
+  flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.brandText { min-width: 0; }
-
 .brandName{
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.85rem;
+  font-weight: 800;
   letter-spacing: -0.03em;
   color: #111;
 }
 
 .brandTagline{
-  margin-top: 4px;
-  font-size: 0.98rem;
+  margin-top: 6px;
+  font-size: 1.05rem;
   color: #555;
   font-style: italic;
 }
 
-/* Nav under subtitle */
+/* nav under subtitle aligned with title */
 .mainNav{
-  margin-top: 10px;
+  margin-top: 12px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .mainNav a{
@@ -100,22 +99,23 @@ img, video, canvas { max-width: 100%; height: auto; }
   border-color: #111;
 }
 
-/* Right section: CTA + social below */
+/* right side: CTA then socials below */
 .headerRight{
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  padding-top: 4px; /* matches title block top */
 }
 
-/* CTA button */
 .headerCTA{
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  background: #1e6bd6;
+  background: #1e6bd6;  /* logo-ish blue */
   border: 1px solid #1e6bd6;
   color: #fff;
 
@@ -132,14 +132,13 @@ img, video, canvas { max-width: 100%; height: auto; }
   border-color: #155bb5;
 }
 
-/* Social icons row */
+/* social icons */
 .socialIcons{
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-/* Social icon buttons */
 .socialLink{
   width: 34px;
   height: 34px;
@@ -153,7 +152,6 @@ img, video, canvas { max-width: 100%; height: auto; }
   text-decoration: none;
 }
 
-/* CRITICAL: lock SVG sizing so it cannot explode */
 .socialLink svg{
   width: 20px !important;
   height: 20px !important;
@@ -166,18 +164,96 @@ img, video, canvas { max-width: 100%; height: auto; }
   background: #f7f9ff;
   border-color: #cfd8ea;
 }
-
 .socialLink:hover svg{
   fill: #1e6bd6 !important;
 }
 
-/* Mobile */
+/* =========================
+   MOBILE ONLY (improves phone layout, does NOT affect desktop)
+========================= */
+
 @media (max-width: 860px){
+
+  /* tighter header padding on phone */
   .headerInner{
-    grid-template-columns: 1fr;
+    padding: 12px 14px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
   }
+
+  /* Put logo + title on one row (feels intentional) */
+  .brandBlock{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* shrink logo on mobile */
+  .brandBlock img{
+    width: 72px !important;
+    height: auto !important;
+  }
+
+  /* title block sizing on mobile */
+  .brandName{
+    font-size: 1.35rem;
+    line-height: 1.1;
+  }
+
+  .brandTagline{
+    font-size: 0.98rem;
+    margin-top: 4px;
+  }
+
+  /* Make nav a clean, scrollable row instead of wrapping into a mess */
+  .mainNav{
+    margin-top: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    gap: 8px;
+  }
+
+  .mainNav a{
+    flex: 0 0 auto;
+    padding: 10px 14px;        /* bigger tap target */
+    font-size: 0.95rem;
+    white-space: nowrap;       /* prevents “Our\nVilla” splitting */
+  }
+
+  /* Hide the scrollbar (still scrollable) */
+  .mainNav::-webkit-scrollbar{ height: 0; }
+
+  /* CTA + socials should sit under nav on mobile, full width CTA */
   .headerRight{
-    align-items: flex-start;
+    align-items: stretch;
+    padding-top: 0;
+    gap: 10px;
+  }
+
+  .headerCTA{
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+
+  /* Social links below button, left aligned, slightly bigger */
+  .socialIcons{
+    justify-content: flex-start;
+  }
+
+  .socialLink{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .socialLink svg{
+    width: 22px !important;
+    height: 22px !important;
   }
 }
 
