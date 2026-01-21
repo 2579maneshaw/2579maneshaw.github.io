@@ -57,13 +57,23 @@ description: Nearby restaurants, groceries, and essentials near Enchanted Villa 
   .mapWrap{border-radius:16px;overflow:hidden;border:1px solid #eee;background:#f3f3f3;}
   iframe{width:100%;height:420px;border:0;}
 
+  /* quick direction buttons */
+  .dirBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+  .dirBtn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:10px 14px;border-radius:999px;
+    border:1px solid #e6e6e6;background:#fff;color:#111;
+    text-decoration:none;font-size:0.95rem;font-weight:600;
+  }
+  .dirBtn:hover{background:#f7f7f7;}
+
   .footer{text-align:center;margin-top:40px;color:#666;font-size:0.92rem;}
 </style>
 
 <div class="wrap">
   <h1>Nearby Restaurants and Convenience</h1>
   <p>
-    From our townhome in Windsor Hills Resort, you can quickly reach these nearby restaurants and convenience stores. These quick links help you find food and essentials fast — perfect for a <strong>midday break</strong> or a late-night run.
+    These quick links help you find food and essentials fast — perfect for a <strong>midday break</strong> or a late-night run.
     Use the filters to view popular categories, including <strong>gluten-free</strong> and <strong>vegan-friendly</strong> options within 8 miles of the townhome.
   </p>
 
@@ -81,9 +91,27 @@ description: Nearby restaurants, groceries, and essentials near Enchanted Villa 
       <div class="card">
         <h2>Food Favorites</h2>
         <ul class="list">
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bayridge+Sushi+near+Windsor+Hills+Kissimmee">Bayridge Sushi</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sickies+Garage+Burgers+%26+Brews+near+Windsor+Hills+Kissimmee">Sickies Garage Burgers &amp; Brews</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kob%C3%A9+Japanese+Steakhouse+near+Windsor+Hills+Kissimmee">Kob&eacute; Japanese Steakhouse (hibachi + sushi)</a></li>
+          <!-- Directions from Villa area (origin) to exact addresses -->
+          <li>
+            <a target="_blank" rel="noopener"
+               href="https://www.google.com/maps/dir/?api=1&origin=Maneshaw%20Ln%20%26%20Fitzclarence%20St%2C%20Four%20Corners%2C%20FL%2034747&destination=3177%20Black%20Lake%20Rd%2C%20Kissimmee%2C%20FL%2034747&travelmode=driving">
+              Bayridge Sushi (Directions)
+            </a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener"
+               href="https://www.google.com/maps/dir/?api=1&origin=Maneshaw%20Ln%20%26%20Fitzclarence%20St%2C%20Four%20Corners%2C%20FL%2034747&destination=7640%20W%20Irlo%20Bronson%20Memorial%20Hwy%2C%20Kissimmee%2C%20FL%2034747&travelmode=driving">
+              Sickies Garage Burgers &amp; Brews (Directions)
+            </a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener"
+               href="https://www.google.com/maps/dir/?api=1&origin=Maneshaw%20Ln%20%26%20Fitzclarence%20St%2C%20Four%20Corners%2C%20FL%2034747&destination=7725%20W%20Irlo%20Bronson%20Memorial%20Hwy%2C%20Kissimmee%2C%20FL%2034747&travelmode=driving">
+              Kob&eacute; Japanese Steakhouse (Directions)
+            </a>
+          </li>
+
+          <!-- keep these as "search nearby" -->
           <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=best+pizza+near+Windsor+Hills+Kissimmee">Pizza nearby</a></li>
           <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=tacos+near+Windsor+Hills+Kissimmee">Tacos nearby</a></li>
         </ul>
@@ -175,6 +203,31 @@ description: Nearby restaurants, groceries, and essentials near Enchanted Villa 
         <p class="mini">Tip: “Vegan-friendly” usually means some options, not fully vegan kitchens.</p>
       </div>
     </div>
+  </div>
+
+  <!-- QUICK DIRECTIONS CARD -->
+  <div class="card" style="margin-top:16px;">
+    <h2>Quick Directions</h2>
+    <p>Tap a button to open turn-by-turn directions in Google Maps.</p>
+
+    <div class="dirBtns" aria-label="Quick directions buttons">
+      <a class="dirBtn" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/dir/?api=1&origin=Maneshaw%20Ln%20%26%20Fitzclarence%20St%2C%20Four%20Corners%2C%20FL%2034747&destination=3177%20Black%20Lake%20Rd%2C%20Kissimmee%2C%20FL%2034747&travelmode=driving">
+        Bayridge Sushi
+      </a>
+
+      <a class="dirBtn" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/dir/?api=1&origin=Maneshaw%20Ln%20%26%20Fitzclarence%20St%2C%20Four%20Corners%2C%20FL%2034747&destination=7640%20W%20Irlo%20Bronson%20Memorial%20Hwy%2C%20Kissimmee%2C%20FL%2034747&travelmode=driving">
+        Sickies Garage
+      </a>
+
+      <a class="dirBtn" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/dir/?api=1&origin=Maneshaw%20Ln%20%26%20Fitzclarence%20St%2C%20Four%20Corners%2C%20FL%2034747&destination=7725%20W%20Irlo%20Bronson%20Memorial%20Hwy%2C%20Kissimmee%2C%20FL%2034747&travelmode=driving">
+        Kob&eacute;
+      </a>
+    </div>
+
+    <p class="mini">Tip: Guests can switch to walking/transit inside Maps if needed.</p>
   </div>
 
   <div class="card" style="margin-top:16px;">
