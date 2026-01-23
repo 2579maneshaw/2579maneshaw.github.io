@@ -1,402 +1,323 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Enchanted Villa of Windsor Hills | Family-Friendly Disney Retreat</title>
-  <meta name="description" content="A calm, family-friendly Disney retreat close enough for a midday break—designed for parents to rest, reset, and enjoy every park day." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+---
+layout: default
+title: Home
+nav: home
+description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the Parks. Close enough for a Disney midday break, steps from Windsor Hills amenities.
+---
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #ffffff;
-      color: #222;
-    }
+<style>
+  /* Home-only styles */
+  .heroCopy {
+    margin-top: 6px;
+    margin-bottom: 18px;
+    padding: 18px;
+    border-radius: 16px;
+    background: #f7f7f7;
+    border: 1px solid #eee;
+  }
+  .headline {
+    margin:0;
+    font-size: 2.0rem;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color:#111;
+  }
+  .subline {
+    margin: 10px 0 0;
+    font-size: 1.02rem;
+    color:#444;
+    line-height:1.55;
+    max-width: 900px;
+  }
 
-    .wrap {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 18px 60px;
-    }
+  .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .chip {
+    font-size:0.92rem;
+    color:#2b2b2b;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .chip::before { content: "•"; margin-right: 8px; color: #111; }
 
-    /* Brand */
-    .brand {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+  .bullets { margin:10px 0 0; padding-left: 18px; color:#333; line-height:1.75; }
+  .bullets li { margin: 6px 0; }
 
-    .brand-logo {
-      display: block;
-      margin: 0 auto 10px;
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-    }
+  .miniGallery {
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+  }
+  .miniGallery img {
+    height: 120px;
+    width: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    background:#f3f3f3;
+    flex: 0 0 auto;
+    cursor: pointer;
+  }
 
-    @media (max-width: 720px) {
-      .brand-logo {
-        max-width: 220px;
-      }
-    }
+  .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+  .btn {
+    display:inline-block;
+    text-decoration:none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border:1px solid #111;
+  }
+  .btn.primary { background:#111; color:#fff; }
+  .btn.primary:hover { background:#2a2a2a; border-color:#2a2a2a; }
+  .btn.ghost { background:#fff; color:#111; border-color:#e6e6e6; }
+  .btn.ghost:hover { background:#f7f7f7; }
 
-    .brand-whisper {
-      margin: 10px auto 0;
-      max-width: 560px;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: #555;
-    }
+  .welcomeNote {
+    margin-top: 14px;
+    border-radius: 14px;
+    background:#fafafa;
+    border:1px solid #eee;
+    padding: 14px;
+    color:#333;
+    line-height:1.6;
+    font-size:0.98rem;
+  }
 
-    .brand h1 {
-      margin: 14px 0 0;
-      font-size: 2.1rem;
-      letter-spacing: -0.02em;
-    }
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 18px;
+  }
+  .lightbox.open { display:flex; }
+  .lightboxInner {
+    position: relative;
+    width: min(1100px, 100%);
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightboxImg {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 14px;
+    background: #111;
+  }
+  .lbBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .lbPrev { left: 8px; }
+  .lbNext { right: 8px; }
+  .lbClose {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+</style>
 
-    /* Slideshow */
-    .hero {
-      margin: 26px auto 10px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #f3f3f3;
-      position: relative;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
-    }
+<section class="heroCopy" aria-label="Intro">
+  <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
+  <p class="subline"><strong>Close enough to the Disney parks for a midday break.</strong></p>
 
-    /* FAST + NO CROPPING */
-    .hero img {
-      width: 100%;
-      height: 520px;
-      object-fit: contain;
-      display: block;
-      background: #f3f3f3;
-    }
+  <div class="chips" aria-label="Highlights">
+    <span class="chip">Midday break friendly</span>
+    <span class="chip">Steps to Windsor Hills amenities</span>
+    <span class="chip">Private screened splash pool</span>
+    <span class="chip">Spa inspired calm</span>
+  </div>
 
-    @media (max-width: 720px) {
-      .hero img { height: 320px; }
-    }
+  <div class="ctaRow">
+    <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
+    <a class="btn ghost" href="{{ '/index.html' | relative_url }}">View Our Townhome Photos</a>
+  </div>
+</section>
 
-    .controls {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.55));
-      gap: 10px;
-    }
+<section class="grid2">
+  <div class="card">
+    <h2>Our Townhome</h2>
+    <p>Designed for families who want the best of both worlds: the excitement of the parks, and a peaceful place to truly recharge.</p>
 
-    .controls button {
-      border: 0;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.9);
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
+    <ul class="bullets">
+      <li>Beautifully renovated townhome with Spa inspired interiors built for rest and calm evenings</li>
+      <li>Private screened in splash pool with year round pool heat included</li>
+      <li>Multiple ensuite bedrooms for comfort and privacy</li>
+      <li>Walkable to the Windsor Hills clubhouse and waterpark</li>
+      <li>Quick access to Disney for a midday break during hot park days</li>
+    </ul>
 
-    .controls button:hover { background: #ffffff; }
-
-    /* Thumbnail strip */
-    .thumbs {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 10px;
-      margin: 12px 0 26px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 6px;
-      scrollbar-width: thin;
-    }
-
-    .thumbs img {
-      flex: 0 0 calc((100% - (10px * 4)) / 5);
-      height: 90px;
-      object-fit: cover;
-      border-radius: 10px;
-      cursor: pointer;
-      opacity: 0.9;
-      border: 2px solid transparent;
-      background: #eee;
-    }
-
-    .thumbs img:hover { opacity: 1; }
-
-    .thumbs img.active {
-      border-color: #111;
-      opacity: 1;
-    }
-
-    /* Content */
-    .section {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .statement {
-      text-align: center;
-      margin: 10px auto 18px;
-    }
-
-    .statement span {
-      display: block;
-      font-size: 1.45rem;
-      font-weight: 600;
-      color: #111;
-      letter-spacing: -0.01em;
-    }
-
-    .statement-sub {
-      margin-top: 6px;
-      font-size: 1.05rem;
-      color: #444;
-      line-height: 1.45;
-    }
-
-    .section p {
-      line-height: 1.65;
-      font-size: 1.05rem;
-      color: #333;
-    }
-
-    .highlights {
-      margin: 18px 0 26px;
-      padding-left: 18px;
-      font-size: 1.03rem;
-      line-height: 1.7;
-    }
-
-    .cta {
-      text-align: center;
-      margin-top: 22px;
-    }
-
-    .cta a {
-      display: inline-block;
-      padding: 14px 28px;
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-size: 1.05rem;
-    }
-
-    .cta a:hover { background: #2a2a2a; }
-
-    .notice {
-      margin-top: 22px;
-      font-size: 0.98rem;
-      background: #fafafa;
-      border: 1px solid #eee;
-      padding: 14px;
-      border-radius: 12px;
-      color: #444;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 46px;
-      font-size: 0.92rem;
-      color: #666;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-
-    <div class="brand">
-      <picture>
-        <source type="image/webp" srcset="photos/EVWHlogo-320w.webp 320w, photos/EVWHlogo-600w.webp 600w">
-        <img
-          src="photos/EVWHlogo-600w.jpg"
-          srcset="photos/EVWHlogo-320w.jpg 320w, photos/EVWHlogo-600w.jpg 600w"
-          sizes="(max-width: 720px) 220px, 300px"
-          alt="Enchanted Villa of Windsor Hills logo"
-          class="brand-logo"
-          width="300"
-          height="279"
-          decoding="async"
-          loading="eager"
-        />
-      </picture>
-
-      <p class="brand-whisper">
-        Where the energy settles, the family resets, and the magic carries on.
-      </p>
-
-      <h1>Enchanted Villa of Windsor Hills</h1>
+    <div class="ctaRow">
+      <a class="btn primary" href="{{ '/index.html' | relative_url }}">Explore the Townhome</a>
+      <a class="btn ghost" href="{{ '/nearby.html' | relative_url }}">See Nearby Convenience</a>
     </div>
 
-    <!-- Slideshow -->
-    <div class="hero">
-      <img id="heroImage" src="" alt="Enchanted Villa of Windsor Hills photo" />
-      <div class="controls">
-        <button id="prevBtn">◀ Prev</button>
-        <button id="playPauseBtn">Pause</button>
-        <button id="nextBtn">Next ▶</button>
-      </div>
-    </div>
-
-    <!-- Thumbnails -->
-    <div id="thumbGrid" class="thumbs"></div>
-
-    <!-- Content -->
-    <div class="section">
-
-      <div class="statement">
-        <span>Rejuvenate your body.</span>
-        <span>Restore your mind.</span>
-        <div class="statement-sub">
-          So every Disney day feels just as magical as the first.
-        </div>
-      </div>
-
-      <p>
-        After full days of rides, parades, and nonstop energy, our villa offers families a serene,
-        spa-inspired retreat where every evening ends in calm, comfort, and connection.
-      </p>
-
-      <p>
-        And because we’re close enough to the Disney parks for a true <strong>midday break</strong>, families can
-        return to the villa to cool off, recharge, and reset before heading back out refreshed instead of
-        pushing through the heat and exhaustion.
-      </p>
-
-      <p>
-        While kids enjoy Disney-inspired touches and access to Windsor Hills’ incredible resort amenities,
-        parents can unwind in quiet, beautifully appointed spaces or relax by the private splash pool under the stars.
-        Located just steps from the Windsor Hills clubhouse, waterpark, and resort attractions,
-        Enchanted Villa combines comfort, convenience, and timeless Disney magic.
-      </p>
-
-      <ul class="highlights">
-        <li>Private screened-in splash pool with year-round pool heat included</li>
-        <li>Spa-inspired interiors designed for rest and relaxation</li>
-        <li>Multiple ensuite bedrooms for comfort and privacy</li>
-        <li>Walkable access to Windsor Hills clubhouse and waterpark</li>
-        <li>Family-friendly layout with open-concept living spaces</li>
-        <li>Close enough to Disney for an easy midday break between park visits</li>
-        <li>Minutes from Disney parks and attractions</li>
-      </ul>
-
-      <div class="cta">
-        <a href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
-          Check Availability
-        </a>
-      </div>
-
-      <!-- Faith statement (best location: near footer, after CTA) -->
-      <div class="notice">
-        <strong>Our values:</strong><br>
-        All guests are warmly welcome. Enchanted Villa of Windsor Hills is a Christian-owned property,
-        and a portion of our profits is thoughtfully dedicated to charitable and faith-based giving.
-      </div>
-
-      <div class="notice">
-        <strong>Please note:</strong>
-        Between 01/05/2026 – 02/06/2026, the Windsor Hills clubhouse waterslides and splash pad
-        will be closed for scheduled restoration.
-      </div>
-
-      <div class="footer">Enchanted Villa of Windsor Hills</div>
+    <div class="welcomeNote">
+      <strong>All guests are warmly welcome.</strong><br/>
+      Enchanted Villa of Windsor Hills is a Christian owned property, and a portion of our profits is thoughtfully dedicated to charitable and faith based giving.
     </div>
   </div>
 
-  <script>
-    const PHOTOS_JSON = "photos.webp.json";
-    const INTERVAL = 4500;
+  <div class="card">
+    <h2>Townhome Gallery</h2>
+    <p>Full photo experience is on the Our Townhome page. Click for larger view.</p>
+    <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
+  </div>
+</section>
 
-    let photos = [];
-    let currentIndex = 0;
-    let timer = null;
+<section class="grid2" style="margin-top:18px;">
+  <div class="card">
+    <h2>Windsor Hills Resort</h2>
+    <p>One of the most loved resort communities near Disney. Enjoy the amenities when you want energy, and come back to your calm when you want rest.</p>
 
-    const heroImage = document.getElementById("heroImage");
-    const thumbGrid = document.getElementById("thumbGrid");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const playPauseBtn = document.getElementById("playPauseBtn");
+    <ul class="bullets">
+      <li>Gated community with 24 hour security</li>
+      <li>Resort style lagoon pool, waterpark, and splash areas</li>
+      <li>Clubhouse, fitness center, arcade, and movie theater</li>
+      <li>Playgrounds, sports courts, and walking paths</li>
+    </ul>
 
-    function setActiveThumb() {
-      thumbGrid.querySelectorAll("img").forEach(img => img.classList.remove("active"));
-      const active = thumbGrid.querySelector(`img[data-idx="${currentIndex}"]`);
-      if (active) active.classList.add("active");
-    }
+    <div class="ctaRow">
+      <a class="btn primary" href="{{ '/windsor-hills.html' | relative_url }}">Explore Windsor Hills</a>
+      <a class="btn ghost" href="{{ '/attractions.html' | relative_url }}">Plan Your Park Days</a>
+    </div>
+  </div>
 
-    function showPhoto(index) {
-      if (!photos.length) return;
+  <div class="card">
+    <h2>Resort Gallery</h2>
+    <p>More resort details are on the Windsor Hills page. Click for larger view.</p>
+    <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
+  </div>
+</section>
 
-      currentIndex = (index + photos.length) % photos.length;
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightboxInner">
+    <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
+    <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
+    <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
+    <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
+  </div>
+</div>
 
-      // WebP first; fallback to JPG if needed
-      heroImage.onerror = () => {
-        heroImage.onerror = null;
-        heroImage.src = photos[currentIndex].replace(".webp", ".jpg");
-      };
+<script>
+  const VILLA_JSON = "{{ '/villa-photos.webp.json' | relative_url }}";
+  const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
 
-      heroImage.src = photos[currentIndex];
-      setActiveThumb();
-    }
-
-    function nextPhoto() { showPhoto(currentIndex + 1); }
-    function prevPhoto() { showPhoto(currentIndex - 1); }
-
-    function startSlideshow() {
-      timer = setInterval(nextPhoto, INTERVAL);
-      playPauseBtn.textContent = "Pause";
-    }
-
-    function stopSlideshow() {
-      clearInterval(timer);
-      timer = null;
-      playPauseBtn.textContent = "Play";
-    }
-
-    function toggleSlideshow() {
-      timer ? stopSlideshow() : startSlideshow();
-    }
-
-    prevBtn.addEventListener("click", prevPhoto);
-    nextBtn.addEventListener("click", nextPhoto);
-    playPauseBtn.addEventListener("click", toggleSlideshow);
-
-    async function init() {
-      try {
-        const res = await fetch(PHOTOS_JSON, { cache: "no-store" });
-        photos = await res.json();
-
-        photos.forEach((src, idx) => {
-          const img = document.createElement("img");
-          img.src = src;
-          img.setAttribute("data-idx", idx);
-
-          // Performance improvements (thumbnails)
-          img.loading = "lazy";
-          img.decoding = "async";
-
-          img.addEventListener("click", () => {
-            showPhoto(idx);
-            if (timer) {
-              stopSlideshow();
-              startSlideshow();
-            }
-          });
-
-          thumbGrid.appendChild(img);
-        });
-
-        showPhoto(0);
-        startSlideshow();
-      } catch (e) {
-        console.warn("photos json not found or invalid");
+  function withJpgFallback(src, imgEl) {
+    imgEl.onerror = () => {
+      if (src && src.toLowerCase().endsWith(".webp")) {
+        imgEl.onerror = null;
+        imgEl.src = src.replace(/\.webp$/i, ".jpg");
       }
-    }
+    };
+  }
 
-    init();
-  </script>
-</body>
-</html>
+  async function loadList(preferred, fallback) {
+    try {
+      const res = await fetch(preferred, { cache: "no-store" });
+      if (!res.ok) throw new Error("preferred not ok");
+      return await res.json();
+    } catch (e) {
+      const res2 = await fetch(fallback, { cache: "no-store" });
+      return await res2.json();
+    }
+  }
+
+  let lbList = [];
+  let lbIndex = 0;
+
+  const lightbox = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbPrev = document.getElementById("lbPrev");
+  const lbNext = document.getElementById("lbNext");
+  const lbClose = document.getElementById("lbClose");
+
+  function openLightbox(list, index) {
+    lbList = list || [];
+    lbIndex = index || 0;
+    if (!lbList.length) return;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    showLb(lbIndex);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+  }
+
+  function showLb(i) {
+    if (!lbList.length) return;
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIndex];
+    withJpgFallback(lbList[lbIndex], lbImg);
+  }
+
+  function lbNextPhoto() { showLb(lbIndex + 1); }
+  function lbPrevPhoto() { showLb(lbIndex - 1); }
+
+  lbNext.addEventListener("click", lbNextPhoto);
+  lbPrev.addEventListener("click", lbPrevPhoto);
+  lbClose.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") lbNextPhoto();
+    if (e.key === "ArrowLeft") lbPrevPhoto();
+  });
+
+  function addMiniGallery(containerId, photos) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = "";
+    photos.forEach((src, idx) => {
+      const img = document.createElement("img");
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.src = src;
+      img.alt = "Enchanted Villa preview photo";
+      withJpgFallback(src, img);
+      img.addEventListener("click", () => openLightbox(photos, idx));
+      el.appendChild(img);
+    });
+  }
+
+  async function initHome() {
+    try {
+      const villaPhotos = await loadList(VILLA_JSON, "{{ '/villa-photos.json' | relative_url }}");
+      const resortPhotos = await loadList(RESORT_JSON, "{{ '/resort-photos.json' | relative_url }}");
+      addMiniGallery("villaMiniGallery", villaPhotos);
+      addMiniGallery("resortMiniGallery", resortPhotos);
+    } catch (e) {
+      console.warn("Could not load gallery JSON files.", e);
+    }
+  }
+
+  initHome();
+</script>
