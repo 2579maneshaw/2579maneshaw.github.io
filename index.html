@@ -1,88 +1,188 @@
 ---
 layout: default
-title: Our Villa
-nav: villa
-description: Explore the townhome layout, amenities, and photo gallery for Enchanted Villa of Windsor Hills Townhome.
+title: Home
+nav: home
+description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the Parks. Close enough for a Disney midday break, steps from Windsor Hills amenities.
 ---
 
 <style>
-  /* Page-specific styles for Villa page only */
-
-  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
-  p{color:#333;line-height:1.65;margin:0 0 12px;}
-
-  .heroCopy{
-    margin: 18px 0 18px;
+  /* Home-only styles */
+  .heroCopy {
+    margin-top: 6px;
+    margin-bottom: 18px;
     padding: 18px;
     border-radius: 16px;
-    background:#f7f7f7;
-    border:1px solid #eee;
+    background: #f7f7f7;
+    border: 1px solid #eee;
+  }
+  .headline {
+    margin:0;
+    font-size: 2.0rem;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color:#111;
+  }
+  .subline {
+    margin: 10px 0 0;
+    font-size: 1.02rem;
+    color:#444;
+    line-height:1.55;
+    max-width: 900px;
   }
 
-  .grid2{
-    display:grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap:18px;
-    align-items:start;
+  .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .chip {
+    font-size:0.92rem;
+    color:#2b2b2b;
+    background: transparent;
+    border: 0;
+    padding: 0;
   }
-  @media (max-width: 860px){ .grid2{ grid-template-columns:1fr; } }
-  .grid2 > *{ min-width:0; }
+  .chip::before { content: "•"; margin-right: 8px; color: #111; }
 
-  .bullets{margin:10px 0 0;padding-left:18px;color:#333;line-height:1.75;}
-  .bullets li{margin:6px 0;}
+  .bullets { margin:10px 0 0; padding-left: 18px; color:#333; line-height:1.75; }
+  .bullets li { margin: 6px 0; }
 
-  /* Mini gallery */
-  .miniGallery{
+  .miniGallery {
     display:flex;
     gap:10px;
     overflow-x:auto;
     padding-bottom:6px;
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
   }
-  .miniGallery img{
-    height:120px;
-    width:180px;
-    object-fit:cover;
-    border-radius:14px;
-    border:1px solid #eee;
+  .miniGallery img {
+    height: 120px;
+    width: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid #eee;
     background:#f3f3f3;
-    flex:0 0 auto;
-    cursor:pointer;
+    flex: 0 0 auto;
+    cursor: pointer;
   }
 
-  /* Button row (uses your global .btn styles if present) */
-  .ctaRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+  .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+  .btn {
+    display:inline-block;
+    text-decoration:none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border:1px solid #111;
+  }
+  .btn.primary { background:#111; color:#fff; }
+  .btn.primary:hover { background:#2a2a2a; border-color:#2a2a2a; }
+  .btn.ghost { background:#fff; color:#111; border-color:#e6e6e6; }
+  .btn.ghost:hover { background:#f7f7f7; }
+
+  .welcomeNote {
+    margin-top: 14px;
+    border-radius: 14px;
+    background:#fafafa;
+    border:1px solid #eee;
+    padding: 14px;
+    color:#333;
+    line-height:1.6;
+    font-size:0.98rem;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 18px;
+  }
+  .lightbox.open { display:flex; }
+  .lightboxInner {
+    position: relative;
+    width: min(1100px, 100%);
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightboxImg {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 14px;
+    background: #111;
+  }
+  .lbBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .lbPrev { left: 8px; }
+  .lbNext { right: 8px; }
+  .lbClose {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
 </style>
 
-<section class="heroCopy" aria-label="Our Villa intro">
-  <h1>Our Villa</h1>
-  <p>
-    A calm, family-friendly townhome retreat near Disney — designed for comfort, quiet evenings, and easy midday breaks.
-  </p>
+<section class="heroCopy">
+  <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
+  <p class="subline"><strong>Close enough to the Disney parks for a midday break.</strong></p>
+
+  <div class="chips">
+    <span class="chip">Midday break friendly</span>
+    <span class="chip">Steps to Windsor Hills amenities</span>
+    <span class="chip">Private screened splash pool</span>
+    <span class="chip">Spa inspired calm</span>
+  </div>
+
+  <div class="ctaRow">
+    <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
+    <a class="btn ghost" href="{{ '/villa.html' | relative_url }}">View Our Townhome Photos</a>
+  </div>
 </section>
 
 <section class="grid2">
   <div class="card">
-    <h2>Townhome Highlights</h2>
-    <p>Here are a few of the most-loved features guests appreciate during their stay.</p>
+    <h2>Our Townhome</h2>
 
     <ul class="bullets">
-      <li>Private screened splash pool</li>
-      <li>Steps to Windsor Hills amenities</li>
-      <li>Comfortable bedrooms and family-friendly layout</li>
-      <li>Great for a midday break from the parks</li>
+      <li>Beautifully renovated townhome with spa inspired interiors</li>
+      <li>Private screened splash pool with pool heat included</li>
+      <li>Multiple ensuite bedrooms for comfort and privacy</li>
+      <li>Walkable to Windsor Hills clubhouse and waterpark</li>
+      <li>Quick Disney access for midday breaks</li>
     </ul>
+
+    <div class="welcomeNote">
+      <strong>All guests are warmly welcome.</strong><br/>
+      Enchanted Villa of Windsor Hills is a Christian owned property, and a portion of our profits is thoughtfully dedicated to charitable and faith based giving.
+    </div>
   </div>
 
   <div class="card">
     <h2>Townhome Gallery</h2>
-    <p>Click a thumbnail to view larger photos.</p>
+    <p>Click any photo for a larger view.</p>
 
-    <!-- ✅ THIS is your thumbnails container. Do NOT remove this. -->
-    <div id="villaMiniGallery" class="miniGallery" aria-label="Townhome mini gallery"></div>
+    <!-- ✅ THUMBNAILS STAY -->
+    <div id="villaMiniGallery" class="miniGallery"></div>
 
-    <!-- ✅ Video button goes UNDER the thumbnails -->
-    <div class="ctaRow" style="margin-top:12px;">
+    <!-- ✅ VIDEO BUTTON ADDED BELOW -->
+    <div class="ctaRow">
       <a class="btn ghost"
          href="{{ '/videos/WalkthroughVideo.mp4' | relative_url }}"
          target="_blank"
@@ -93,124 +193,45 @@ description: Explore the townhome layout, amenities, and photo gallery for Encha
   </div>
 </section>
 
-<!-- Lightbox (optional but recommended if your thumbnails use it) -->
-<div id="lightbox" class="lightbox" aria-hidden="true" style="display:none;">
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
   <div class="lightboxInner">
-    <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
-    <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
-    <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
-    <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
+    <button class="lbBtn lbPrev" id="lbPrev">◀</button>
+    <img id="lbImg" class="lightboxImg">
+    <button class="lbBtn lbNext" id="lbNext">▶</button>
+    <button class="lbClose" id="lbClose">✕</button>
   </div>
 </div>
 
 <script>
-  // If you already load this gallery elsewhere, keep your existing JSON name consistent.
-  // This matches your home page approach.
-  const VILLA_JSON = "villa-photos.webp.json";
+  const VILLA_JSON = "{{ '/villa-photos.webp.json' | relative_url }}";
 
   function withJpgFallback(src, imgEl) {
     imgEl.onerror = () => {
-      if (src && src.toLowerCase().endsWith(".webp")) {
-        imgEl.onerror = null;
-        imgEl.src = src.replace(/\.webp$/i, ".jpg");
-      }
+      if (src.endsWith(".webp")) imgEl.src = src.replace(".webp",".jpg");
     };
   }
 
-  async function loadList(preferred, fallback) {
-    try {
-      const res = await fetch(preferred, { cache: "no-store" });
-      if (!res.ok) throw new Error("preferred not ok");
-      return await res.json();
-    } catch (e) {
-      const res2 = await fetch(fallback, { cache: "no-store" });
-      return await res2.json();
-    }
-  }
-
-  // Lightbox state
-  let lbList = [];
-  let lbIndex = 0;
-
-  const lightbox = document.getElementById("lightbox");
+  let lbList = [], lbIndex = 0;
+  const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
-  const lbPrev = document.getElementById("lbPrev");
-  const lbNext = document.getElementById("lbNext");
-  const lbClose = document.getElementById("lbClose");
 
-  function openLightbox(list, index) {
-    lbList = list || [];
-    lbIndex = index || 0;
-    if (!lbList.length) return;
+  function openLB(list,i){ lbList=list; lbIndex=i; lb.classList.add("open"); show(); }
+  function show(){ lbImg.src=lbList[lbIndex]; withJpgFallback(lbList[lbIndex],lbImg); }
+  function next(){ lbIndex=(lbIndex+1)%lbList.length; show(); }
+  function prev(){ lbIndex=(lbIndex-1+lbList.length)%lbList.length; show(); }
 
-    lightbox.style.display = "flex";
-    lightbox.classList.add("open");
-    lightbox.setAttribute("aria-hidden", "false");
-    showLb(lbIndex);
-  }
+  document.getElementById("lbNext").onclick=next;
+  document.getElementById("lbPrev").onclick=prev;
+  document.getElementById("lbClose").onclick=()=>lb.classList.remove("open");
 
-  function closeLightbox() {
-    lightbox.classList.remove("open");
-    lightbox.style.display = "none";
-    lightbox.setAttribute("aria-hidden", "true");
-  }
-
-  function showLb(i) {
-    if (!lbList.length) return;
-    lbIndex = (i + lbList.length) % lbList.length;
-    lbImg.src = lbList[lbIndex];
-    withJpgFallback(lbList[lbIndex], lbImg);
-  }
-
-  function lbNextPhoto() { showLb(lbIndex + 1); }
-  function lbPrevPhoto() { showLb(lbIndex - 1); }
-
-  if (lbNext) lbNext.addEventListener("click", lbNextPhoto);
-  if (lbPrev) lbPrev.addEventListener("click", lbPrevPhoto);
-  if (lbClose) lbClose.addEventListener("click", closeLightbox);
-
-  // Close when clicking backdrop
-  if (lightbox) {
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
+  fetch(VILLA_JSON).then(r=>r.json()).then(list=>{
+    const g=document.getElementById("villaMiniGallery");
+    list.forEach((src,i)=>{
+      const img=document.createElement("img");
+      img.src=src;
+      img.onclick=()=>openLB(list,i);
+      g.appendChild(img);
     });
-  }
-
-  // Keyboard support
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox || !lightbox.classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") lbNextPhoto();
-    if (e.key === "ArrowLeft") lbPrevPhoto();
   });
-
-  function addMiniGallery(containerId, photos) {
-    const el = document.getElementById(containerId);
-    if (!el) return;
-
-    el.innerHTML = "";
-
-    photos.forEach((src, idx) => {
-      const img = document.createElement("img");
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.src = src;
-      img.alt = "Townhome photo preview";
-      withJpgFallback(src, img);
-
-      img.addEventListener("click", () => openLightbox(photos, idx));
-      el.appendChild(img);
-    });
-  }
-
-  async function initVillaGallery() {
-    try {
-      const photos = await loadList(VILLA_JSON, "villa-photos.json");
-      addMiniGallery("villaMiniGallery", photos);
-    } catch (e) {
-      console.warn("Could not load villa gallery JSON files.", e);
-    }
-  }
-
-  initVillaGallery();
 </script>
