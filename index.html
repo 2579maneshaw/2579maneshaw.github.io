@@ -139,11 +139,11 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
   }
 </style>
 
-<section class="heroCopy">
+<section class="heroCopy" aria-label="Intro">
   <h1 class="headline">Where the energy settles, the family resets, and the magic carries on.</h1>
   <p class="subline"><strong>Close enough to the Disney parks for a midday break.</strong></p>
 
-  <div class="chips">
+  <div class="chips" aria-label="Highlights">
     <span class="chip">Midday break friendly</span>
     <span class="chip">Steps to Windsor Hills amenities</span>
     <span class="chip">Private screened splash pool</span>
@@ -152,26 +152,33 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
 
   <div class="ctaRow">
     <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
-    <a class="btn ghost" href="{{ '/villa.html' | relative_url }}">View Our Townhome Photos</a>
+    <a class="btn ghost" href="{{ '/index.html' | relative_url }}">View Our Townhome Photos</a>
     <a class="btn ghost" href="{{ 'https://www.youtube.com/playlist?list=PLeQctqcRuiWve1Hvo5Pfv0Na5_Mdqgsj_' | relative_url }}"
          target="_blank"
          rel="noopener">
         Watch Walkthrough Videos
       </a>
-    </div>
+
+  </div>
 </section>
 
 <section class="grid2">
   <div class="card">
     <h2>Our Townhome</h2>
+    <p>Designed for families who want the best of both worlds: the excitement of the parks, and a peaceful place to truly recharge.</p>
 
     <ul class="bullets">
-      <li>Beautifully renovated townhome with spa inspired interiors</li>
-      <li>Private screened splash pool with pool heat included</li>
+      <li>Beautifully renovated townhome with Spa inspired interiors built for rest and calm evenings</li>
+      <li>Private screened in splash pool with year round pool heat included</li>
       <li>Multiple ensuite bedrooms for comfort and privacy</li>
-      <li>Walkable to Windsor Hills clubhouse and waterpark</li>
-      <li>Quick Disney access for midday breaks</li>
+      <li>Walkable to the Windsor Hills clubhouse and waterpark</li>
+      <li>Quick access to Disney for a midday break during hot park days</li>
     </ul>
+
+    <div class="ctaRow">
+      <a class="btn primary" href="{{ '/index.html' | relative_url }}">Explore the Townhome</a>
+      <a class="btn ghost" href="{{ '/nearby.html' | relative_url }}">See Nearby Convenience</a>
+    </div>
 
     <div class="welcomeNote">
       <strong>All guests are warmly welcome.</strong><br/>
@@ -181,22 +188,43 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
 
   <div class="card">
     <h2>Townhome Gallery</h2>
-    <p>Click any photo for a larger view.</p>
+    <p>Full photo experience is on the Our Townhome page. Click for larger view.</p>
+    <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
+  </div>
+</section>
 
-    <!-- ✅ THUMBNAILS STAY -->
-    <div id="villaMiniGallery" class="miniGallery"></div>
+<section class="grid2" style="margin-top:18px;">
+  <div class="card">
+    <h2>Windsor Hills Resort</h2>
+    <p>One of the most loved resort communities near Disney. Enjoy the amenities when you want energy, and come back to your calm when you want rest.</p>
 
-    
+    <ul class="bullets">
+      <li>Gated community with 24 hour security</li>
+      <li>Resort style lagoon pool, waterpark, and splash areas</li>
+      <li>Clubhouse, fitness center, arcade, and movie theater</li>
+      <li>Playgrounds, sports courts, and walking paths</li>
+    </ul>
+
+    <div class="ctaRow">
+      <a class="btn primary" href="{{ '/windsor-hills.html' | relative_url }}">Explore Windsor Hills</a>
+      <a class="btn ghost" href="{{ '/attractions.html' | relative_url }}">Plan Your Park Days</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Resort Gallery</h2>
+    <p>More resort details are on the Windsor Hills page. Click for larger view.</p>
+    <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
   </div>
 </section>
 
 <!-- Lightbox -->
-<div id="lightbox" class="lightbox">
+<div id="lightbox" class="lightbox" aria-hidden="true">
   <div class="lightboxInner">
-    <button class="lbBtn lbPrev" id="lbPrev">◀</button>
-    <img id="lbImg" class="lightboxImg">
-    <button class="lbBtn lbNext" id="lbNext">▶</button>
-    <button class="lbClose" id="lbClose">✕</button>
+    <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
+    <img id="lbImg" class="lightboxImg" alt="Expanded photo view">
+    <button class="lbBtn lbNext" id="lbNext" aria-label="Next photo">▶</button>
+    <button class="lbClose" id="lbClose" aria-label="Close">✕</button>
   </div>
 </div>
 
