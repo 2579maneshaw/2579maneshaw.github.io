@@ -202,33 +202,100 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
 
 <script>
   const VILLA_JSON = "{{ '/villa-photos.webp.json' | relative_url }}";
+  const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
 
   function withJpgFallback(src, imgEl) {
     imgEl.onerror = () => {
-      if (src.endsWith(".webp")) imgEl.src = src.replace(".webp",".jpg");
+      if (src && src.toLowerCase().endsWith(".webp")) {
+        imgEl.onerror = null;
+        imgEl.src = src.replace(/\.webp$/i, ".jpg");
+      }
     };
   }
 
-  let lbList = [], lbIndex = 0;
-  const lb = document.getElementById("lightbox");
+  async function loadList(preferred, fallback) {
+    try {
+      const res = await fetch(preferred, { cache: "no-store" });
+      if (!res.ok) throw new Error("preferred not ok");
+      return await res.json();
+    } catch (e) {
+      const res2 = await fetch(fallback, { cache: "no-store" });
+      return await res2.json();
+    }
+  }
+
+  let lbList = [];
+  let lbIndex = 0;
+
+  const lightbox = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
+  const lbPrev = document.getElementById("lbPrev");
+  const lbNext = document.getElementById("lbNext");
+  const lbClose = document.getElementById("lbClose");
 
-  function openLB(list,i){ lbList=list; lbIndex=i; lb.classList.add("open"); show(); }
-  function show(){ lbImg.src=lbList[lbIndex]; withJpgFallback(lbList[lbIndex],lbImg); }
-  function next(){ lbIndex=(lbIndex+1)%lbList.length; show(); }
-  function prev(){ lbIndex=(lbIndex-1+lbList.length)%lbList.length; show(); }
+  function openLightbox(list, index) {
+    lbList = list || [];
+    lbIndex = index || 0;
+    if (!lbList.length) return;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    showLb(lbIndex);
+  }
 
-  document.getElementById("lbNext").onclick=next;
-  document.getElementById("lbPrev").onclick=prev;
-  document.getElementById("lbClose").onclick=()=>lb.classList.remove("open");
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+  }
 
-  fetch(VILLA_JSON).then(r=>r.json()).then(list=>{
-    const g=document.getElementById("villaMiniGallery");
-    list.forEach((src,i)=>{
-      const img=document.createElement("img");
-      img.src=src;
-      img.onclick=()=>openLB(list,i);
-      g.appendChild(img);
-    });
+  function showLb(i) {
+    if (!lbList.length) return;
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIndex];
+    withJpgFallback(lbList[lbIndex], lbImg);
+  }
+
+  function lbNextPhoto() { showLb(lbIndex + 1); }
+  function lbPrevPhoto() { showLb(lbIndex - 1); }
+
+  lbNext.addEventListener("click", lbNextPhoto);
+  lbPrev.addEventListener("click", lbPrevPhoto);
+  lbClose.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") lbNextPhoto();
+    if (e.key === "ArrowLeft") lbPrevPhoto();
   });
+
+  function addMiniGallery(containerId, photos) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = "";
+    photos.forEach((src, idx) => {
+      const img = document.createElement("img");
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.src = src;
+      img.alt = "Enchanted Villa preview photo";
+      withJpgFallback(src, img);
+      img.addEventListener("click", () => openLightbox(photos, idx));
+      el.appendChild(img);
+    });
+  }
+
+  async function initHome() {
+    try {
+      const villaPhotos = await loadList(VILLA_JSON, "{{ '/villa-photos.json' | relative_url }}");
+      const resortPhotos = await loadList(RESORT_JSON, "{{ '/resort-photos.json' | relative_url }}");
+      addMiniGallery("villaMiniGallery", villaPhotos);
+      addMiniGallery("resortMiniGallery", resortPhotos);
+    } catch (e) {
+      console.warn("Could not load gallery JSON files.", e);
+    }
+  }
+
+  initHome();
 </script>
