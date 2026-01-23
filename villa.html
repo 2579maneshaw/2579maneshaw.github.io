@@ -177,19 +177,18 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
 <!-- ✅ Walkthrough video container (between highlights and photo gallery) -->
 <section class="videoCard" aria-label="Walkthrough video">
   <div class="videoWrap">
-    <video
-      id="walkthroughVideo"
-      autoplay
-      muted
-      playsinline
-      controls
-      preload="metadata">
-      <source src="{{ 'https://www.youtube.com/playlist?list=PLeQctqcRuiWve1Hvo5Pfv0Na5_Mdqgsj_' | relative_url }}" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <iframe
+      src="https://www.youtube.com/embed?listType=playlist&list=PLeQctqcRuiWve1Hvo5Pfv0Na5_Mdqgsj_&autoplay=1&mute=1&playsinline=1&rel=0"
+      title="Walkthrough video"
+      frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen
+      style="position:absolute; inset:0; width:100%; height:100%;">
+    </iframe>
   </div>
   <div class="videoCaption">Walkthrough video</div>
 </section>
+
 
 <!-- Photo gallery section -->
 <section class="grid" aria-label="Photo gallery">
