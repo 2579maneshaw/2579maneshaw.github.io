@@ -1,11 +1,20 @@
-
 [
- "photos/Front.webp",
-  "photos/PrincessRoom.webp",
- "photos/LRKitchen.webp",
- "photos/Map.webp",
-  "photos/JustMinutes.webp",
-  "photos/Map2.webp",
- "photos/WalktoClub.webp"
-  
+  "photos/villaGallery/Front.webp",
+  "photos/villaGallery/LRKitchen.webp",
+  "photos/villaGallery/PrincessRoom.webp",
+  "photos/villaGallery/Map.webp",
+  "photos/villaGallery/JustMinutes.webp",
+  "photos/villaGallery/Map2.webp",
+  "photos/villaGallery/WalktoClub.webp",
+  "photos/villaGallery/BunkBed01.webp",
+  "photos/villaGallery/DiningRoom01.webp",
+  "photos/villaGallery/LRKitchen01.webp",
+  "photos/villaGallery/LivingRoom01.webp",
+  "photos/villaGallery/MasterBath01.webp",
+  "photos/villaGallery/MasterBed01.webp",
+  "photos/villaGallery/MasterBed02.webp",
+  "photos/villaGallery/MasterShower01.webp",
+  "photos/villaGallery/PrincessRoom01.webp",
+  "photos/villaGallery/kitchen01.webp"
+ 
 ]
