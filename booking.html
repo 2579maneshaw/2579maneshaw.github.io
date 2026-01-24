@@ -1,152 +1,209 @@
 ---
 layout: default
-title: Booking
-nav: booking
-description: Check availability, rates, reviews, and get a quote for Enchanted Villa of Windsor Hills Townhome.
+title: Attractions
+nav: attractions
+description: Top attractions near Enchanted Villa of Windsor Hills Townhome— The Calm Pause Between the Parks.
 ---
 
 <style>
-  /* Booking page-only styles */
-  h1{margin:18px 0 8px;font-size:1.9rem;letter-spacing:-0.02em;}
+  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
   p{color:#333;line-height:1.65;margin:0 0 12px;}
-
-  .bookingIntro{
-    margin-top: 8px;
-    margin-bottom: 16px;
-    padding: 16px;
-    border-radius: 16px;
-    background:#f7f7f7;
-    border:1px solid #eee;
-  }
 
   .grid{
     display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    align-items: stretch;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap:18px;
+    align-items:start;
   }
-  @media (max-width: 860px){
-    .grid{ grid-template-columns: 1fr; }
+  @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+  .grid > *{min-width:0;}
+
+  .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
+  .list li{margin:8px 0;}
+  .placeBtn{
+    display:inline-block;
+    border:0;
+    background:transparent;
+    padding:0;
+    margin:0;
+    text-align:left;
+    cursor:pointer;
+    color:#111;
+    text-decoration:underline;
+    text-underline-offset:3px;
+    font-size:1rem;
+  }
+  .placeBtn:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
+    border-radius:6px;
   }
 
-  .card{
-    border:1px solid #eee;
+  .mini{font-size:0.95rem;color:#555;margin-top:10px;}
+
+  .mapWrap{
     border-radius:16px;
-    padding:16px;
-    background:#fff;
-    box-shadow:0 10px 26px rgba(0,0,0,0.05);
-    min-width:0;
+    overflow:hidden;
+    border:1px solid #eee;
+    background:#f3f3f3;
+  }
+  iframe{width:100%;height:520px;border:0;}
+
+  .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 0;}
+  .pill{
+    border:1px solid #eee;
+    background:#fafafa;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:0.92rem;
+    color:#111;
   }
 
-  .card h2{
-    margin:0 0 8px;
-    font-size:1.2rem;
-    letter-spacing:-0.02em;
-  }
-
-  .btnRow{
-    margin-top: 12px;
+  .actionRow{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+    margin-top:10px;
+    align-items:center;
   }
-
-  .btn{
+  .actionLink{
     display:inline-block;
-    text-decoration:none;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 1rem;
-    border:1px solid #e6e6e6;
+    border:1px solid #eee;
     background:#fff;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:0.92rem;
     color:#111;
+    text-decoration:none;
   }
-  .btn:hover{ background:#f7f7f7; }
-
-  /* Use your same booking blue as header button */
-  .btn.primary{
-    border-color:#0B5FAE;
-    background:#0B5FAE;
-    color:#fff;
-  }
-  .btn.primary:hover{
-    background:#094F90;
-    border-color:#094F90;
-  }
-
-  .note{
-    margin-top: 10px;
-    font-size: 0.95rem;
-    color:#555;
-    line-height: 1.5;
-  }
-
-  .fine{
-    margin-top: 10px;
-    font-size: 0.92rem;
-    color:#666;
-  }
+  .actionLink:hover{ text-decoration:underline; text-underline-offset:3px; }
 </style>
 
-<h1>Booking</h1>
-
-<div class="bookingIntro">
-  <p>
-    Use the buttons below to view <strong>availability</strong>, <strong>rates</strong>, <strong>reviews</strong>, and get a <strong>quote</strong>.
-    These open on Signature Villas (our property manager) in a new tab for the most reliable experience.
-  </p>
-  <div class="btnRow">
-    <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
-      Check Availability
-    </a>
-  </div>
-  <div class="fine">
-    Note: Signature Villas pages may not allow embedding inside other websites, so opening in a new tab is the cleanest option.
-  </div>
-</div>
+<h1>Attractions Near Windsor Hills</h1>
+<p>
+  Tap any attraction below to update the map with <strong>directions from the Windsor Hills gate</strong>.
+  This search feature is a convenience to show the distance of area attractions near the townhome.
+</p>
 
 <div class="grid">
+  <!-- LEFT: LIST -->
   <div class="card">
-    <h2>Availability Calendar</h2>
-    <p>See open dates and plan your stay.</p>
-    <div class="btnRow">
-      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
-        Open Availability
-      </a>
+    <h2>Disney + Theme Parks</h2>
+    <ul class="list" id="placesList">
+      <li><button class="placeBtn" data-dest="Magic Kingdom Park, Orlando, FL">Magic Kingdom</button></li>
+      <li><button class="placeBtn" data-dest="EPCOT, Orlando, FL">EPCOT</button></li>
+      <li><button class="placeBtn" data-dest="Disney's Hollywood Studios, Orlando, FL">Hollywood Studios</button></li>
+      <li><button class="placeBtn" data-dest="Disney's Animal Kingdom Theme Park, Orlando, FL">Animal Kingdom</button></li>
+      <li><button class="placeBtn" data-dest="Disney Springs, Orlando, FL">Disney Springs</button></li>
+    </ul>
+
+    <div class="pillRow" aria-label="Quick tips">
+      <span class="pill">Midday break friendly</span>
+      <span class="pill">Fastest return: I-4</span>
+      <span class="pill">Gate to door: quick</span>
     </div>
-    <div class="note">Tip: On the listing page, look for the availability/calendar section.</div>
+
+    <h2 style="margin-top:16px;">Nearby Favorites</h2>
+    <ul class="list">
+      <li><button class="placeBtn" data-dest="Mystic Dunes Golf Club, Celebration, FL">Mystic Dunes Golf Club</button></li>
+      <li><button class="placeBtn" data-dest="Old Town, Kissimmee, FL">Old Town Kissimmee</button></li>
+      <li><button class="placeBtn" data-dest="ICON Park, Orlando, FL">ICON Park</button></li>
+      <li><button class="placeBtn" data-dest="SeaWorld Orlando, Orlando, FL">SeaWorld</button></li>
+      <li><button class="placeBtn" data-dest="Universal CityWalk Orlando, Orlando, FL">Universal CityWalk</button></li>
+    </ul>
+
+    <p class="mini">
+      Tip: If you want the map to open in your phone’s Maps app, use the “Open in Google Maps” button under the map.
+      You can also use the “Directions” button inside the embedded map.
+    </p>
   </div>
 
+  <!-- RIGHT: MAP -->
   <div class="card">
-    <h2>Rates</h2>
-    <p>View nightly rates and pricing details.</p>
-    <div class="btnRow">
-      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
-        Open Rates
-      </a>
-    </div>
-    <div class="note">Tip: Rates are typically shown near the booking / quote area.</div>
-  </div>
+    <h2>Directions Map</h2>
+    <p class="mini" id="mapLabel">
+      Showing directions from <strong>Windsor Hills Resort Gate</strong>.
+    </p>
 
-  <div class="card">
-    <h2>Reviews</h2>
-    <p>Read guest feedback and experience notes.</p>
-    <div class="btnRow">
-      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
-        Open Reviews
-      </a>
+    <div class="mapWrap">
+      <iframe
+        id="mapFrame"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Directions from Windsor Hills gate">
+      </iframe>
     </div>
-  </div>
 
-  <div class="card">
-    <h2>Get a Quote</h2>
-    <p>Enter dates and guest count to see an exact quote.</p>
-    <div class="btnRow">
-      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
-        Start Quote
-      </a>
+    <div class="actionRow" aria-label="Map actions">
+      <a class="actionLink" id="openMapsLink" href="#" target="_blank" rel="noopener">Open in Google Maps</a>
+      <a class="actionLink" id="copyLinkBtn" href="#" role="button">Copy route link</a>
     </div>
   </div>
 </div>
 
-<div class="footer">Enchanted Villa of Windsor Hills Townhome</div>
+<script>
+  // Start location (keeps your exact address private)
+  const ORIGIN = "Windsor Hills Resort Gate, Kissimmee, FL";
+
+  // Default destination on load:
+  const DEFAULT_DEST = "Magic Kingdom Park, Orlando, FL";
+
+  // Route mode: d=driving, w=walking, r=transit, b=biking
+  const DIRFLG = "d";
+
+  const mapFrame = document.getElementById("mapFrame");
+  const mapLabel = document.getElementById("mapLabel");
+  const openMapsLink = document.getElementById("openMapsLink");
+  const copyLinkBtn = document.getElementById("copyLinkBtn");
+
+  function makeDirectionsEmbed(origin, destination) {
+    // True directions embed (no API key): saddr + daddr
+    const saddr = encodeURIComponent(origin);
+    const daddr = encodeURIComponent(destination);
+    return `https://www.google.com/maps?output=embed&saddr=${saddr}&daddr=${daddr}&dirflg=${DIRFLG}`;
+  }
+
+  function makeDirectionsLink(origin, destination) {
+    // Clickable route link (opens in Maps app on mobile, Google Maps on desktop)
+    const saddr = encodeURIComponent(origin);
+    const daddr = encodeURIComponent(destination);
+    return `https://www.google.com/maps/dir/?api=1&origin=${saddr}&destination=${daddr}&travelmode=driving`;
+  }
+
+  function setMapTo(destination) {
+    mapFrame.src = makeDirectionsEmbed(ORIGIN, destination);
+
+    mapLabel.innerHTML =
+      `Showing directions from <strong>Windsor Hills Resort Gate</strong> to <strong>${destination}</strong>.`;
+
+    const routeUrl = makeDirectionsLink(ORIGIN, destination);
+    openMapsLink.href = routeUrl;
+
+    // Store current route url for copy button
+    copyLinkBtn.dataset.route = routeUrl;
+  }
+
+  // Copy route link to clipboard
+  copyLinkBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const url = copyLinkBtn.dataset.route || makeDirectionsLink(ORIGIN, DEFAULT_DEST);
+
+    try {
+      await navigator.clipboard.writeText(url);
+      const oldText = copyLinkBtn.textContent;
+      copyLinkBtn.textContent = "Copied";
+      setTimeout(() => (copyLinkBtn.textContent = oldText), 1200);
+    } catch (err) {
+      // Fallback
+      window.prompt("Copy this link:", url);
+    }
+  });
+
+  // Wire up buttons
+  document.querySelectorAll(".placeBtn").forEach(btn => {
+    btn.addEventListener("click", () => setMapTo(btn.dataset.dest));
+  });
+
+  // Initial map load
+  setMapTo(DEFAULT_DEST);
+</script>
