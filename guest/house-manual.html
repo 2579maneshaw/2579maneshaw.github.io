@@ -1,0 +1,209 @@
+---
+layout: null
+title: House Manual
+description: House Manual for Enchanted Villa of Windsor Hills Townhome.
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>House Manual | Enchanted Villa of Windsor Hills</title>
+  <meta name="description" content="House Manual for Enchanted Villa of Windsor Hills Townhome." />
+
+  <style>
+    :root{
+      --ink:#111; --muted:#555; --border:#e9e9e9; --bg:#fff; --soft:#f7f7f7; --brand:#2f5fbf;
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:var(--ink); }
+    a{ color:inherit; }
+    .wrap{ max-width:1100px; margin:0 auto; padding:16px 16px 64px; }
+
+    .guestHeader{ border-bottom:1px solid var(--border); background:#fff; }
+    .guestHeaderInner{
+      max-width:1100px; margin:0 auto; padding:14px 16px;
+      display:flex; align-items:center; gap:16px;
+    }
+    .logo{ width:92px; height:92px; object-fit:contain; border-radius:14px; }
+    .brand{ flex:1 1 auto; min-width:0; }
+    .brandTitle{ margin:0; font-size:1.6rem; font-weight:800; letter-spacing:-0.03em; line-height:1.1; }
+    .brandSub{ margin-top:6px; color:var(--muted); font-style:italic; line-height:1.3; }
+
+    .headerRight{ display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+    .headerCTA{
+      display:inline-block; text-decoration:none; background:var(--brand); color:#fff;
+      padding:12px 16px; border-radius:999px; font-weight:700; border:1px solid rgba(0,0,0,0.08);
+      white-space:nowrap;
+    }
+    .headerCTA:hover{ filter:brightness(0.95); }
+    .socialRow{ display:flex; gap:10px; align-items:center; }
+    .iconBtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:999px; border:1px solid var(--border); background:#fff; text-decoration:none;
+    }
+    .iconBtn:hover{ background:#f3f6ff; border-color:#d8e3ff; }
+    .icon{ width:20px; height:20px; fill:#1f1f1f; display:block; }
+
+    .guestNavRow{ max-width:1100px; margin:0 auto; padding:0 16px 14px; }
+    .guestNav{ display:flex; gap:10px; flex-wrap:wrap; }
+    .pill{
+      text-decoration:none; border:1px solid var(--border); background:#fafafa;
+      padding:10px 14px; border-radius:999px; font-size:0.95rem;
+    }
+    .pill:hover{ background:#f2f2f2; }
+    .pill.active{ background:#111; border-color:#111; color:#fff; }
+
+    @media (max-width: 900px){
+      .guestHeaderInner{ align-items:flex-start; }
+      .headerRight{ align-items:flex-start; }
+    }
+
+    .hero{
+      margin-top:18px; background:var(--soft); border:1px solid var(--border);
+      border-radius:18px; padding:18px;
+    }
+    .hero h1{ margin:0 0 8px; font-size:2rem; letter-spacing:-0.03em; line-height:1.1; }
+    .hero p{ margin:0; color:#333; line-height:1.6; }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:#fff;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      padding:16px;
+      min-width:0;
+    }
+    .card h2{ margin:0 0 10px; font-size:1.25rem; letter-spacing:-0.02em; }
+    .muted{ color:var(--muted); }
+    .list{ margin:0; padding-left:18px; line-height:1.8; color:#333; }
+    .fine{ margin-top:18px; text-align:center; color:#777; font-size:0.92rem; }
+    .ruleBox{
+      margin-top:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      line-height:1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="guestHeader">
+    <div class="guestHeaderInner">
+      <img class="logo" src="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }}" alt="Enchanted Villa of Windsor Hills logo" />
+
+      <div class="brand">
+        <div class="brandTitle">Enchanted Villa of Windsor Hills</div>
+        <div class="brandSub">Your Calm Pause Between the Parks.</div>
+      </div>
+
+      <div class="headerRight">
+        <a class="headerCTA" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
+        <div class="socialRow" aria-label="Social links">
+          <a class="iconBtn" href="https://www.instagram.com/enchanted_villa_windsor_hills" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm10.75 1.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+            </svg>
+          </a>
+          <a class="iconBtn" href="https://www.facebook.com/profile.php?id=61586521704194" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.7-1.6h1.5V4.8c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V11H7.5v3H10v8h3.5Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="guestNavRow">
+      <nav class="guestNav" aria-label="Guest navigation">
+        <a class="pill" href="{{ '/guest/index.html' | relative_url }}">Welcome</a>
+        <a class="pill active" href="{{ '/guest/house-manual.html' | relative_url }}">House Manual</a>
+        <a class="pill" href="{{ '/guest/local-guide.html' | relative_url }}">Local Guide</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>House Manual</h1>
+      <p>Simple, practical notes to keep your stay smooth and comfortable.</p>
+
+      <div class="ruleBox">
+        <strong>Quiet hours:</strong> 10:00 PM to 8:00 AM.<br/>
+        Please be respectful of neighbors and keep outdoor noise low during these hours.
+      </div>
+    </section>
+
+    <section class="grid" aria-label="House manual cards">
+      <div class="card">
+        <h2>Check In and Check Out</h2>
+        <ul class="list">
+          <li><strong>Check in:</strong> (add time here)</li>
+          <li><strong>Check out:</strong> (add time here)</li>
+          <li>Leave used towels in a pile and start a load if you have time.</li>
+          <li>Make sure doors are locked when you depart.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>WiFi</h2>
+        <ul class="list">
+          <li><strong>Network:</strong> 2579 MANESHAW</li>
+          <li><strong>Password:</strong> (add password here)</li>
+        </ul>
+        <p class="muted" style="margin-top:10px;">If streaming buffers, disconnect and reconnect to refresh the connection.</p>
+      </div>
+
+      <div class="card">
+        <h2>Thermostat and Comfort</h2>
+        <ul class="list">
+          <li>Set a comfortable temperature and keep doors/windows closed to maintain it.</li>
+          <li>Florida humidity is real. Cooler settings can help the home feel crisp and dry.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Trash</h2>
+        <ul class="list">
+          <li>Bag trash securely before taking it out.</li>
+          <li>Do not leave food trash outside overnight.</li>
+          <li>If you are unsure where to place trash, follow the posted community guidance or ask your host.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Pool and Patio Notes</h2>
+        <ul class="list">
+          <li>Always supervise children near water.</li>
+          <li>Keep glass away from the pool area.</li>
+          <li>Rinse off sunscreen before swimming to keep the water clean.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Pest Control</h2>
+        <p class="muted">Florida is tropical. You may occasionally see ants or bugs.</p>
+        <ul class="list">
+          <li>Wipe crumbs and spills quickly.</li>
+          <li>Keep doors closed so insects are not invited in.</li>
+          <li>If you see an issue, message your host so it can be handled quickly.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="fine">House Manual • Enchanted Villa of Windsor Hills Townhome</div>
+  </main>
+
+</body>
+</html>
