@@ -1,209 +1,361 @@
 ---
 layout: default
-title: Attractions
-nav: attractions
-description: Top attractions near Enchanted Villa of Windsor Hills Townhome— The Calm Pause Between the Parks.
+title: Booking
+nav: booking
+description: Check availability and pricing for Enchanted Villa of Windsor Hills Townhome.
 ---
 
 <style>
-  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
+  /* Booking page only */
+  .wrap{max-width:1100px;margin:0 auto;padding:18px 16px 60px;}
+
+  h1{margin:18px 0 8px;font-size:1.85rem;letter-spacing:-0.02em;}
   p{color:#333;line-height:1.65;margin:0 0 12px;}
 
-  .grid{
+  .card{
+    border:1px solid #eee;border-radius:16px;padding:16px;
+    background:#fff;box-shadow:0 10px 26px rgba(0,0,0,0.05);
+    min-width:0;
+  }
+
+  .grid2{
     display:grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap:18px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap:16px;
     align-items:start;
   }
-  @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
-  .grid > *{min-width:0;}
+  @media (max-width: 860px){
+    .grid2{grid-template-columns:1fr;}
+  }
 
-  .list{margin:0;padding-left:18px;line-height:1.75;color:#333;}
-  .list li{margin:8px 0;}
-  .placeBtn{
-    display:inline-block;
-    border:0;
-    background:transparent;
-    padding:0;
-    margin:0;
-    text-align:left;
-    cursor:pointer;
-    color:#111;
-    text-decoration:underline;
-    text-underline-offset:3px;
+  .formRow{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:12px;
+    margin-top:12px;
+  }
+  @media (max-width: 560px){
+    .formRow{grid-template-columns:1fr;}
+  }
+
+  label{font-size:0.92rem;color:#444;display:block;margin-bottom:6px;}
+  input, select{
+    width:100%;
+    padding:12px 12px;
+    border-radius:12px;
+    border:1px solid #e6e6e6;
+    background:#fff;
     font-size:1rem;
+    outline:none;
   }
-  .placeBtn:focus-visible{
-    outline:2px solid #111;
-    outline-offset:3px;
-    border-radius:6px;
+  input:focus, select:focus{border-color:#b9b9b9;}
+
+  .ctaRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:12px;
+    font-size:1rem;
+    border:1px solid #111;
+    cursor:pointer;
+  }
+  .btn.primary{background:#111;color:#fff;}
+  .btn.primary:hover{background:#2a2a2a;border-color:#2a2a2a;}
+  .btn.blue{
+    background:#2f5fbf;  /* logo-matching-ish blue */
+    color:#fff;
+    border-color:#2f5fbf;
+  }
+  .btn.blue:hover{
+    filter: brightness(0.95);
+  }
+  .btn.ghost{background:#fff;color:#111;border-color:#e6e6e6;}
+  .btn.ghost:hover{background:#f7f7f7;}
+
+  .note{
+    margin-top:12px;
+    border-radius:12px;
+    border:1px solid #eee;
+    background:#fafafa;
+    padding:12px;
+    color:#333;
+    font-size:0.95rem;
+    line-height:1.55;
   }
 
-  .mini{font-size:0.95rem;color:#555;margin-top:10px;}
+  .result{
+    margin-top:14px;
+    border-radius:14px;
+    border:1px solid #eee;
+    background:#fafafa;
+    padding:14px;
+    display:none;
+  }
 
-  .mapWrap{
+  .resultRow{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:8px 0;
+    border-bottom:1px solid #e8e8e8;
+    font-size:0.98rem;
+  }
+  .resultRow:last-child{border-bottom:0;}
+  .muted{color:#666;font-size:0.95rem;margin-top:6px;}
+
+  .divider{height:1px;background:#eee;margin:16px 0;}
+
+  /* Embedded fallback view */
+  .embedWrap{
     border-radius:16px;
     overflow:hidden;
     border:1px solid #eee;
     background:#f3f3f3;
   }
-  iframe{width:100%;height:520px;border:0;}
-
-  .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 0;}
-  .pill{
-    border:1px solid #eee;
-    background:#fafafa;
-    padding:8px 12px;
-    border-radius:999px;
-    font-size:0.92rem;
-    color:#111;
+  .embedWrap iframe{
+    width:100%;
+    height:720px;
+    border:0;
+  }
+  @media (max-width: 560px){
+    .embedWrap iframe{height:820px;}
   }
 
-  .actionRow{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:10px;
-    align-items:center;
+  .error{
+    margin-top:12px;
+    border:1px solid #ffd7d7;
+    background:#fff3f3;
+    border-radius:12px;
+    padding:12px;
+    color:#7a1f1f;
+    display:none;
   }
-  .actionLink{
-    display:inline-block;
-    border:1px solid #eee;
-    background:#fff;
-    padding:8px 12px;
-    border-radius:999px;
-    font-size:0.92rem;
-    color:#111;
-    text-decoration:none;
-  }
-  .actionLink:hover{ text-decoration:underline; text-underline-offset:3px; }
 </style>
 
-<h1>Attractions Near Windsor Hills</h1>
-<p>
-  Tap any attraction below to update the map with <strong>directions from the Windsor Hills gate</strong>.
-  This search feature is a convenience to show the distance of area attractions near the townhome.
-</p>
+<div class="wrap">
+  <h1>Check Availability & Pricing</h1>
+  <p>
+    Enter your dates to estimate pricing. If the live quote service is unavailable, you can still book instantly using the official booking page.
+  </p>
 
-<div class="grid">
-  <!-- LEFT: LIST -->
-  <div class="card">
-    <h2>Disney + Theme Parks</h2>
-    <ul class="list" id="placesList">
-      <li><button class="placeBtn" data-dest="Magic Kingdom Park, Orlando, FL">Magic Kingdom</button></li>
-      <li><button class="placeBtn" data-dest="EPCOT, Orlando, FL">EPCOT</button></li>
-      <li><button class="placeBtn" data-dest="Disney's Hollywood Studios, Orlando, FL">Hollywood Studios</button></li>
-      <li><button class="placeBtn" data-dest="Disney's Animal Kingdom Theme Park, Orlando, FL">Animal Kingdom</button></li>
-      <li><button class="placeBtn" data-dest="Disney Springs, Orlando, FL">Disney Springs</button></li>
-    </ul>
+  <div class="grid2">
+    <div class="card">
+      <h2 style="margin:0 0 8px;font-size:1.25rem;">Get a Quote</h2>
+      <p class="muted" style="margin:0 0 6px;">
+        Uses the same quote engine as the booking site.
+      </p>
 
-    <div class="pillRow" aria-label="Quick tips">
-      <span class="pill">Midday break friendly</span>
-      <span class="pill">Fastest return: I-4</span>
-      <span class="pill">Gate to door: quick</span>
+      <div class="formRow">
+        <div>
+          <label for="checkin">Check-in</label>
+          <input id="checkin" type="date" />
+        </div>
+        <div>
+          <label for="checkout">Check-out</label>
+          <input id="checkout" type="date" />
+        </div>
+      </div>
+
+      <div class="formRow">
+        <div>
+          <label for="adults">Adults</label>
+          <select id="adults">
+            <option>1</option><option selected>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7</option><option>8</option>
+            <option>9</option><option>10</option><option>11</option>
+          </select>
+        </div>
+        <div>
+          <label for="children">Children</label>
+          <select id="children">
+            <option selected>0</option><option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option><option>7</option>
+            <option>8</option><option>9</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="ctaRow">
+        <button id="quoteBtn" class="btn blue" type="button">Check Availability</button>
+        <a class="btn ghost" target="_blank" rel="noopener"
+           href="https://signaturevillasorlando.com/listing/400961">Open Official Booking Page</a>
+      </div>
+
+      <div id="errBox" class="error"></div>
+
+      <div id="resultBox" class="result" aria-live="polite">
+        <div class="resultRow"><strong>Estimated Total</strong> <strong id="totalOut">$—</strong></div>
+        <div class="resultRow"><span>Nightly (avg)</span> <span id="nightlyOut">$—</span></div>
+        <div class="resultRow"><span>Taxes + Fees</span> <span id="feesOut">$—</span></div>
+        <div class="muted" id="resultNote"></div>
+
+        <div class="ctaRow" style="margin-top:12px;">
+          <a class="btn primary" target="_blank" rel="noopener"
+             href="https://signaturevillasorlando.com/listing/400961">Book These Dates</a>
+        </div>
+      </div>
+
+      <div class="note">
+        If the quote doesn’t load, it’s usually because the booking provider requires a session token (JWT).
+        In that case, use the official booking page button.
+      </div>
     </div>
 
-    <h2 style="margin-top:16px;">Nearby Favorites</h2>
-    <ul class="list">
-      <li><button class="placeBtn" data-dest="Mystic Dunes Golf Club, Celebration, FL">Mystic Dunes Golf Club</button></li>
-      <li><button class="placeBtn" data-dest="Old Town, Kissimmee, FL">Old Town Kissimmee</button></li>
-      <li><button class="placeBtn" data-dest="ICON Park, Orlando, FL">ICON Park</button></li>
-      <li><button class="placeBtn" data-dest="SeaWorld Orlando, Orlando, FL">SeaWorld</button></li>
-      <li><button class="placeBtn" data-dest="Universal CityWalk Orlando, Orlando, FL">Universal CityWalk</button></li>
-    </ul>
+    <div class="card">
+      <h2 style="margin:0 0 8px;font-size:1.25rem;">Official Booking View</h2>
+      <p class="muted" style="margin:0 0 12px;">
+        This is the full provider page. If your browser blocks embedding, use “Open Official Booking Page”.
+      </p>
 
-    <p class="mini">
-      Tip: If you want the map to open in your phone’s Maps app, use the “Open in Google Maps” button under the map.
-      You can also use the “Directions” button inside the embedded map.
-    </p>
-  </div>
-
-  <!-- RIGHT: MAP -->
-  <div class="card">
-    <h2>Directions Map</h2>
-    <p class="mini" id="mapLabel">
-      Showing directions from <strong>Windsor Hills Resort Gate</strong>.
-    </p>
-
-    <div class="mapWrap">
-      <iframe
-        id="mapFrame"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Directions from Windsor Hills gate">
-      </iframe>
-    </div>
-
-    <div class="actionRow" aria-label="Map actions">
-      <a class="actionLink" id="openMapsLink" href="#" target="_blank" rel="noopener">Open in Google Maps</a>
-      <a class="actionLink" id="copyLinkBtn" href="#" role="button">Copy route link</a>
+      <div class="embedWrap">
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://signaturevillasorlando.com/listing/400961"
+          title="Official booking page for Enchanted Villa of Windsor Hills">
+        </iframe>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-  // Start location (keeps your exact address private)
-  const ORIGIN = "Windsor Hills Resort Gate, Kissimmee, FL";
+  // NOTE:
+  // We can call the CIIRUS quote API directly because it returns CORS: *
+  // HOWEVER: the provider may require a JWT header (session token).
+  // This implementation tries WITHOUT the JWT first.
+  // If the API requires JWT, we show a friendly fallback.
 
-  // Default destination on load:
-  const DEFAULT_DEST = "Magic Kingdom Park, Orlando, FL";
+  const QUOTE_ENDPOINT = "https://cms-api.ciirus.com/propertydetails/getQuote";
 
-  // Route mode: d=driving, w=walking, r=transit, b=biking
-  const DIRFLG = "d";
+  // You may need to set these IDs/fields once we confirm the request body used by SignatureVillas.
+  // For now we send a minimal payload and gracefully handle failures.
+  const PROPERTY_ID = 400961;
 
-  const mapFrame = document.getElementById("mapFrame");
-  const mapLabel = document.getElementById("mapLabel");
-  const openMapsLink = document.getElementById("openMapsLink");
-  const copyLinkBtn = document.getElementById("copyLinkBtn");
+  const $ = (id) => document.getElementById(id);
 
-  function makeDirectionsEmbed(origin, destination) {
-    // True directions embed (no API key): saddr + daddr
-    const saddr = encodeURIComponent(origin);
-    const daddr = encodeURIComponent(destination);
-    return `https://www.google.com/maps?output=embed&saddr=${saddr}&daddr=${daddr}&dirflg=${DIRFLG}`;
+  function dollars(n){
+    if (n === null || n === undefined || n === "" || Number.isNaN(Number(n))) return "$—";
+    try {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number(n));
+    } catch {
+      return "$" + n;
+    }
   }
 
-  function makeDirectionsLink(origin, destination) {
-    // Clickable route link (opens in Maps app on mobile, Google Maps on desktop)
-    const saddr = encodeURIComponent(origin);
-    const daddr = encodeURIComponent(destination);
-    return `https://www.google.com/maps/dir/?api=1&origin=${saddr}&destination=${daddr}&travelmode=driving`;
+  function showError(msg){
+    const box = $("errBox");
+    box.style.display = "block";
+    box.textContent = msg;
   }
 
-  function setMapTo(destination) {
-    mapFrame.src = makeDirectionsEmbed(ORIGIN, destination);
-
-    mapLabel.innerHTML =
-      `Showing directions from <strong>Windsor Hills Resort Gate</strong> to <strong>${destination}</strong>.`;
-
-    const routeUrl = makeDirectionsLink(ORIGIN, destination);
-    openMapsLink.href = routeUrl;
-
-    // Store current route url for copy button
-    copyLinkBtn.dataset.route = routeUrl;
+  function clearError(){
+    const box = $("errBox");
+    box.style.display = "none";
+    box.textContent = "";
   }
 
-  // Copy route link to clipboard
-  copyLinkBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const url = copyLinkBtn.dataset.route || makeDirectionsLink(ORIGIN, DEFAULT_DEST);
+  function showResult(data){
+    // Because we don't yet know exact response shape, we attempt common fields.
+    // We'll display what we can without breaking.
+    const total =
+      data?.Total
+      ?? data?.total
+      ?? data?.TotalPrice
+      ?? data?.totalPrice
+      ?? data?.GrandTotal
+      ?? data?.grandTotal;
+
+    const nightly =
+  data?.AverageNightly
+      ?? data?.averageNightly
+      ?? data?.AvgNightly
+      ?? data?.avgNightly
+      ?? data?.NightlyRate
+      ?? data?.nightlyRate;
+
+    const fees =
+      data?.Fees
+      ?? data?.fees
+      ?? data?.TaxesAndFees
+      ?? data?.taxesAndFees
+      ?? data?.TotalFees
+      ?? data?.totalFees;
+
+    $("totalOut").textContent = dollars(total);
+    $("nightlyOut").textContent = dollars(nightly);
+    $("feesOut").textContent = dollars(fees);
+
+    $("resultNote").textContent =
+      "Estimates may vary slightly depending on specials, cleaning, taxes, or provider rules. Final pricing is shown on the booking page.";
+
+    $("resultBox").style.display = "block";
+  }
+
+  async function getQuote(){
+    clearError();
+    $("resultBox").style.display = "none";
+
+    const checkin = $("checkin").value;
+    const checkout = $("checkout").value;
+
+    if (!checkin || !checkout){
+      showError("Please select both check-in and check-out dates.");
+      return;
+    }
+    if (checkout <= checkin){
+      showError("Check-out must be after check-in.");
+      return;
+    }
+
+    const payload = {
+      // This is a best-guess “minimal payload”.
+      // Next step (if needed): you can paste your Request Payload from DevTools
+      // and I’ll lock this to the exact schema CIIRUS expects for your listing.
+      PropertyID: PROPERTY_ID,
+      CheckIn: checkin,
+      CheckOut: checkout,
+      Adults: Number($("adults").value),
+      Children: Number($("children").value)
+    };
+
+    $("quoteBtn").disabled = true;
+    $("quoteBtn").textContent = "Checking…";
 
     try {
-      await navigator.clipboard.writeText(url);
-      const oldText = copyLinkBtn.textContent;
-      copyLinkBtn.textContent = "Copied";
-      setTimeout(() => (copyLinkBtn.textContent = oldText), 1200);
-    } catch (err) {
-      // Fallback
-      window.prompt("Copy this link:", url);
+      const res = await fetch(QUOTE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+          // No JWT here intentionally; we test without it.
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok){
+        throw new Error("HTTP " + res.status);
+      }
+
+      const data = await res.json();
+
+      // If the API responds with an error object, show fallback message
+      if (data?.error || data?.Error || data?.message?.toLowerCase?.().includes("jwt") || data?.Message?.toLowerCase?.().includes("jwt")){
+        showError("The booking provider requires a session token for live quotes. Please use the official booking page button.");
+        return;
+      }
+
+      showResult(data);
+
+    } catch (e){
+      showError("Live quote couldn’t load here (provider restrictions). Please use the official booking page button.");
+      console.warn("Quote error:", e);
+    } finally {
+      $("quoteBtn").disabled = false;
+      $("quoteBtn").textContent = "Check Availability";
     }
-  });
+  }
 
-  // Wire up buttons
-  document.querySelectorAll(".placeBtn").forEach(btn => {
-    btn.addEventListener("click", () => setMapTo(btn.dataset.dest));
-  });
-
-  // Initial map load
-  setMapTo(DEFAULT_DEST);
+  $("quoteBtn").addEventListener("click", getQuote);
 </script>
