@@ -1,123 +1,152 @@
 ---
 layout: default
-title: Booking, Rates & Reviews
+title: Booking
 nav: booking
-description: Check availability, view rates, read guest reviews, and request a quote for Enchanted Villa of Windsor Hills Townhome.
+description: Check availability, rates, reviews, and get a quote for Enchanted Villa of Windsor Hills Townhome.
 ---
 
 <style>
-  /* Booking page only */
-  h1{
-    margin: 18px 0 10px;
-    font-size: 1.85rem;
-    letter-spacing: -0.02em;
+  /* Booking page-only styles */
+  h1{margin:18px 0 8px;font-size:1.9rem;letter-spacing:-0.02em;}
+  p{color:#333;line-height:1.65;margin:0 0 12px;}
+
+  .bookingIntro{
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    background:#f7f7f7;
+    border:1px solid #eee;
   }
 
-  p{
-    color:#333;
-    line-height:1.65;
-    margin: 0 0 16px;
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
   }
-
-  .section{
-    margin-top: 22px;
+  @media (max-width: 860px){
+    .grid{ grid-template-columns: 1fr; }
   }
 
   .card{
-    margin-top: 16px;
+    border:1px solid #eee;
+    border-radius:16px;
+    padding:16px;
+    background:#fff;
+    box-shadow:0 10px 26px rgba(0,0,0,0.05);
+    min-width:0;
   }
 
-  .embedWrap{
-    position: relative;
-    width: 100%;
-    padding-top: 62.5%; /* ~16:10 for calendars/tables */
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #eee;
-    background:#f7f7f7;
+  .card h2{
+    margin:0 0 8px;
+    font-size:1.2rem;
+    letter-spacing:-0.02em;
   }
 
-  .embedWrap iframe{
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+  .btnRow{
+    margin-top: 12px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
   }
 
-  @media (max-width: 768px){
-    .embedWrap{
-      padding-top: 90%;
-    }
+  .btn{
+    display:inline-block;
+    text-decoration:none;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border:1px solid #e6e6e6;
+    background:#fff;
+    color:#111;
+  }
+  .btn:hover{ background:#f7f7f7; }
+
+  /* Use your same booking blue as header button */
+  .btn.primary{
+    border-color:#0B5FAE;
+    background:#0B5FAE;
+    color:#fff;
+  }
+  .btn.primary:hover{
+    background:#094F90;
+    border-color:#094F90;
+  }
+
+  .note{
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color:#555;
+    line-height: 1.5;
+  }
+
+  .fine{
+    margin-top: 10px;
+    font-size: 0.92rem;
+    color:#666;
   }
 </style>
 
-<h1>Booking, Rates & Reviews</h1>
-<p>
-  View real-time availability, explore nightly rates, read verified guest reviews,  
-  or request a personalized quote — all without leaving our site.
-</p>
+<h1>Booking</h1>
 
-<!-- Availability -->
-<section class="section">
+<div class="bookingIntro">
+  <p>
+    Use the buttons below to view <strong>availability</strong>, <strong>rates</strong>, <strong>reviews</strong>, and get a <strong>quote</strong>.
+    These open on Signature Villas (our property manager) in a new tab for the most reliable experience.
+  </p>
+  <div class="btnRow">
+    <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
+      Check Availability
+    </a>
+  </div>
+  <div class="fine">
+    Note: Signature Villas pages may not allow embedding inside other websites, so opening in a new tab is the cleanest option.
+  </div>
+</div>
+
+<div class="grid">
   <div class="card">
     <h2>Availability Calendar</h2>
-    <p>See open dates and plan your stay at Enchanted Villa of Windsor Hills.</p>
-
-    <div class="embedWrap">
-      <iframe
-        src="https://signaturevillasorlando.com/EmbedCalendar.aspx?PropertyID=400961"
-        scrolling="auto"
-        title="Availability Calendar">
-      </iframe>
+    <p>See open dates and plan your stay.</p>
+    <div class="btnRow">
+      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
+        Open Availability
+      </a>
     </div>
+    <div class="note">Tip: On the listing page, look for the availability/calendar section.</div>
   </div>
-</section>
 
-<!-- Rates -->
-<section class="section">
   <div class="card">
-    <h2>Rates Table</h2>
-    <p>Nightly pricing varies by season, demand, and length of stay.</p>
-
-    <div class="embedWrap">
-      <iframe
-        src="https://signaturevillasorlando.com/Rates.aspx?PropertyID=400961"
-        scrolling="auto"
-        title="Rates Table">
-      </iframe>
+    <h2>Rates</h2>
+    <p>View nightly rates and pricing details.</p>
+    <div class="btnRow">
+      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
+        Open Rates
+      </a>
     </div>
+    <div class="note">Tip: Rates are typically shown near the booking / quote area.</div>
   </div>
-</section>
 
-<!-- Reviews -->
-<section class="section">
   <div class="card">
-    <h2>Guest Reviews</h2>
-    <p>Read verified reviews from guests who have stayed in the townhome.</p>
-
-    <div class="embedWrap">
-      <iframe
-        src="https://signaturevillasorlando.com/reviews.aspx?PropertyID=400961"
-        scrolling="auto"
-        title="Guest Reviews">
-      </iframe>
+    <h2>Reviews</h2>
+    <p>Read guest feedback and experience notes.</p>
+    <div class="btnRow">
+      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
+        Open Reviews
+      </a>
     </div>
   </div>
-</section>
 
-<!-- Quoter -->
-<section class="section">
   <div class="card">
     <h2>Get a Quote</h2>
-    <p>Request a custom quote for your travel dates and group size.</p>
-
-    <div class="embedWrap">
-      <iframe
-        src="https://signaturevillasorlando.com/EmbedQuoter.aspx?PropertyID=400961"
-        scrolling="auto"
-        title="Quote Request">
-      </iframe>
+    <p>Enter dates and guest count to see an exact quote.</p>
+    <div class="btnRow">
+      <a class="btn primary" href="https://signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">
+        Start Quote
+      </a>
     </div>
   </div>
-</section>
+</div>
+
+<div class="footer">Enchanted Villa of Windsor Hills Townhome</div>
