@@ -44,12 +44,12 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
   /* Fallback for older browsers */
   @supports not (aspect-ratio: 16 / 9){
     .videoWrap{height:0;padding-top:56.25%;}
-    .videoWrap video{position:absolute;inset:0;}
+    .videoWrap iframe{position:absolute;inset:0;}
   }
-  .videoWrap video{
+  .videoWrap iframe{
     width:100%;
     height:100%;
-    object-fit: cover;
+    border:0;
     display:block;
   }
   .videoCaption{
@@ -178,17 +178,14 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
 <section class="videoCard" aria-label="Walkthrough video">
   <div class="videoWrap">
     <iframe
-      src="https://youtu.be/j87aWOF-fpM"
-      title="Walkthrough video"
-      frameborder="0"
-      allow="autoplay; encrypted-media; picture-in-picture"
-      allowfullscreen
-      style="position:absolute; inset:0; width:100%; height:100%;">
+      src="https://www.youtube.com/embed/j87aWOF-fpM?rel=0&modestbranding=1&playsinline=1"
+      title="Enchanted Villa Walkthrough"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
     </iframe>
   </div>
-  <div class="videoCaption">Walkthrough videos</div>
+  <div class="videoCaption">Walkthrough video</div>
 </section>
-
 
 <!-- Photo gallery section -->
 <section class="grid" aria-label="Photo gallery">
@@ -315,12 +312,4 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
   }
 
   initVilla();
-
-  // Attempt autoplay (some mobile browsers require a user gesture even if muted)
-  const v = document.getElementById("walkthroughVideo");
-  if (v) {
-    const tryPlay = () => v.play().catch(() => {});
-    document.addEventListener("DOMContentLoaded", tryPlay);
-    window.addEventListener("load", tryPlay);
-  }
 </script>
