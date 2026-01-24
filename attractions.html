@@ -33,6 +33,11 @@ description: Top attractions near Enchanted Villa of Windsor Hills Townhome— T
     text-underline-offset:3px;
     font-size:1rem;
   }
+  .placeBtn:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
+    border-radius:6px;
+  }
 
   .mini{font-size:0.95rem;color:#555;margin-top:10px;}
 
@@ -52,6 +57,35 @@ description: Top attractions near Enchanted Villa of Windsor Hills Townhome— T
     border-radius:999px;
     font-size:0.92rem;
     color:#111;
+  }
+
+  .actionRow{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:10px;
+    align-items:center;
+  }
+  .actionLink{
+    display:inline-block;
+    border:1px solid #eee;
+    background:#fff;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:0.92rem;
+    color:#111;
+    text-decoration:none;
+  }
+  .actionLink:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+  .note{
+    margin-top:10px;
+    padding:10px 12px;
+    border:1px solid #eee;
+    background:#fafafa;
+    border-radius:12px;
+    font-size:0.92rem;
+    color:#444;
   }
 </style>
 
@@ -89,7 +123,7 @@ description: Top attractions near Enchanted Villa of Windsor Hills Townhome— T
     </ul>
 
     <p class="mini">
-      Tip: If you want the map to open in your phone’s Maps app, you can still use the “Directions” button inside the embedded map.
+      Tip: Use “Open Directions” under the map to open the route in Google Maps (or your phone’s Maps app).
     </p>
   </div>
 
@@ -105,8 +139,19 @@ description: Top attractions near Enchanted Villa of Windsor Hills Townhome— T
         id="mapFrame"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
         title="Directions from Windsor Hills gate">
       </iframe>
+    </div>
+
+    <div class="actionRow" aria-label="Map actions">
+      <a class="actionLink" id="openMapsLink" href="#" target="_blank" rel="noopener">Open Directions</a>
+      <a class="actionLink" id="copyLinkBtn" href="#" role="button">Copy route link</a>
+    </div>
+
+    <div class="note" id="embedNote" style="display:none;">
+      This embedded map is using the “no key” fallback, which can show pins instead of turn-by-turn directions.
+      The “Open Directions” button always opens the correct route.
     </div>
   </div>
 </div>
@@ -118,20 +163,63 @@ description: Top attractions near Enchanted Villa of Windsor Hills Townhome— T
   // Default destination on load:
   const DEFAULT_DEST = "Magic Kingdom Park, Orlando, FL";
 
-  function makeDirectionsEmbed(origin, destination) {
-    // Uses "q=" for a standard embed, and a directions-style link format via query
-    // This works reliably without exposing your address.
-    const q = encodeURIComponent(`Directions from ${origin} to ${destination}`);
-    return `https://www.google.com/maps?q=${q}&output=embed`;
-  }
+  // OPTIONAL (recommended): Google Maps Embed API key for true directions embed
+  // Put your key here, or leave as "" to use the fallback.
+  const MAPS_EMBED_API_KEY = "";
 
   const mapFrame = document.getElementById("mapFrame");
   const mapLabel = document.getElementById("mapLabel");
+  const openMapsLink = document.getElementById("openMapsLink");
+  const copyLinkBtn = document.getElementById("copyLinkBtn");
+  const embedNote = document.getElementById("embedNote");
+
+  function makeEmbedUrl(origin, destination) {
+    const o = encodeURIComponent(origin);
+    const d = encodeURIComponent(destination);
+
+    // Best: official directions embed (requires key)
+    if (MAPS_EMBED_API_KEY && MAPS_EMBED_API_KEY.trim().length > 0) {
+      embedNote.style.display = "none";
+      return `https://www.google.com/maps/embed/v1/directions?key=${encodeURIComponent(MAPS_EMBED_API_KEY)}&origin=${o}&destination=${d}&mode=driving`;
+    }
+
+    // Fallback: no-key embed (may show pins instead of route, depends on Google)
+    embedNote.style.display = "block";
+    return `https://www.google.com/maps?output=embed&saddr=${o}&daddr=${d}&dirflg=d`;
+  }
+
+  function makeOpenDirectionsLink(origin, destination) {
+    // Opens correct route reliably (mobile will open Maps app)
+    const o = encodeURIComponent(origin);
+    const d = encodeURIComponent(destination);
+    return `https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${d}&travelmode=driving`;
+  }
 
   function setMapTo(destination) {
-    mapFrame.src = makeDirectionsEmbed(ORIGIN, destination);
-    mapLabel.innerHTML = `Showing directions from <strong>Windsor Hills Resort Gate</strong> to <strong>${destination}</strong>.`;
+    mapFrame.src = makeEmbedUrl(ORIGIN, destination);
+
+    mapLabel.innerHTML =
+      `Showing directions from <strong>Windsor Hills Resort Gate</strong> to <strong>${destination}</strong>.`;
+
+    const routeUrl = makeOpenDirectionsLink(ORIGIN, destination);
+    openMapsLink.href = routeUrl;
+    copyLinkBtn.dataset.route = routeUrl;
   }
+
+  // Copy route link to clipboard
+  copyLinkBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const url = copyLinkBtn.dataset.route || makeOpenDirectionsLink(ORIGIN, DEFAULT_DEST);
+
+    try {
+      await navigator.clipboard.writeText(url);
+      const oldText = copyLinkBtn.textContent;
+      copyLinkBtn.textContent = "Copied";
+      setTimeout(() => (copyLinkBtn.textContent = oldText), 1200);
+    } catch (err) {
+      window.prompt("Copy this link:", url);
+    }
+  });
 
   // Wire up buttons
   document.querySelectorAll(".placeBtn").forEach(btn => {
