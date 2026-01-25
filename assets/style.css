@@ -24,7 +24,7 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   HEADER (DESKTOP - unchanged)
+   HEADER (DESKTOP)
 ========================= */
 
 .siteHeader {
@@ -106,17 +106,17 @@ img, video, canvas { max-width: 100%; height: auto; }
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-  padding-top: 4px; /* matches title block top */
+  padding-top: 4px;
 }
 
-/* Header-only CTA (this avoids page-level .btn overrides) */
+/* Header CTA (always pill + blue) */
 .headerCTA{
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  background: #1e6bd6;  /* logo-ish blue */
+  background: #1e6bd6;
   border: 1px solid #1e6bd6;
   color: #fff;
 
@@ -131,6 +131,40 @@ img, video, canvas { max-width: 100%; height: auto; }
 .headerCTA:hover{
   background: #155bb5;
   border-color: #155bb5;
+}
+
+/* =========================
+   PAGE BUTTON HELPERS
+   (Use these inside page content)
+========================= */
+
+/* Keep your existing page-level .btn styles if you have them.
+   This is just a safe baseline if a page doesn't define .btn. */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  border: 1px solid #111;
+  cursor: pointer;
+}
+
+/* Default "primary" buttons in page content should be BLACK */
+.btn.primary{ background:#111; color:#fff; }
+.btn.primary:hover{ background:#2a2a2a; border-color:#2a2a2a; }
+
+/* Only Check Availability inside page content should be BLUE */
+.btn.availabilityBtn{
+  background:#1e6bd6;
+  border-color:#1e6bd6;
+  color:#fff;
+}
+.btn.availabilityBtn:hover{
+  background:#155bb5;
+  border-color:#155bb5;
 }
 
 /* social icons */
@@ -152,7 +186,6 @@ img, video, canvas { max-width: 100%; height: auto; }
   background: transparent;
   text-decoration: none;
 
-  /* key: drive SVG color reliably everywhere */
   color: #666;
 }
 
@@ -161,8 +194,6 @@ img, video, canvas { max-width: 100%; height: auto; }
   height: 20px !important;
   display: block !important;
   flex: 0 0 auto !important;
-
-  /* key: SVG uses currentColor so it cannot become a "gray square" */
   fill: currentColor !important;
 }
 
@@ -173,12 +204,10 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   MOBILE ONLY (improves phone layout, does NOT affect desktop)
+   MOBILE ONLY
 ========================= */
 
 @media (max-width: 860px){
-
-  /* tighter header padding on phone */
   .headerInner{
     padding: 12px 14px;
     gap: 12px;
@@ -186,20 +215,17 @@ img, video, canvas { max-width: 100%; height: auto; }
     align-items: stretch;
   }
 
-  /* Put logo + title on one row (feels intentional) */
   .brandBlock{
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
-  /* shrink logo on mobile */
   .brandBlock img{
     width: 72px !important;
     height: auto !important;
   }
 
-  /* title block sizing on mobile */
   .brandName{
     font-size: 1.35rem;
     line-height: 1.1;
@@ -210,7 +236,6 @@ img, video, canvas { max-width: 100%; height: auto; }
     margin-top: 4px;
   }
 
-  /* Make nav a clean, scrollable row instead of wrapping into a mess */
   .mainNav{
     margin-top: 10px;
     flex-wrap: nowrap;
@@ -222,15 +247,13 @@ img, video, canvas { max-width: 100%; height: auto; }
 
   .mainNav a{
     flex: 0 0 auto;
-    padding: 10px 14px;        /* bigger tap target */
+    padding: 10px 14px;
     font-size: 0.95rem;
-    white-space: nowrap;       /* prevents line breaks */
+    white-space: nowrap;
   }
 
-  /* Hide the scrollbar (still scrollable) */
   .mainNav::-webkit-scrollbar{ height: 0; }
 
-  /* CTA + socials should sit under nav on mobile, full width CTA */
   .headerRight{
     align-items: stretch;
     padding-top: 0;
@@ -244,7 +267,6 @@ img, video, canvas { max-width: 100%; height: auto; }
     font-size: 1rem;
   }
 
-  /* Social links below button, left aligned, slightly bigger */
   .socialIcons{
     justify-content: flex-start;
   }
