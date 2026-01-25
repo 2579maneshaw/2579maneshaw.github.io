@@ -24,7 +24,7 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   HEADER (DESKTOP - unchanged)
+   HEADER (DESKTOP)
 ========================= */
 
 .siteHeader {
@@ -106,17 +106,17 @@ img, video, canvas { max-width: 100%; height: auto; }
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-  padding-top: 4px; /* matches title block top */
+  padding-top: 4px;
 }
 
-/* NOTE: headerCTA remains for backwards compatibility (optional usage) */
+/* Header CTA (always pill + blue) */
 .headerCTA{
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  background: #1e6bd6;  /* logo-ish blue */
+  background: #1e6bd6;
   border: 1px solid #1e6bd6;
   color: #fff;
 
@@ -134,34 +134,37 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   GLOBAL CTA BUTTON (fix)
-   Ensures "Check Availability" renders as a button on ALL pages
-   even if page-level .btn styles are absent.
+   PAGE BUTTON HELPERS
+   (Use these inside page content)
 ========================= */
 
+/* Keep your existing page-level .btn styles if you have them.
+   This is just a safe baseline if a page doesn't define .btn. */
 .btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  border: 1px solid #111;
   cursor: pointer;
-  border: 1px solid transparent;
 }
 
-.btn.primary{
-  background: #1e6bd6;      /* same blue as headerCTA */
-  border-color: #1e6bd6;
-  color: #ffffff;
-}
+/* Default "primary" buttons in page content should be BLACK */
+.btn.primary{ background:#111; color:#fff; }
+.btn.primary:hover{ background:#2a2a2a; border-color:#2a2a2a; }
 
-.btn.primary:hover{
-  background: #155bb5;
-  border-color: #155bb5;
+/* Only Check Availability inside page content should be BLUE */
+.btn.availabilityBtn{
+  background:#1e6bd6;
+  border-color:#1e6bd6;
+  color:#fff;
+}
+.btn.availabilityBtn:hover{
+  background:#155bb5;
+  border-color:#155bb5;
 }
 
 /* social icons */
@@ -182,6 +185,8 @@ img, video, canvas { max-width: 100%; height: auto; }
   border-radius: 8px;
   background: transparent;
   text-decoration: none;
+
+  color: #666;
 }
 
 .socialLink svg{
@@ -189,24 +194,20 @@ img, video, canvas { max-width: 100%; height: auto; }
   height: 20px !important;
   display: block !important;
   flex: 0 0 auto !important;
-  fill: #666 !important;
+  fill: currentColor !important;
 }
 
 .socialLink:hover{
   background: #f7f9ff;
   border-color: #cfd8ea;
-}
-.socialLink:hover svg{
-  fill: #1e6bd6 !important;
+  color: #1e6bd6;
 }
 
 /* =========================
-   MOBILE ONLY (improves phone layout, does NOT affect desktop)
+   MOBILE ONLY
 ========================= */
 
 @media (max-width: 860px){
-
-  /* tighter header padding on phone */
   .headerInner{
     padding: 12px 14px;
     gap: 12px;
@@ -214,20 +215,17 @@ img, video, canvas { max-width: 100%; height: auto; }
     align-items: stretch;
   }
 
-  /* Put logo + title on one row (feels intentional) */
   .brandBlock{
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
-  /* shrink logo on mobile */
   .brandBlock img{
     width: 72px !important;
     height: auto !important;
   }
 
-  /* title block sizing on mobile */
   .brandName{
     font-size: 1.35rem;
     line-height: 1.1;
@@ -238,7 +236,6 @@ img, video, canvas { max-width: 100%; height: auto; }
     margin-top: 4px;
   }
 
-  /* Make nav a clean, scrollable row instead of wrapping into a mess */
   .mainNav{
     margin-top: 10px;
     flex-wrap: nowrap;
@@ -250,15 +247,13 @@ img, video, canvas { max-width: 100%; height: auto; }
 
   .mainNav a{
     flex: 0 0 auto;
-    padding: 10px 14px;        /* bigger tap target */
+    padding: 10px 14px;
     font-size: 0.95rem;
-    white-space: nowrap;       /* prevents “Our\nVilla” splitting */
+    white-space: nowrap;
   }
 
-  /* Hide the scrollbar (still scrollable) */
   .mainNav::-webkit-scrollbar{ height: 0; }
 
-  /* CTA + socials should sit under nav on mobile, full width CTA */
   .headerRight{
     align-items: stretch;
     padding-top: 0;
@@ -272,15 +267,6 @@ img, video, canvas { max-width: 100%; height: auto; }
     font-size: 1rem;
   }
 
-  /* Ensure .btn primary (header uses this) also stretches nicely on mobile */
-  .btn.primary{
-    width: 100%;
-    justify-content: center;
-    padding: 12px 16px;
-    font-size: 1rem;
-  }
-
-  /* Social links below button, left aligned, slightly bigger */
   .socialIcons{
     justify-content: flex-start;
   }
