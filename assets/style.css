@@ -24,7 +24,7 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   HEADER (DESKTOP)
+   HEADER (DESKTOP - unchanged)
 ========================= */
 
 .siteHeader {
@@ -106,10 +106,10 @@ img, video, canvas { max-width: 100%; height: auto; }
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-  padding-top: 4px;
+  padding-top: 4px; /* matches title block top */
 }
 
-/* Header CTA (always pill + blue) */
+/* Header-only CTA */
 .headerCTA{
   text-decoration: none;
   display: inline-flex;
@@ -131,40 +131,6 @@ img, video, canvas { max-width: 100%; height: auto; }
 .headerCTA:hover{
   background: #155bb5;
   border-color: #155bb5;
-}
-
-/* =========================
-   PAGE BUTTON HELPERS
-   (Use these inside page content)
-========================= */
-
-/* Keep your existing page-level .btn styles if you have them.
-   This is just a safe baseline if a page doesn't define .btn. */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 1rem;
-  border: 1px solid #111;
-  cursor: pointer;
-}
-
-/* Default "primary" buttons in page content should be BLACK */
-.btn.primary{ background:#111; color:#fff; }
-.btn.primary:hover{ background:#2a2a2a; border-color:#2a2a2a; }
-
-/* Only Check Availability inside page content should be BLUE */
-.btn.availabilityBtn{
-  background:#1e6bd6;
-  border-color:#1e6bd6;
-  color:#fff;
-}
-.btn.availabilityBtn:hover{
-  background:#155bb5;
-  border-color:#155bb5;
 }
 
 /* social icons */
@@ -204,10 +170,12 @@ img, video, canvas { max-width: 100%; height: auto; }
 }
 
 /* =========================
-   MOBILE ONLY
+   MOBILE ONLY (fix: prevent cut-off)
 ========================= */
 
 @media (max-width: 860px){
+
+  /* tighter header padding on phone */
   .headerInner{
     padding: 12px 14px;
     gap: 12px;
@@ -215,17 +183,20 @@ img, video, canvas { max-width: 100%; height: auto; }
     align-items: stretch;
   }
 
+  /* Put logo + title on one row (feels intentional) */
   .brandBlock{
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
+  /* shrink logo on mobile */
   .brandBlock img{
     width: 72px !important;
     height: auto !important;
   }
 
+  /* title block sizing on mobile */
   .brandName{
     font-size: 1.35rem;
     line-height: 1.1;
@@ -236,13 +207,14 @@ img, video, canvas { max-width: 100%; height: auto; }
     margin-top: 4px;
   }
 
+  /* ✅ FIX: allow nav to wrap to a second row so nothing is cut off */
   .mainNav{
     margin-top: 10px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 6px;
+    flex-wrap: wrap;          /* was nowrap */
+    overflow-x: visible;      /* was auto */
+    padding-bottom: 0;        /* was 6px */
     gap: 8px;
+    row-gap: 8px;
   }
 
   .mainNav a{
@@ -252,8 +224,7 @@ img, video, canvas { max-width: 100%; height: auto; }
     white-space: nowrap;
   }
 
-  .mainNav::-webkit-scrollbar{ height: 0; }
-
+  /* CTA + socials should sit under nav on mobile, full width CTA */
   .headerRight{
     align-items: stretch;
     padding-top: 0;
@@ -267,6 +238,7 @@ img, video, canvas { max-width: 100%; height: auto; }
     font-size: 1rem;
   }
 
+  /* Social links below button, left aligned, slightly bigger */
   .socialIcons{
     justify-content: flex-start;
   }
