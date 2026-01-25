@@ -1,73 +1,46 @@
 <header class="siteHeader">
   <div class="headerInner">
 
-    <!-- LEFT: Logo -->
-    <a class="brandBlock" href="{{ '/' | relative_url }}" aria-label="Home">
+    <!-- Brand -->
+    <a class="brandBlock" href="{{ '/index.html' | relative_url }}" style="text-decoration:none; color:inherit;">
       <picture class="brandLogo">
         <source type="image/webp"
-          srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
+          srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w,
+                  {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
         <img
           src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
-          srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
-          sizes="180px"
           alt="Enchanted Villa of Windsor Hills logo"
-          width="180"
-          height="168"
+          width="200"
+          height="187"
           loading="eager"
-          decoding="async"
-        />
+          decoding="async">
       </picture>
-    </a>
 
-    <!-- CENTER: Title + subtitle + nav -->
-    <div class="headerCenter">
       <div class="brandText">
         <div class="brandName">Enchanted Villa of Windsor Hills</div>
-        <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
+        <div class="brandTagline"><em>Your Calm Pause Between the Parks</em></div>
       </div>
+    </a>
 
+    <!-- Navigation + CTA -->
+    <div class="navBlock">
       <nav class="mainNav" aria-label="Primary navigation">
-        <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
+        <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/index.html' | relative_url }}">Home</a>
         <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/villa.html' | relative_url }}">Our Townhome</a>
         <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
         <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
         <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
       </nav>
-    </div>
 
-    <!-- RIGHT: CTA + Social below -->
-    <div class="headerRight">
-       <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
-       
-   
-
-      <div class="socialIcons" aria-label="Social links">
-        <a class="socialLink"
-           href="https://www.facebook.com/profile.php?id=61586521704194"
-           target="_blank"
-           rel="noopener"
-           aria-label="Facebook">
-          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3h-2.2v7A10 10 0 0 0 22 12z"/>
-          </svg>
-        </a>
-
-        <a class="socialLink"
-           href="https://www.instagram.com/enchanted_villa_windsor_hills"
-           target="_blank"
-           rel="noopener"
-           aria-label="Instagram">
-          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/>
-          </svg>
-        </a>
-      </div>
+      <!-- ✅ ALWAYS A BUTTON -->
+      <a
+        class="headerCTA"
+        href="https://www.signaturevillasorlando.com/listing/400961"
+        target="_blank"
+        rel="noopener">
+        Check Availability
+      </a>
     </div>
 
   </div>
 </header>
-
-
-
-
-
