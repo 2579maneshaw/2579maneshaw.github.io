@@ -152,7 +152,13 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
 
   <div class="ctaRow">
     <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
-    <a class="btn ghost" href="{{ '/index.html' | relative_url }}">View Our Townhome Photos</a>
+    <a class="btn ghost" href="{{ '/villa.html' | relative_url }}">View Our Townhome Photos</a>
+    <a class="btn ghost" href="{{ 'https://youtu.be/j87aWOF-fpM' | relative_url }}"
+         target="_blank"
+         rel="noopener">
+        Watch Walkthrough Videos
+      </a>
+
   </div>
 </section>
 
@@ -170,7 +176,7 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
     </ul>
 
     <div class="ctaRow">
-      <a class="btn primary" href="{{ '/index.html' | relative_url }}">Explore the Townhome</a>
+      <a class="btn primary" href="{{ '/villa.html' | relative_url }}">Explore the Townhome</a>
       <a class="btn ghost" href="{{ '/nearby.html' | relative_url }}">See Nearby Convenience</a>
     </div>
 
@@ -223,7 +229,7 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
 </div>
 
 <script>
-  const VILLA_JSON = "{{ '/villa-photos.webp.json' | relative_url }}";
+  const VILLA_JSON = "{{ '/mini-villa-photos.webp.json' | relative_url }}";
   const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
 
   function withJpgFallback(src, imgEl) {
