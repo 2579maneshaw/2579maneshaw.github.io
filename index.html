@@ -71,10 +71,17 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
     font-size: 1rem;
     border:1px solid #111;
   }
-  .btn.primary { background:#1e6bd6; color:#fff; border-color:#1e6bd6; }
-  .btn.primary:hover { background:#155bb5; border-color:#155bb5; }
+
+  /* Keep normal primary buttons BLACK */
+  .btn.primary { background:#111; color:#fff; }
+  .btn.primary:hover { background:#2a2a2a; border-color:#2a2a2a; }
+
   .btn.ghost { background:#fff; color:#111; border-color:#e6e6e6; }
   .btn.ghost:hover { background:#f7f7f7; }
+
+  /* Only Check Availability in page content should be BLUE */
+  .btn.availabilityBtn { background:#1e6bd6; color:#fff; border-color:#1e6bd6; }
+  .btn.availabilityBtn:hover { background:#155bb5; border-color:#155bb5; }
 
   .welcomeNote {
     margin-top: 14px;
@@ -151,14 +158,9 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
   </div>
 
   <div class="ctaRow">
-    <a class="btn primary" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
+    <a class="btn availabilityBtn" href="https://www.signaturevillasorlando.com/listing/400961" target="_blank" rel="noopener">Check Availability</a>
     <a class="btn ghost" href="{{ '/villa.html' | relative_url }}">View Our Townhome Photos</a>
-    <a class="btn ghost" href="{{ 'https://youtu.be/j87aWOF-fpM' | relative_url }}"
-         target="_blank"
-         rel="noopener">
-        Watch Walkthrough Videos
-      </a>
-
+    <a class="btn ghost" href="https://youtu.be/j87aWOF-fpM" target="_blank" rel="noopener">Watch Walkthrough Videos</a>
   </div>
 </section>
 
