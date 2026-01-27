@@ -21,8 +21,10 @@
 
     <!-- CENTER: Title + subtitle + nav -->
     <div class="headerMid">
-      <div class="brandName">Enchanted Villa of Windsor Hills</div>
-      <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
+      <div class="brandText">
+        <div class="brandName">Enchanted Villa of Windsor Hills</div>
+        <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
+      </div>
 
       <nav class="mainNav" aria-label="Primary navigation">
         <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
@@ -33,15 +35,12 @@
       </nav>
     </div>
 
-    <!-- RIGHT: CTA + Social -->
+    <!-- RIGHT: CTA + Social below -->
     <div class="headerRight">
-
-      <!-- ONLY this button is blue -->
-      <a
-        class="btn availability"
-        href="https://www.signaturevillasorlando.com/listing/400961"
-        target="_blank"
-        rel="noopener">
+      <a class="headerCTA"
+         href="https://www.signaturevillasorlando.com/listing/400961"
+         target="_blank"
+         rel="noopener">
         Check Availability
       </a>
 
@@ -66,7 +65,7 @@
           </svg>
         </a>
       </div>
-
     </div>
+
   </div>
 </header>
