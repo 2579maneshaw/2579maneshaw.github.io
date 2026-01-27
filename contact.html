@@ -1,49 +1,131 @@
 ---
 layout: default
-title: Contact
+title: Contact & Booking Inquiries
 nav: contact
-description: We are changing property management systems. Online booking is temporarily unavailable while our new property management system is being set up. 
+description: Booking inquiries for Enchanted Villa of Windsor Hills Townhome.
+---
 
-<section class="grid2" style="margin-top:18px;">
-  <div class="card">
-    <h1 style="margin:0 0 10px;font-size:1.85rem;letter-spacing:-0.02em;">Booking Temporarily Unavailable</h1>
+<style>
+  /* Contact page only */
+  .contactCard{
+    max-width: 760px;
+    margin: 24px auto 0;
+    padding: 24px;
+    border-radius: 18px;
+    background:#f7f7f7;
+    border:1px solid #eee;
+  }
 
-    <p style="color:#333;line-height:1.65;margin:0 0 12px;">
-      Our new property management system is not yet set up.
-    </p>
+  .contactCard h1{
+    margin:0 0 10px;
+    font-size:1.9rem;
+    letter-spacing:-0.03em;
+    color:#111;
+  }
 
-    <p style="color:#333;line-height:1.65;margin:0 0 16px;">
-      For booking inquiries, please contact us via Facebook Messenger:
-    </p>
+  .contactCard p{
+    margin:10px 0;
+    color:#333;
+    line-height:1.6;
+    font-size:1rem;
+  }
 
-    <p style="margin:0;">
-      <a
-        class="headerCTA"
-        href="https://www.facebook.com/profile.php?id=61586521704194"
-        target="_blank"
-        rel="noopener"
-        style="text-decoration:none;"
-      >
-        Message us on Facebook
-      </a>
-    </p>
+  .notice{
+    margin-top:16px;
+    padding:16px;
+    border-radius:14px;
+    background:#fff;
+    border:1px solid #e6e6e6;
+  }
 
-    <p style="margin:14px 0 0;color:#555;line-height:1.6;font-size:0.98rem;">
-      Facebook: Enchanted Villa of Windsor Hills
-    </p>
+  .notice strong{
+    display:block;
+    margin-bottom:6px;
+    font-size:1.05rem;
+    color:#111;
+  }
+
+  .ctaRow{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 22px;
+    border-radius:999px;
+    font-size:1rem;
+    font-weight:700;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+
+  .btn.primary{
+    background:#1e6bd6;
+    border-color:#1e6bd6;
+    color:#fff;
+  }
+
+  .btn.primary:hover{
+    background:#155bb5;
+    border-color:#155bb5;
+  }
+
+  .btn.ghost{
+    background:#fff;
+    color:#111;
+    border-color:#ddd;
+  }
+
+  .btn.ghost:hover{
+    background:#f2f2f2;
+  }
+
+  .smallNote{
+    margin-top:18px;
+    font-size:0.95rem;
+    color:#555;
+    line-height:1.55;
+  }
+</style>
+
+<section class="contactCard" aria-label="Booking inquiries">
+  <h1>Booking & Availability</h1>
+
+  <p>
+    Thank you for your interest in <strong>Enchanted Villa of Windsor Hills</strong>.
+    We are currently transitioning to a new property management system.
+  </p>
+
+  <div class="notice">
+    <strong>Temporary Booking Notice</strong>
+    Our new booking system is not yet set up.
+    For availability, quotes, or booking questions, please contact us directly via Facebook Messenger.
   </div>
 
-  <div class="card">
-    <h2 style="margin:0 0 10px;">What we can help with right now</h2>
-    <ul style="margin:0; padding-left:18px; color:#333; line-height:1.75;">
-      <li>Availability questions</li>
-      <li>Pricing and length of stay</li>
-      <li>House details and amenities</li>
-      <li>Special requests and trip planning tips</li>
-    </ul>
+  <div class="ctaRow">
+    <a
+      class="btn primary"
+      href="https://www.facebook.com/profile.php?id=61586521704194"
+      target="_blank"
+      rel="noopener"
+    >
+      Message Us on Facebook
+    </a>
 
-    <p style="margin:14px 0 0;color:#555;line-height:1.6;font-size:0.98rem;">
-      Thanks for your patience while we get everything fully set up.
-    </p>
+    <a class="btn ghost" href="{{ '/' | relative_url }}">
+      Return to Home
+    </a>
+  </div>
+
+  <div class="smallNote">
+    We typically respond quickly and are happy to answer questions about dates,
+    pricing, amenities, or anything else to help you plan a relaxing stay.
   </div>
 </section>
