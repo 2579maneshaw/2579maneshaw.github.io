@@ -54,6 +54,9 @@
       color: #333;
     }
     .notice strong { display: inline-block; margin-bottom: 6px; }
+    .notice a { color: inherit; font-weight: 700; }
+    .notice ul { margin: 10px 0 0; padding-left: 18px; color: #333; }
+    .notice li { margin: 6px 0; }
   </style>
 </head>
 <body>
@@ -65,6 +68,21 @@
         We’ll confirm availability and pricing by text or email.
       </p>
 
+      <!-- NEW: Pricing & availability check (shortened link text) -->
+      <div class="notice">
+        <strong>Before you submit this request</strong><br>
+        Please <a href="https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY"
+                 target="_blank" rel="noopener noreferrer">check current pricing and availability</a> on Airbnb for your desired dates.
+        <ul>
+          <li>The price shown on Airbnb includes Airbnb and property management booking fees.</li>
+          <li>If approved as Friends/Family, the property management booking fee will be removed. Cleaning fee and all other fees still apply.</li>
+          <li>All requests from this page must be verified and approved by the owner.</li>
+          <li>A stay is not considered booked until payment is received by the property manager.</li>
+          <li>Submitting this form is a request only, not a confirmed reservation.</li>
+        </ul>
+      </div>
+
+      <!-- Pets policy notice -->
       <div class="notice">
         <strong>No pets allowed.</strong>
         Pets are not allowed for any reason, including service animals, to help reduce allergens for other guests.
@@ -74,14 +92,14 @@
         <!-- Subject line requirement -->
         <input type="hidden" name="_subject" value="Enchanted Villa of WH Booking request - Family/Friend" />
 
-        <!-- Keep your existing email instructions (unchanged wording), and add Airbnb link to Owner instructions -->
+        <!-- Keep your existing email instructions (unchanged wording) -->
         <input type="hidden" name="Instructions to Property Manager"
           value="If you receive this email, the owner has tentatively verified and approved a direct booking, for friends and family, without the 20% booking fee. All other fees should still apply to the guest. Please contact the guest below to continue the booking process (less 20% fee)." />
 
         <input type="hidden" name="Instructions to Owner"
-          value="Jayla or Derek, check availability here: https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY . Once you agree with the guest on dates/pricing, forward this email to your property manager to book without the 20% booking fee, but cleaning fee and all other fees still apply." />
+          value="Jayla or Derek, once you agree with the guest on dates/pricing, forward this email to your property manager to book without the 20% booking fee, but cleaning fee and all other fees still apply." />
 
-        <!-- (Optional) If you want a visible divider in the emailed submission, keep this hidden marker. -->
+        <!-- Optional marker line for email readability -->
         <input type="hidden" name="Guest Information" value="--- Guest Information ---" />
 
         <div class="grid two">
@@ -106,7 +124,7 @@
           </div>
         </div>
 
-        <!-- NEW: guest count + pets acknowledgement -->
+        <!-- Guest count + pets acknowledgement -->
         <div class="grid two" style="margin-top:14px;">
           <div>
             <label for="guestCount">Number of guests</label>
@@ -125,7 +143,7 @@
           </div>
         </div>
 
-        <!-- Relationship dropdown (kept) -->
+        <!-- Relationship dropdown -->
         <div class="sectionTitle">How do you know the owner?</div>
         <div class="grid">
           <div>
@@ -140,7 +158,7 @@
           </div>
         </div>
 
-        <!-- Required long text field when "owner directed me" is selected (kept) -->
+        <!-- Required long text field when "owner directed me" is selected -->
         <div id="directedDetailBlock" style="display:none; margin-top:14px;">
           <label for="directedDetails">Please provide more detail about your relationship to the owner</label>
           <textarea id="directedDetails"
