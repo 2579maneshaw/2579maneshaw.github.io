@@ -45,6 +45,15 @@
     .status.ok { color: #0a7a2f; }
     .status.err { color: #b00020; }
     .fineprint { margin-top: 14px; font-size: .9rem; color: #666; }
+    .notice {
+      border: 1px solid #e3e7ee;
+      background: #fbfbfd;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 12px 0 16px;
+      color: #333;
+    }
+    .notice strong { display: inline-block; margin-bottom: 6px; }
   </style>
 </head>
 <body>
@@ -53,27 +62,30 @@
       <h1>Friends & Family Booking Request</h1>
       <p>
         Use this private form to request a friends and family rate. The daily rate will be set by the pricing model used to stay competitive, but removes the Property Management's booking fee.
-    We’ll confirm availability and pricing by text or email.
+        We’ll confirm availability and pricing by text or email.
       </p>
 
-      <!--
-        IMPORTANT:
-        1) Create a Formspree form and paste your endpoint below.
-        2) Configure recipients in Formspree to email infoevwh@gmail.com + your second email.
-      -->
+      <div class="notice">
+        <strong>No pets allowed.</strong>
+        Pets are not allowed for any reason, including service animals, to help reduce allergens for other guests.
+      </div>
+
       <form id="ffForm" action="https://formspree.io/f/xgolrkoa" method="POST" novalidate>
         <!-- Subject line requirement -->
         <input type="hidden" name="_subject" value="Enchanted Villa of WH Booking request - Family/Friend" />
 
-        <!-- This line will appear in the emailed submission body -->
+        <!-- Keep your existing email instructions (unchanged wording), and add Airbnb link to Owner instructions -->
         <input type="hidden" name="Instructions to Property Manager"
-          value='If you receive this email, the owner has tentatively verified and approved a direct booking, for friends and family, without the 20% booking fee. All other fees should still apply to the guest. Please contact the guest below to continue the booking process (less 20% fee).' />
+          value="If you receive this email, the owner has tentatively verified and approved a direct booking, for friends and family, without the 20% booking fee. All other fees should still apply to the guest. Please contact the guest below to continue the booking process (less 20% fee)." />
+
         <input type="hidden" name="Instructions to Owner"
-          value='Jayla or Derek, once you agree with the guest on dates/pricing, forward this email to your property manager to book without the 20% booking fee, but cleaning fee and all other fees still apply.' />
+          value="Jayla or Derek, check availability here: https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY . Once you agree with the guest on dates/pricing, forward this email to your property manager to book without the 20% booking fee, but cleaning fee and all other fees still apply." />
+
+        <!-- (Optional) If you want a visible divider in the emailed submission, keep this hidden marker. -->
+        <input type="hidden" name="Guest Information" value="--- Guest Information ---" />
 
         <div class="grid two">
           <div>
-             <input type="hidden" name="Guest Information"
             <label for="firstName">First name</label>
             <input id="firstName" name="First name" type="text" required autocomplete="given-name" />
           </div>
@@ -86,8 +98,7 @@
         <div class="grid two">
           <div>
             <label for="cell">Cell number (for texting)</label>
-            <input id="cell" name="Cell" type="tel" required autocomplete="tel"
-                   placeholder="(###) ###-####" />
+            <input id="cell" name="Cell" type="tel" required autocomplete="tel" placeholder="(###) ###-####" />
           </div>
           <div>
             <label for="email">Email</label>
@@ -95,7 +106,26 @@
           </div>
         </div>
 
-        <!-- NEW: Relationship dropdown -->
+        <!-- NEW: guest count + pets acknowledgement -->
+        <div class="grid two" style="margin-top:14px;">
+          <div>
+            <label for="guestCount">Number of guests</label>
+            <input id="guestCount" name="Number of guests" type="number" min="1" step="1" required />
+            <div class="hint">Enter the total number of guests that need to be accommodated.</div>
+          </div>
+          <div>
+            <label for="petAck">Pets policy acknowledgment</label>
+            <select id="petAck" name="Pets acknowledgment" required>
+              <option value="" selected disabled>Select...</option>
+              <option value="I understand pets are not allowed for any reason, including service animals.">
+                I understand pets are not allowed for any reason, including service animals.
+              </option>
+            </select>
+            <div class="hint">Required to submit this request.</div>
+          </div>
+        </div>
+
+        <!-- Relationship dropdown (kept) -->
         <div class="sectionTitle">How do you know the owner?</div>
         <div class="grid">
           <div>
@@ -110,7 +140,7 @@
           </div>
         </div>
 
-        <!-- NEW: Required long text field when "owner directed me" is selected -->
+        <!-- Required long text field when "owner directed me" is selected (kept) -->
         <div id="directedDetailBlock" style="display:none; margin-top:14px;">
           <label for="directedDetails">Please provide more detail about your relationship to the owner</label>
           <textarea id="directedDetails"
@@ -205,7 +235,6 @@
       const rangeEnd   = document.getElementById('rangeEnd');
       const nights     = document.getElementById('nights');
 
-      // NEW: relationship dropdown + conditional details
       const relationship = document.getElementById('relationship');
       const directedDetailBlock = document.getElementById('directedDetailBlock');
       const directedDetails = document.getElementById('directedDetails');
@@ -222,7 +251,6 @@
         exactBlock.style.display = exact ? '' : 'none';
         flexBlock.style.display  = flex ? '' : 'none';
 
-        // Either/or requirement
         setRequired(startDate, exact);
         setRequired(endDate, exact);
 
@@ -231,7 +259,6 @@
         setRequired(nights, flex);
       }
 
-      // NEW: show required long text field when needed
       function toggleRelationshipDetails() {
         const isDirected = relationship.value === 'The owner directed me to this page';
         directedDetailBlock.style.display = isDirected ? '' : 'none';
@@ -241,26 +268,21 @@
 
       modeExact.addEventListener('change', toggleMode);
       modeFlex.addEventListener('change', toggleMode);
-
       relationship.addEventListener('change', toggleRelationshipDetails);
 
-      // Ensure initial state is correct
       toggleMode();
       toggleRelationshipDetails();
 
-      // Handle submit with fetch so guests get a clean confirmation message
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         status.textContent = '';
         status.className = 'status';
 
-        // Trigger browser validation messages
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
         }
 
-        // Extra sanity check: end date after start date when exact mode
         if (modeExact.checked) {
           const s = startDate.value;
           const en = endDate.value;
