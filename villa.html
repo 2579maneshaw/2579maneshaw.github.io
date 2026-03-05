@@ -5,51 +5,74 @@ nav: villa
 ---
 
 <style>
-  .villaWrap{
-    max-width:1100px;
-    margin:0 auto;
-    padding:18px 16px 60px;
-  }
-
-  .villaIntro{
+  /* Page-only helpers (keeps your global style intact) */
+  .heroCopy {
     margin-top: 6px;
-    margin-bottom: 14px;
-    padding: 16px;
+    margin-bottom: 18px;
+    padding: 18px;
     border-radius: 16px;
-    background:#f7f7f7;
-    border:1px solid #eee;
-    color:#222;
-    line-height:1.55;
+    background: #f7f7f7;
+    border: 1px solid #eee;
   }
 
-  .villaGrid{
+  .headline {
+    margin:0;
+    font-size: 2.0rem;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color:#111;
+  }
+
+  .subline {
+    margin: 10px 0 0;
+    font-size: 1.02rem;
+    color:#444;
+    line-height:1.55;
+    max-width: 900px;
+  }
+
+  .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .chip {
+    font-size:0.92rem;
+    color:#2b2b2b;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .chip::before { content: "•"; margin-right: 8px; color: #111; }
+
+  .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+
+  /* Photo grid */
+  .photoGrid{
     display:grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap:10px;
+    margin-top: 10px;
   }
 
-  .villaThumb{
+  .photoGrid img{
     width:100%;
     height: 170px;
     object-fit: cover;
     border-radius: 14px;
     border: 1px solid #eee;
     background:#f3f3f3;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   @media (max-width: 980px){
-    .villaGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .villaThumb{ height: 160px; }
+    .photoGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .photoGrid img{ height: 160px; }
   }
 
   @media (max-width: 720px){
-    .villaGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .villaThumb{ height: 150px; }
+    .photoGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .photoGrid img{ height: 150px; }
   }
 
-  /* Lightbox */
-  .lightbox{
+  /* Lightbox (matches your existing style) */
+  .lightbox {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.88);
@@ -59,82 +82,106 @@ nav: villa
     z-index: 9999;
     padding: 18px;
   }
-  .lightbox.open{ display:flex; }
+  .lightbox.open { display:flex; }
 
-  .lightboxInner{
+  .lightboxInner {
     position: relative;
     width: min(1100px, 100%);
     max-height: 90vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .lightboxImg{
+  .lightboxImg {
     max-width: 100%;
     max-height: 90vh;
     border-radius: 14px;
     background: #111;
   }
 
-  .lbBtn{
-    position:absolute;
+  .lbBtn {
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    border:0;
+    border: 0;
     background: rgba(255,255,255,0.92);
     padding: 10px 12px;
     border-radius: 12px;
     cursor: pointer;
     font-size: 1rem;
-    user-select:none;
   }
-  .lbPrev{ left: 8px; }
-  .lbNext{ right: 8px; }
+  .lbPrev { left: 8px; }
+  .lbNext { right: 8px; }
 
-  .lbClose{
-    position:absolute;
+  .lbClose {
+    position: absolute;
     top: -10px;
     right: -10px;
-    border:0;
+    border: 0;
     background: rgba(255,255,255,0.92);
     padding: 10px 12px;
     border-radius: 12px;
-    cursor:pointer;
+    cursor: pointer;
     font-size: 1rem;
   }
 </style>
 
-<div class="villaWrap">
+<section class="heroCopy" aria-label="Our Townhome intro">
+  <h1 class="headline">Our Townhome</h1>
+  <p class="subline">
+    A calm, spa inspired retreat designed for families who want the best of both worlds: the excitement of Disney, and a peaceful place to recharge.
+  </p>
 
-  <section class="villaIntro" aria-label="Townhome photos intro">
-    <strong>Our Townhome Photo Gallery</strong><br/>
-    Add or remove photos anytime by uploading images into <code>/photos/villagallery/</code>.
-    This page auto-updates after GitHub Pages rebuilds.
-  </section>
+  <div class="chips" aria-label="Highlights">
+    <span class="chip">Midday break friendly</span>
+    <span class="chip">Steps to Windsor Hills amenities</span>
+    <span class="chip">Private screened splash pool</span>
+    <span class="chip">Spa inspired calm</span>
+  </div>
 
-  <section class="villaGrid" id="villaGrid" aria-label="Townhome gallery grid">
-    {% assign villa_files = site.static_files
-      | where_exp: "f", "f.path contains '/photos/villagallery/'"
-      | sort: "path"
-    %}
+  <div class="ctaRow">
+    <a class="btn ghost" href="{{ '/nearby.html' | relative_url }}">Nearby Convenience</a>
+    <a class="btn ghost" href="https://youtu.be/j87aWOF-fpM" target="_blank" rel="noopener">Walkthrough video</a>
+  </div>
+</section>
 
-    {% for f in villa_files %}
-      {% assign ext = f.extname | downcase %}
-      {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
-        <img
-          class="villaThumb"
-          src="{{ f.path | relative_url }}"
-          alt="Townhome photo {{ forloop.index }}"
-          loading="lazy"
-          decoding="async"
-          data-full="{{ f.path | relative_url }}"
-        />
-      {% endif %}
-    {% endfor %}
-  </section>
+<section class="grid2">
+  <div class="card">
+    <h2>Townhome Photos</h2>
+    <p>Click any photo for a larger view.</p>
 
-</div>
+    <div class="photoGrid" id="villaPhotoGrid" aria-label="Townhome photo grid">
+      {% assign villa_files = site.static_files
+        | where_exp: "f", "f.path contains '/photos/villagallery/'"
+        | sort: "path"
+      %}
+
+      {% for f in villa_files %}
+        {% assign ext = f.extname | downcase %}
+        {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
+          <img
+            src="{{ f.path | relative_url }}"
+            alt="Townhome photo {{ forloop.index }}"
+            loading="lazy"
+            decoding="async"
+            data-full="{{ f.path | relative_url }}"
+          />
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Good to Know</h2>
+    <ul class="bullets">
+      <li>Gated Windsor Hills community near Disney</li>
+      <li>Great for midday breaks and calm evenings</li>
+      <li>Walkable to clubhouse and waterpark</li>
+      <li>Stock up fast with nearby Target, Publix, and Walmart</li>
+    </ul>
+  </div>
+</section>
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" aria-hidden="true">
@@ -148,8 +195,10 @@ nav: villa
 
 <script>
 (function(){
-  const thumbs = Array.from(document.querySelectorAll(".villaThumb"));
+  const thumbs = Array.from(document.querySelectorAll("#villaPhotoGrid img"));
   if(!thumbs.length) return;
+
+  const sources = thumbs.map(t => t.getAttribute("data-full") || t.src);
 
   const lightbox = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
@@ -157,27 +206,34 @@ nav: villa
   const lbNext = document.getElementById("lbNext");
   const lbClose = document.getElementById("lbClose");
 
-  const sources = thumbs.map(t => t.getAttribute("data-full") || t.src);
   let idx = 0;
 
-  function openAt(i){
+  function lockScroll(lock){
+    const v = lock ? "hidden" : "";
+    document.documentElement.style.overflow = v;
+    document.body.style.overflow = v;
+  }
+
+  function show(i){
     idx = (i + sources.length) % sources.length;
     lbImg.src = sources[idx];
+  }
+
+  function openAt(i){
+    show(i);
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    lockScroll(true);
   }
 
   function close(){
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
+    lockScroll(false);
   }
 
-  function next(){ openAt(idx + 1); }
-  function prev(){ openAt(idx - 1); }
+  function next(){ show(idx + 1); }
+  function prev(){ show(idx - 1); }
 
   thumbs.forEach((t, i) => t.addEventListener("click", () => openAt(i)));
   lbNext.addEventListener("click", next);
