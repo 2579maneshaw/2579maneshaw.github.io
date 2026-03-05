@@ -80,7 +80,7 @@ nav: reviews
 
     {% assign review_files = site.static_files
       | where_exp: "f", "f.path contains '/photos/reviewGallery/'"
-      | where_exp: "f", "f.extname == '.webp'"
+      | where_exp: "f", "f.extname == '.webp' or f.extname == '.jpg' or f.extname == '.jpeg' or f.extname == '.png' or f.extname == '.gif'"
       | sort: "path"
     %}
 
@@ -203,15 +203,15 @@ nav: reviews
 })();
 
 function openReviewModal(src){
-  const modal = document.getElementById("reviewModal");
-  const img = document.getElementById("reviewModalImg");
+  const modal=document.getElementById("reviewModal");
+  const img=document.getElementById("reviewModalImg");
 
-  img.src = src;
+  img.src=src;
   modal.classList.add("open");
 
   // better iOS scroll lock
-  document.documentElement.style.overflow = "hidden";
-  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow="hidden";
+  document.body.style.overflow="hidden";
 
   if(window.__reviews){
     window.__reviews.setModalOpen(true);
@@ -220,11 +220,12 @@ function openReviewModal(src){
 }
 
 function closeReviewModal(){
-  const modal = document.getElementById("reviewModal");
+  const modal=document.getElementById("reviewModal");
+
   modal.classList.remove("open");
 
-  document.documentElement.style.overflow = "";
-  document.body.style.overflow = "";
+  document.documentElement.style.overflow="";
+  document.body.style.overflow="";
 
   if(window.__reviews){
     window.__reviews.setModalOpen(false);
