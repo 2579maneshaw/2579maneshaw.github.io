@@ -3,9 +3,10 @@
 <head>
   {% include head.html %}
 
-  <!-- Handwritten font for "Read our Reviews" -->
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <!-- Handwritten font -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   {% include header.html %}
 
@@ -15,29 +16,33 @@
 
   {% include footer.html %}
 
-  <!-- Styles for handwritten "Read our Reviews" link in the header -->
   <style>
-    .reviewsHandwritten{
-      display:block;
-      text-align:center;
-      margin-top:6px;
 
-      font-family:'Caveat', cursive;
-      font-size:24px;
-      font-weight:600;
+  .reviewsHandwritten{
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-top:6px;
 
-      color:#222;
-      text-decoration:none;
+    font-family:'Caveat', cursive;
+    font-size:26px;
+    font-weight:700;
 
-      transform:rotate(-1deg);
-      opacity:.9;
-      transition:all .2s ease;
-    }
+    color:#d40000;
+    text-decoration:none;
 
-    .reviewsHandwritten:hover{
-      transform:rotate(0deg);
-      opacity:1;
-    }
+    transform:rotate(-1deg);
+    opacity:.95;
+
+    transition:all .2s ease;
+  }
+
+  .reviewsHandwritten:hover{
+    color:#a80000;
+    transform:rotate(0deg);
+  }
+
   </style>
+
 </body>
 </html>
