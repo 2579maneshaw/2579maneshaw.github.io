@@ -5,7 +5,6 @@ nav: reviews
 ---
 
 <style>
-
 .reviewsWrap{
   max-width:1100px;
   margin:0 auto;
@@ -32,14 +31,12 @@ nav: reviews
   opacity:0;
   transition:opacity .6s ease;
   cursor:zoom-in;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.reviewSlide.active{
-  opacity:1;
-}
+.reviewSlide.active{ opacity:1; }
 
 /* modal */
-
 .reviewModal{
   display:none;
   position:fixed;
@@ -51,9 +48,7 @@ nav: reviews
   padding:20px;
 }
 
-.reviewModal.open{
-  display:flex;
-}
+.reviewModal.open{ display:flex; }
 
 #reviewModalImg{
   max-width:95vw;
@@ -76,107 +71,164 @@ nav: reviews
 }
 
 @media (max-width:860px){
-  .reviewCarousel{
-    height:320px;
-  }
+  .reviewCarousel{ height:320px; }
 }
-
 </style>
 
-
 <div class="reviewsWrap">
+  <div class="reviewCarousel">
 
-<div class="reviewCarousel">
+    {% assign review_files = site.static_files
+      | where_exp: "f", "f.path contains '/photos/reviewGallery/'"
+      | where_exp: "f", "f.extname == '.webp'"
+      | sort: "path"
+    %}
 
-{% assign review_files = site.static_files
-| where_exp: "f", "f.path contains '/photos/reviewGallery/'"
-| where_exp: "f", "f.extname == '.webp'"
-| sort: "path"
-%}
+    {% for f in review_files %}
+      <img
+        class="reviewSlide {% if forloop.first %}active{% endif %}"
+        src="{{ f.path | relative_url }}"
+        alt="Guest review {{ forloop.index }}"
+        loading="lazy"
+        decoding="async"
+      />
+    {% endfor %}
 
-{% for f in review_files %}
-
-<img
-class="reviewSlide {% if forloop.first %}active{% endif %}"
-src="{{ f.path | relative_url }}"
-alt="Guest review {{ forloop.index }}"
-loading="lazy"
-decoding="async"
-/>
-
-{% endfor %}
-
+  </div>
 </div>
-
-</div>
-
 
 <!-- modal -->
-<div id="reviewModal" class="reviewModal">
-<button class="reviewModalClose" onclick="closeReviewModal()">×</button>
-<img id="reviewModalImg">
+<div id="reviewModal" class="reviewModal" role="dialog" aria-modal="true" aria-label="Review image viewer">
+  <button class="reviewModalClose" type="button" aria-label="Close" onclick="closeReviewModal()">×</button>
+  <img id="reviewModalImg" alt="Enlarged guest review">
 </div>
 
-
 <script>
-
 (function(){
+  const slides = Array.from(document.querySelectorAll(".reviewSlide"));
+  if(!slides.length) return;
 
-const slides = document.querySelectorAll(".reviewSlide");
-if(!slides.length) return;
+  let index = 0;
+  let timer = null;
+  let modalOpen = false;
 
-let index = 0;
+  function show(i){
+    slides.forEach(s => s.classList.remove("active"));
+    slides[i].classList.add("active");
 
-function show(i){
+    // Preload next image for smoother fades
+    const nextIndex = (i + 1) % slides.length;
+    const preload = new Image();
+    preload.src = slides[nextIndex].src;
+  }
 
-slides.forEach(s => s.classList.remove("active"));
-slides[i].classList.add("active");
+  function next(){
+    index = (index + 1) % slides.length;
+    show(index);
+  }
 
-}
+  function start(){
+    stop();
+    timer = setInterval(() => {
+      if(!modalOpen) next();
+    }, 3500);
+  }
 
-function next(){
+  function stop(){
+    if(timer) clearInterval(timer);
+    timer = null;
+  }
 
-index++;
+  // Tap/click to open modal
+  slides.forEach((img, i) => {
+    img.addEventListener("click", () => {
+      index = i; // keep modal in sync
+      openReviewModal(img.src);
+    });
+  });
 
-if(index >= slides.length){
-index = 0;
-}
+  // Swipe support inside modal
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-show(index);
+  function onTouchStart(e){
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+  }
 
-}
+  function onTouchEnd(e){
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
 
-setInterval(next,3500);
+    // horizontal swipe only (ignore vertical scroll-ish gestures)
+    if(Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
 
-/* click to enlarge */
+    if(dx < 0){
+      // swipe left -> next
+      index = (index + 1) % slides.length;
+    }else{
+      // swipe right -> prev
+      index = (index - 1 + slides.length) % slides.length;
+    }
+    openReviewModal(slides[index].src);
+  }
 
-slides.forEach(img=>{
-img.addEventListener("click",()=>{
-openReviewModal(img.src);
-});
-});
+  // Close on Esc
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeReviewModal();
+  });
 
+  // Close when tapping outside image
+  const modal = document.getElementById("reviewModal");
+  modal.addEventListener("click", (e) => {
+    if(e.target === modal) closeReviewModal();
+  });
+
+  // Add touch handlers to modal image area
+  modal.addEventListener("touchstart", onTouchStart, {passive:true});
+  modal.addEventListener("touchend", onTouchEnd, {passive:true});
+
+  // Expose flags for global modal funcs below
+  window.__reviews = {
+    setModalOpen: (v) => { modalOpen = v; },
+    stop,
+    start
+  };
+
+  // kick off
+  show(0);
+  start();
 })();
 
 function openReviewModal(src){
+  const modal = document.getElementById("reviewModal");
+  const img = document.getElementById("reviewModalImg");
 
-const modal=document.getElementById("reviewModal");
-const img=document.getElementById("reviewModalImg");
+  img.src = src;
+  modal.classList.add("open");
 
-img.src=src;
+  // better iOS scroll lock
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
 
-modal.classList.add("open");
-document.body.style.overflow="hidden";
-
+  if(window.__reviews){
+    window.__reviews.setModalOpen(true);
+    window.__reviews.stop();
+  }
 }
 
 function closeReviewModal(){
+  const modal = document.getElementById("reviewModal");
+  modal.classList.remove("open");
 
-const modal=document.getElementById("reviewModal");
+  document.documentElement.style.overflow = "";
+  document.body.style.overflow = "";
 
-modal.classList.remove("open");
-document.body.style.overflow="";
-
+  if(window.__reviews){
+    window.__reviews.setModalOpen(false);
+    window.__reviews.start();
+  }
 }
-
 </script>
