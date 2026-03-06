@@ -191,7 +191,26 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
   <div class="card">
     <h2>Townhome Gallery</h2>
     <p>Full photo experience is on the Our Townhome page. Click for larger view.</p>
-    <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery"></div>
+
+    <div id="villaMiniGallery" class="miniGallery" aria-label="Villa mini gallery">
+      {% assign villa_files = site.static_files
+        | where_exp: "f", "f.path contains '/photos/villagallery/'"
+        | sort: "path"
+      %}
+      {% assign villa_shown = 0 %}
+      {% for f in villa_files %}
+        {% assign ext = f.extname | downcase %}
+        {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
+          {% assign villa_shown = villa_shown | plus: 1 %}
+          <img
+            src="{{ f.path | relative_url }}"
+            alt="Townhome preview {{ villa_shown }}"
+            loading="lazy"
+            decoding="async"
+          />
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -216,7 +235,39 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
   <div class="card">
     <h2>Resort Gallery</h2>
     <p>More resort details are on the Windsor Hills page. Click for larger view.</p>
-    <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery"></div>
+
+    <div id="resortMiniGallery" class="miniGallery" aria-label="Resort mini gallery">
+      {% assign resort_files = site.static_files
+        | where_exp: "f", "f.path contains '/photos/'"
+        | sort: "path"
+      %}
+      {% assign resort_shown = 0 %}
+      {% for f in resort_files %}
+        {% assign ext = f.extname | downcase %}
+
+        {%- comment -%}
+        Filter rules so /photos/ doesn't accidentally pull site assets:
+        - Skip logo files
+        - Skip known gallery folders that aren't "resort"
+        - Skip SVG
+        Adjust these excludes if you have other folders under /photos/
+        {%- endcomment -%}
+
+        {% assign p = f.path | downcase %}
+
+        {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
+          {% unless p contains "/photos/evwhlogo" or p contains "/photos/reviewgallery/" or p contains "/photos/villagallery/" %}
+            {% assign resort_shown = resort_shown | plus: 1 %}
+            <img
+              src="{{ f.path | relative_url }}"
+              alt="Resort preview {{ resort_shown }}"
+              loading="lazy"
+              decoding="async"
+            />
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -231,29 +282,6 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
 </div>
 
 <script>
-  const VILLA_JSON = "{{ '/mini-villa-photos.webp.json' | relative_url }}";
-  const RESORT_JSON = "{{ '/resort-photos.webp.json' | relative_url }}";
-
-  function withJpgFallback(src, imgEl) {
-    imgEl.onerror = () => {
-      if (src && src.toLowerCase().endsWith(".webp")) {
-        imgEl.onerror = null;
-        imgEl.src = src.replace(/\.webp$/i, ".jpg");
-      }
-    };
-  }
-
-  async function loadList(preferred, fallback) {
-    try {
-      const res = await fetch(preferred, { cache: "no-store" });
-      if (!res.ok) throw new Error("preferred not ok");
-      return await res.json();
-    } catch (e) {
-      const res2 = await fetch(fallback, { cache: "no-store" });
-      return await res2.json();
-    }
-  }
-
   let lbList = [];
   let lbIndex = 0;
 
@@ -281,7 +309,6 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
     if (!lbList.length) return;
     lbIndex = (i + lbList.length) % lbList.length;
     lbImg.src = lbList[lbIndex];
-    withJpgFallback(lbList[lbIndex], lbImg);
   }
 
   function lbNextPhoto() { showLb(lbIndex + 1); }
@@ -300,32 +327,18 @@ description: Enchanted Villa of Windsor Hills Townhome — The Pause Between the
     if (e.key === "ArrowLeft") lbPrevPhoto();
   });
 
-  function addMiniGallery(containerId, photos) {
+  function hookMiniGallery(containerId) {
     const el = document.getElementById(containerId);
     if (!el) return;
-    el.innerHTML = "";
-    photos.forEach((src, idx) => {
-      const img = document.createElement("img");
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.src = src;
-      img.alt = "Enchanted Villa preview photo";
-      withJpgFallback(src, img);
-      img.addEventListener("click", () => openLightbox(photos, idx));
-      el.appendChild(img);
+
+    const imgs = Array.from(el.querySelectorAll("img"));
+    const list = imgs.map(img => img.src);
+
+    imgs.forEach((img, idx) => {
+      img.addEventListener("click", () => openLightbox(list, idx));
     });
   }
 
-  async function initHome() {
-    try {
-      const villaPhotos = await loadList(VILLA_JSON, "{{ '/villa-photos.json' | relative_url }}");
-      const resortPhotos = await loadList(RESORT_JSON, "{{ '/resort-photos.json' | relative_url }}");
-      addMiniGallery("villaMiniGallery", villaPhotos);
-      addMiniGallery("resortMiniGallery", resortPhotos);
-    } catch (e) {
-      console.warn("Could not load gallery JSON files.", e);
-    }
-  }
-
-  initHome();
+  hookMiniGallery("villaMiniGallery");
+  hookMiniGallery("resortMiniGallery");
 </script>
