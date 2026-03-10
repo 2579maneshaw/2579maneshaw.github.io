@@ -15,37 +15,62 @@ nav: villa
     border: 1px solid #eee;
   }
   .headline {
-    margin:0;
-    font-size: 2.0rem;
+    margin: 0;
+    font-size: 2rem;
     letter-spacing: -0.03em;
     line-height: 1.1;
-    color:#111;
+    color: #111;
   }
   .subline {
     margin: 10px 0 0;
     font-size: 1.02rem;
-    color:#444;
-    line-height:1.55;
+    color: #444;
+    line-height: 1.55;
     max-width: 900px;
   }
-  .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .chips {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
   .chip {
-    font-size:0.92rem;
-    color:#2b2b2b;
+    font-size: 0.92rem;
+    color: #2b2b2b;
     background: transparent;
     border: 0;
     padding: 0;
   }
-  .chip::before { content: "•"; margin-right: 8px; color: #111; }
-  .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+  .chip::before {
+    content: "•";
+    margin-right: 8px;
+    color: #111;
+  }
 
-  .bedHover{
+  .chipSubline {
+    width: 100%;
+    margin: 2px 0 0 22px;
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  .ctaRow {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .bedHover,
+  .inlinePhotoHover {
     text-decoration: underline;
     cursor: pointer;
     position: relative;
   }
 
-  .bedPreview{
+  .bedPreview {
     position: absolute;
     display: none;
     z-index: 99999;
@@ -57,144 +82,173 @@ nav: villa
     pointer-events: none;
   }
 
-  .bedPreview img{
+  .bedPreview img {
     width: 240px;
     height: 150px;
     object-fit: cover;
-    display:block;
+    display: block;
+  }
+
+  .familyAmenities {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   /* If your global CSS already defines .grid2 and .card, this will blend.
      If not, these fallbacks make it look like villabackup. */
-  .grid2{
-    display:grid;
+  .grid2 {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:18px;
-    align-items:start;
+    gap: 18px;
+    align-items: start;
   }
-  @media (max-width: 900px){
-    .grid2{ grid-template-columns: 1fr; }
+  @media (max-width: 900px) {
+    .grid2 { grid-template-columns: 1fr; }
   }
-  .card{
-    background:#fff;
-    border:1px solid #eee;
-    border-radius:16px;
-    padding:18px;
+
+  .card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 18px;
     box-shadow: 0 10px 26px rgba(0,0,0,0.05);
   }
-  .card h2{ margin:0 0 10px; font-size:1.6rem; color:#111; }
-  .card p{ margin:0 0 12px; color:#444; line-height:1.6; }
-  .bullets{ margin:10px 0 0; padding-left:18px; color:#333; line-height:1.75; }
-  .bullets li{ margin:6px 0; }
-
-  /* Buttons (fallbacks if your global .btn exists it will still look fine) */
-  .btn{
-    display:inline-block;
-    text-decoration:none;
-    padding:12px 18px;
-    border-radius:12px;
-    font-size:1rem;
-    border:1px solid #111;
+  .card h2 {
+    margin: 0 0 10px;
+    font-size: 1.6rem;
+    color: #111;
   }
-  .btn.ghost{ background:#fff; color:#111; border-color:#e6e6e6; }
-  .btn.ghost:hover{ background:#f7f7f7; }
+  .card p {
+    margin: 0 0 12px;
+    color: #444;
+    line-height: 1.6;
+  }
+  .bullets {
+    margin: 10px 0 0;
+    padding-left: 18px;
+    color: #333;
+    line-height: 1.75;
+  }
+  .bullets li {
+    margin: 6px 0;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border: 1px solid #111;
+  }
+  .btn.ghost {
+    background: #fff;
+    color: #111;
+    border-color: #e6e6e6;
+  }
+  .btn.ghost:hover {
+    background: #f7f7f7;
+  }
 
   /* Video */
-  .videoFrame{
-    width:100%;
+  .videoFrame {
+    width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius:14px;
-    border:1px solid #eee;
-    overflow:hidden;
-    background:#000;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    background: #000;
   }
-  .videoFrame iframe{
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
+  .videoFrame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
   }
-  .videoCaption{
-    margin-top:10px;
-    color:#555;
-    font-size:0.95rem;
+  .videoCaption {
+    margin-top: 10px;
+    color: #555;
+    font-size: 0.95rem;
   }
 
-  /* Townhome Photos carousel (matches villabackup horizontal strip) */
-  .carousel{
-    position:relative;
+  /* Townhome Photos carousel */
+  .carousel {
+    position: relative;
   }
-  .carouselTrack{
-    display:flex;
-    gap:12px;
-    overflow-x:auto;
+  .carouselTrack {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
     padding: 4px 2px 10px;
-    scroll-snap-type:x mandatory;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
-  .carouselItem{
+  .carouselItem {
     flex: 0 0 auto;
     width: 260px;
     height: 150px;
-    border-radius:14px;
-    border:1px solid #eee;
-    background:#f3f3f3;
-    object-fit:cover;
-    cursor:pointer;
-    scroll-snap-align:start;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    background: #f3f3f3;
+    object-fit: cover;
+    cursor: pointer;
+    scroll-snap-align: start;
   }
-  @media (max-width: 900px){
-    .carouselItem{ width: 240px; height: 145px; }
+  @media (max-width: 900px) {
+    .carouselItem { width: 240px; height: 145px; }
   }
-  @media (max-width: 520px){
-    .carouselItem{ width: 215px; height: 135px; }
+  @media (max-width: 520px) {
+    .carouselItem { width: 215px; height: 135px; }
   }
 
-  .carBtn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:42px;
-    height:42px;
-    border-radius:999px;
-    border:1px solid #e6e6e6;
-    background:rgba(255,255,255,0.95);
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 10px 24px rgba(0,0,0,0.10);
-    user-select:none;
+  .carBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 1px solid #e6e6e6;
+    background: rgba(255,255,255,0.95);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+    user-select: none;
   }
-  .carPrev{ left:-6px; }
-  .carNext{ right:-6px; }
-  .carBtn:active{ transform:translateY(-50%) scale(0.98); }
+  .carPrev { left: -6px; }
+  .carNext { right: -6px; }
+  .carBtn:active { transform: translateY(-50%) scale(0.98); }
 
-  .carFooter{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:6px;
-    color:#666;
-    font-size:0.92rem;
+  .carFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 6px;
+    color: #666;
+    font-size: 0.92rem;
   }
-  .dots{
-    display:flex;
-    gap:6px;
-    align-items:center;
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
   }
-  .dot{
-    width:18px;
-    height:6px;
-    border-radius:999px;
-    background:#d9d9d9;
+  .dot {
+    width: 18px;
+    height: 6px;
+    border-radius: 999px;
+    background: #d9d9d9;
   }
-  .dot.active{ background:#111; }
+  .dot.active { background: #111; }
 
   /* Lightbox */
-  .lightbox{
+  .lightbox {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.88);
@@ -204,8 +258,8 @@ nav: villa
     z-index: 9999;
     padding: 18px;
   }
-  .lightbox.open{ display:flex; }
-  .lightboxInner{
+  .lightbox.open { display: flex; }
+  .lightboxInner {
     position: relative;
     width: min(1100px, 100%);
     max-height: 90vh;
@@ -213,13 +267,13 @@ nav: villa
     align-items: center;
     justify-content: center;
   }
-  .lightboxImg{
+  .lightboxImg {
     max-width: 100%;
     max-height: 90vh;
     border-radius: 14px;
     background: #111;
   }
-  .lbBtn{
+  .lbBtn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -230,9 +284,9 @@ nav: villa
     cursor: pointer;
     font-size: 1rem;
   }
-  .lbPrev{ left: 8px; }
-  .lbNext{ right: 8px; }
-  .lbClose{
+  .lbPrev { left: 8px; }
+  .lbNext { right: 8px; }
+  .lbClose {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -252,19 +306,27 @@ nav: villa
   </p>
 
   <div class="chips" aria-label="Highlights">
-    <span class="chip">3 bed / 3 full bath - sleeps up to 9!</span>
+    <span class="chip">Sleeps up to 9</span>
+    <span class="chip">3 bed / 3 full bath</span>
+
     <span class="chip">
       1 <span class="bedHover" data-img="{{ '/photos/villagallery/33.webp' | relative_url }}">King</span>,
       1 <span class="bedHover" data-img="{{ '/photos/villagallery/26.webp' | relative_url }}">Queen</span>,
       2 Full (<span class="bedHover" data-img="{{ '/photos/villagallery/40.webp' | relative_url }}">Bunk</span>),
       1 twin (<span class="bedHover" data-img="{{ '/photos/villagallery/42.webp' | relative_url }}">Trundle</span>)
     </span>
+
     <div class="familyAmenities">
-  <span class="chip">Pack and play</span>
-  <span class="chip">Stroller</span>
-  <span class="chip">High chair</span>
-</div>
+      <span class="chip">Pack and play</span>
+      <span class="chip">Stroller</span>
+      <span class="chip">High chair</span>
+    </div>
+
     <span class="chip">Midday break friendly</span>
+    <div class="chipSubline">
+      “Need more rooms? Add this second <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1739.jpeg' | relative_url }}">close by</span> <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1741.jpeg' | relative_url }}">townhome</span>.”
+    </div>
+
     <span class="chip">Steps to Windsor Hills amenities</span>
     <span class="chip">Private screened splash pool</span>
     <span class="chip">Spa inspired calm</span>
@@ -299,7 +361,6 @@ nav: villa
       <button class="carBtn carNext" type="button" aria-label="Next photos" id="carNext">›</button>
 
       <div class="carouselTrack" id="carTrack" aria-label="Townhome photos carousel">
-
         {% assign villa_files = site.static_files
           | where_exp: "f", "f.path contains '/photos/villagallery/'"
           | sort: "path"
@@ -322,7 +383,6 @@ nav: villa
             />
           {% endif %}
         {% endfor %}
-
       </div>
 
       <div class="carFooter">
@@ -363,116 +423,119 @@ nav: villa
 </div>
 
 <script>
-(function(){
+(function () {
   const track = document.getElementById("carTrack");
-  if(!track) return;
+  if (track) {
+    const items = Array.from(track.querySelectorAll(".carouselItem"));
 
-  const items = Array.from(track.querySelectorAll(".carouselItem"));
-  if(!items.length) return;
+    if (items.length) {
+      const prevBtn = document.getElementById("carPrev");
+      const nextBtn = document.getElementById("carNext");
+      const dotsEl = document.getElementById("carDots");
+      const countEl = document.getElementById("carCount");
 
-  const prevBtn = document.getElementById("carPrev");
-  const nextBtn = document.getElementById("carNext");
-  const dotsEl  = document.getElementById("carDots");
-  const countEl = document.getElementById("carCount");
+      const sources = items.map(i => i.getAttribute("data-full") || i.src);
 
-  const sources = items.map(i => i.getAttribute("data-full") || i.src);
+      const lightbox = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbPrev = document.getElementById("lbPrev");
+      const lbNext = document.getElementById("lbNext");
+      const lbClose = document.getElementById("lbClose");
+      let lbIndex = 0;
 
-  const lightbox = document.getElementById("lightbox");
-  const lbImg = document.getElementById("lbImg");
-  const lbPrev = document.getElementById("lbPrev");
-  const lbNext = document.getElementById("lbNext");
-  const lbClose = document.getElementById("lbClose");
-  let lbIndex = 0;
+      function lockScroll(lock) {
+        const v = lock ? "hidden" : "";
+        document.documentElement.style.overflow = v;
+        document.body.style.overflow = v;
+      }
 
-  function lockScroll(lock){
-    const v = lock ? "hidden" : "";
-    document.documentElement.style.overflow = v;
-    document.body.style.overflow = v;
-  }
+      function lbShow(i) {
+        lbIndex = (i + sources.length) % sources.length;
+        lbImg.src = sources[lbIndex];
+      }
 
-  function lbShow(i){
-    lbIndex = (i + sources.length) % sources.length;
-    lbImg.src = sources[lbIndex];
-  }
+      function lbOpen(i) {
+        lbShow(i);
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+        lockScroll(true);
+      }
 
-  function lbOpen(i){
-    lbShow(i);
-    lightbox.classList.add("open");
-    lightbox.setAttribute("aria-hidden", "false");
-    lockScroll(true);
-  }
+      function lbCloseFn() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lockScroll(false);
+      }
 
-  function lbCloseFn(){
-    lightbox.classList.remove("open");
-    lightbox.setAttribute("aria-hidden", "true");
-    lockScroll(false);
-  }
+      function lbNextFn() { lbShow(lbIndex + 1); }
+      function lbPrevFn() { lbShow(lbIndex - 1); }
 
-  function lbNextFn(){ lbShow(lbIndex + 1); }
-  function lbPrevFn(){ lbShow(lbIndex - 1); }
+      items.forEach((img, i) => img.addEventListener("click", () => lbOpen(i)));
+      lbNext.addEventListener("click", lbNextFn);
+      lbPrev.addEventListener("click", lbPrevFn);
+      lbClose.addEventListener("click", lbCloseFn);
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) lbCloseFn();
+      });
 
-  items.forEach((img, i) => img.addEventListener("click", () => lbOpen(i)));
-  lbNext.addEventListener("click", lbNextFn);
-  lbPrev.addEventListener("click", lbPrevFn);
-  lbClose.addEventListener("click", lbCloseFn);
-  lightbox.addEventListener("click", (e) => { if(e.target === lightbox) lbCloseFn(); });
+      document.addEventListener("keydown", (e) => {
+        if (lightbox.classList.contains("open")) {
+          if (e.key === "Escape") lbCloseFn();
+          if (e.key === "ArrowRight") lbNextFn();
+          if (e.key === "ArrowLeft") lbPrevFn();
+        }
+      });
 
-  document.addEventListener("keydown", (e) => {
-    if(lightbox.classList.contains("open")){
-      if(e.key === "Escape") lbCloseFn();
-      if(e.key === "ArrowRight") lbNextFn();
-      if(e.key === "ArrowLeft") lbPrevFn();
+      function scrollByOne(direction) {
+        const w = items[0].getBoundingClientRect().width;
+        const gap = 12;
+        track.scrollBy({ left: direction * (w + gap), behavior: "smooth" });
+      }
+
+      prevBtn.addEventListener("click", () => scrollByOne(-1));
+      nextBtn.addEventListener("click", () => scrollByOne(1));
+
+      const DOTS = 3;
+      for (let i = 0; i < DOTS; i++) {
+        const d = document.createElement("span");
+        d.className = "dot" + (i === 0 ? " active" : "");
+        dotsEl.appendChild(d);
+      }
+
+      function setDotByScroll() {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        const pct = maxScroll <= 1 ? 0 : (track.scrollLeft / maxScroll);
+        const idx = Math.min(DOTS - 1, Math.max(0, Math.round(pct * (DOTS - 1))));
+        Array.from(dotsEl.children).forEach((d, i) => d.classList.toggle("active", i === idx));
+      }
+
+      track.addEventListener("scroll", () => {
+        window.requestAnimationFrame(setDotByScroll);
+      });
+
+      countEl.textContent = sources.length + " photos";
+      setDotByScroll();
     }
-  });
-
-  function scrollByOne(direction){
-    const w = items[0].getBoundingClientRect().width;
-    const gap = 12;
-    track.scrollBy({ left: direction * (w + gap), behavior: "smooth" });
   }
-
-  prevBtn.addEventListener("click", () => scrollByOne(-1));
-  nextBtn.addEventListener("click", () => scrollByOne(1));
-
-  const DOTS = 3;
-  for(let i=0;i<DOTS;i++){
-    const d = document.createElement("span");
-    d.className = "dot" + (i===0 ? " active" : "");
-    dotsEl.appendChild(d);
-  }
-
-  function setDotByScroll(){
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    const pct = maxScroll <= 1 ? 0 : (track.scrollLeft / maxScroll);
-    const idx = Math.min(DOTS - 1, Math.max(0, Math.round(pct * (DOTS - 1))));
-    Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle("active", i===idx));
-  }
-
-  track.addEventListener("scroll", () => {
-    window.requestAnimationFrame(setDotByScroll);
-  });
-
-  countEl.textContent = sources.length + " photos";
-  setDotByScroll();
 
   const preview = document.createElement("div");
   preview.className = "bedPreview";
-  preview.innerHTML = "<img alt='Bed preview'>";
+  preview.innerHTML = "<img alt='Photo preview'>";
   document.body.appendChild(preview);
 
   const previewImg = preview.querySelector("img");
-  const hoverTargets = document.querySelectorAll(".bedHover");
+  const hoverTargets = document.querySelectorAll(".bedHover, .inlinePhotoHover");
 
-  function showPreview(el){
+  function showPreview(el) {
     previewImg.src = el.getAttribute("data-img");
     preview.style.display = "block";
   }
 
-  function hidePreview(){
+  function hidePreview() {
     preview.style.display = "none";
   }
 
-  function movePreview(x, y){
+  function movePreview(x, y) {
     const offset = 16;
     const previewWidth = 240;
     const previewHeight = 150;
