@@ -39,6 +39,31 @@ nav: villa
   .chip::before { content: "•"; margin-right: 8px; color: #111; }
   .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
 
+  .bedHover{
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .bedPreview{
+    position: absolute;
+    display: none;
+    z-index: 99999;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+    background: #fff;
+    pointer-events: none;
+  }
+
+  .bedPreview img{
+    width: 240px;
+    height: 150px;
+    object-fit: cover;
+    display:block;
+  }
+
   /* If your global CSS already defines .grid2 and .card, this will blend.
      If not, these fallbacks make it look like villabackup. */
   .grid2{
@@ -227,6 +252,17 @@ nav: villa
   </p>
 
   <div class="chips" aria-label="Highlights">
+    <span class="chip">Sleeps up to 9</span>
+    <span class="chip">3 bed / 3 full bath</span>
+    <span class="chip">
+      1 <span class="bedHover" data-img="{{ '/photos/villagallery/33.webp' | relative_url }}">King</span>,
+      1 <span class="bedHover" data-img="{{ '/photos/villagallery/26.webp' | relative_url }}">Queen</span>,
+      2 Full (<span class="bedHover" data-img="{{ '/photos/villagallery/40.webp' | relative_url }}">Bunk</span>),
+      1 twin (<span class="bedHover" data-img="{{ '/photos/villagallery/42.webp' | relative_url }}">Trundle</span>)
+    </span>
+    <span class="chip">Pack and play</span>
+    <span class="chip">Stroller</span>
+    <span class="chip">High chair</span>
     <span class="chip">Midday break friendly</span>
     <span class="chip">Steps to Windsor Hills amenities</span>
     <span class="chip">Private screened splash pool</span>
@@ -239,7 +275,6 @@ nav: villa
 </section>
 
 <section class="grid2" aria-label="Townhome content grid">
-  <!-- Video card -->
   <div class="card">
     <div class="videoFrame" aria-label="Walkthrough video">
       <iframe
@@ -254,7 +289,6 @@ nav: villa
     <div class="videoCaption">Walkthrough video</div>
   </div>
 
-  <!-- Photos carousel card -->
   <div class="card">
     <h2>Townhome Photos</h2>
     <p>Click any photo for a larger view.</p>
@@ -318,7 +352,6 @@ nav: villa
   </div>
 </section>
 
-<!-- Lightbox -->
 <div id="lightbox" class="lightbox" aria-hidden="true">
   <div class="lightboxInner">
     <button class="lbBtn lbPrev" id="lbPrev" aria-label="Previous photo">◀</button>
@@ -341,10 +374,8 @@ nav: villa
   const dotsEl  = document.getElementById("carDots");
   const countEl = document.getElementById("carCount");
 
-  // Build source list for lightbox
   const sources = items.map(i => i.getAttribute("data-full") || i.src);
 
-  // --- Lightbox wiring ---
   const lightbox = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
   const lbPrev = document.getElementById("lbPrev");
@@ -386,13 +417,13 @@ nav: villa
   lightbox.addEventListener("click", (e) => { if(e.target === lightbox) lbCloseFn(); });
 
   document.addEventListener("keydown", (e) => {
-    if(!lightbox.classList.contains("open")) return;
-    if(e.key === "Escape") lbCloseFn();
-    if(e.key === "ArrowRight") lbNextFn();
-    if(e.key === "ArrowLeft") lbPrevFn();
+    if(lightbox.classList.contains("open")){
+      if(e.key === "Escape") lbCloseFn();
+      if(e.key === "ArrowRight") lbNextFn();
+      if(e.key === "ArrowLeft") lbPrevFn();
+    }
   });
 
-  // --- Carousel controls ---
   function scrollByOne(direction){
     const w = items[0].getBoundingClientRect().width;
     const gap = 12;
@@ -402,7 +433,6 @@ nav: villa
   prevBtn.addEventListener("click", () => scrollByOne(-1));
   nextBtn.addEventListener("click", () => scrollByOne(1));
 
-  // --- Dots (simple: 3 dots that represent rough position like your screenshot) ---
   const DOTS = 3;
   for(let i=0;i<DOTS;i++){
     const d = document.createElement("span");
@@ -421,8 +451,63 @@ nav: villa
     window.requestAnimationFrame(setDotByScroll);
   });
 
-  // Count
   countEl.textContent = sources.length + " photos";
   setDotByScroll();
+
+  const preview = document.createElement("div");
+  preview.className = "bedPreview";
+  preview.innerHTML = "<img alt='Bed preview'>";
+  document.body.appendChild(preview);
+
+  const previewImg = preview.querySelector("img");
+  const hoverTargets = document.querySelectorAll(".bedHover");
+
+  function showPreview(el){
+    previewImg.src = el.getAttribute("data-img");
+    preview.style.display = "block";
+  }
+
+  function hidePreview(){
+    preview.style.display = "none";
+  }
+
+  function movePreview(x, y){
+    const offset = 16;
+    const previewWidth = 240;
+    const previewHeight = 150;
+    const maxX = window.scrollX + window.innerWidth - previewWidth - 12;
+    const maxY = window.scrollY + window.innerHeight - previewHeight - 12;
+
+    const left = Math.min(x + offset, maxX);
+    const top = Math.min(y + offset, maxY);
+
+    preview.style.left = left + "px";
+    preview.style.top = top + "px";
+  }
+
+  hoverTargets.forEach(el => {
+    el.addEventListener("mouseenter", (e) => {
+      showPreview(el);
+      movePreview(e.pageX, e.pageY);
+    });
+
+    el.addEventListener("mousemove", (e) => {
+      movePreview(e.pageX, e.pageY);
+    });
+
+    el.addEventListener("mouseleave", hidePreview);
+
+    el.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      showPreview(el);
+      movePreview(touch.pageX, touch.pageY);
+    }, { passive: true });
+
+    el.addEventListener("touchend", () => {
+      setTimeout(hidePreview, 900);
+    });
+  });
+
+  window.addEventListener("scroll", hidePreview, { passive: true });
 })();
 </script>
