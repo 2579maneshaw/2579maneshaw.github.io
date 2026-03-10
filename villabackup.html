@@ -2,93 +2,67 @@
 layout: default
 title: Our Townhome
 nav: villa
-description: Explore the renovated Enchanted Villa of Windsor Hills Townhome — photos, layout, and amenities.
 ---
 
 <style>
-  /* Villa page-only styles (keeps desktop behavior intact) */
-  h1{margin:18px 0 10px;font-size:1.85rem;letter-spacing:-0.02em;}
-  p{color:#333;line-height:1.65;margin:0 0 12px;}
-
-  .heroCopy{
+  /* Match your existing page style: soft cards + clean spacing */
+  .heroCopy {
     margin-top: 6px;
     margin-bottom: 18px;
     padding: 18px;
     border-radius: 16px;
-    background:#f7f7f7;
-    border:1px solid #eee;
-  }
-
-  .chips{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
-  .chip{font-size:0.92rem;color:#2b2b2b;background:transparent;border:0;padding:0;}
-  .chip::before{content:"•";margin-right:8px;color:#111;}
-
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  @media (max-width: 860px){ .grid{grid-template-columns:1fr;} }
-
-  /* Video container (full width, 16:9) */
-  .videoCard{
-    border:1px solid #eee;
-    border-radius:16px;
-    background:#fff;
-    box-shadow:0 10px 26px rgba(0,0,0,0.05);
-    overflow:hidden;
-    margin: 0 0 18px;
-  }
-  .videoWrap{
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background:#000;
-  }
-  /* Fallback for older browsers */
-  @supports not (aspect-ratio: 16 / 9){
-    .videoWrap{height:0;padding-top:56.25%;}
-    .videoWrap iframe{position:absolute;inset:0;}
-  }
-  .videoWrap iframe{
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
-  }
-  .videoCaption{
-    padding: 12px 14px;
-    font-size: 0.95rem;
-    color:#555;
-    border-top:1px solid #eee;
-    background:#fff;
-  }
-
-  .card{
-    border:1px solid #eee;
-    border-radius:16px;
-    padding:16px;
-    background:#fff;
-    box-shadow:0 10px 26px rgba(0,0,0,0.05);
-    min-width:0;
-  }
-
-  .miniGallery{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding-bottom:6px;
-    -webkit-overflow-scrolling: touch;
-    min-width:0;
-  }
-  .miniGallery img{
-    height: 140px;
-    width: 210px;
-    object-fit: cover;
-    border-radius: 14px;
+    background: #f7f7f7;
     border: 1px solid #eee;
-    background:#f3f3f3;
-    flex: 0 0 auto;
-    cursor: pointer;
   }
+  .headline {
+    margin:0;
+    font-size: 2.0rem;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color:#111;
+  }
+  .subline {
+    margin: 10px 0 0;
+    font-size: 1.02rem;
+    color:#444;
+    line-height:1.55;
+    max-width: 900px;
+  }
+  .chips { margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .chip {
+    font-size:0.92rem;
+    color:#2b2b2b;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .chip::before { content: "•"; margin-right: 8px; color: #111; }
+  .ctaRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
 
-  .ctaRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+  /* If your global CSS already defines .grid2 and .card, this will blend.
+     If not, these fallbacks make it look like villabackup. */
+  .grid2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:18px;
+    align-items:start;
+  }
+  @media (max-width: 900px){
+    .grid2{ grid-template-columns: 1fr; }
+  }
+  .card{
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:16px;
+    padding:18px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+  }
+  .card h2{ margin:0 0 10px; font-size:1.6rem; color:#111; }
+  .card p{ margin:0 0 12px; color:#444; line-height:1.6; }
+  .bullets{ margin:10px 0 0; padding-left:18px; color:#333; line-height:1.75; }
+  .bullets li{ margin:6px 0; }
+
+  /* Buttons (fallbacks if your global .btn exists it will still look fine) */
   .btn{
     display:inline-block;
     text-decoration:none;
@@ -97,10 +71,102 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
     font-size:1rem;
     border:1px solid #111;
   }
-  .btn.primary{background:#111;color:#fff;}
-  .btn.primary:hover{background:#2a2a2a;border-color:#2a2a2a;}
-  .btn.ghost{background:#fff;color:#111;border-color:#e6e6e6;}
-  .btn.ghost:hover{background:#f7f7f7;}
+  .btn.ghost{ background:#fff; color:#111; border-color:#e6e6e6; }
+  .btn.ghost:hover{ background:#f7f7f7; }
+
+  /* Video */
+  .videoFrame{
+    width:100%;
+    aspect-ratio: 16 / 9;
+    border-radius:14px;
+    border:1px solid #eee;
+    overflow:hidden;
+    background:#000;
+  }
+  .videoFrame iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+  .videoCaption{
+    margin-top:10px;
+    color:#555;
+    font-size:0.95rem;
+  }
+
+  /* Townhome Photos carousel (matches villabackup horizontal strip) */
+  .carousel{
+    position:relative;
+  }
+  .carouselTrack{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding: 4px 2px 10px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .carouselItem{
+    flex: 0 0 auto;
+    width: 260px;
+    height: 150px;
+    border-radius:14px;
+    border:1px solid #eee;
+    background:#f3f3f3;
+    object-fit:cover;
+    cursor:pointer;
+    scroll-snap-align:start;
+  }
+  @media (max-width: 900px){
+    .carouselItem{ width: 240px; height: 145px; }
+  }
+  @media (max-width: 520px){
+    .carouselItem{ width: 215px; height: 135px; }
+  }
+
+  .carBtn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:42px;
+    height:42px;
+    border-radius:999px;
+    border:1px solid #e6e6e6;
+    background:rgba(255,255,255,0.95);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 24px rgba(0,0,0,0.10);
+    user-select:none;
+  }
+  .carPrev{ left:-6px; }
+  .carNext{ right:-6px; }
+  .carBtn:active{ transform:translateY(-50%) scale(0.98); }
+
+  .carFooter{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:6px;
+    color:#666;
+    font-size:0.92rem;
+  }
+  .dots{
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
+  .dot{
+    width:18px;
+    height:6px;
+    border-radius:999px;
+    background:#d9d9d9;
+  }
+  .dot.active{ background:#111; }
 
   /* Lightbox */
   .lightbox{
@@ -113,7 +179,7 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
     z-index: 9999;
     padding: 18px;
   }
-  .lightbox.open{display:flex;}
+  .lightbox.open{ display:flex; }
   .lightboxInner{
     position: relative;
     width: min(1100px, 100%);
@@ -139,8 +205,8 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
     cursor: pointer;
     font-size: 1rem;
   }
-  .lbPrev{left: 8px;}
-  .lbNext{right: 8px;}
+  .lbPrev{ left: 8px; }
+  .lbNext{ right: 8px; }
   .lbClose{
     position: absolute;
     top: -10px;
@@ -154,11 +220,10 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
   }
 </style>
 
-<section class="heroCopy" aria-label="Quick highlights">
-  <h1>Our Townhome</h1>
-  <p>
-    A calm, spa inspired retreat designed for families who want the best of both worlds:
-    the excitement of Disney, and a peaceful place to recharge.
+<section class="heroCopy" aria-label="Our Townhome intro">
+  <h1 class="headline">Our Townhome</h1>
+  <p class="subline">
+    A calm, spa inspired retreat designed for families who want the best of both worlds: the excitement of Disney, and a peaceful place to recharge.
   </p>
 
   <div class="chips" aria-label="Highlights">
@@ -169,39 +234,86 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
   </div>
 
   <div class="ctaRow">
-  <!--  <a class="btn primary" href="{{ '/contact.html' | relative_url }}">Check Availability</a> -->
     <a class="btn ghost" href="{{ '/nearby.html' | relative_url }}">Nearby Convenience</a>
   </div>
 </section>
 
-<!-- ✅ Walkthrough video container (between highlights and photo gallery) -->
-<section class="videoCard" aria-label="Walkthrough video">
-  <div class="videoWrap">
-    <iframe
-      src="https://www.youtube.com/embed/j87aWOF-fpM?rel=0&modestbranding=1&playsinline=1"
-      title="Enchanted Villa Walkthrough"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
+<section class="grid2" aria-label="Townhome content grid">
+  <!-- Video card -->
+  <div class="card">
+    <div class="videoFrame" aria-label="Walkthrough video">
+      <iframe
+        src="https://www.youtube.com/embed/j87aWOF-fpM"
+        title="Enchanted Villa of Windsor Hills Townhome (Official)"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="videoCaption">Walkthrough video</div>
   </div>
-  <div class="videoCaption">Walkthrough video</div>
-</section>
 
-<!-- Photo gallery section -->
-<section class="grid" aria-label="Photo gallery">
+  <!-- Photos carousel card -->
   <div class="card">
     <h2>Townhome Photos</h2>
     <p>Click any photo for a larger view.</p>
-    <div id="villaGallery" class="miniGallery" aria-label="Townhome photo gallery"></div>
-  </div>
 
+    <div class="carousel" id="villaCarousel">
+      <button class="carBtn carPrev" type="button" aria-label="Previous photos" id="carPrev">‹</button>
+      <button class="carBtn carNext" type="button" aria-label="Next photos" id="carNext">›</button>
+
+      <div class="carouselTrack" id="carTrack" aria-label="Townhome photos carousel">
+
+        {% assign villa_files = site.static_files
+          | where_exp: "f", "f.path contains '/photos/villagallery/'"
+          | sort: "path"
+        %}
+
+        {% assign shown = 0 %}
+
+        {% for f in villa_files %}
+          {% assign ext = f.extname | downcase %}
+          {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
+            {% assign shown = shown | plus: 1 %}
+            <img
+              class="carouselItem"
+              src="{{ f.path | relative_url }}"
+              alt="Townhome photo {{ shown }}"
+              loading="lazy"
+              decoding="async"
+              data-full="{{ f.path | relative_url }}"
+              data-index="{{ shown | minus: 1 }}"
+            />
+          {% endif %}
+        {% endfor %}
+
+      </div>
+
+      <div class="carFooter">
+        <div class="dots" id="carDots" aria-label="Carousel position"></div>
+        <div id="carCount"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="grid2" style="margin-top:18px;" aria-label="Good to know">
   <div class="card">
     <h2>Good to Know</h2>
-    <ul style="margin:10px 0 0; padding-left:18px; color:#333; line-height:1.75;">
+    <ul class="bullets">
       <li>Gated Windsor Hills community near Disney</li>
       <li>Great for midday breaks and calm evenings</li>
       <li>Walkable to clubhouse and waterpark</li>
-      <li>Stock up fast with nearby Target, Publix, and Walmart</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>More details</h2>
+    <ul class="bullets">
+      <li>Perfect for families who want a calmer place to recharge</li>
+      <li>Easy access to groceries, food, and essentials</li>
+      <li>Designed for comfort, privacy, and rest</li>
     </ul>
   </div>
 </section>
@@ -217,99 +329,100 @@ description: Explore the renovated Enchanted Villa of Windsor Hills Townhome —
 </div>
 
 <script>
-  const VILLA_JSON = "{{ '/villa-photos.webp.json' | relative_url }}";
+(function(){
+  const track = document.getElementById("carTrack");
+  if(!track) return;
 
-  function withJpgFallback(src, imgEl) {
-    imgEl.onerror = () => {
-      if (src && src.toLowerCase().endsWith(".webp")) {
-        imgEl.onerror = null;
-        imgEl.src = src.replace(/\.webp$/i, ".jpg");
-      }
-    };
-  }
+  const items = Array.from(track.querySelectorAll(".carouselItem"));
+  if(!items.length) return;
 
-  async function loadList(preferred, fallback) {
-    try {
-      const res = await fetch(preferred, { cache: "no-store" });
-      if (!res.ok) throw new Error("preferred not ok");
-      return await res.json();
-    } catch (e) {
-      const res2 = await fetch(fallback, { cache: "no-store" });
-      return await res2.json();
-    }
-  }
+  const prevBtn = document.getElementById("carPrev");
+  const nextBtn = document.getElementById("carNext");
+  const dotsEl  = document.getElementById("carDots");
+  const countEl = document.getElementById("carCount");
 
-  // Lightbox
-  let lbList = [];
-  let lbIndex = 0;
+  // Build source list for lightbox
+  const sources = items.map(i => i.getAttribute("data-full") || i.src);
 
+  // --- Lightbox wiring ---
   const lightbox = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
   const lbPrev = document.getElementById("lbPrev");
   const lbNext = document.getElementById("lbNext");
   const lbClose = document.getElementById("lbClose");
+  let lbIndex = 0;
 
-  function openLightbox(list, index) {
-    lbList = list || [];
-    lbIndex = index || 0;
-    if (!lbList.length) return;
+  function lockScroll(lock){
+    const v = lock ? "hidden" : "";
+    document.documentElement.style.overflow = v;
+    document.body.style.overflow = v;
+  }
+
+  function lbShow(i){
+    lbIndex = (i + sources.length) % sources.length;
+    lbImg.src = sources[lbIndex];
+  }
+
+  function lbOpen(i){
+    lbShow(i);
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
-    showLb(lbIndex);
+    lockScroll(true);
   }
 
-  function closeLightbox() {
+  function lbCloseFn(){
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
+    lockScroll(false);
   }
 
-  function showLb(i) {
-    if (!lbList.length) return;
-    lbIndex = (i + lbList.length) % lbList.length;
-    lbImg.src = lbList[lbIndex];
-    withJpgFallback(lbList[lbIndex], lbImg);
-  }
+  function lbNextFn(){ lbShow(lbIndex + 1); }
+  function lbPrevFn(){ lbShow(lbIndex - 1); }
 
-  function lbNextPhoto() { showLb(lbIndex + 1); }
-  function lbPrevPhoto() { showLb(lbIndex - 1); }
-
-  lbNext.addEventListener("click", lbNextPhoto);
-  lbPrev.addEventListener("click", lbPrevPhoto);
-  lbClose.addEventListener("click", closeLightbox);
-
-  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+  items.forEach((img, i) => img.addEventListener("click", () => lbOpen(i)));
+  lbNext.addEventListener("click", lbNextFn);
+  lbPrev.addEventListener("click", lbPrevFn);
+  lbClose.addEventListener("click", lbCloseFn);
+  lightbox.addEventListener("click", (e) => { if(e.target === lightbox) lbCloseFn(); });
 
   document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") lbNextPhoto();
-    if (e.key === "ArrowLeft") lbPrevPhoto();
+    if(!lightbox.classList.contains("open")) return;
+    if(e.key === "Escape") lbCloseFn();
+    if(e.key === "ArrowRight") lbNextFn();
+    if(e.key === "ArrowLeft") lbPrevFn();
   });
 
-  function addGallery(containerId, photos) {
-    const el = document.getElementById(containerId);
-    if (!el) return;
-    el.innerHTML = "";
-    photos.forEach((src, idx) => {
-      const img = document.createElement("img");
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.src = src;
-      img.alt = "Enchanted Villa photo";
-      withJpgFallback(src, img);
-      img.addEventListener("click", () => openLightbox(photos, idx));
-      el.appendChild(img);
-    });
+  // --- Carousel controls ---
+  function scrollByOne(direction){
+    const w = items[0].getBoundingClientRect().width;
+    const gap = 12;
+    track.scrollBy({ left: direction * (w + gap), behavior: "smooth" });
   }
 
-  async function initVilla() {
-    try {
-      const photos = await loadList(VILLA_JSON, "{{ '/villa-photos.json' | relative_url }}");
-      addGallery("villaGallery", photos);
-    } catch (e) {
-      console.warn("Could not load villa gallery JSON files.", e);
-    }
+  prevBtn.addEventListener("click", () => scrollByOne(-1));
+  nextBtn.addEventListener("click", () => scrollByOne(1));
+
+  // --- Dots (simple: 3 dots that represent rough position like your screenshot) ---
+  const DOTS = 3;
+  for(let i=0;i<DOTS;i++){
+    const d = document.createElement("span");
+    d.className = "dot" + (i===0 ? " active" : "");
+    dotsEl.appendChild(d);
   }
 
-  initVilla();
+  function setDotByScroll(){
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const pct = maxScroll <= 1 ? 0 : (track.scrollLeft / maxScroll);
+    const idx = Math.min(DOTS - 1, Math.max(0, Math.round(pct * (DOTS - 1))));
+    Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle("active", i===idx));
+  }
+
+  track.addEventListener("scroll", () => {
+    window.requestAnimationFrame(setDotByScroll);
+  });
+
+  // Count
+  countEl.textContent = sources.length + " photos";
+  setDotByScroll();
+})();
 </script>
