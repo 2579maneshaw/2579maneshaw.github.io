@@ -99,6 +99,25 @@ img, video, canvas { max-width: 100%; height: auto; }
   border-color: #111;
 }
 
+/* reviews link in shared header */
+.reviewsLink{
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #c62828;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 14px 0 4px;
+  font-family: "Brush Script MT", cursive;
+  text-decoration: none;
+  line-height: 1.1;
+}
+
+.reviewsLink:hover{
+  color: #a91f23;
+  text-decoration: none;
+}
+
 /* right side: CTA then socials below */
 .headerRight{
   flex: 0 0 auto;
@@ -210,9 +229,9 @@ img, video, canvas { max-width: 100%; height: auto; }
   /* ✅ FIX: allow nav to wrap to a second row so nothing is cut off */
   .mainNav{
     margin-top: 10px;
-    flex-wrap: wrap;          /* was nowrap */
-    overflow-x: visible;      /* was auto */
-    padding-bottom: 0;        /* was 6px */
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding-bottom: 0;
     gap: 8px;
     row-gap: 8px;
   }
@@ -222,6 +241,11 @@ img, video, canvas { max-width: 100%; height: auto; }
     padding: 10px 14px;
     font-size: 0.95rem;
     white-space: nowrap;
+  }
+
+  .reviewsLink{
+    margin: 12px 0 2px;
+    font-size: 1.15rem;
   }
 
   /* CTA + socials should sit under nav on mobile, full width CTA */
