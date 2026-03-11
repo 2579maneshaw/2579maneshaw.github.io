@@ -1,0 +1,29 @@
+---
+layout: default
+title: Podcast Redirect
+permalink: /dinglehopper/
+---
+
+<script>
+  // Track a custom event for podcast landing visits
+  if (typeof gtag === 'function') {
+    gtag('event', 'podcast_visit', {
+      event_category: 'marketing',
+      event_label: 'dinglehopper'
+    });
+  }
+
+  // Redirect after a very short delay so analytics has time to fire
+  setTimeout(function () {
+    window.location.replace('/');
+  }, 900);
+</script>
+
+<div style="padding:40px 20px; text-align:center;">
+  <h1 style="margin-bottom:10px;">Welcome, podcast listeners</h1>
+  <p style="margin:0;">Redirecting you to Enchanted Villa of Windsor Hills...</p>
+</div>
+
+<noscript>
+  <meta http-equiv="refresh" content="1; url=/" />
+</noscript>
