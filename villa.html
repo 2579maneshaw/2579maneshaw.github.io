@@ -5,7 +5,6 @@ nav: villa
 ---
 
 <style>
-  /* Match your existing page style: soft cards + clean spacing */
   .heroCopy {
     margin-top: 6px;
     margin-bottom: 18px;
@@ -14,6 +13,7 @@ nav: villa
     background: #f7f7f7;
     border: 1px solid #eee;
   }
+
   .headline {
     margin: 0;
     font-size: 2rem;
@@ -21,6 +21,7 @@ nav: villa
     line-height: 1.1;
     color: #111;
   }
+
   .subline {
     margin: 10px 0 0;
     font-size: 1.02rem;
@@ -28,6 +29,7 @@ nav: villa
     line-height: 1.55;
     max-width: 900px;
   }
+
   .chips {
     margin-top: 12px;
     display: flex;
@@ -35,6 +37,7 @@ nav: villa
     flex-wrap: wrap;
     align-items: flex-start;
   }
+
   .chip {
     font-size: 0.92rem;
     color: #2b2b2b;
@@ -42,10 +45,18 @@ nav: villa
     border: 0;
     padding: 0;
   }
+
   .chip::before {
     content: "•";
     margin-right: 8px;
     color: #111;
+  }
+
+  .familyAmenities {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .chipSubline {
@@ -53,14 +64,7 @@ nav: villa
     margin: 2px 0 0 22px;
     font-size: 0.92rem;
     color: #444;
-    line-height: 1.5;
-  }
-
-  .ctaRow {
-    margin-top: 14px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    line-height: 1.55;
   }
 
   .bedHover,
@@ -89,23 +93,24 @@ nav: villa
     display: block;
   }
 
-  .familyAmenities {
-    width: 100%;
+  .ctaRow {
+    margin-top: 14px;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
-  /* If your global CSS already defines .grid2 and .card, this will blend.
-     If not, these fallbacks make it look like villabackup. */
   .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
     align-items: start;
   }
+
   @media (max-width: 900px) {
-    .grid2 { grid-template-columns: 1fr; }
+    .grid2 {
+      grid-template-columns: 1fr;
+    }
   }
 
   .card {
@@ -115,27 +120,30 @@ nav: villa
     padding: 18px;
     box-shadow: 0 10px 26px rgba(0,0,0,0.05);
   }
+
   .card h2 {
     margin: 0 0 10px;
     font-size: 1.6rem;
     color: #111;
   }
+
   .card p {
     margin: 0 0 12px;
     color: #444;
     line-height: 1.6;
   }
+
   .bullets {
     margin: 10px 0 0;
     padding-left: 18px;
     color: #333;
     line-height: 1.75;
   }
+
   .bullets li {
     margin: 6px 0;
   }
 
-  /* Buttons */
   .btn {
     display: inline-block;
     text-decoration: none;
@@ -144,16 +152,17 @@ nav: villa
     font-size: 1rem;
     border: 1px solid #111;
   }
+
   .btn.ghost {
     background: #fff;
     color: #111;
     border-color: #e6e6e6;
   }
+
   .btn.ghost:hover {
     background: #f7f7f7;
   }
 
-  /* Video */
   .videoFrame {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -162,22 +171,24 @@ nav: villa
     overflow: hidden;
     background: #000;
   }
+
   .videoFrame iframe {
     width: 100%;
     height: 100%;
     border: 0;
     display: block;
   }
+
   .videoCaption {
     margin-top: 10px;
     color: #555;
     font-size: 0.95rem;
   }
 
-  /* Townhome Photos carousel */
   .carousel {
     position: relative;
   }
+
   .carouselTrack {
     display: flex;
     gap: 12px;
@@ -187,6 +198,7 @@ nav: villa
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
+
   .carouselItem {
     flex: 0 0 auto;
     width: 260px;
@@ -198,11 +210,19 @@ nav: villa
     cursor: pointer;
     scroll-snap-align: start;
   }
+
   @media (max-width: 900px) {
-    .carouselItem { width: 240px; height: 145px; }
+    .carouselItem {
+      width: 240px;
+      height: 145px;
+    }
   }
+
   @media (max-width: 520px) {
-    .carouselItem { width: 215px; height: 135px; }
+    .carouselItem {
+      width: 215px;
+      height: 135px;
+    }
   }
 
   .carBtn {
@@ -221,9 +241,13 @@ nav: villa
     box-shadow: 0 10px 24px rgba(0,0,0,0.10);
     user-select: none;
   }
+
   .carPrev { left: -6px; }
   .carNext { right: -6px; }
-  .carBtn:active { transform: translateY(-50%) scale(0.98); }
+
+  .carBtn:active {
+    transform: translateY(-50%) scale(0.98);
+  }
 
   .carFooter {
     display: flex;
@@ -234,20 +258,24 @@ nav: villa
     color: #666;
     font-size: 0.92rem;
   }
+
   .dots {
     display: flex;
     gap: 6px;
     align-items: center;
   }
+
   .dot {
     width: 18px;
     height: 6px;
     border-radius: 999px;
     background: #d9d9d9;
   }
-  .dot.active { background: #111; }
 
-  /* Lightbox */
+  .dot.active {
+    background: #111;
+  }
+
   .lightbox {
     position: fixed;
     inset: 0;
@@ -258,7 +286,11 @@ nav: villa
     z-index: 9999;
     padding: 18px;
   }
-  .lightbox.open { display: flex; }
+
+  .lightbox.open {
+    display: flex;
+  }
+
   .lightboxInner {
     position: relative;
     width: min(1100px, 100%);
@@ -267,12 +299,14 @@ nav: villa
     align-items: center;
     justify-content: center;
   }
+
   .lightboxImg {
     max-width: 100%;
     max-height: 90vh;
     border-radius: 14px;
     background: #111;
   }
+
   .lbBtn {
     position: absolute;
     top: 50%;
@@ -284,8 +318,10 @@ nav: villa
     cursor: pointer;
     font-size: 1rem;
   }
+
   .lbPrev { left: 8px; }
   .lbNext { right: 8px; }
+
   .lbClose {
     position: absolute;
     top: -10px;
@@ -301,6 +337,7 @@ nav: villa
 
 <section class="heroCopy" aria-label="Our Townhome intro">
   <h1 class="headline">Our Townhome</h1>
+
   <p class="subline">
     A calm, spa inspired retreat designed for families who want the best of both worlds: the excitement of Disney, and a peaceful place to recharge.
   </p>
@@ -309,32 +346,34 @@ nav: villa
     <span class="chip">Sleeps up to 9</span>
     <span class="chip">3 bed / 3 full bath</span>
 
-<span class="chip">
-  1 <span class="bedHover" data-img="{{ '/photos/villagallery/33.webp' | relative_url }}">King</span>,
-  1 <span class="bedHover" data-img="{{ '/photos/villagallery/26.webp' | relative_url }}">Queen</span>,
-  2 Full (<span class="bedHover" data-img="{{ '/photos/villagallery/40.webp' | relative_url }}">Bunk</span>),
-  1 twin (<span class="bedHover" data-img="{{ '/photos/villagallery/42.webp' | relative_url }}">Trundle</span>)
-</span>
+    <span class="chip">
+      1 <span class="bedHover" data-img="{{ '/photos/villagallery/33.webp' | relative_url }}">King</span>,
+      1 <span class="bedHover" data-img="{{ '/photos/villagallery/26.webp' | relative_url }}">Queen</span>,
+      2 Full (<span class="bedHover" data-img="{{ '/photos/villagallery/40.webp' | relative_url }}">Bunk</span>),
+      1 twin (<span class="bedHover" data-img="{{ '/photos/villagallery/42.webp' | relative_url }}">Trundle</span>)
+    </span>
 
-<div class="chipSubline">
-  Need more rooms? Add this second
-  <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1739.jpeg' | relative_url }}">close by</span>
-  <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1741.jpeg' | relative_url }}">townhome</span>.
-</div>
-
-<div class="familyAmenities">
-  <span class="chip">Pack and play</span>
-  <span class="chip">Stroller</span>
-  <span class="chip">High chair</span>
-</div>
-
-    <span class="chip">Midday break friendly</span>
     <div class="chipSubline">
-      “Need more rooms? Add this second <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1739.jpeg' | relative_url }}">close by</span> <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1741.jpeg' | relative_url }}">townhome</span>.”
+      Need more beds? View this second nearby townhome.
     </div>
 
+    <div class="chipSubline">
+      -Only a <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1739.jpeg' | relative_url }}">3 minute walk</span>.
+    </div>
+
+    <div class="chipSubline">
+      -<a href="https://www.airbnb.com/rooms/1637267662005639708?unique_share_id=91b1e3e8-8a89-4acf-b4a5-6502de1c5001&amp;viralityEntryPoint=1&amp;s=76" target="_blank" rel="noopener noreferrer">Book now!</a>
+    </div>
+
+    <div class="familyAmenities">
+      <span class="chip">Pack and play</span>
+      <span class="chip">Stroller</span>
+      <span class="chip">High chair</span>
+    </div>
+
+    <span class="chip">Midday break friendly</span>
     <span class="chip">Steps to Windsor Hills amenities</span>
-    <span class="chip">Private screened splash pool</span>
+    <span class="chip">Private screened splash pool (with optional heat)</span>
     <span class="chip">Spa inspired calm</span>
   </div>
 
@@ -431,6 +470,7 @@ nav: villa
 <script>
 (function () {
   const track = document.getElementById("carTrack");
+
   if (track) {
     const items = Array.from(track.querySelectorAll(".carouselItem"));
 
@@ -450,9 +490,9 @@ nav: villa
       let lbIndex = 0;
 
       function lockScroll(lock) {
-        const v = lock ? "hidden" : "";
-        document.documentElement.style.overflow = v;
-        document.body.style.overflow = v;
+        const value = lock ? "hidden" : "";
+        document.documentElement.style.overflow = value;
+        document.body.style.overflow = value;
       }
 
       function lbShow(i) {
@@ -473,29 +513,40 @@ nav: villa
         lockScroll(false);
       }
 
-      function lbNextFn() { lbShow(lbIndex + 1); }
-      function lbPrevFn() { lbShow(lbIndex - 1); }
+      function lbNextFn() {
+        lbShow(lbIndex + 1);
+      }
 
-      items.forEach((img, i) => img.addEventListener("click", () => lbOpen(i)));
+      function lbPrevFn() {
+        lbShow(lbIndex - 1);
+      }
+
+      items.forEach((img, i) => {
+        img.addEventListener("click", () => lbOpen(i));
+      });
+
       lbNext.addEventListener("click", lbNextFn);
       lbPrev.addEventListener("click", lbPrevFn);
       lbClose.addEventListener("click", lbCloseFn);
+
       lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) lbCloseFn();
       });
 
       document.addEventListener("keydown", (e) => {
-        if (lightbox.classList.contains("open")) {
-          if (e.key === "Escape") lbCloseFn();
-          if (e.key === "ArrowRight") lbNextFn();
-          if (e.key === "ArrowLeft") lbPrevFn();
-        }
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "Escape") lbCloseFn();
+        if (e.key === "ArrowRight") lbNextFn();
+        if (e.key === "ArrowLeft") lbPrevFn();
       });
 
       function scrollByOne(direction) {
-        const w = items[0].getBoundingClientRect().width;
+        const width = items[0].getBoundingClientRect().width;
         const gap = 12;
-        track.scrollBy({ left: direction * (w + gap), behavior: "smooth" });
+        track.scrollBy({
+          left: direction * (width + gap),
+          behavior: "smooth"
+        });
       }
 
       prevBtn.addEventListener("click", () => scrollByOne(-1));
@@ -512,7 +563,9 @@ nav: villa
         const maxScroll = track.scrollWidth - track.clientWidth;
         const pct = maxScroll <= 1 ? 0 : (track.scrollLeft / maxScroll);
         const idx = Math.min(DOTS - 1, Math.max(0, Math.round(pct * (DOTS - 1))));
-        Array.from(dotsEl.children).forEach((d, i) => d.classList.toggle("active", i === idx));
+        Array.from(dotsEl.children).forEach((d, i) => {
+          d.classList.toggle("active", i === idx);
+        });
       }
 
       track.addEventListener("scroll", () => {
