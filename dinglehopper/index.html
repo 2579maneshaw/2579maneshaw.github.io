@@ -1,122 +1,136 @@
----
-layout: default
-title: Podcast Listener Offer
-permalink: /dinglehopper/
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast Listener Offer | Enchanted Villa of Windsor Hills</title>
 
-<script>
-  if (typeof gtag === 'function') {
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV1ZE9QFNP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FV1ZE9QFNP');
+
     gtag('event', 'podcast_visit', {
       event_category: 'marketing',
       event_label: 'twtad_podcast'
     });
-  }
 
-  setTimeout(function () {
-    window.location.replace('/');
-  }, 10000);
-</script>
+    setTimeout(function () {
+      window.location.href = "https://enchantedvillawh.com/";
+    }, 10000);
+  </script>
 
-<style>
-  .podcastWrap {
-    max-width: 800px;
-    margin: 40px auto 60px;
-    padding: 0 16px;
-  }
-
-  .podcastCard {
-    background: #f7f7f7;
-    border: 1px solid #ececec;
-    border-radius: 18px;
-    padding: 28px 22px;
-    text-align: center;
-  }
-
-  .podcastEyebrow {
-    margin: 0 0 8px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: #b1272c;
-  }
-
-  .podcastTitle {
-    margin: 0 0 12px;
-    font-size: 2rem;
-    line-height: 1.1;
-    color: #111;
-  }
-
-  .podcastText {
-    margin: 0 auto 14px;
-    max-width: 650px;
-    color: #444;
-    line-height: 1.6;
-    font-size: 1.02rem;
-  }
-
-  .podcastOffer {
-    margin: 18px auto;
-    padding: 16px;
-    max-width: 620px;
-    background: #fff;
-    border: 1px solid #e4e4e4;
-    border-radius: 14px;
-    color: #222;
-    line-height: 1.6;
-  }
-
-  .podcastButton {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 14px 22px;
-    border-radius: 12px;
-    background: #b1272c;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-  }
-
-  .podcastSmall {
-    margin-top: 14px;
-    color: #666;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 760px) {
-    .podcastTitle {
-      font-size: 1.65rem;
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #222;
     }
-  }
-</style>
 
-<div class="podcastWrap">
-  <div class="podcastCard">
-    <p class="podcastEyebrow">Welcome, podcast listeners</p>
-    <h1 class="podcastTitle">Enchanted Villa of Windsor Hills</h1>
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 18px 60px;
+    }
 
-    <p class="podcastText">
-      Thanks for visiting from The Wonderful Thing About Disney Podcast.
-      You are being redirected to our website now.
-    </p>
+    .card {
+      background: #f7f7f7;
+      border: 1px solid #ececec;
+      border-radius: 18px;
+      padding: 28px 22px;
+      text-align: center;
+    }
 
-    <div class="podcastOffer">
-      <strong>Podcast listener perk:</strong><br>
-      If you book through Airbnb, mention <strong>“dinglehopper”</strong> in your Airbnb message
-      to receive <strong>$20 off the cleaning fee</strong>.
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #b1272c;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.1;
+      color: #111;
+    }
+
+    .text {
+      margin: 0 auto 14px;
+      max-width: 650px;
+      color: #444;
+      line-height: 1.6;
+      font-size: 1.02rem;
+    }
+
+    .offer {
+      margin: 18px auto;
+      padding: 16px;
+      max-width: 620px;
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 14px;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      background: #b1272c;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .small {
+      margin-top: 14px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      h1 {
+        font-size: 1.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Welcome, podcast listeners</p>
+      <h1>Enchanted Villa of Windsor Hills</h1>
+
+      <p class="text">
+        Thanks for visiting from The Wonderful Thing About Disney Podcast.
+      </p>
+
+      <div class="offer">
+        <strong>Podcast listener perk:</strong><br>
+        If you book through Airbnb, mention <strong>“dinglehopper”</strong> in your Airbnb message to receive <strong>$20 off the cleaning fee</strong>.
+      </div>
+
+      <a class="button" href="https://enchantedvillawh.com/">
+        Click here to continue
+      </a>
+
+      <p class="small">
+        You will be redirected automatically in 10 seconds.
+      </p>
     </div>
-
-    <a class="podcastButton" href="/">
-      Click here to continue
-    </a>
-
-    <p class="podcastSmall">
-      You will be redirected automatically in 10 seconds.
-    </p>
   </div>
-</div>
 
-<noscript>
-  <meta http-equiv="refresh" content="10; url=/" />
-</noscript>
+  <noscript>
+    <meta http-equiv="refresh" content="10; url=https://enchantedvillawh.com/">
+  </noscript>
+</body>
+</html>
