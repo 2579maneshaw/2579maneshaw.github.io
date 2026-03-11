@@ -113,6 +113,39 @@ nav: villa
     line-height: 1.6;
   }
 
+  .bullets {
+    margin: 10px 0 0;
+    padding-left: 18px;
+    color: #333;
+    line-height: 1.75;
+  }
+
+  .bullets li {
+    margin: 6px 0;
+  }
+
+  .videoFrame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .videoFrame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .videoCaption {
+    margin-top: 10px;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
   .carousel {
     position: relative;
   }
@@ -293,14 +326,26 @@ nav: villa
 
     <div class="chipSubline">
       Need to sleep more guests? When you book Enchanted Villa, ask Mark about the availability of <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1741.jpeg' | relative_url }}">Our Hyperspace Hideaway</span>. It's an additional 3 bed / 3 bath townhome and it&#39;s only a
-      <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1739.jpeg' | relative_url }}">3 minute walk from Enchanted Villa! </span>.
+      <span class="inlinePhotoHover" data-img="{{ '/photos/IMG_1739.jpeg' | relative_url }}">3 minute walk from Enchanted Villa!</span>
     </div>
-
-    
   </div>
 </section>
 
 <section class="grid2" aria-label="Townhome content grid">
+  <div class="card">
+    <div class="videoFrame" aria-label="Walkthrough video">
+      <iframe
+        src="https://www.youtube.com/embed/j87aWOF-fpM"
+        title="Enchanted Villa of Windsor Hills Townhome (Official)"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="videoCaption">Walkthrough video</div>
+  </div>
+
   <div class="card">
     <h2>Townhome Photos</h2>
     <p>Click any photo for a larger view.</p>
@@ -335,6 +380,26 @@ nav: villa
         <div id="carCount"></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="grid2" style="margin-top:18px;" aria-label="Good to know">
+  <div class="card">
+    <h2>Good to Know</h2>
+    <ul class="bullets">
+      <li>Gated Windsor Hills community near Disney</li>
+      <li>Great for midday breaks and calm evenings</li>
+      <li>Walkable to clubhouse and waterpark</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>More details</h2>
+    <ul class="bullets">
+      <li>Perfect for families who want a calmer place to recharge</li>
+      <li>Easy access to groceries, food, and essentials</li>
+      <li>Designed for comfort, privacy, and rest</li>
+    </ul>
   </div>
 </section>
 
