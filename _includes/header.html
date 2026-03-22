@@ -1,172 +1,203 @@
----
-layout: default
-title: Enchanted Villa of Windsor Hills
----
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
 
-<section class="home-header">
+<style>
+.reviewsHandwritten{
+  display:block;
+  width:100%;
+  text-align:center;
+  margin-top:10px;
 
-  <!-- VIDEO BACKGROUND -->
-  <video class="hero-video-bg" autoplay muted loop playsinline>
+  font-family:"Caveat", cursive;
+  font-size:30px;
+  line-height:1;
+
+  color:#c62828;
+  text-decoration:none;
+
+  transform:rotate(-1deg);
+  opacity:.95;
+  transition:all .2s ease;
+}
+
+.reviewsHandwritten:hover{
+  color:#a91f23;
+  opacity:1;
+  transform:rotate(0deg);
+}
+
+.brandTagline{
+  margin-top:8px;
+  margin-bottom:8px;
+  line-height:1.15;
+}
+
+.brandAltName{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:0;
+  margin-bottom:2px;
+
+  font-size:0.82rem;
+  color:#777;
+  line-height:1.2;
+  text-decoration:none;
+}
+
+.brandAltName:link,
+.brandAltName:visited,
+.brandAltName:hover,
+.brandAltName:active{
+  color:#777;
+  text-decoration:none;
+}
+
+.brandAltName:hover{
+  cursor:pointer;
+  opacity:.92;
+}
+
+.airbnbLogo{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  flex:0 0 auto;
+  transform:translateY(1px);
+}
+
+/* added only for video background */
+.siteHeader{
+  position:relative;
+  overflow:hidden;
+}
+
+.siteHeaderVideo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.12;
+  pointer-events:none;
+  z-index:-1;
+}
+
+@media (max-width:860px){
+  .brandTagline{
+    margin-top:6px;
+    margin-bottom:6px;
+  }
+
+  .brandAltName{
+    font-size:0.78rem;
+    gap:8px;
+  }
+
+  .airbnbLogo{
+    width:20px;
+    height:20px;
+  }
+
+  .reviewsHandwritten{
+    margin-top:12px;
+  }
+}
+</style>
+
+<header class="siteHeader">
+
+  <video class="siteHeaderVideo" autoplay muted loop playsinline>
     <source src="{{ '/videos/2579_Maneshaw_Ln.mp4' | relative_url }}" type="video/mp4">
   </video>
 
-  <!-- OPTIONAL LIGHT OVERLAY (keeps your soft white look) -->
-  <div class="hero-overlay"></div>
+  <div class="headerInner">
 
-  <!-- YOUR EXISTING CONTENT (UNCHANGED) -->
-  <div class="header-content">
+    <a class="brandBlock" href="{{ '/' | relative_url }}" aria-label="Home">
+      <picture class="brandLogo">
+        <source type="image/webp"
+          srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
+        <img
+          src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
+          srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
+          sizes="180px"
+          alt="Enchanted Villa of Windsor Hills logo"
+          width="180"
+          height="168"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+    </a>
 
-    <img src="/images/logo.png" alt="Enchanted Villa Logo" class="logo">
+    <div class="headerMid">
 
-    <h1>Enchanted Villa of Windsor Hills Townhome</h1>
+      <div class="brandText">
+        <div class="brandName">Enchanted Villa of Windsor Hills Townhome</div>
 
-    <p class="tagline"><em>Your Pause Between the Parks</em></p>
+        <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
 
-    <p class="subtext">
-      <img src="/images/airbnb-logo.png" class="airbnb-icon">
-      Our Happily Ever After House
-    </p>
+        <a class="brandAltName"
+           href="https://www.airbnb.com/rooms/1626958722930248767?unique_share_id=ab4eb228-eeb2-4977-a2a3-35df18190eba&viralityEntryPoint=1&s=76"
+           target="_blank"
+           rel="noopener"
+           title="View on Airbnb">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
+            alt="Airbnb"
+            class="airbnbLogo"
+          />
+          <span>Our Happily Ever After House</span>
+        </a>
+      </div>
 
-    <div class="nav-buttons">
-      <a href="/" class="nav-btn active">Home</a>
-      <a href="/our-townhome/" class="nav-btn">Our Townhome</a>
-      <a href="/nearby/" class="nav-btn">Nearby</a>
-      <a href="/attractions/" class="nav-btn">Attractions</a>
-      <a href="/windsor-hills/" class="nav-btn">Windsor Hills</a>
-      <a href="/pet-policy/" class="nav-btn">Pet Policy</a>
+      <nav class="mainNav" aria-label="Primary navigation">
+        <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
+        <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/villa.html' | relative_url }}">Our Townhome</a>
+        <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
+        <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
+        <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
+        <a class="{% if page.nav == 'petpolicy' %}active{% endif %}" href="{{ '/petpolicy.html' | relative_url }}">Pet Policy</a>
+      </nav>
+
+      <a class="reviewsHandwritten" href="{{ '/reviews.html' | relative_url }}">
+        Read our Reviews!
+      </a>
+
     </div>
 
-    <h2 class="reviews-text">Read our Reviews!</h2>
+    <div class="headerRight">
 
-    <a href="/availability/" class="cta-btn">Check Availability</a>
+      <a class="headerCTA"
+         href="https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY"
+         target="_blank"
+         rel="noopener">
+        Check Availability
+      </a>
 
-    <div class="socials">
-      <a href="#"><img src="/images/facebook.png"></a>
-      <a href="#"><img src="/images/instagram.png"></a>
+      <div class="socialIcons" aria-label="Social links">
+
+        <a class="socialLink"
+           href="https://www.facebook.com/profile.php?id=61586521704194"
+           target="_blank"
+           rel="noopener"
+           aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3h-2.2v7A10 10 0 0 0 22 12z"/>
+          </svg>
+        </a>
+
+        <a class="socialLink"
+           href="https://www.instagram.com/enchanted_villa_windsor_hills"
+           target="_blank"
+           rel="noopener"
+           aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/>
+          </svg>
+        </a>
+
+      </div>
     </div>
 
   </div>
-</section>
-
-<style>
-
-/* ===== KEEP YOUR DESIGN ===== */
-
-.home-header {
-  position: relative;
-  overflow: hidden;
-  padding: 60px 20px;
-  text-align: left;
-}
-
-/* ===== VIDEO BACKGROUND ===== */
-
-.hero-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-  /* Adjust visibility here */
-  opacity: 0.12;
-
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Soft white overlay to match your current look */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.88);
-  z-index: 1;
-}
-
-/* Ensure content stays above video */
-.header-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-}
-
-/* ===== EXISTING STYLES (UNCHANGED LOOK) ===== */
-
-.logo {
-  width: 120px;
-  margin-bottom: 20px;
-}
-
-h1 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.tagline {
-  font-size: 24px;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.subtext {
-  color: #888;
-  margin-bottom: 25px;
-}
-
-.airbnb-icon {
-  width: 18px;
-  vertical-align: middle;
-  margin-right: 6px;
-}
-
-.nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 30px;
-}
-
-.nav-btn {
-  padding: 12px 22px;
-  border-radius: 999px;
-  border: 1px solid #ddd;
-  background: #f5f5f5;
-  text-decoration: none;
-  color: #222;
-  font-weight: 500;
-}
-
-.nav-btn.active {
-  background: #000;
-  color: #fff;
-}
-
-.reviews-text {
-  color: #c33;
-  font-style: italic;
-  margin-bottom: 20px;
-}
-
-.cta-btn {
-  display: inline-block;
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  padding: 18px;
-  border-radius: 999px;
-  background: #2f69c7;
-  color: #fff;
-  font-size: 22px;
-  text-decoration: none;
-  margin-bottom: 30px;
-}
-
-.socials img {
-  width: 40px;
-  margin-right: 15px;
-  opacity: 0.6;
-}
-
-</style>
+</header>
