@@ -1,130 +1,172 @@
-<header class="hero">
-  <div class="hero-video-wrap">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="{{ '/videos/2579_Maneshaw_Ln.mp4' | relative_url }}" type="video/mp4">
-    </video>
-    <div class="hero-video-overlay"></div>
-  </div>
+---
+layout: default
+title: Enchanted Villa of Windsor Hills
+---
 
-  <div class="hero-content">
-    <p class="eyebrow">Enchanted Villa of Windsor Hills</p>
-    <h1>Your pause between the parks</h1>
-    <p class="hero-subtext">
-      A thoughtfully designed Windsor Hills townhome for families who want comfort,
-      convenience, and a little extra magic between Disney days.
+<section class="home-header">
+
+  <!-- VIDEO BACKGROUND -->
+  <video class="hero-video-bg" autoplay muted loop playsinline>
+    <source src="{{ '/videos/2579_Maneshaw_Ln.mp4' | relative_url }}" type="video/mp4">
+  </video>
+
+  <!-- OPTIONAL LIGHT OVERLAY (keeps your soft white look) -->
+  <div class="hero-overlay"></div>
+
+  <!-- YOUR EXISTING CONTENT (UNCHANGED) -->
+  <div class="header-content">
+
+    <img src="/images/logo.png" alt="Enchanted Villa Logo" class="logo">
+
+    <h1>Enchanted Villa of Windsor Hills Townhome</h1>
+
+    <p class="tagline"><em>Your Pause Between the Parks</em></p>
+
+    <p class="subtext">
+      <img src="/images/airbnb-logo.png" class="airbnb-icon">
+      Our Happily Ever After House
     </p>
 
-    <div class="hero-buttons">
-      <a href="{{ '/availability/' | relative_url }}" class="btn btn-primary">Check Availability</a>
-      <a href="{{ '/reviews/' | relative_url }}" class="btn btn-secondary">Read Reviews</a>
+    <div class="nav-buttons">
+      <a href="/" class="nav-btn active">Home</a>
+      <a href="/our-townhome/" class="nav-btn">Our Townhome</a>
+      <a href="/nearby/" class="nav-btn">Nearby</a>
+      <a href="/attractions/" class="nav-btn">Attractions</a>
+      <a href="/windsor-hills/" class="nav-btn">Windsor Hills</a>
+      <a href="/pet-policy/" class="nav-btn">Pet Policy</a>
     </div>
+
+    <h2 class="reviews-text">Read our Reviews!</h2>
+
+    <a href="/availability/" class="cta-btn">Check Availability</a>
+
+    <div class="socials">
+      <a href="#"><img src="/images/facebook.png"></a>
+      <a href="#"><img src="/images/instagram.png"></a>
+    </div>
+
   </div>
-</header>
+</section>
 
 <style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-    min-height: 560px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 24px;
-    text-align: center;
-    color: #fff;
-    isolation: isolate;
-  }
 
-  .hero-video-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-  }
+/* ===== KEEP YOUR DESIGN ===== */
 
-  .hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.18; /* adjust 0.10 to 0.25 for more or less visibility */
-  }
+.home-header {
+  position: relative;
+  overflow: hidden;
+  padding: 60px 20px;
+  text-align: left;
+}
 
-  .hero-video-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
-    z-index: 1;
-  }
+/* ===== VIDEO BACKGROUND ===== */
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-  }
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 
-  .eyebrow {
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    opacity: 0.95;
-  }
+  /* Adjust visibility here */
+  opacity: 0.12;
 
-  .hero h1 {
-    font-size: clamp(2.4rem, 5vw, 4.5rem);
-    line-height: 1.05;
-    margin: 0 0 18px;
-  }
+  z-index: 0;
+  pointer-events: none;
+}
 
-  .hero-subtext {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    max-width: 700px;
-    margin: 0 auto 28px;
-    opacity: 0.98;
-  }
+/* Soft white overlay to match your current look */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.88);
+  z-index: 1;
+}
 
-  .hero-buttons {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+/* Ensure content stays above video */
+.header-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
 
-  .btn {
-    display: inline-block;
-    padding: 14px 24px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
+/* ===== EXISTING STYLES (UNCHANGED LOOK) ===== */
 
-  .btn:hover {
-    transform: translateY(-1px);
-  }
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
 
-  .btn-primary {
-    background: #ffffff;
-    color: #111111;
-  }
+h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
 
-  .btn-secondary {
-    background: rgba(255,255,255,0.14);
-    color: #ffffff;
-    border: 1px solid rgba(255,255,255,0.35);
-    backdrop-filter: blur(4px);
-  }
+.tagline {
+  font-size: 24px;
+  color: #666;
+  margin-bottom: 10px;
+}
 
-  @media (max-width: 768px) {
-    .hero {
-      min-height: 480px;
-      padding: 80px 20px;
-    }
+.subtext {
+  color: #888;
+  margin-bottom: 25px;
+}
 
-    .hero-subtext {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-  }
+.airbnb-icon {
+  width: 18px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.nav-btn {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+}
+
+.nav-btn.active {
+  background: #000;
+  color: #fff;
+}
+
+.reviews-text {
+  color: #c33;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  padding: 18px;
+  border-radius: 999px;
+  background: #2f69c7;
+  color: #fff;
+  font-size: 22px;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.socials img {
+  width: 40px;
+  margin-right: 15px;
+  opacity: 0.6;
+}
+
 </style>
