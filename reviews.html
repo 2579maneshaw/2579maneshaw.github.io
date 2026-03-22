@@ -24,7 +24,6 @@ nav: reviews
   margin:0 0 8px;
   font-size:2rem;
   letter-spacing:-0.03em;
-  line-height:1.1;
   color:#111;
 }
 
@@ -33,7 +32,6 @@ nav: reviews
   max-width:800px;
   color:#444;
   line-height:1.6;
-  font-size:1rem;
 }
 
 .reviewsActions{
@@ -59,18 +57,12 @@ nav: reviews
 
 .airbnbReviewsBtn:hover{
   background:#fcfcfc;
-  border-color:#d9d9d9;
 }
 
 .airbnbLogo{
-  width:18px;
-  height:18px;
-  flex:0 0 auto;
-}
-
-.reviewsNote{
-  font-size:0.92rem;
-  color:#666;
+  width:20px;
+  height:20px;
+  object-fit:contain;
 }
 
 .reviewCarousel{
@@ -133,24 +125,15 @@ nav: reviews
   font-size:28px;
   cursor:pointer;
 }
-
-@media (max-width:760px){
-  .reviewsTitle{
-    font-size:1.7rem;
-  }
-
-  .reviewCarousel{
-    height:360px;
-  }
-}
 </style>
 
 <div class="reviewsWrap">
 
-  <section class="reviewsIntro" aria-label="Reviews intro">
+  <section class="reviewsIntro">
     <h1 class="reviewsTitle">Guest Reviews</h1>
+
     <p class="reviewsText">
-      Browse screenshots of guest feedback below, or open our Airbnb review page to see the full review experience directly on Airbnb.
+      See what guests are saying about their stay, or view our live reviews directly on Airbnb.
     </p>
 
     <div class="reviewsActions">
@@ -159,21 +142,19 @@ nav: reviews
         href="https://www.airbnb.com/rooms/1626958722930248767/reviews?photo_id=2528016015&source_impression_id=p3_1774210873_P3Ys82HvZmi1IEt-&previous_page_section_name=1000"
         target="_blank"
         rel="noopener">
-        <svg class="airbnbLogo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M12 2.5c-1.6 0-2.82 1.21-3.72 2.78-.92 1.6-1.68 3.61-2.46 5.11-.74 1.43-1.47 2.54-2.07 3.53C3.18 14.86 2.75 15.95 2.75 17c0 2.57 2.03 4.5 4.56 4.5 1.92 0 3.42-.97 4.69-2.74 1.27 1.77 2.77 2.74 4.69 2.74 2.53 0 4.56-1.93 4.56-4.5 0-1.05-.43-2.14-1-3.08-.6-.99-1.33-2.1-2.07-3.53-.78-1.5-1.54-3.51-2.46-5.11C14.82 3.71 13.6 2.5 12 2.5Zm0 3c.42 0 .98.4 1.65 1.56.67 1.16 1.38 3 2.17 4.52.82 1.58 1.63 2.82 2.27 3.87.64 1.05.91 1.69.91 2.55 0 .93-.72 1.5-1.56 1.5-.95 0-1.94-.62-3.08-2.53l-.86-1.44-.86 1.44C11.5 18.88 10.51 19.5 9.56 19.5 8.72 19.5 8 18.93 8 18c0-.86.27-1.5.91-2.55.64-1.05 1.45-2.29 2.27-3.87.79-1.52 1.5-3.36 2.17-4.52C11.02 5.9 11.58 5.5 12 5.5Z"
-            fill="#FF5A5F"/>
-        </svg>
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
+          alt="Airbnb"
+          class="airbnbLogo"
+        />
+
         <span>View all Airbnb reviews</span>
       </a>
-
-      <div class="reviewsNote">
-        For live Airbnb review details, use the button above.
-      </div>
     </div>
   </section>
 
-  <div class="reviewCarousel" aria-label="Guest review screenshots">
+  <div class="reviewCarousel">
 
     {% assign review_files = site.static_files
     | where_exp: "f", "f.path contains '/photos/reviewGallery/'"
@@ -200,54 +181,54 @@ nav: reviews
   </div>
 </div>
 
-<div id="reviewModal" class="reviewModal" aria-hidden="true">
-  <button class="reviewModalClose" onclick="closeReviewModal()" aria-label="Close review image">×</button>
-  <img id="reviewModalImg" alt="Expanded guest review">
+<div id="reviewModal" class="reviewModal">
+  <button class="reviewModalClose" onclick="closeReviewModal()">×</button>
+  <img id="reviewModalImg">
 </div>
 
 <script>
+
 (function(){
 
-  const slides = document.querySelectorAll(".reviewSlide");
-  if(!slides.length) return;
+const slides = document.querySelectorAll(".reviewSlide");
+if(!slides.length) return;
 
-  let index = 0;
+let index = 0;
 
-  function show(i){
-    slides.forEach(s => s.classList.remove("active"));
-    slides[i].classList.add("active");
-  }
+function show(i){
+slides.forEach(s=>s.classList.remove("active"));
+slides[i].classList.add("active");
+}
 
-  function next(){
-    index++;
-    if(index >= slides.length){
-      index = 0;
-    }
-    show(index);
-  }
+function next(){
+index++;
+if(index >= slides.length){
+index = 0;
+}
+show(index);
+}
 
-  setInterval(next, 3500);
+setInterval(next,3500);
 
-  slides.forEach(img => {
-    img.addEventListener("click", () => {
-      openReviewModal(img.src);
-    });
-  });
+slides.forEach(img=>{
+img.addEventListener("click",()=>{
+openReviewModal(img.src);
+});
+});
 
 })();
 
 function openReviewModal(src){
-  const modal = document.getElementById("reviewModal");
-  const img = document.getElementById("reviewModalImg");
+const modal=document.getElementById("reviewModal");
+const img=document.getElementById("reviewModalImg");
 
-  img.src = src;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
+img.src=src;
+modal.classList.add("open");
 }
 
 function closeReviewModal(){
-  const modal = document.getElementById("reviewModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
+const modal=document.getElementById("reviewModal");
+modal.classList.remove("open");
 }
+
 </script>
