@@ -25,10 +25,11 @@
   transform:rotate(0deg);
 }
 
+/* Subtle Airbnb name — refined */
 .brandAltName{
   font-size:0.78rem;
-  color:#888;
-  margin-top:2px;
+  color:#999;
+  margin-top:4px;
   line-height:1.2;
   letter-spacing:0.02em;
 }
@@ -60,7 +61,10 @@
 
       <div class="brandText">
         <div class="brandName">Enchanted Villa of Windsor Hills Townhome</div>
-        <div class="brandAltName">Our Happily Ever After House</div>
+
+        <!-- Airbnb Listing Name (clean + intentional) -->
+        <div class="brandAltName">“Our Happily Ever After House”</div>
+
         <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
       </div>
 
@@ -73,13 +77,14 @@
         <a class="{% if page.nav == 'petpolicy' %}active{% endif %}" href="{{ '/petpolicy.html' | relative_url }}">Pet Policy</a>
       </nav>
 
+      <!-- Reviews Link -->
       <a class="reviewsHandwritten" href="{{ '/reviews.html' | relative_url }}">
         Read our Reviews!
       </a>
 
     </div>
 
-    <!-- RIGHT: CTA + Social below -->
+    <!-- RIGHT: CTA + Social -->
     <div class="headerRight">
 
       <a class="headerCTA"
