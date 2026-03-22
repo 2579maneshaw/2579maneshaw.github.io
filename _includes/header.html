@@ -24,6 +24,14 @@
   opacity:1;
   transform:rotate(0deg);
 }
+
+.brandAltName{
+  font-size:0.78rem;
+  color:#888;
+  margin-top:2px;
+  line-height:1.2;
+  letter-spacing:0.02em;
+}
 </style>
 
 <header class="siteHeader">
@@ -52,6 +60,7 @@
 
       <div class="brandText">
         <div class="brandName">Enchanted Villa of Windsor Hills Townhome</div>
+        <div class="brandAltName">Our Happily Ever After House</div>
         <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
       </div>
 
@@ -64,10 +73,8 @@
         <a class="{% if page.nav == 'petpolicy' %}active{% endif %}" href="{{ '/petpolicy.html' | relative_url }}">Pet Policy</a>
       </nav>
 
-      <!-- Handwritten Reviews Link -->
-      <a class="reviewsHandwritten"
-         href="{{ '/reviews.html' | relative_url }}">
-         Read our Reviews!
+      <a class="reviewsHandwritten" href="{{ '/reviews.html' | relative_url }}">
+        Read our Reviews!
       </a>
 
     </div>
