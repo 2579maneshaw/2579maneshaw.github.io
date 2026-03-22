@@ -1,181 +1,130 @@
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+<header class="hero">
+  <div class="hero-video-wrap">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="{{ '/videos/2579_Maneshaw_Ln.mp4' | relative_url }}" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+  </div>
 
-<style>
-.reviewsHandwritten{
-  display:block;
-  width:100%;
-  text-align:center;
-  margin-top:10px;
+  <div class="hero-content">
+    <p class="eyebrow">Enchanted Villa of Windsor Hills</p>
+    <h1>Your pause between the parks</h1>
+    <p class="hero-subtext">
+      A thoughtfully designed Windsor Hills townhome for families who want comfort,
+      convenience, and a little extra magic between Disney days.
+    </p>
 
-  font-family:"Caveat", cursive;
-  font-size:30px;
-  line-height:1;
-
-  color:#c62828;
-  text-decoration:none;
-
-  transform:rotate(-1deg);
-  opacity:.95;
-  transition:all .2s ease;
-}
-
-.reviewsHandwritten:hover{
-  color:#a91f23;
-  opacity:1;
-  transform:rotate(0deg);
-}
-
-.brandTagline{
-  margin-top:8px;
-  margin-bottom:8px;
-  line-height:1.15;
-}
-
-.brandAltName{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:0;
-  margin-bottom:2px;
-
-  font-size:0.82rem;
-  color:#777;
-  line-height:1.2;
-  text-decoration:none;
-}
-
-.brandAltName:link,
-.brandAltName:visited,
-.brandAltName:hover,
-.brandAltName:active{
-  color:#777;
-  text-decoration:none;
-}
-
-.brandAltName:hover{
-  cursor:pointer;
-  opacity:.92;
-}
-
-.airbnbLogo{
-  width:22px;
-  height:22px;
-  object-fit:contain;
-  flex:0 0 auto;
-  transform:translateY(1px);
-}
-
-@media (max-width:860px){
-  .brandTagline{
-    margin-top:6px;
-    margin-bottom:6px;
-  }
-
-  .brandAltName{
-    font-size:0.78rem;
-    gap:8px;
-  }
-
-  .airbnbLogo{
-    width:20px;
-    height:20px;
-  }
-
-  .reviewsHandwritten{
-    margin-top:12px;
-  }
-}
-</style>
-
-<header class="siteHeader">
-  <div class="headerInner">
-
-    <a class="brandBlock" href="{{ '/' | relative_url }}" aria-label="Home">
-      <picture class="brandLogo">
-        <source type="image/webp"
-          srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
-        <img
-          src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
-          srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
-          sizes="180px"
-          alt="Enchanted Villa of Windsor Hills logo"
-          width="180"
-          height="168"
-          loading="eager"
-          decoding="async"
-        />
-      </picture>
-    </a>
-
-    <div class="headerMid">
-
-      <div class="brandText">
-        <div class="brandName">Enchanted Villa of Windsor Hills Townhome</div>
-
-        <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
-
-        <a class="brandAltName"
-           href="https://www.airbnb.com/rooms/1626958722930248767?unique_share_id=ab4eb228-eeb2-4977-a2a3-35df18190eba&viralityEntryPoint=1&s=76"
-           target="_blank"
-           rel="noopener"
-           title="View on Airbnb">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
-            alt="Airbnb"
-            class="airbnbLogo"
-          />
-          <span>Our Happily Ever After House</span>
-        </a>
-      </div>
-
-      <nav class="mainNav" aria-label="Primary navigation">
-        <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
-        <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/villa.html' | relative_url }}">Our Townhome</a>
-        <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
-        <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
-        <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
-        <a class="{% if page.nav == 'petpolicy' %}active{% endif %}" href="{{ '/petpolicy.html' | relative_url }}">Pet Policy</a>
-      </nav>
-
-      <a class="reviewsHandwritten" href="{{ '/reviews.html' | relative_url }}">
-        Read our Reviews!
-      </a>
-
+    <div class="hero-buttons">
+      <a href="{{ '/availability/' | relative_url }}" class="btn btn-primary">Check Availability</a>
+      <a href="{{ '/reviews/' | relative_url }}" class="btn btn-secondary">Read Reviews</a>
     </div>
-
-    <div class="headerRight">
-
-      <a class="headerCTA"
-         href="https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY"
-         target="_blank"
-         rel="noopener">
-        Check Availability
-      </a>
-
-      <div class="socialIcons" aria-label="Social links">
-
-        <a class="socialLink"
-           href="https://www.facebook.com/profile.php?id=61586521704194"
-           target="_blank"
-           rel="noopener"
-           aria-label="Facebook">
-          <svg width="20" height="20" viewBox="0 0 24 24">
-            <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3h-2.2v7A10 10 0 0 0 22 12z"/>
-          </svg>
-        </a>
-
-        <a class="socialLink"
-           href="https://www.instagram.com/enchanted_villa_windsor_hills"
-           target="_blank"
-           rel="noopener"
-           aria-label="Instagram">
-          <svg width="20" height="20" viewBox="0 0 24 24">
-            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/>
-          </svg>
-        </a>
-
-      </div>
-    </div>
-
   </div>
 </header>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 24px;
+    text-align: center;
+    color: #fff;
+    isolation: isolate;
+  }
+
+  .hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.18; /* adjust 0.10 to 0.25 for more or less visibility */
+  }
+
+  .hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .eyebrow {
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.95;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    margin: 0 0 18px;
+  }
+
+  .hero-subtext {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 28px;
+    opacity: 0.98;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(4px);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 480px;
+      padding: 80px 20px;
+    }
+
+    .hero-subtext {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  }
+</style>
