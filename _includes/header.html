@@ -25,14 +25,20 @@
   transform:rotate(0deg);
 }
 
+.brandTagline{
+  margin-top:8px;
+  margin-bottom:8px;
+  line-height:1.15;
+}
+
 .brandAltName{
   display:flex;
   align-items:center;
   gap:10px;
-  margin-top:6px;
-  margin-bottom:4px;
+  margin-top:0;
+  margin-bottom:2px;
 
-  font-size:0.85rem;
+  font-size:0.82rem;
   color:#777;
   line-height:1.2;
   text-decoration:none;
@@ -52,11 +58,32 @@
 }
 
 .airbnbLogo{
-  width:20px;
-  height:20px;
+  width:22px;
+  height:22px;
   object-fit:contain;
-  transform:translateY(1px);
   flex:0 0 auto;
+  transform:translateY(1px);
+}
+
+@media (max-width:860px){
+  .brandTagline{
+    margin-top:6px;
+    margin-bottom:6px;
+  }
+
+  .brandAltName{
+    font-size:0.78rem;
+    gap:8px;
+  }
+
+  .airbnbLogo{
+    width:20px;
+    height:20px;
+  }
+
+  .reviewsHandwritten{
+    margin-top:12px;
+  }
 }
 </style>
 
@@ -85,6 +112,8 @@
       <div class="brandText">
         <div class="brandName">Enchanted Villa of Windsor Hills Townhome</div>
 
+        <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
+
         <a class="brandAltName"
            href="https://www.airbnb.com/rooms/1626958722930248767?unique_share_id=ab4eb228-eeb2-4977-a2a3-35df18190eba&viralityEntryPoint=1&s=76"
            target="_blank"
@@ -97,8 +126,6 @@
           />
           <span>Our Happily Ever After House</span>
         </a>
-
-        <div class="brandTagline"><em>Your Pause Between the Parks</em></div>
       </div>
 
       <nav class="mainNav" aria-label="Primary navigation">
