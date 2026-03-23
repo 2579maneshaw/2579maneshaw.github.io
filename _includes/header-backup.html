@@ -65,34 +65,26 @@
   transform:translateY(1px);
 }
 
-/* Added only for video background */
+/* only added for video background */
 .siteHeader{
   position:relative;
   overflow:hidden;
 }
 
-.headerVideoBg{
+.siteHeaderVideo{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
+  opacity:.12;
+  pointer-events:none;
   z-index:0;
-  pointer-events:none;
-  opacity:.16;
-}
-
-.headerVideoOverlay{
-  position:absolute;
-  inset:0;
-  background:rgba(255,255,255,.78);
-  z-index:1;
-  pointer-events:none;
 }
 
 .headerInner{
   position:relative;
-  z-index:2;
+  z-index:1;
 }
 
 @media (max-width:860px){
@@ -119,20 +111,19 @@
 
 <header class="siteHeader">
 
-  <video class="headerVideoBg" autoplay muted loop playsinline>
-    <source src="{{ '/videos/2579_Maneshaw_Ln.mp4' | relative_url }}" type="video/mp4">
+  <video class="siteHeaderVideo" autoplay muted loop playsinline>
+    <source src="videos/2579_Maneshaw_Ln.mp4" type="video/mp4">
   </video>
-  <div class="headerVideoOverlay" aria-hidden="true"></div>
 
   <div class="headerInner">
 
-    <a class="brandBlock" href="{{ '/' | relative_url }}" aria-label="Home">
+    <a class="brandBlock" href="/" aria-label="Home">
       <picture class="brandLogo">
         <source type="image/webp"
-          srcset="{{ '/photos/EVWHlogo-320w.webp' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.webp' | relative_url }} 600w">
+          srcset="/photos/EVWHlogo-320w.webp 320w, /photos/EVWHlogo-600w.webp 600w">
         <img
-          src="{{ '/photos/EVWHlogo-600w.jpg' | relative_url }}"
-          srcset="{{ '/photos/EVWHlogo-320w.jpg' | relative_url }} 320w, {{ '/photos/EVWHlogo-600w.jpg' | relative_url }} 600w"
+          src="/photos/EVWHlogo-600w.jpg"
+          srcset="/photos/EVWHlogo-320w.jpg 320w, /photos/EVWHlogo-600w.jpg 600w"
           sizes="180px"
           alt="Enchanted Villa of Windsor Hills logo"
           width="180"
@@ -165,15 +156,15 @@
       </div>
 
       <nav class="mainNav" aria-label="Primary navigation">
-        <a class="{% if page.nav == 'home' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
-        <a class="{% if page.nav == 'villa' %}active{% endif %}" href="{{ '/villa.html' | relative_url }}">Our Townhome</a>
-        <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="{{ '/nearby.html' | relative_url }}">Nearby</a>
-        <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="{{ '/attractions.html' | relative_url }}">Attractions</a>
-        <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="{{ '/windsor-hills.html' | relative_url }}">Windsor Hills</a>
-        <a class="{% if page.nav == 'petpolicy' %}active{% endif %}" href="{{ '/petpolicy.html' | relative_url }}">Pet Policy</a>
+        <a class="{% if page.nav == 'home' %}active{% endif %}" href="/">Home</a>
+        <a class="{% if page.nav == 'villa' %}active{% endif %}" href="/villa.html">Our Townhome</a>
+        <a class="{% if page.nav == 'nearby' %}active{% endif %}" href="/nearby.html">Nearby</a>
+        <a class="{% if page.nav == 'attractions' %}active{% endif %}" href="/attractions.html">Attractions</a>
+        <a class="{% if page.nav == 'windsor' %}active{% endif %}" href="/windsor-hills.html">Windsor Hills</a>
+        <a class="{% if page.nav == 'petpolicy' %}active{% endif %}" href="/petpolicy.html">Pet Policy</a>
       </nav>
 
-      <a class="reviewsHandwritten" href="{{ '/reviews.html' | relative_url }}">
+      <a class="reviewsHandwritten" href="/reviews.html">
         Read our Reviews!
       </a>
 
