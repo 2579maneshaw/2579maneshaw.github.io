@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Discount Offer | Enchanted Villa of Windsor Hills</title>
-  <meta name="description" content="Social media follower discount offer for select stays at Enchanted Villa of Windsor Hills." />
+  <meta name="description" content="Social media follower discount offer for select last minute stays at Enchanted Villa of Windsor Hills." />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV1ZE9QFNP"></script>
@@ -62,35 +62,22 @@
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: 2.1rem;
+      margin: 0 0 14px;
+      font-size: 2.15rem;
       line-height: 1.1;
       text-align: center;
       color: #111;
     }
 
     .intro {
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto 18px;
       text-align: center;
       color: #444;
-      font-size: 1.04rem;
+      font-size: 1.08rem;
     }
 
-    .highlight {
-      margin: 18px auto 22px;
-      max-width: 760px;
-      background: var(--soft);
-      border: 1px solid #e5e5e5;
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .highlight strong {
-      font-size: 1.1rem;
-    }
-
+    .highlight,
     .dates-box,
     .steps-box,
     .message-box {
@@ -99,6 +86,14 @@
       border-radius: 16px;
       padding: 20px 18px;
       margin-top: 18px;
+    }
+
+    .highlight {
+      text-align: center;
+    }
+
+    .highlight strong {
+      font-size: 1.18rem;
     }
 
     h2 {
@@ -113,19 +108,74 @@
       font-size: 0.96rem;
     }
 
-    #datesList {
-      margin: 14px 0 0;
-      padding-left: 20px;
+    .platform-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      color: #444;
     }
 
-    #datesList li {
-      margin: 8px 0;
+    .radio-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .date-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .date-option:hover {
+      border-color: var(--brand);
+      background: #fffafa;
+    }
+
+    .date-option input[type="radio"] {
+      margin-top: 3px;
+      transform: scale(1.15);
+      accent-color: var(--brand);
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .date-option-text {
       font-size: 1.02rem;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .selected-note {
+      margin-top: 14px;
+      font-weight: 700;
+      color: var(--brand);
+      display: none;
     }
 
     .loading {
       color: var(--muted);
       font-style: italic;
+    }
+
+    .error-box {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #fff3f3;
+      color: #8f1d21;
+      border: 1px solid #f0c6c8;
+      border-radius: 12px;
     }
 
     .button-grid {
@@ -226,30 +276,16 @@
       font-size: 0.95rem;
     }
 
-    .platform-badge {
-      display: inline-block;
-      margin-top: 8px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 0.92rem;
-      color: #444;
-    }
-
-    .error-box {
-      display: none;
-      margin-top: 12px;
-      padding: 12px 14px;
-      background: #fff3f3;
-      color: #8f1d21;
-      border: 1px solid #f0c6c8;
-      border-radius: 12px;
+    .first-come {
+      margin-top: 14px;
+      text-align: center;
+      font-weight: 700;
+      color: #111;
     }
 
     @media (max-width: 760px) {
       h1 {
-        font-size: 1.72rem;
+        font-size: 1.78rem;
       }
 
       .button-grid {
@@ -261,44 +297,49 @@
 <body>
   <div class="wrap">
     <div class="card">
-      <p class="eyebrow">Welcome, social media followers</p>
-      <h1>Get 20% Off Your Stay</h1>
-
-      <p class="intro">
-        Follow the steps below to claim 20% off one of our select 2 or 3 night stays at Enchanted Villa of Windsor Hills.
-      </p>
+      <p class="eyebrow">WELCOME, SOCIAL MEDIA FOLLOWERS</p>
+      <h1>You can save 20% on a select last minute booking!</h1>
 
       <div class="highlight">
-        <strong>Get 20% off if you book one of the following 2 or 3 night stays:</strong><br>
+        <strong>These are the currently available dates that qualify for this offer:</strong><br>
         <span class="platform-badge" id="platformBadge">Loaded for social visitors</span>
       </div>
 
       <div class="dates-box">
-        <h2>Eligible stay dates</h2>
+        <h2>Select your date</h2>
         <div class="dates-help">
-          These dates are pulled automatically from a text file so you can update them anytime.
+          Choose one date below. When you copy the repost message, the selected date will be inserted automatically.
         </div>
+
         <div class="error-box" id="datesError">
           We could not load the eligible dates right now. Please try again later or contact us directly.
         </div>
-        <ul id="datesList">
-          <li class="loading">Loading available dates…</li>
-        </ul>
+
+        <div id="datesList" class="radio-list">
+          <div class="loading">Loading available dates…</div>
+        </div>
+
+        <div class="selected-note" id="selectedDateNote"></div>
+
+        <div class="first-come">
+          First come,<br>
+          First serve.
+        </div>
       </div>
 
       <div class="steps-box">
-        <h2>To get 20% off one of the above 2 or 3 night stays, complete all 4 steps below:</h2>
+        <h2>To claim the 20% offer, complete all 4 steps below:</h2>
 
         <ol class="steps">
           <li>
             Follow us.
-            <span class="step-note">Tap both buttons below.</span>
+            <span class="step-note">Tap the buttons below.</span>
             <div class="button-grid">
               <a class="button" id="igFollowButton" href="https://www.instagram.com/enchantedvillawh/" target="_blank" rel="noopener">
-                Follow Enchanted Villa on Instagram
+                Follow on Instagram
               </a>
               <a class="button" id="fbFollowButton" href="https://www.facebook.com/enchantedvillawh" target="_blank" rel="noopener">
-                Follow Enchanted Villa on Facebook
+                Follow on Facebook
               </a>
             </div>
           </li>
@@ -322,14 +363,14 @@
               @enchantedvillawh
             </div>
             <span class="step-note">
-              Copy the suggested repost message below, then replace [DATES YOU WANT] with one of the eligible dates listed above.
+              Select a date above, then copy the message below and use it in your repost.
             </span>
           </li>
 
           <li>
-            Take a screenshot of your repost and message it to us with the dates you want to stay.
+            Take a screenshot of your repost and message it to us with the same date you selected above.
             <span class="step-note">
-              We will send back a quote with the 20% discount applied for one of the eligible listed stays.
+              We will send back a quote with the 20% discount applied if that date is still available.
             </span>
             <div class="button-grid">
               <a class="button outline" id="messageIgButton" href="https://www.instagram.com/enchantedvillawh/" target="_blank" rel="noopener">
@@ -345,12 +386,7 @@
 
       <div class="message-box">
         <h2>Suggested repost message</h2>
-        <textarea id="repostMessage" class="message-template" readonly>We’d love to book Enchanted Villa of Windsor Hills for [DATES YOU WANT].
-
-@sunstatevacationhomes
-@enchantedvillawh
-
-Claiming the 20% discount on this select stay.</textarea>
+        <textarea id="repostMessage" class="message-template" readonly></textarea>
 
         <div class="copy-row">
           <button class="button" id="copyButton" type="button">Copy repost message</button>
@@ -358,12 +394,12 @@ Claiming the 20% discount on this select stay.</textarea>
         </div>
 
         <p class="small" style="margin-top: 14px;">
-          Replace <strong>[DATES YOU WANT]</strong> with one of the exact stays listed above before posting.
+          Pick a date above first so the correct stay dates are included automatically.
         </p>
       </div>
 
       <p class="footer-note">
-        Offer applies only to the listed 2 or 3 night stays shown above and is subject to availability.
+        Offer applies only to the listed dates shown above and is subject to availability.
       </p>
     </div>
   </div>
@@ -377,6 +413,8 @@ Claiming the 20% discount on this select stay.</textarea>
       instagramMessageUrl: 'https://www.instagram.com/enchantedvillawh/',
       facebookMessageUrl: 'https://m.me/enchantedvillawh'
     };
+
+    let selectedDate = '';
 
     function getSource() {
       const params = new URLSearchParams(window.location.search);
@@ -406,16 +444,12 @@ Claiming the 20% discount on this select stay.</textarea>
     function applyConfig(config, source) {
       const merged = { ...defaultConfig, ...config };
 
-      const igFollowButton = document.getElementById('igFollowButton');
-      const fbFollowButton = document.getElementById('fbFollowButton');
-      const viewPostButton = document.getElementById('viewPostButton');
-      const messageIgButton = document.getElementById('messageIgButton');
-      const messageFbButton = document.getElementById('messageFbButton');
+      document.getElementById('igFollowButton').href = merged.instagramProfileUrl;
+      document.getElementById('fbFollowButton').href = merged.facebookProfileUrl;
+      document.getElementById('messageIgButton').href = merged.instagramMessageUrl;
+      document.getElementById('messageFbButton').href = merged.facebookMessageUrl;
 
-      igFollowButton.href = merged.instagramProfileUrl;
-      fbFollowButton.href = merged.facebookProfileUrl;
-      messageIgButton.href = merged.instagramMessageUrl;
-      messageFbButton.href = merged.facebookMessageUrl;
+      const viewPostButton = document.getElementById('viewPostButton');
 
       if (source === 'ig') {
         viewPostButton.href = merged.instagramPostUrl;
@@ -439,6 +473,27 @@ Claiming the 20% discount on this select stay.</textarea>
       }
     }
 
+    function buildMessage(dateText) {
+      return `We’d love to book Enchanted Villa of Windsor Hills for ${dateText}.
+
+@sunstatevacationhomes
+@enchantedvillawh
+
+Claiming the 20% discount on this select stay.`;
+    }
+
+    function updateSelectedDate(dateText) {
+      selectedDate = dateText;
+
+      const note = document.getElementById('selectedDateNote');
+      const textarea = document.getElementById('repostMessage');
+
+      note.textContent = `Selected stay: ${dateText}`;
+      note.style.display = 'block';
+
+      textarea.value = buildMessage(dateText);
+    }
+
     async function loadDates() {
       const list = document.getElementById('datesList');
       const errorBox = document.getElementById('datesError');
@@ -456,26 +511,52 @@ Claiming the 20% discount on this select stay.</textarea>
         list.innerHTML = '';
 
         if (!dates.length) {
-          const li = document.createElement('li');
-          li.textContent = 'No discounted stays are listed right now.';
-          list.appendChild(li);
+          list.innerHTML = '<div>No discounted stays are listed right now.</div>';
+          document.getElementById('repostMessage').value =
+            'Please select a qualifying date when dates become available.';
           return;
         }
 
-        dates.forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          list.appendChild(li);
+        dates.forEach((item, index) => {
+          const label = document.createElement('label');
+          label.className = 'date-option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = 'stayDate';
+          input.value = item;
+          input.checked = index === 0;
+
+          input.addEventListener('change', function() {
+            updateSelectedDate(this.value);
+          });
+
+          const textSpan = document.createElement('span');
+          textSpan.className = 'date-option-text';
+          textSpan.textContent = item;
+
+          label.appendChild(input);
+          label.appendChild(textSpan);
+          list.appendChild(label);
         });
+
+        updateSelectedDate(dates[0]);
       } catch (error) {
         list.innerHTML = '';
         errorBox.style.display = 'block';
+        document.getElementById('repostMessage').value =
+          'We could not load the available dates right now.';
       }
     }
 
     async function copyRepostMessage() {
       const textarea = document.getElementById('repostMessage');
       const status = document.getElementById('copyStatus');
+
+      if (!selectedDate) {
+        alert('Please select a date first.');
+        return;
+      }
 
       try {
         await navigator.clipboard.writeText(textarea.value);
@@ -486,7 +567,7 @@ Claiming the 20% discount on this select stay.</textarea>
 
         gtag('event', 'discount_repost_message_copied', {
           event_category: 'marketing',
-          event_label: 'discount_page'
+          event_label: selectedDate
         });
       } catch (error) {
         textarea.removeAttribute('readonly');
