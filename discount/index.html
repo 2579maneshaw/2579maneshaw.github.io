@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Media Offer | Enchanted Villa of Windsor Hills</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discount Offer | Enchanted Villa of Windsor Hills</title>
+  <meta name="description" content="Social media follower discount offer for select stays at Enchanted Villa of Windsor Hills." />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV1ZE9QFNP"></script>
@@ -12,33 +13,42 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-FV1ZE9QFNP');
-
-    gtag('event', 'social_visit', {
-      event_category: 'marketing',
-      event_label: 'social_media'
-    });
   </script>
 
   <style>
+    :root {
+      --brand: #b1272c;
+      --brand-dark: #951e23;
+      --ink: #222;
+      --muted: #666;
+      --bg: #ffffff;
+      --card: #f7f7f7;
+      --line: #e9e9e9;
+      --soft: #fff;
+      --success: #1f7a3d;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #222;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
     }
 
     .wrap {
-      max-width: 860px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 40px 18px 60px;
+      padding: 36px 18px 64px;
     }
 
     .card {
-      background: #f7f7f7;
-      border: 1px solid #ececec;
-      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
       padding: 28px 22px;
-      text-align: center;
     }
 
     .eyebrow {
@@ -47,113 +57,203 @@
       font-weight: 700;
       letter-spacing: 0.03em;
       text-transform: uppercase;
-      color: #b1272c;
+      color: var(--brand);
+      text-align: center;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: 2rem;
+      margin: 0 0 10px;
+      font-size: 2.1rem;
       line-height: 1.1;
+      text-align: center;
       color: #111;
     }
 
-    .text {
-      margin: 0 auto 14px;
-      max-width: 650px;
+    .intro {
+      max-width: 740px;
+      margin: 0 auto 18px;
+      text-align: center;
       color: #444;
-      line-height: 1.6;
+      font-size: 1.04rem;
+    }
+
+    .highlight {
+      margin: 18px auto 22px;
+      max-width: 760px;
+      background: var(--soft);
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .highlight strong {
+      font-size: 1.1rem;
+    }
+
+    .dates-box,
+    .steps-box,
+    .message-box {
+      background: var(--soft);
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+      padding: 20px 18px;
+      margin-top: 18px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.28rem;
+      color: #111;
+    }
+
+    .dates-help,
+    .small {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    #datesList {
+      margin: 14px 0 0;
+      padding-left: 20px;
+    }
+
+    #datesList li {
+      margin: 8px 0;
       font-size: 1.02rem;
     }
 
-    .offer {
-      margin: 18px auto;
-      padding: 16px;
-      max-width: 620px;
-      background: #fff;
-      border: 1px solid #e4e4e4;
-      border-radius: 14px;
-      color: #222;
-      line-height: 1.6;
+    .loading {
+      color: var(--muted);
+      font-style: italic;
     }
 
-    .code-entry {
-      margin: 22px auto 0;
-      max-width: 420px;
-    }
-
-    .code-label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: 700;
-      color: #222;
-    }
-
-    .code-row {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .code-input {
-      flex: 1 1 220px;
-      max-width: 260px;
-      padding: 14px 14px;
-      border: 1px solid #d8d8d8;
-      border-radius: 12px;
-      font-size: 1rem;
-      background: #fff;
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
     }
 
     .button {
       display: inline-block;
-      margin-top: 12px;
-      padding: 14px 22px;
+      padding: 14px 18px;
       border-radius: 12px;
-      background: #b1272c;
+      background: var(--brand);
       color: #fff;
       text-decoration: none;
       font-weight: 700;
+      text-align: center;
       border: 0;
       cursor: pointer;
       font-size: 1rem;
     }
 
     .button:hover {
-      background: #971f24;
+      background: var(--brand-dark);
     }
 
-    .error {
+    .button.secondary {
+      background: #444;
+    }
+
+    .button.secondary:hover {
+      background: #2f2f2f;
+    }
+
+    .button.outline {
+      background: #fff;
+      color: var(--brand);
+      border: 2px solid var(--brand);
+    }
+
+    .button.outline:hover {
+      background: #fff6f6;
+    }
+
+    ol.steps {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    ol.steps li {
+      margin: 14px 0;
+    }
+
+    .step-note {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .inline-tags {
+      margin-top: 6px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .message-template {
+      width: 100%;
+      min-height: 150px;
+      border: 1px solid #d8d8d8;
+      border-radius: 12px;
+      padding: 14px;
+      font: inherit;
+      resize: vertical;
+      background: #fff;
+      color: #222;
+    }
+
+    .copy-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      align-items: center;
+    }
+
+    .copy-status {
+      color: var(--success);
+      font-weight: 700;
+      display: none;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .platform-badge {
+      display: inline-block;
+      margin-top: 8px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      color: #444;
+    }
+
+    .error-box {
       display: none;
       margin-top: 12px;
-      color: #b1272c;
-      font-weight: 700;
-    }
-
-    .small {
-      margin-top: 14px;
-      color: #666;
-      font-size: 0.95rem;
+      padding: 12px 14px;
+      background: #fff3f3;
+      color: #8f1d21;
+      border: 1px solid #f0c6c8;
+      border-radius: 12px;
     }
 
     @media (max-width: 760px) {
       h1 {
-        font-size: 1.65rem;
+        font-size: 1.72rem;
       }
 
-      .code-row {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .code-input {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .button {
-        width: 100%;
-        max-width: 260px;
+      .button-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -162,95 +262,261 @@
   <div class="wrap">
     <div class="card">
       <p class="eyebrow">Welcome, social media followers</p>
-      <h1>Enchanted Villa of Windsor Hills</h1>
+      <h1>Get 20% Off Your Stay</h1>
 
-      <p class="text">
-        Thanks for visiting from social media.
+      <p class="intro">
+        Follow the steps below to claim 20% off one of our select 2 or 3 night stays at Enchanted Villa of Windsor Hills.
       </p>
 
-      <div class="offer">
-        <strong>Follower perk:</strong><br>
-        Enter your social media code below to continue to the special offer page.
+      <div class="highlight">
+        <strong>Get 20% off if you book one of the following 2 or 3 night stays:</strong><br>
+        <span class="platform-badge" id="platformBadge">Loaded for social visitors</span>
       </div>
 
-      <div class="code-entry">
-        <label class="code-label" for="discountCode">Enter your code</label>
-        <div class="code-row">
-          <input
-            class="code-input"
-            type="text"
-            id="discountCode"
-            placeholder="Enter code"
-            autocomplete="off"
-          >
-          <button class="button" type="button" onclick="checkCode()">
-            Continue
-          </button>
+      <div class="dates-box">
+        <h2>Eligible stay dates</h2>
+        <div class="dates-help">
+          These dates are pulled automatically from a text file so you can update them anytime.
         </div>
-        <div class="error" id="errorMsg">
-          That code was not recognized. Please try again.
+        <div class="error-box" id="datesError">
+          We could not load the eligible dates right now. Please try again later or contact us directly.
         </div>
+        <ul id="datesList">
+          <li class="loading">Loading available dates…</li>
+        </ul>
       </div>
 
-      <p class="small">
-        Valid codes are checked before continuing.
+      <div class="steps-box">
+        <h2>To get 20% off one of the above 2 or 3 night stays, complete all 4 steps below:</h2>
+
+        <ol class="steps">
+          <li>
+            Follow us.
+            <span class="step-note">Tap both buttons below.</span>
+            <div class="button-grid">
+              <a class="button" id="igFollowButton" href="https://www.instagram.com/enchantedvillawh/" target="_blank" rel="noopener">
+                Follow Enchanted Villa on Instagram
+              </a>
+              <a class="button" id="fbFollowButton" href="https://www.facebook.com/enchantedvillawh" target="_blank" rel="noopener">
+                Follow Enchanted Villa on Facebook
+              </a>
+            </div>
+          </li>
+
+          <li>
+            Like this post.
+            <span class="step-note">
+              Use the button below to go back to the original post from the platform you came from. After you like it, come back here to finish the steps.
+            </span>
+            <div class="button-grid">
+              <a class="button secondary" id="viewPostButton" href="#" target="_blank" rel="noopener">
+                View the original post
+              </a>
+            </div>
+          </li>
+
+          <li>
+            Repost to your feed and tag both accounts with the dates you want to stay.
+            <div class="inline-tags">
+              @sunstatevacationhomes<br>
+              @enchantedvillawh
+            </div>
+            <span class="step-note">
+              Copy the suggested repost message below, then replace [DATES YOU WANT] with one of the eligible dates listed above.
+            </span>
+          </li>
+
+          <li>
+            Take a screenshot of your repost and message it to us with the dates you want to stay.
+            <span class="step-note">
+              We will send back a quote with the 20% discount applied for one of the eligible listed stays.
+            </span>
+            <div class="button-grid">
+              <a class="button outline" id="messageIgButton" href="https://www.instagram.com/enchantedvillawh/" target="_blank" rel="noopener">
+                Message on Instagram
+              </a>
+              <a class="button outline" id="messageFbButton" href="https://m.me/enchantedvillawh" target="_blank" rel="noopener">
+                Message on Facebook
+              </a>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="message-box">
+        <h2>Suggested repost message</h2>
+        <textarea id="repostMessage" class="message-template" readonly>We’d love to book Enchanted Villa of Windsor Hills for [DATES YOU WANT].
+
+@sunstatevacationhomes
+@enchantedvillawh
+
+Claiming the 20% discount on this select stay.</textarea>
+
+        <div class="copy-row">
+          <button class="button" id="copyButton" type="button">Copy repost message</button>
+          <span class="copy-status" id="copyStatus">Copied</span>
+        </div>
+
+        <p class="small" style="margin-top: 14px;">
+          Replace <strong>[DATES YOU WANT]</strong> with one of the exact stays listed above before posting.
+        </p>
+      </div>
+
+      <p class="footer-note">
+        Offer applies only to the listed 2 or 3 night stays shown above and is subject to availability.
       </p>
     </div>
   </div>
 
   <script>
-    async function checkCode() {
-      const input = document.getElementById('discountCode').value.trim().toLowerCase();
-      const errorMsg = document.getElementById('errorMsg');
+    const defaultConfig = {
+      instagramProfileUrl: 'https://www.instagram.com/enchantedvillawh/',
+      facebookProfileUrl: 'https://www.facebook.com/enchantedvillawh',
+      instagramPostUrl: 'https://www.instagram.com/enchantedvillawh/',
+      facebookPostUrl: 'https://www.facebook.com/enchantedvillawh',
+      instagramMessageUrl: 'https://www.instagram.com/enchantedvillawh/',
+      facebookMessageUrl: 'https://m.me/enchantedvillawh'
+    };
 
-      errorMsg.style.display = 'none';
+    function getSource() {
+      const params = new URLSearchParams(window.location.search);
+      let source = (params.get('src') || '').toLowerCase();
 
-      if (!input) {
-        errorMsg.textContent = 'Please enter a code.';
-        errorMsg.style.display = 'block';
-        return;
+      if (!source) {
+        const ref = (document.referrer || '').toLowerCase();
+        if (ref.includes('instagram.com')) source = 'ig';
+        if (ref.includes('facebook.com') || ref.includes('m.facebook.com')) source = 'fb';
       }
 
-      try {
-        const response = await fetch('/data/codes.txt', { cache: 'no-store' });
+      return source;
+    }
 
-        if (!response.ok) {
-          throw new Error('Unable to load code list.');
-        }
+    function setPlatformBadge(source) {
+      const badge = document.getElementById('platformBadge');
 
-        const text = await response.text();
-        const validCodes = text
-          .split(/\r?\n/)
-          .map(code => code.trim().toLowerCase())
-          .filter(code => code.length > 0);
-
-        if (validCodes.includes(input)) {
-          gtag('event', 'discount_code_accepted', {
-            event_category: 'marketing',
-            event_label: input
-          });
-
-          window.location.href = 'https://enchantedvillawh.com/special-offer.html?code=' + encodeURIComponent(input);
-        } else {
-          gtag('event', 'discount_code_rejected', {
-            event_category: 'marketing',
-            event_label: input
-          });
-
-          errorMsg.textContent = 'That code was not recognized. Please try again.';
-          errorMsg.style.display = 'block';
-        }
-      } catch (error) {
-        errorMsg.textContent = 'There was a problem validating the code. Please try again.';
-        errorMsg.style.display = 'block';
+      if (source === 'ig') {
+        badge.textContent = 'Opened from Instagram';
+      } else if (source === 'fb') {
+        badge.textContent = 'Opened from Facebook';
+      } else {
+        badge.textContent = 'Opened from social media';
       }
     }
 
-    document.getElementById('discountCode').addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-        checkCode();
+    function applyConfig(config, source) {
+      const merged = { ...defaultConfig, ...config };
+
+      const igFollowButton = document.getElementById('igFollowButton');
+      const fbFollowButton = document.getElementById('fbFollowButton');
+      const viewPostButton = document.getElementById('viewPostButton');
+      const messageIgButton = document.getElementById('messageIgButton');
+      const messageFbButton = document.getElementById('messageFbButton');
+
+      igFollowButton.href = merged.instagramProfileUrl;
+      fbFollowButton.href = merged.facebookProfileUrl;
+      messageIgButton.href = merged.instagramMessageUrl;
+      messageFbButton.href = merged.facebookMessageUrl;
+
+      if (source === 'ig') {
+        viewPostButton.href = merged.instagramPostUrl;
+        viewPostButton.textContent = 'Go back to Instagram post';
+      } else if (source === 'fb') {
+        viewPostButton.href = merged.facebookPostUrl;
+        viewPostButton.textContent = 'Go back to Facebook post';
+      } else {
+        viewPostButton.href = merged.instagramPostUrl || merged.facebookPostUrl || '#';
+        viewPostButton.textContent = 'View the original post';
       }
-    });
+    }
+
+    async function loadConfig() {
+      try {
+        const response = await fetch('/discount/config.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Config load failed');
+        return await response.json();
+      } catch (error) {
+        return defaultConfig;
+      }
+    }
+
+    async function loadDates() {
+      const list = document.getElementById('datesList');
+      const errorBox = document.getElementById('datesError');
+
+      try {
+        const response = await fetch('/discount/dates.txt', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Dates load failed');
+
+        const text = await response.text();
+        const dates = text
+          .split(/\r?\n/)
+          .map(line => line.trim())
+          .filter(line => line.length > 0 && !line.startsWith('#'));
+
+        list.innerHTML = '';
+
+        if (!dates.length) {
+          const li = document.createElement('li');
+          li.textContent = 'No discounted stays are listed right now.';
+          list.appendChild(li);
+          return;
+        }
+
+        dates.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      } catch (error) {
+        list.innerHTML = '';
+        errorBox.style.display = 'block';
+      }
+    }
+
+    async function copyRepostMessage() {
+      const textarea = document.getElementById('repostMessage');
+      const status = document.getElementById('copyStatus');
+
+      try {
+        await navigator.clipboard.writeText(textarea.value);
+        status.style.display = 'inline';
+        setTimeout(() => {
+          status.style.display = 'none';
+        }, 2200);
+
+        gtag('event', 'discount_repost_message_copied', {
+          event_category: 'marketing',
+          event_label: 'discount_page'
+        });
+      } catch (error) {
+        textarea.removeAttribute('readonly');
+        textarea.select();
+        document.execCommand('copy');
+        textarea.setAttribute('readonly', 'readonly');
+
+        status.style.display = 'inline';
+        setTimeout(() => {
+          status.style.display = 'none';
+        }, 2200);
+      }
+    }
+
+    async function initPage() {
+      const source = getSource();
+      setPlatformBadge(source);
+
+      const config = await loadConfig();
+      applyConfig(config, source);
+      await loadDates();
+
+      gtag('event', 'discount_page_view', {
+        event_category: 'marketing',
+        event_label: source || 'unknown'
+      });
+    }
+
+    document.getElementById('copyButton').addEventListener('click', copyRepostMessage);
+    initPage();
   </script>
 </body>
 </html>
