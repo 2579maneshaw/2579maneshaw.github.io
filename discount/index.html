@@ -444,7 +444,7 @@ Claiming the 20% discount on this select stay.</textarea>
       const errorBox = document.getElementById('datesError');
 
       try {
-        const response = await fetch('/discount/dates.txt', { cache: 'no-store' });
+        const response = await fetch('/discount/dates', { cache: 'no-store' });
         if (!response.ok) throw new Error('Dates load failed');
 
         const text = await response.text();
