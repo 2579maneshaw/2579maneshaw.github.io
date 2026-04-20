@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Podcast Listener Offer | Enchanted Villa of Windsor Hills</title>
+  <title>Social Media Offer | Enchanted Villa of Windsor Hills</title>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV1ZE9QFNP"></script>
@@ -13,14 +13,10 @@
     gtag('js', new Date());
     gtag('config', 'G-FV1ZE9QFNP');
 
-    gtag('event', 'podcast_visit', {
+    gtag('event', 'social_visit', {
       event_category: 'marketing',
-      event_label: 'twtad_podcast'
+      event_label: 'social_media'
     });
-
-    setTimeout(function () {
-      window.location.href = "https://enchantedvillawh.com/";
-    }, 10000);
   </script>
 
   <style>
@@ -80,6 +76,35 @@
       line-height: 1.6;
     }
 
+    .code-entry {
+      margin: 22px auto 0;
+      max-width: 420px;
+    }
+
+    .code-label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .code-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .code-input {
+      flex: 1 1 220px;
+      max-width: 260px;
+      padding: 14px 14px;
+      border: 1px solid #d8d8d8;
+      border-radius: 12px;
+      font-size: 1rem;
+      background: #fff;
+    }
+
     .button {
       display: inline-block;
       margin-top: 12px;
@@ -88,6 +113,20 @@
       background: #b1272c;
       color: #fff;
       text-decoration: none;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .button:hover {
+      background: #971f24;
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      color: #b1272c;
       font-weight: 700;
     }
 
@@ -101,36 +140,117 @@
       h1 {
         font-size: 1.65rem;
       }
+
+      .code-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .code-input {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .button {
+        width: 100%;
+        max-width: 260px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <p class="eyebrow">Welcome, podcast listeners</p>
+      <p class="eyebrow">Welcome, social media followers</p>
       <h1>Enchanted Villa of Windsor Hills</h1>
 
       <p class="text">
-        Thanks for visiting from The Wonderful Thing About Disney Podcast.
+        Thanks for visiting from social media.
       </p>
 
       <div class="offer">
-        <strong>Podcast listener perk:</strong><br>
-        If you book through Airbnb, mention <strong>“dinglehopper”</strong> in your Airbnb message to receive <strong>$20 off the cleaning fee</strong>.
+        <strong>Follower perk:</strong><br>
+        Enter your social media code below to continue to the special offer page.
       </div>
 
-      <a class="button" href="https://enchantedvillawh.com/">
-        Click here to continue
-      </a>
+      <div class="code-entry">
+        <label class="code-label" for="discountCode">Enter your code</label>
+        <div class="code-row">
+          <input
+            class="code-input"
+            type="text"
+            id="discountCode"
+            placeholder="Enter code"
+            autocomplete="off"
+          >
+          <button class="button" type="button" onclick="checkCode()">
+            Continue
+          </button>
+        </div>
+        <div class="error" id="errorMsg">
+          That code was not recognized. Please try again.
+        </div>
+      </div>
 
       <p class="small">
-        You will be redirected automatically in 10 seconds.
+        Valid codes are checked before continuing.
       </p>
     </div>
   </div>
 
-  <noscript>
-    <meta http-equiv="refresh" content="10; url=https://enchantedvillawh.com/">
-  </noscript>
+  <script>
+    async function checkCode() {
+      const input = document.getElementById('discountCode').value.trim().toLowerCase();
+      const errorMsg = document.getElementById('errorMsg');
+
+      errorMsg.style.display = 'none';
+
+      if (!input) {
+        errorMsg.textContent = 'Please enter a code.';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      try {
+        const response = await fetch('/data/codes.txt', { cache: 'no-store' });
+
+        if (!response.ok) {
+          throw new Error('Unable to load code list.');
+        }
+
+        const text = await response.text();
+        const validCodes = text
+          .split(/\r?\n/)
+          .map(code => code.trim().toLowerCase())
+          .filter(code => code.length > 0);
+
+        if (validCodes.includes(input)) {
+          gtag('event', 'discount_code_accepted', {
+            event_category: 'marketing',
+            event_label: input
+          });
+
+          window.location.href = 'https://enchantedvillawh.com/special-offer.html?code=' + encodeURIComponent(input);
+        } else {
+          gtag('event', 'discount_code_rejected', {
+            event_category: 'marketing',
+            event_label: input
+          });
+
+          errorMsg.textContent = 'That code was not recognized. Please try again.';
+          errorMsg.style.display = 'block';
+        }
+      } catch (error) {
+        errorMsg.textContent = 'There was a problem validating the code. Please try again.';
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    document.getElementById('discountCode').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        checkCode();
+      }
+    });
+  </script>
 </body>
 </html>
