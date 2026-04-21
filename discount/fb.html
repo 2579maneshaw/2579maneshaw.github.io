@@ -4,184 +4,468 @@ title: Facebook Discount
 permalink: /discount/fb/
 ---
 
+<style>
+  .discountPage {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 0 50px;
+  }
+
+  .discountCard {
+    background: #f7f7f7;
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    padding: 28px 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  }
+
+  .discountEyebrow {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #b1272c;
+    text-align: center;
+  }
+
+  .discountPage h1 {
+    margin: 0 0 14px;
+    font-size: 2.15rem;
+    line-height: 1.1;
+    text-align: center;
+    color: #111;
+  }
+
+  .discountHeroText {
+    margin: 0 auto 18px;
+    max-width: 760px;
+    text-align: center;
+    color: #444;
+    font-size: 1.05rem;
+  }
+
+  .discountHighlight,
+  .discountDatesBox,
+  .discountStepsBox,
+  .discountCommentBox,
+  .discountEmailBox {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 20px 18px;
+    margin-top: 18px;
+  }
+
+  .discountHighlight {
+    text-align: center;
+  }
+
+  .discountHighlight strong {
+    font-size: 1.16rem;
+  }
+
+  .discountPage h2 {
+    margin: 0 0 12px;
+    font-size: 1.28rem;
+    color: #111;
+  }
+
+  .discountHelp,
+  .discountSmall,
+  .discountStepNote,
+  .discountFooterNote {
+    color: #666;
+    font-size: 0.96rem;
+  }
+
+  .discountRadioList {
+    margin-top: 14px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .discountDateOption {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  }
+
+  .discountDateOption:hover {
+    border-color: #b1272c;
+    background: #fffafa;
+    transform: translateY(-1px);
+  }
+
+  .discountDateOption input[type="radio"] {
+    margin-top: 3px;
+    transform: scale(1.15);
+    accent-color: #b1272c;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .discountDateText {
+    font-size: 1.02rem;
+    color: #222;
+    font-weight: 600;
+  }
+
+  .discountSelectedNote {
+    margin-top: 14px;
+    font-weight: 700;
+    color: #b1272c;
+    display: none;
+  }
+
+  .discountLoading {
+    color: #666;
+    font-style: italic;
+  }
+
+  .discountErrorBox {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #fff3f3;
+    color: #8f1d21;
+    border: 1px solid #f0c6c8;
+    border-radius: 12px;
+  }
+
+  .discountButtonGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .discountButton {
+    display: inline-block;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: #b1272c;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .discountButton:hover {
+    background: #951e23;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .discountButtonSecondary {
+    background: #444;
+  }
+
+  .discountButtonSecondary:hover {
+    background: #2f2f2f;
+  }
+
+  .discountSteps {
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .discountSteps li {
+    margin: 16px 0;
+  }
+
+  .discountInlineText {
+    margin-top: 8px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  .discountMessageTemplate {
+    width: 100%;
+    min-height: 120px;
+    border: 1px solid #d8d8d8;
+    border-radius: 12px;
+    padding: 14px;
+    font: inherit;
+    resize: vertical;
+    background: #fff;
+    color: #222;
+    box-sizing: border-box;
+  }
+
+  .discountCopyRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+    align-items: center;
+  }
+
+  .discountCopyStatus {
+    color: #1f7a3d;
+    font-weight: 700;
+    display: none;
+  }
+
+  .discountFirstCome {
+    margin-top: 14px;
+    text-align: center;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .discountFooterNote {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .discountLinkPreview {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #444;
+    word-break: break-word;
+  }
+
+  @media (max-width: 760px) {
+    .discountPage h1 {
+      font-size: 1.78rem;
+    }
+
+    .discountCard {
+      padding: 22px 16px;
+    }
+  }
+</style>
+
 <div class="discountPage">
   <div class="discountCard">
-
     <p class="discountEyebrow">WELCOME, FACEBOOK FOLLOWERS</p>
-
     <h1>You can save 20% on a select last minute booking!</h1>
+
+    <p class="discountHeroText">
+      Follow the steps below to claim the offer before the date is gone.
+    </p>
 
     <div class="discountHighlight">
       <strong>These are the currently available dates that qualify for this offer:</strong>
     </div>
 
-    <div id="datesList" class="discountRadioList">
-      Loading available dates…
-    </div>
+    <div class="discountDatesBox">
+      <h2>Select your date</h2>
+      <div class="discountHelp">
+        Choose one date below. The selected date will automatically be inserted into the comment text and the email.
+      </div>
 
-    <div class="discountFirstCome">
-      First come,<br>First serve.
+      <div class="discountErrorBox" id="datesError">
+        We could not load the eligible dates right now. Please try again later or contact us directly.
+      </div>
+
+      <div id="datesList" class="discountRadioList">
+        <div class="discountLoading">Loading available dates...</div>
+      </div>
+
+      <div class="discountSelectedNote" id="selectedDateNote"></div>
+
+      <div class="discountFirstCome">
+        First come,<br>
+        First serve.
+      </div>
     </div>
 
     <div class="discountStepsBox">
-      <h2>To claim the 20% offer, complete all steps:</h2>
+      <h2>To claim the 20% offer, complete these 3 steps:</h2>
 
       <ol class="discountSteps">
-
         <li>
-          Follow us on Facebook
+          Follow us and like our post.
+          <span class="discountStepNote">
+            This button takes you to the Facebook post where you can follow and like it.
+          </span>
           <div class="discountButtonGrid">
-            <a class="discountButton"
-               href="https://www.facebook.com/profile.php?id=61586521704194"
-               target="_blank"
-               rel="noopener">
-              Follow on Facebook
+            <a class="discountButton" id="fbPostButton" href="#" target="_blank" rel="noopener">
+              Follow us on Facebook and like our post
             </a>
           </div>
         </li>
 
         <li>
-          Like the original post
-          <div class="discountButtonGrid">
-            <a class="discountButton discountButtonSecondary"
-               id="fbPostButton"
-               href="#"
-               target="_blank"
-               rel="noopener">
-              Go back to Facebook post
-            </a>
+          Share this post and paste the following comment:
+          <div class="discountCommentBox">
+            <div class="discountInlineText" id="commentPreview"></div>
+
+            <div class="discountCopyRow">
+              <button class="discountButton discountButtonSecondary" type="button" onclick="copyCommentText()">
+                Copy to clipboard
+              </button>
+              <span class="discountCopyStatus" id="commentCopyStatus">Copied</span>
+            </div>
           </div>
         </li>
 
         <li>
-          Repost and tag:
-          <div class="discountInlineTags">
-            @sunstatevacationhomes<br>
-            @enchantedvillawh
-          </div>
+          Send this email to us:
+          <div class="discountEmailBox">
+            <div class="discountSmall">
+              The button below will open your email app with the subject and body already filled in.
+            </div>
 
-          <div class="discountButtonGrid">
-            <button class="discountButton" type="button" onclick="copyTagsOnly()">
-              Copy tags + selected date
-            </button>
-          </div>
-        </li>
+            <div class="discountButtonGrid">
+              <a class="discountButton" id="emailButton" href="#">
+                Send quote request email
+              </a>
+            </div>
 
-        <li>
-          Message us your repost screenshot
-          <div class="discountButtonGrid">
-            <a class="discountButton discountButtonOutline"
-               href="https://m.me/61586521704194"
-               target="_blank"
-               rel="noopener">
-              Message on Facebook
-            </a>
+            <div class="discountLinkPreview" id="emailPreview"></div>
           </div>
         </li>
-
       </ol>
     </div>
 
-    <div class="discountMessageBox">
-      <h2>Suggested repost message</h2>
-
-      <textarea id="msgBox" class="discountMessageTemplate" readonly></textarea>
-
-      <button class="discountButton" type="button" onclick="copyMsg()">
-        Copy repost message
-      </button>
-    </div>
-
+    <p class="discountFooterNote">
+      Offer applies only to the listed dates shown above and is subject to availability.
+    </p>
   </div>
 </div>
 
 <script>
-let selectedDate = "";
+  let selectedDate = "";
+  let facebookPostLink = "";
+  const emailRecipient = "info@enchantedvillawh.com";
 
-/* ---------- LOAD DATES ---------- */
-function renderDates(dates) {
-  const el = document.getElementById("datesList");
-  el.innerHTML = "";
-
-  dates.forEach((d, i) => {
-    const label = document.createElement("label");
-    label.className = "discountDateOption";
-
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = "date";
-    input.value = d;
-
-    if (i === 0) {
-      input.checked = true;
-      selectedDate = d;
-    }
-
-    input.onchange = () => {
-      selectedDate = d;
-      updateMsg();
-    };
-
-    const span = document.createElement("span");
-    span.className = "discountDateText";
-    span.textContent = d;
-
-    label.appendChild(input);
-    label.appendChild(span);
-    el.appendChild(label);
-  });
-
-  updateMsg();
-}
-
-/* ---------- MESSAGE ---------- */
-function updateMsg() {
-  document.getElementById("msgBox").value =
-`We’d love to book Enchanted Villa of Windsor Hills for ${selectedDate}.
-
-@sunstatevacationhomes
-@enchantedvillawh
-
-Claiming the 20% Facebook offer.`;
-}
-
-function copyMsg() {
-  navigator.clipboard.writeText(
-    document.getElementById("msgBox").value
-  );
-}
-
-function copyTagsOnly() {
-  if (!selectedDate) {
-    alert("Please select a date first.");
-    return;
+  function showCopied(id) {
+    const el = document.getElementById(id);
+    el.style.display = "inline";
+    setTimeout(() => {
+      el.style.display = "none";
+    }, 2000);
   }
 
-  const text =
-`@sunstatevacationhomes
+  function buildCommentText(dateText) {
+    return `@sunstatevacationhomes
 @enchantedvillawh
-${selectedDate}`;
+${dateText}`;
+  }
 
-  navigator.clipboard.writeText(text);
-}
+  function buildEmailSubject() {
+    return "Our Happily Ever After 20%OFF Social media quote";
+  }
 
-/* ---------- LOAD FB POST LINK ---------- */
-function loadFBPost() {
-  fetch("/discount/fbpost.txt")
-    .then(r => r.text())
-    .then(link => {
-      document.getElementById("fbPostButton").href = link.trim();
-    })
-    .catch(() => {
-      console.warn("Could not load Facebook post link");
+  function buildEmailBody(dateText, postLink) {
+    return `If still available, please send me a quote to stay in Our Happily Ever After House 10 Min to Disney: https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY
+
+My requested dates are: ${dateText}.
+
+Please include the 20% social media discount from your post: ${postLink}`;
+  }
+
+  function updateSelectedDate(dateText) {
+    selectedDate = dateText;
+
+    const note = document.getElementById("selectedDateNote");
+    note.textContent = `Selected stay: ${dateText}`;
+    note.style.display = "block";
+
+    document.getElementById("commentPreview").textContent = buildCommentText(dateText);
+    updateEmailButton();
+  }
+
+  function updateEmailButton() {
+    const subject = buildEmailSubject();
+    const body = buildEmailBody(selectedDate, facebookPostLink);
+    const href = `mailto:${encodeURIComponent(emailRecipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    const emailButton = document.getElementById("emailButton");
+    emailButton.href = href;
+
+    document.getElementById("emailPreview").textContent =
+      `Subject: ${subject} | Dates: ${selectedDate || "None selected yet"}`;
+  }
+
+  function renderDates(dates) {
+    const el = document.getElementById("datesList");
+    el.innerHTML = "";
+
+    dates.forEach((d, i) => {
+      const label = document.createElement("label");
+      label.className = "discountDateOption";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "date";
+      input.value = d;
+
+      if (i === 0) {
+        input.checked = true;
+        selectedDate = d;
+      }
+
+      input.onchange = () => {
+        selectedDate = d;
+        updateSelectedDate(d);
+      };
+
+      const span = document.createElement("span");
+      span.className = "discountDateText";
+      span.textContent = d;
+
+      label.appendChild(input);
+      label.appendChild(span);
+      el.appendChild(label);
     });
-}
 
-/* ---------- INIT ---------- */
-fetch("/discount/dates")
-  .then(r => r.text())
-  .then(t => t.split("\n").filter(x => x.trim()))
-  .then(renderDates);
+    if (dates.length > 0) {
+      updateSelectedDate(dates[0]);
+    }
+  }
 
-loadFBPost();
+  function copyCommentText() {
+    if (!selectedDate) {
+      alert("Please select a date first.");
+      return;
+    }
+
+    navigator.clipboard.writeText(buildCommentText(selectedDate));
+    showCopied("commentCopyStatus");
+  }
+
+  function loadFBPost() {
+    fetch("/discount/fbpost.txt", { cache: "no-store" })
+      .then(r => r.text())
+      .then(link => {
+        facebookPostLink = link.trim();
+        document.getElementById("fbPostButton").href = facebookPostLink;
+        updateEmailButton();
+      })
+      .catch(() => {
+        console.warn("Could not load Facebook post link");
+      });
+  }
+
+  function loadDates() {
+    fetch("/discount/dates", { cache: "no-store" })
+      .then(r => r.text())
+      .then(t => t.split(/\r?\n/).map(x => x.trim()).filter(x => x && !x.startsWith("#")))
+      .then(renderDates)
+      .catch(() => {
+        document.getElementById("datesList").innerHTML = "";
+        document.getElementById("datesError").style.display = "block";
+      });
+  }
+
+  updateEmailButton();
+  loadFBPost();
+  loadDates();
 </script>
