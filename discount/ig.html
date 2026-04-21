@@ -4,498 +4,185 @@ title: Instagram Discount
 permalink: /discount/ig/
 ---
 
-<style>
-  .discountPage {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 20px 0 50px;
-  }
-
-  .discountCard {
-    background: #f7f7f7;
-    border: 1px solid #ececec;
-    border-radius: 20px;
-    padding: 28px 22px;
-  }
-
-  .discountEyebrow {
-    margin: 0 0 8px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: #b1272c;
-    text-align: center;
-  }
-
-  .discountPage h1 {
-    margin: 0 0 14px;
-    font-size: 2.15rem;
-    line-height: 1.1;
-    text-align: center;
-    color: #111;
-  }
-
-  .discountHeroText {
-    margin: 0 auto 18px;
-    max-width: 760px;
-    text-align: center;
-    color: #444;
-    font-size: 1.05rem;
-  }
-
-  .discountHighlight,
-  .discountDatesBox,
-  .discountStepsBox,
-  .discountMessageBox {
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 16px;
-    padding: 20px 18px;
-    margin-top: 18px;
-  }
-
-  .discountHighlight {
-    text-align: center;
-  }
-
-  .discountHighlight strong {
-    font-size: 1.16rem;
-  }
-
-  .discountPage h2 {
-    margin: 0 0 12px;
-    font-size: 1.28rem;
-    color: #111;
-  }
-
-  .discountHelp,
-  .discountSmall,
-  .discountStepNote,
-  .discountFooterNote {
-    color: #666;
-    font-size: 0.96rem;
-  }
-
-  .discountRadioList {
-    margin-top: 14px;
-    display: grid;
-    gap: 12px;
-  }
-
-  .discountDateOption {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    background: #fff;
-    cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease;
-  }
-
-  .discountDateOption:hover {
-    border-color: #b1272c;
-    background: #fffafa;
-  }
-
-  .discountDateOption input[type="radio"] {
-    margin-top: 3px;
-    transform: scale(1.15);
-    accent-color: #b1272c;
-    cursor: pointer;
-    flex: 0 0 auto;
-  }
-
-  .discountDateText {
-    font-size: 1.02rem;
-    color: #222;
-    font-weight: 600;
-  }
-
-  .discountSelectedNote {
-    margin-top: 14px;
-    font-weight: 700;
-    color: #b1272c;
-    display: none;
-  }
-
-  .discountLoading {
-    color: #666;
-    font-style: italic;
-  }
-
-  .discountErrorBox {
-    display: none;
-    margin-top: 12px;
-    padding: 12px 14px;
-    background: #fff3f3;
-    color: #8f1d21;
-    border: 1px solid #f0c6c8;
-    border-radius: 12px;
-  }
-
-  .discountButtonGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 14px;
-  }
-
-  .discountButton {
-    display: inline-block;
-    padding: 14px 18px;
-    border-radius: 12px;
-    background: #b1272c;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    text-align: center;
-    border: 0;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-
-  .discountButton:hover {
-    background: #951e23;
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .discountButtonSecondary {
-    background: #444;
-  }
-
-  .discountButtonSecondary:hover {
-    background: #2f2f2f;
-  }
-
-  .discountButtonOutline {
-    background: #fff;
-    color: #b1272c;
-    border: 2px solid #b1272c;
-  }
-
-  .discountButtonOutline:hover {
-    background: #fff6f6;
-    color: #b1272c;
-  }
-
-  .discountSteps {
-    margin: 0;
-    padding-left: 22px;
-  }
-
-  .discountSteps li {
-    margin: 14px 0;
-  }
-
-  .discountInlineTags {
-    margin-top: 6px;
-    font-weight: 700;
-    color: #111;
-    line-height: 1.7;
-  }
-
-  .discountMessageTemplate {
-    width: 100%;
-    min-height: 150px;
-    border: 1px solid #d8d8d8;
-    border-radius: 12px;
-    padding: 14px;
-    font: inherit;
-    resize: vertical;
-    background: #fff;
-    color: #222;
-  }
-
-  .discountCopyRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 12px;
-    align-items: center;
-  }
-
-  .discountCopyStatus {
-    color: #1f7a3d;
-    font-weight: 700;
-    display: none;
-  }
-
-  .discountFirstCome {
-    margin-top: 14px;
-    text-align: center;
-    font-weight: 700;
-    color: #111;
-  }
-
-  .discountFooterNote {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  @media (max-width: 760px) {
-    .discountPage h1 {
-      font-size: 1.78rem;
-    }
-  }
-</style>
-
 <div class="discountPage">
   <div class="discountCard">
-    <p class="discountEyebrow">WELCOME, SOCIAL MEDIA FOLLOWERS</p>
-    <h1>You can save 20% on a select last minute booking!</h1>
 
-    <p class="discountHeroText">
-      Follow the steps below to claim the offer before the date is gone.
-    </p>
+    <p class="discountEyebrow">WELCOME, INSTAGRAM FOLLOWERS</p>
+
+    <h1>You can save 20% on a select last minute booking!</h1>
 
     <div class="discountHighlight">
       <strong>These are the currently available dates that qualify for this offer:</strong>
     </div>
 
-    <div class="discountDatesBox">
-      <h2>Select your date</h2>
-      <div class="discountHelp">
-        Choose one date below. When you copy the text, the selected date will be inserted automatically.
-      </div>
+    <div id="datesList" class="discountRadioList">
+      Loading available dates…
+    </div>
 
-      <div class="discountErrorBox" id="datesError">
-        We could not load the eligible dates right now. Please try again later or contact us directly.
-      </div>
-
-      <div id="datesList" class="discountRadioList">
-        <div class="discountLoading">Loading available dates…</div>
-      </div>
-
-      <div class="discountSelectedNote" id="selectedDateNote"></div>
-
-      <div class="discountFirstCome">
-        First come,<br>
-        First serve.
-      </div>
+    <div class="discountFirstCome">
+      First come,<br>First serve.
     </div>
 
     <div class="discountStepsBox">
-      <h2>To claim the 20% offer, complete all 4 steps below:</h2>
+      <h2>To claim the 20% offer, complete all steps:</h2>
 
       <ol class="discountSteps">
+
+        <!-- STEP 1 -->
         <li>
-          Follow us on Instagram.
-          <span class="discountStepNote">Tap the button below.</span>
+          Follow us on Instagram
           <div class="discountButtonGrid">
-            <a class="discountButton" href="https://www.instagram.com/enchanted_villa_windsor_hills/" target="_blank" rel="noopener">
+            <a class="discountButton"
+               href="https://www.instagram.com/enchanted_villa_windsor_hills/"
+               target="_blank">
               Follow on Instagram
             </a>
           </div>
         </li>
 
+        <!-- STEP 2 -->
         <li>
-          Like this post.
-          <span class="discountStepNote">
-            Use the button below to go back to the original Instagram post. After you like it, come back here to finish the steps.
-          </span>
+          Like the original post
           <div class="discountButtonGrid">
-            <a class="discountButton discountButtonSecondary" href="REPLACE_WITH_YOUR_IG_POST_URL" target="_blank" rel="noopener">
+            <a class="discountButton discountButtonSecondary"
+               id="igPostButton"
+               href="#"
+               target="_blank">
               Go back to Instagram post
             </a>
           </div>
         </li>
 
+        <!-- STEP 3 -->
         <li>
-          Repost to your feed and tag both accounts with the dates you want to stay.
+          Repost and tag:
           <div class="discountInlineTags">
             @sunstatevacationhomes<br>
             @enchantedvillawh
           </div>
-          <span class="discountStepNote">
-            Select a date above, then use one of the copy buttons below.
-          </span>
 
-          <div class="discountCopyRow">
-            <button class="discountButton" type="button" onclick="copyTagsOnly()">
-              Copy tags + date
+          <div class="discountButtonGrid">
+            <button class="discountButton" onclick="copyTagsOnly()">
+              Copy tags + selected date
             </button>
-            <span class="discountCopyStatus" id="tagsCopyStatus">Copied</span>
           </div>
         </li>
 
+        <!-- STEP 4 -->
         <li>
-          Take a screenshot of your repost and message it to us with the same date you selected above.
-          <span class="discountStepNote">
-            We will send back a quote with the 20% discount applied if that date is still available.
-          </span>
+          Message us your repost screenshot
           <div class="discountButtonGrid">
-            <a class="discountButton discountButtonOutline" href="https://www.instagram.com/enchanted_villa_windsor_hills/" target="_blank" rel="noopener">
+            <a class="discountButton discountButtonOutline"
+               href="https://www.instagram.com/enchanted_villa_windsor_hills/"
+               target="_blank">
               Message on Instagram
             </a>
           </div>
         </li>
+
       </ol>
     </div>
 
     <div class="discountMessageBox">
       <h2>Suggested repost message</h2>
-      <textarea id="repostMessage" class="discountMessageTemplate" readonly></textarea>
 
-      <div class="discountCopyRow">
-        <button class="discountButton" id="copyButton" type="button">Copy repost message</button>
-        <span class="discountCopyStatus" id="copyStatus">Copied</span>
-      </div>
+      <textarea id="msgBox" class="discountMessageTemplate"></textarea>
 
-      <p class="discountSmall" style="margin-top: 14px;">
-        Pick a date above first so the correct stay dates are included automatically.
-      </p>
+      <button class="discountButton" onclick="copyMsg()">
+        Copy repost message
+      </button>
     </div>
 
-    <p class="discountFooterNote">
-      Offer applies only to the listed dates shown above and is subject to availability.
-    </p>
   </div>
 </div>
 
 <script>
-  let selectedDate = '';
+let selectedDate = "";
 
-  function buildMessage(dateText) {
-    return `We’d love to book Enchanted Villa of Windsor Hills for ${dateText}.
+/* ---------- LOAD DATES ---------- */
+function renderDates(dates){
+  const el = document.getElementById("datesList");
+  el.innerHTML = "";
+
+  dates.forEach((d, i) => {
+    const label = document.createElement("label");
+    label.className = "discountDateOption";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "date";
+    input.value = d;
+
+    if(i === 0){
+      input.checked = true;
+      selectedDate = d;
+    }
+
+    input.onchange = () => {
+      selectedDate = d;
+      updateMsg();
+    };
+
+    const span = document.createElement("span");
+    span.className = "discountDateText";
+    span.textContent = d;
+
+    label.appendChild(input);
+    label.appendChild(span);
+    el.appendChild(label);
+  });
+
+  updateMsg();
+}
+
+/* ---------- MESSAGE ---------- */
+function updateMsg(){
+  document.getElementById("msgBox").value =
+`We’d love to book Enchanted Villa of Windsor Hills for ${selectedDate}.
 
 @sunstatevacationhomes
 @enchantedvillawh
 
-Claiming the 20% discount on this select stay.`;
+Claiming the 20% Instagram offer.`;
+}
+
+function copyMsg(){
+  navigator.clipboard.writeText(
+    document.getElementById("msgBox").value
+  );
+}
+
+function copyTagsOnly(){
+  if(!selectedDate){
+    alert("Please select a date first.");
+    return;
   }
 
-  function updateSelectedDate(dateText) {
-    selectedDate = dateText;
-
-    const note = document.getElementById('selectedDateNote');
-    const textarea = document.getElementById('repostMessage');
-
-    note.textContent = `Selected stay: ${dateText}`;
-    note.style.display = 'block';
-
-    textarea.value = buildMessage(dateText);
-  }
-
-  async function loadDates() {
-    const list = document.getElementById('datesList');
-    const errorBox = document.getElementById('datesError');
-
-    try {
-      const response = await fetch('/discount/dates', { cache: 'no-store' });
-      if (!response.ok) throw new Error('Dates load failed');
-
-      const text = await response.text();
-      const dates = text
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(line => line.length > 0 && !line.startsWith('#'));
-
-      list.innerHTML = '';
-
-      if (!dates.length) {
-        list.innerHTML = '<div>No discounted stays are listed right now.</div>';
-        document.getElementById('repostMessage').value =
-          'Please select a qualifying date when dates become available.';
-        return;
-      }
-
-      dates.forEach((item, index) => {
-        const label = document.createElement('label');
-        label.className = 'discountDateOption';
-
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = 'stayDate';
-        input.value = item;
-        input.checked = index === 0;
-
-        input.addEventListener('change', function() {
-          updateSelectedDate(this.value);
-        });
-
-        const textSpan = document.createElement('span');
-        textSpan.className = 'discountDateText';
-        textSpan.textContent = item;
-
-        label.appendChild(input);
-        label.appendChild(textSpan);
-        list.appendChild(label);
-      });
-
-      updateSelectedDate(dates[0]);
-    } catch (error) {
-      list.innerHTML = '';
-      errorBox.style.display = 'block';
-      document.getElementById('repostMessage').value =
-        'We could not load the available dates right now.';
-    }
-  }
-
-  async function copyRepostMessage() {
-    const textarea = document.getElementById('repostMessage');
-    const status = document.getElementById('copyStatus');
-
-    if (!selectedDate) {
-      alert('Please select a date first.');
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(textarea.value);
-      status.style.display = 'inline';
-      setTimeout(() => {
-        status.style.display = 'none';
-      }, 2200);
-    } catch (error) {
-      textarea.removeAttribute('readonly');
-      textarea.select();
-      document.execCommand('copy');
-      textarea.setAttribute('readonly', 'readonly');
-
-      status.style.display = 'inline';
-      setTimeout(() => {
-        status.style.display = 'none';
-      }, 2200);
-    }
-  }
-
-  async function copyTagsOnly() {
-    const status = document.getElementById('tagsCopyStatus');
-
-    if (!selectedDate) {
-      alert('Please select a date first.');
-      return;
-    }
-
-    const text = `@sunstatevacationhomes
+  const text =
+`@sunstatevacationhomes
 @enchantedvillawh
 ${selectedDate}`;
 
-    try {
-      await navigator.clipboard.writeText(text);
-      status.style.display = 'inline';
-      setTimeout(() => {
-        status.style.display = 'none';
-      }, 2200);
-    } catch (error) {
-      const temp = document.createElement('textarea');
-      temp.value = text;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
+  navigator.clipboard.writeText(text);
+}
 
-      status.style.display = 'inline';
-      setTimeout(() => {
-        status.style.display = 'none';
-      }, 2200);
-    }
-  }
+/* ---------- LOAD IG POST LINK ---------- */
+function loadIGPost(){
+  fetch("/discount/igpost.txt")
+    .then(r => r.text())
+    .then(link => {
+      document.getElementById("igPostButton").href = link.trim();
+    })
+    .catch(() => {
+      console.warn("Could not load IG post link");
+    });
+}
 
-  document.getElementById('copyButton').addEventListener('click', copyRepostMessage);
-  loadDates();
+/* ---------- INIT ---------- */
+fetch("/discount/dates")
+  .then(r => r.text())
+  .then(t => t.split("\n").filter(x => x.trim()))
+  .then(renderDates);
+
+loadIGPost();
 </script>
