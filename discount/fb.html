@@ -1,0 +1,187 @@
+---
+layout: default
+title: Facebook Discount
+permalink: /discount/fb/
+---
+
+<div class="discountPage">
+  <div class="discountCard">
+
+    <p class="discountEyebrow">WELCOME, FACEBOOK FOLLOWERS</p>
+
+    <h1>You can save 20% on a select last minute booking!</h1>
+
+    <div class="discountHighlight">
+      <strong>These are the currently available dates that qualify for this offer:</strong>
+    </div>
+
+    <div id="datesList" class="discountRadioList">
+      Loading available dates…
+    </div>
+
+    <div class="discountFirstCome">
+      First come,<br>First serve.
+    </div>
+
+    <div class="discountStepsBox">
+      <h2>To claim the 20% offer, complete all steps:</h2>
+
+      <ol class="discountSteps">
+
+        <li>
+          Follow us on Facebook
+          <div class="discountButtonGrid">
+            <a class="discountButton"
+               href="https://www.facebook.com/profile.php?id=61586521704194"
+               target="_blank"
+               rel="noopener">
+              Follow on Facebook
+            </a>
+          </div>
+        </li>
+
+        <li>
+          Like the original post
+          <div class="discountButtonGrid">
+            <a class="discountButton discountButtonSecondary"
+               id="fbPostButton"
+               href="#"
+               target="_blank"
+               rel="noopener">
+              Go back to Facebook post
+            </a>
+          </div>
+        </li>
+
+        <li>
+          Repost and tag:
+          <div class="discountInlineTags">
+            @sunstatevacationhomes<br>
+            @enchantedvillawh
+          </div>
+
+          <div class="discountButtonGrid">
+            <button class="discountButton" type="button" onclick="copyTagsOnly()">
+              Copy tags + selected date
+            </button>
+          </div>
+        </li>
+
+        <li>
+          Message us your repost screenshot
+          <div class="discountButtonGrid">
+            <a class="discountButton discountButtonOutline"
+               href="https://m.me/61586521704194"
+               target="_blank"
+               rel="noopener">
+              Message on Facebook
+            </a>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+
+    <div class="discountMessageBox">
+      <h2>Suggested repost message</h2>
+
+      <textarea id="msgBox" class="discountMessageTemplate" readonly></textarea>
+
+      <button class="discountButton" type="button" onclick="copyMsg()">
+        Copy repost message
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let selectedDate = "";
+
+/* ---------- LOAD DATES ---------- */
+function renderDates(dates) {
+  const el = document.getElementById("datesList");
+  el.innerHTML = "";
+
+  dates.forEach((d, i) => {
+    const label = document.createElement("label");
+    label.className = "discountDateOption";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "date";
+    input.value = d;
+
+    if (i === 0) {
+      input.checked = true;
+      selectedDate = d;
+    }
+
+    input.onchange = () => {
+      selectedDate = d;
+      updateMsg();
+    };
+
+    const span = document.createElement("span");
+    span.className = "discountDateText";
+    span.textContent = d;
+
+    label.appendChild(input);
+    label.appendChild(span);
+    el.appendChild(label);
+  });
+
+  updateMsg();
+}
+
+/* ---------- MESSAGE ---------- */
+function updateMsg() {
+  document.getElementById("msgBox").value =
+`We’d love to book Enchanted Villa of Windsor Hills for ${selectedDate}.
+
+@sunstatevacationhomes
+@enchantedvillawh
+
+Claiming the 20% Facebook offer.`;
+}
+
+function copyMsg() {
+  navigator.clipboard.writeText(
+    document.getElementById("msgBox").value
+  );
+}
+
+function copyTagsOnly() {
+  if (!selectedDate) {
+    alert("Please select a date first.");
+    return;
+  }
+
+  const text =
+`@sunstatevacationhomes
+@enchantedvillawh
+${selectedDate}`;
+
+  navigator.clipboard.writeText(text);
+}
+
+/* ---------- LOAD FB POST LINK ---------- */
+function loadFBPost() {
+  fetch("/discount/fbpost.txt")
+    .then(r => r.text())
+    .then(link => {
+      document.getElementById("fbPostButton").href = link.trim();
+    })
+    .catch(() => {
+      console.warn("Could not load Facebook post link");
+    });
+}
+
+/* ---------- INIT ---------- */
+fetch("/discount/dates")
+  .then(r => r.text())
+  .then(t => t.split("\n").filter(x => x.trim()))
+  .then(renderDates);
+
+loadFBPost();
+</script>
