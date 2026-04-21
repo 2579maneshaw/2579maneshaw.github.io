@@ -29,6 +29,7 @@ permalink: /discount/ig/
   .discountPage h1 {
     text-align: center;
     margin-bottom: 16px;
+    color: #111;
   }
 
   .discountHighlight,
@@ -56,12 +57,18 @@ permalink: /discount/ig/
     cursor: pointer;
   }
 
+  .discountButton:hover {
+    background: #1d4ed8;
+    color: #fff;
+    text-decoration: none;
+  }
+
   .discountButtonSecondary {
     background: #444;
   }
 
-  .discountButton:hover {
-    background: #1d4ed8;
+  .discountButtonSecondary:hover {
+    background: #2f2f2f;
   }
 
   .discountRadioList {
@@ -77,6 +84,7 @@ permalink: /discount/ig/
     display: flex;
     gap: 10px;
     cursor: pointer;
+    background: #fff;
   }
 
   .discountDateOption:hover {
@@ -105,6 +113,16 @@ permalink: /discount/ig/
     font-weight: bold;
     color: #2563eb;
   }
+
+  .discountErrorBox {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #fff3f3;
+    color: #8f1d21;
+    border: 1px solid #f0c6c8;
+    border-radius: 12px;
+  }
 </style>
 
 <div class="discountPage">
@@ -120,6 +138,7 @@ permalink: /discount/ig/
 
     <div class="discountDatesBox">
       <div id="datesList" class="discountRadioList">Loading...</div>
+      <div id="datesError" class="discountErrorBox">Could not load dates.</div>
       <div id="selectedDateNote" class="discountSelectedNote"></div>
     </div>
 
@@ -127,7 +146,6 @@ permalink: /discount/ig/
       <h2>Steps:</h2>
 
       <ol>
-
         <li>
           Copy this info:
           <div class="discountCommentBox">
@@ -135,7 +153,7 @@ permalink: /discount/ig/
 
             <br>
 
-            <button class="discountButtonSecondary discountButton" onclick="copyComment()">
+            <button class="discountButtonSecondary discountButton" type="button" onclick="copyComment()">
               Copy to clipboard
             </button>
             <span id="copyStatus" class="discountCopyStatus">Copied</span>
@@ -147,7 +165,7 @@ permalink: /discount/ig/
         <li>
           Then click this button to like our post, follow us, and share this post using the copied comment:
           <br><br>
-          <a class="discountButton" id="igPostButton" href="#" target="_blank">
+          <a class="discountButton" id="igPostButton" href="#" target="_blank" rel="noopener">
             Go to Instagram Post
           </a>
         </li>
@@ -157,16 +175,13 @@ permalink: /discount/ig/
         <li>
           Send this email:
           <div class="discountEmailBox">
-
-            <a id="emailButton" class="discountButton">
+            <a id="emailButton" class="discountButton" href="#">
               Open Email
             </a>
 
             <div id="emailPreview" class="discountLinkPreview"></div>
-
           </div>
         </li>
-
       </ol>
     </div>
 
@@ -183,12 +198,11 @@ const airbnbUrl = "https://www.airbnb.com/rooms/1626958722930248767?viralityEntr
 const emailTo = "info@enchantedvillawh.com";
 const emailCc = "sunstatepropmanagement@gmail.com";
 
-/* DATE LOAD */
-function renderDates(dates){
+function renderDates(dates) {
   const el = document.getElementById("datesList");
   el.innerHTML = "";
 
-  dates.forEach((d,i)=>{
+  dates.forEach((d, i) => {
     const label = document.createElement("label");
     label.className = "discountDateOption";
 
@@ -197,15 +211,15 @@ function renderDates(dates){
     input.name = "date";
     input.value = d;
 
-    if(i===0){
+    if (i === 0) {
       input.checked = true;
       selectedDate = d;
     }
 
-    input.onchange = ()=>{
+    input.addEventListener("change", () => {
       selectedDate = d;
       updateAll();
-    };
+    });
 
     label.appendChild(input);
     label.appendChild(document.createTextNode(d));
@@ -215,21 +229,21 @@ function renderDates(dates){
   updateAll();
 }
 
-/* COMMENT */
-function buildComment(){
+function buildComment() {
   return `@sunstatevacationhomes
 @enchantedvillawh
 ${selectedDate}`;
 }
 
-function copyComment(){
+function copyComment() {
   navigator.clipboard.writeText(buildComment());
-  document.getElementById("copyStatus").style.display="inline";
-  setTimeout(()=>document.getElementById("copyStatus").style.display="none",2000);
+  document.getElementById("copyStatus").style.display = "inline";
+  setTimeout(() => {
+    document.getElementById("copyStatus").style.display = "none";
+  }, 2000);
 }
 
-/* EMAIL */
-function buildEmail(){
+function buildEmail() {
   return `If still available, please send me a quote to stay in ${airbnbTitle}
 ${airbnbUrl}
 
@@ -238,35 +252,58 @@ My requested dates are: ${selectedDate}.
 Please include the 20% social media discount from your post: ${igLink}`;
 }
 
-function updateAll(){
+function updateAll() {
   document.getElementById("commentPreview").textContent = buildComment();
-  document.getElementById("selectedDateNote").textContent = `Selected stay: ${selectedDate}`;
+  document.getElementById("selectedDateNote").textContent = selectedDate ? `Selected stay: ${selectedDate}` : "";
 
   const subject = "Our Happily Ever After 20%OFF Social media quote";
   const body = buildEmail();
 
   const mail = `mailto:${emailTo}?cc=${encodeURIComponent(emailCc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
   document.getElementById("emailButton").href = mail;
 
   document.getElementById("emailPreview").textContent =
 `Subject: ${subject}
 
-${buildEmail()}`;
+If still available, please send me a quote to stay in ${airbnbTitle}
+${airbnbUrl}
+
+My requested dates are: ${selectedDate || ""}.
+
+Please include the 20% social media discount from your post: ${igLink || ""}`;
 }
 
-/* LOAD IG POST */
-fetch("/discount/igpost.txt")
-  .then(r=>r.text())
-  .then(t=>{
-    igLink = t.trim();
-    document.getElementById("igPostButton").href = igLink;
-    updateAll();
-  });
+function loadIgPost() {
+  fetch("/discount/igpost.txt", { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error("Could not load igpost.txt");
+      return response.text();
+    })
+    .then(text => {
+      igLink = text.trim();
+      document.getElementById("igPostButton").href = igLink;
+      updateAll();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
 
-/* LOAD DATES */
-fetch("/discount/dates")
-  .then(r=>r.text())
-  .then(t=>t.split("\n").filter(x=>x.trim()))
-  .then(renderDates);
+function loadDates() {
+  fetch("/discount/dates", { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error("Could not load dates");
+      return response.text();
+    })
+    .then(text => text.split(/\r?\n/).map(x => x.trim()).filter(x => x))
+    .then(renderDates)
+    .catch(error => {
+      console.error(error);
+      document.getElementById("datesList").innerHTML = "";
+      document.getElementById("datesError").style.display = "block";
+    });
+}
+
+loadIgPost();
+loadDates();
 </script>
