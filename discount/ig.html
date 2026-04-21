@@ -4,6 +4,109 @@ title: Instagram Discount
 permalink: /discount/ig/
 ---
 
+<style>
+  .discountPage {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 0 50px;
+  }
+
+  .discountCard {
+    background: #f7f7f7;
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    padding: 28px 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  }
+
+  .discountEyebrow {
+    text-align: center;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 10px;
+  }
+
+  .discountPage h1 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .discountHighlight,
+  .discountDatesBox,
+  .discountStepsBox,
+  .discountCommentBox,
+  .discountEmailBox {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 18px;
+  }
+
+  .discountButton {
+    display: inline-block;
+    padding: 14px;
+    border-radius: 12px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .discountButtonSecondary {
+    background: #444;
+  }
+
+  .discountButton:hover {
+    background: #1d4ed8;
+  }
+
+  .discountRadioList {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .discountDateOption {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .discountDateOption:hover {
+    border-color: #2563eb;
+  }
+
+  .discountInlineText {
+    white-space: pre-line;
+    font-weight: 600;
+  }
+
+  .discountCopyStatus {
+    display: none;
+    color: green;
+    font-weight: bold;
+  }
+
+  .discountLinkPreview {
+    white-space: pre-line;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+
+  .discountSelectedNote {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #2563eb;
+  }
+</style>
+
 <div class="discountPage">
   <div class="discountCard">
 
@@ -12,85 +115,59 @@ permalink: /discount/ig/
     <h1>You can save 20% on a select last minute booking!</h1>
 
     <div class="discountHighlight">
-      <strong>These are the currently available dates that qualify for this offer:</strong>
+      <strong>Select your available dates:</strong>
     </div>
 
-    <div id="datesList" class="discountRadioList">
-      Loading available dates…
-    </div>
-
-    <div class="discountFirstCome">
-      First come,<br>First serve.
+    <div class="discountDatesBox">
+      <div id="datesList" class="discountRadioList">Loading...</div>
+      <div id="selectedDateNote" class="discountSelectedNote"></div>
     </div>
 
     <div class="discountStepsBox">
-      <h2>To claim the 20% offer, complete all steps:</h2>
+      <h2>Steps:</h2>
 
-      <ol class="discountSteps">
+      <ol>
 
-        <!-- STEP 1 -->
         <li>
-          Follow us on Instagram
-          <div class="discountButtonGrid">
-            <a class="discountButton"
-               href="https://www.instagram.com/enchanted_villa_windsor_hills/"
-               target="_blank">
-              Follow on Instagram
-            </a>
-          </div>
-        </li>
+          Copy this info:
+          <div class="discountCommentBox">
+            <div id="commentPreview" class="discountInlineText"></div>
 
-        <!-- STEP 2 -->
-        <li>
-          Like the original post
-          <div class="discountButtonGrid">
-            <a class="discountButton discountButtonSecondary"
-               id="igPostButton"
-               href="#"
-               target="_blank">
-              Go back to Instagram post
-            </a>
-          </div>
-        </li>
+            <br>
 
-        <!-- STEP 3 -->
-        <li>
-          Repost and tag:
-          <div class="discountInlineTags">
-            @sunstatevacationhomes<br>
-            @enchantedvillawh
-          </div>
-
-          <div class="discountButtonGrid">
-            <button class="discountButton" onclick="copyTagsOnly()">
-              Copy tags + selected date
+            <button class="discountButtonSecondary discountButton" onclick="copyComment()">
+              Copy to clipboard
             </button>
+            <span id="copyStatus" class="discountCopyStatus">Copied</span>
           </div>
         </li>
 
-        <!-- STEP 4 -->
+        <br>
+
         <li>
-          Message us your repost screenshot
-          <div class="discountButtonGrid">
-            <a class="discountButton discountButtonOutline"
-               href="https://www.instagram.com/enchanted_villa_windsor_hills/"
-               target="_blank">
-              Message on Instagram
+          Then click this button to like our post, follow us, and share this post using the copied comment:
+          <br><br>
+          <a class="discountButton" id="igPostButton" href="#" target="_blank">
+            Go to Instagram Post
+          </a>
+        </li>
+
+        <br>
+
+        <li>
+          Send this email:
+          <div class="discountEmailBox">
+
+            <a id="emailButton" class="discountButton">
+              Open Email
             </a>
+
+            <div id="emailPreview" class="discountLinkPreview"></div>
+
           </div>
         </li>
 
       </ol>
-    </div>
-
-    <div class="discountMessageBox">
-      <h2>Suggested repost message</h2>
-
-      <textarea id="msgBox" class="discountMessageTemplate"></textarea>
-
-      <button class="discountButton" onclick="copyMsg()">
-        Copy repost message
-      </button>
     </div>
 
   </div>
@@ -98,13 +175,20 @@ permalink: /discount/ig/
 
 <script>
 let selectedDate = "";
+let igLink = "";
 
-/* ---------- LOAD DATES ---------- */
+const airbnbTitle = "Our Happily Ever After House 10 Min to Disney";
+const airbnbUrl = "https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY";
+
+const emailTo = "info@enchantedvillawh.com";
+const emailCc = "sunstatepropmanagement@gmail.com";
+
+/* DATE LOAD */
 function renderDates(dates){
   const el = document.getElementById("datesList");
   el.innerHTML = "";
 
-  dates.forEach((d, i) => {
+  dates.forEach((d,i)=>{
     const label = document.createElement("label");
     label.className = "discountDateOption";
 
@@ -113,76 +197,76 @@ function renderDates(dates){
     input.name = "date";
     input.value = d;
 
-    if(i === 0){
+    if(i===0){
       input.checked = true;
       selectedDate = d;
     }
 
-    input.onchange = () => {
+    input.onchange = ()=>{
       selectedDate = d;
-      updateMsg();
+      updateAll();
     };
 
-    const span = document.createElement("span");
-    span.className = "discountDateText";
-    span.textContent = d;
-
     label.appendChild(input);
-    label.appendChild(span);
+    label.appendChild(document.createTextNode(d));
     el.appendChild(label);
   });
 
-  updateMsg();
+  updateAll();
 }
 
-/* ---------- MESSAGE ---------- */
-function updateMsg(){
-  document.getElementById("msgBox").value =
-`We’d love to book Enchanted Villa of Windsor Hills for ${selectedDate}.
-
-@sunstatevacationhomes
-@enchantedvillawh
-
-Claiming the 20% Instagram offer.`;
-}
-
-function copyMsg(){
-  navigator.clipboard.writeText(
-    document.getElementById("msgBox").value
-  );
-}
-
-function copyTagsOnly(){
-  if(!selectedDate){
-    alert("Please select a date first.");
-    return;
-  }
-
-  const text =
-`@sunstatevacationhomes
+/* COMMENT */
+function buildComment(){
+  return `@sunstatevacationhomes
 @enchantedvillawh
 ${selectedDate}`;
-
-  navigator.clipboard.writeText(text);
 }
 
-/* ---------- LOAD IG POST LINK ---------- */
-function loadIGPost(){
-  fetch("/discount/igpost.txt")
-    .then(r => r.text())
-    .then(link => {
-      document.getElementById("igPostButton").href = link.trim();
-    })
-    .catch(() => {
-      console.warn("Could not load IG post link");
-    });
+function copyComment(){
+  navigator.clipboard.writeText(buildComment());
+  document.getElementById("copyStatus").style.display="inline";
+  setTimeout(()=>document.getElementById("copyStatus").style.display="none",2000);
 }
 
-/* ---------- INIT ---------- */
+/* EMAIL */
+function buildEmail(){
+  return `If still available, please send me a quote to stay in ${airbnbTitle}
+${airbnbUrl}
+
+My requested dates are: ${selectedDate}.
+
+Please include the 20% social media discount from your post: ${igLink}`;
+}
+
+function updateAll(){
+  document.getElementById("commentPreview").textContent = buildComment();
+  document.getElementById("selectedDateNote").textContent = `Selected stay: ${selectedDate}`;
+
+  const subject = "Our Happily Ever After 20%OFF Social media quote";
+  const body = buildEmail();
+
+  const mail = `mailto:${emailTo}?cc=${encodeURIComponent(emailCc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  document.getElementById("emailButton").href = mail;
+
+  document.getElementById("emailPreview").textContent =
+`Subject: ${subject}
+
+${buildEmail()}`;
+}
+
+/* LOAD IG POST */
+fetch("/discount/igpost.txt")
+  .then(r=>r.text())
+  .then(t=>{
+    igLink = t.trim();
+    document.getElementById("igPostButton").href = igLink;
+    updateAll();
+  });
+
+/* LOAD DATES */
 fetch("/discount/dates")
-  .then(r => r.text())
-  .then(t => t.split("\n").filter(x => x.trim()))
+  .then(r=>r.text())
+  .then(t=>t.split("\n").filter(x=>x.trim()))
   .then(renderDates);
-
-loadIGPost();
 </script>
