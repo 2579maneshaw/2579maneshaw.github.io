@@ -20,24 +20,15 @@ permalink: /discount/fb/
   }
 
   .discountEyebrow {
-    margin: 0 0 8px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #2563eb;
     text-align: center;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 10px;
   }
 
   .discountPage h1 {
-    margin: 0 0 14px;
-    font-size: 2.15rem;
     text-align: center;
-    color: #111;
-  }
-
-  .discountHeroText {
-    text-align: center;
-    color: #444;
+    margin-bottom: 16px;
   }
 
   .discountHighlight,
@@ -58,8 +49,8 @@ permalink: /discount/fb/
     border-radius: 12px;
     background: #2563eb;
     color: #fff;
-    text-align: center;
     font-weight: 700;
+    text-align: center;
     text-decoration: none;
     border: none;
     cursor: pointer;
@@ -106,8 +97,13 @@ permalink: /discount/fb/
   .discountLinkPreview {
     white-space: pre-line;
     font-size: 0.9rem;
-    color: #444;
     margin-top: 10px;
+  }
+
+  .discountSelectedNote {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #2563eb;
   }
 </style>
 
@@ -123,10 +119,8 @@ permalink: /discount/fb/
     </div>
 
     <div class="discountDatesBox">
-      <div id="datesList" class="discountRadioList">
-        Loading...
-      </div>
-      <div id="selectedDateNote"></div>
+      <div id="datesList" class="discountRadioList">Loading...</div>
+      <div id="selectedDateNote" class="discountSelectedNote"></div>
     </div>
 
     <div class="discountStepsBox">
@@ -135,17 +129,7 @@ permalink: /discount/fb/
       <ol>
 
         <li>
-          Follow us and like our post
-          <br><br>
-          <a class="discountButton" id="fbPostButton" href="#" target="_blank">
-            Go to Facebook Post
-          </a>
-        </li>
-
-        <br>
-
-        <li>
-          Share this post and paste this comment:
+          Copy this info:
           <div class="discountCommentBox">
             <div id="commentPreview" class="discountInlineText"></div>
 
@@ -156,6 +140,16 @@ permalink: /discount/fb/
             </button>
             <span id="copyStatus" class="discountCopyStatus">Copied</span>
           </div>
+        </li>
+
+        <br>
+
+        <li>
+          Then click this button to like our post, follow us, and share this post using the copied comment:
+          <br><br>
+          <a class="discountButton" id="fbPostButton" href="#" target="_blank">
+            Go to Facebook Post
+          </a>
         </li>
 
         <br>
@@ -187,7 +181,7 @@ const airbnbTitle = "Our Happily Ever After House 10 Min to Disney";
 const airbnbUrl = "https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY";
 const emailTo = "info@enchantedvillawh.com";
 
-/* ---------- DATE ---------- */
+/* DATE LOAD */
 function renderDates(dates){
   const el = document.getElementById("datesList");
   el.innerHTML = "";
@@ -219,7 +213,7 @@ function renderDates(dates){
   updateAll();
 }
 
-/* ---------- COMMENT ---------- */
+/* COMMENT */
 function buildComment(){
   return `@sunstatevacationhomes
 @enchantedvillawh
@@ -232,7 +226,7 @@ function copyComment(){
   setTimeout(()=>document.getElementById("copyStatus").style.display="none",2000);
 }
 
-/* ---------- EMAIL ---------- */
+/* EMAIL */
 function buildEmail(){
   return `If still available, please send me a quote to stay in ${airbnbTitle}
 ${airbnbUrl}
@@ -244,6 +238,7 @@ Please include the 20% social media discount from your post: ${fbLink}`;
 
 function updateAll(){
   document.getElementById("commentPreview").textContent = buildComment();
+  document.getElementById("selectedDateNote").textContent = `Selected stay: ${selectedDate}`;
 
   const subject = "Our Happily Ever After 20%OFF Social media quote";
   const body = buildEmail();
@@ -258,7 +253,7 @@ function updateAll(){
 ${buildEmail()}`;
 }
 
-/* ---------- LOAD FB LINK (FIXED) ---------- */
+/* LOAD FB POST LINK */
 fetch("/discount/fbpost.txt")
   .then(r=>r.text())
   .then(t=>{
@@ -267,7 +262,7 @@ fetch("/discount/fbpost.txt")
     updateAll();
   });
 
-/* ---------- LOAD DATES ---------- */
+/* LOAD DATES */
 fetch("/discount/dates")
   .then(r=>r.text())
   .then(t=>t.split("\n").filter(x=>x.trim()))
