@@ -24,11 +24,16 @@ permalink: /discount/fb/
     font-weight: 700;
     color: #2563eb;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   .discountPage h1 {
     text-align: center;
     margin-bottom: 16px;
+    color: #111;
+    font-size: 2.15rem;
+    line-height: 1.15;
   }
 
   .discountHighlight,
@@ -43,9 +48,19 @@ permalink: /discount/fb/
     margin-top: 18px;
   }
 
+  .discountHighlight strong {
+    font-size: 1.1rem;
+  }
+
+  .discountHelp {
+    color: #666;
+    font-size: 0.96rem;
+    margin-bottom: 10px;
+  }
+
   .discountButton {
     display: inline-block;
-    padding: 14px;
+    padding: 14px 18px;
     border-radius: 12px;
     background: #2563eb;
     color: #fff;
@@ -54,14 +69,21 @@ permalink: /discount/fb/
     text-decoration: none;
     border: none;
     cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .discountButton:hover {
+    background: #1d4ed8;
+    color: #fff;
+    text-decoration: none;
   }
 
   .discountButtonSecondary {
     background: #444;
   }
 
-  .discountButton:hover {
-    background: #1d4ed8;
+  .discountButtonSecondary:hover {
+    background: #2f2f2f;
   }
 
   .discountRadioList {
@@ -71,39 +93,104 @@ permalink: /discount/fb/
   }
 
   .discountDateOption {
-    padding: 12px;
+    padding: 12px 14px;
     border: 1px solid #ddd;
     border-radius: 12px;
     display: flex;
     gap: 10px;
     cursor: pointer;
+    align-items: flex-start;
+    background: #fff;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
 
   .discountDateOption:hover {
     border-color: #2563eb;
+    background: #f8fbff;
+  }
+
+  .discountDateOption input[type="radio"] {
+    margin-top: 3px;
+    accent-color: #2563eb;
+    transform: scale(1.1);
   }
 
   .discountInlineText {
     white-space: pre-line;
     font-weight: 600;
+    line-height: 1.65;
   }
 
   .discountCopyStatus {
     display: none;
-    color: green;
+    color: #1f7a3d;
     font-weight: bold;
-  }
-
-  .discountLinkPreview {
-    white-space: pre-line;
-    font-size: 0.9rem;
-    margin-top: 10px;
+    margin-left: 8px;
   }
 
   .discountSelectedNote {
-    margin-top: 10px;
+    margin-top: 12px;
     font-weight: bold;
     color: #2563eb;
+  }
+
+  .discountErrorBox {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #fff3f3;
+    color: #8f1d21;
+    border: 1px solid #f0c6c8;
+    border-radius: 12px;
+  }
+
+  .discountEmailPreview {
+    margin-top: 14px;
+    padding: 16px;
+    border: 1px solid #dbe7ff;
+    background: #f8fbff;
+    border-radius: 14px;
+    color: #1f2937;
+    line-height: 1.6;
+  }
+
+  .discountEmailPreview strong {
+    color: #111827;
+  }
+
+  .discountEmailPreview a {
+    color: #2563eb;
+    word-break: break-word;
+  }
+
+  .discountSectionLabel {
+    margin-top: 14px;
+    margin-bottom: 4px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .discountPreviewBlock {
+    white-space: pre-line;
+  }
+
+  ol.discountSteps {
+    padding-left: 24px;
+    margin-bottom: 0;
+  }
+
+  ol.discountSteps li {
+    margin-bottom: 22px;
+  }
+
+  @media (max-width: 760px) {
+    .discountPage h1 {
+      font-size: 1.8rem;
+    }
+
+    .discountCard {
+      padding: 22px 16px;
+    }
   }
 </style>
 
@@ -119,15 +206,19 @@ permalink: /discount/fb/
     </div>
 
     <div class="discountDatesBox">
+      <div class="discountHelp">
+        Choose one date below. The selected date will automatically be used in the copied comment and the email request.
+      </div>
+
       <div id="datesList" class="discountRadioList">Loading...</div>
+      <div id="datesError" class="discountErrorBox">Could not load dates.</div>
       <div id="selectedDateNote" class="discountSelectedNote"></div>
     </div>
 
     <div class="discountStepsBox">
       <h2>Steps:</h2>
 
-      <ol>
-
+      <ol class="discountSteps">
         <li>
           Copy this info:
           <div class="discountCommentBox">
@@ -135,38 +226,52 @@ permalink: /discount/fb/
 
             <br>
 
-            <button class="discountButtonSecondary discountButton" onclick="copyComment()">
+            <button class="discountButtonSecondary discountButton" type="button" onclick="copyComment()">
               Copy to clipboard
             </button>
             <span id="copyStatus" class="discountCopyStatus">Copied</span>
           </div>
         </li>
 
-        <br>
-
         <li>
-          Then return to our post (click below), and share our post using the copied comment below. Please follow and like, while your there!
+          Then click this button to like our post, follow us, and share this post using the copied comment:
           <br><br>
-          <a class="discountButton" id="fbPostButton" href="#" target="_blank">
+          <a class="discountButton" id="fbPostButton" href="#" target="_blank" rel="noopener">
             Go to Facebook Post
           </a>
         </li>
 
-        <br>
-
         <li>
-          Request a discounted quote by sending us the prefilled email below. Just click the "open email" button:
+          Request a discounted quote by sending us the prefilled email below. Just click the "Open Email" button:
           <div class="discountEmailBox">
-
-            <a id="emailButton" class="discountButton">
+            <a id="emailButton" class="discountButton" href="#">
               Open Email
             </a>
 
-            <div id="emailPreview" class="discountLinkPreview"></div>
+            <div class="discountEmailPreview">
+              <div class="discountSectionLabel">Subject:</div>
+              <div id="previewSubject" class="discountPreviewBlock"></div>
 
+              <div class="discountSectionLabel">Body:</div>
+              <div class="discountPreviewBlock">
+                If still available, please send me a quote to stay in
+              </div>
+
+              <div class="discountSectionLabel" id="previewAirbnbTitle"></div>
+              <div>
+                <a id="previewAirbnbLink" href="#" target="_blank" rel="noopener"></a>
+              </div>
+
+              <div class="discountSectionLabel">My requested dates are:</div>
+              <div id="previewDate" class="discountPreviewBlock"></div>
+
+              <div class="discountSectionLabel">Please include the 20% social media discount from your post:</div>
+              <div>
+                <a id="previewPostLink" href="#" target="_blank" rel="noopener"></a>
+              </div>
+            </div>
           </div>
         </li>
-
       </ol>
     </div>
 
@@ -177,16 +282,17 @@ permalink: /discount/fb/
 let selectedDate = "";
 let fbLink = "";
 
-const airbnbTitle = "'Our Happily Ever After House 10 Min to Disney'";
+const airbnbTitle = "Our Happily Ever After House 10 Min to Disney";
 const airbnbUrl = "https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY";
-const emailTo = "enchantedvillaofwindsorhills@gmail.com,sunstatepropmanagement@gmail.com";
 
-/* DATE LOAD */
-function renderDates(dates){
+const emailTo = "info@enchantedvillawh.com";
+const emailCc = "sunstatepropmanagement@gmail.com";
+
+function renderDates(dates) {
   const el = document.getElementById("datesList");
   el.innerHTML = "";
 
-  dates.forEach((d,i)=>{
+  dates.forEach((d, i) => {
     const label = document.createElement("label");
     label.className = "discountDateOption";
 
@@ -195,15 +301,15 @@ function renderDates(dates){
     input.name = "date";
     input.value = d;
 
-    if(i===0){
+    if (i === 0) {
       input.checked = true;
       selectedDate = d;
     }
 
-    input.onchange = ()=>{
+    input.addEventListener("change", () => {
       selectedDate = d;
       updateAll();
-    };
+    });
 
     label.appendChild(input);
     label.appendChild(document.createTextNode(d));
@@ -213,22 +319,25 @@ function renderDates(dates){
   updateAll();
 }
 
-/* COMMENT */
-function buildComment(){
+function buildComment() {
   return `@sunstatevacationhomes
 @enchantedvillawh
-Please send me a discounted quote for "Our Happily Ever After House"
 ${selectedDate}`;
 }
 
-function copyComment(){
+function copyComment() {
   navigator.clipboard.writeText(buildComment());
-  document.getElementById("copyStatus").style.display="inline";
-  setTimeout(()=>document.getElementById("copyStatus").style.display="none",2000);
+  document.getElementById("copyStatus").style.display = "inline";
+  setTimeout(() => {
+    document.getElementById("copyStatus").style.display = "none";
+  }, 2000);
 }
 
-/* EMAIL */
-function buildEmail(){
+function buildEmailSubject() {
+  return "Our Happily Ever After 20%OFF Social media quote";
+}
+
+function buildEmailBody() {
   return `If still available, please send me a quote to stay in ${airbnbTitle}
 ${airbnbUrl}
 
@@ -237,35 +346,62 @@ My requested dates are: ${selectedDate}.
 Please include the 20% social media discount from your post: ${fbLink}`;
 }
 
-function updateAll(){
-  document.getElementById("commentPreview").textContent = buildComment();
-  document.getElementById("selectedDateNote").textContent = `Selected stay: ${selectedDate}`;
-
-  const subject = "Our Happily Ever After 20%OFF Social media quote";
-  const body = buildEmail();
-
-  const mail = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  document.getElementById("emailButton").href = mail;
-
-  document.getElementById("emailPreview").textContent =
-`Subject: ${subject}
-
-${buildEmail()}`;
+function updatePreview() {
+  document.getElementById("previewSubject").textContent = buildEmailSubject();
+  document.getElementById("previewAirbnbTitle").textContent = airbnbTitle;
+  document.getElementById("previewAirbnbLink").textContent = airbnbUrl;
+  document.getElementById("previewAirbnbLink").href = airbnbUrl;
+  document.getElementById("previewDate").textContent = selectedDate || "";
+  document.getElementById("previewPostLink").textContent = fbLink || "";
+  document.getElementById("previewPostLink").href = fbLink || "#";
 }
 
-/* LOAD FB POST LINK */
-fetch("/discount/fbpost.txt")
-  .then(r=>r.text())
-  .then(t=>{
-    fbLink = t.trim();
-    document.getElementById("fbPostButton").href = fbLink;
-    updateAll();
-  });
+function updateEmailButton() {
+  const subject = buildEmailSubject();
+  const body = buildEmailBody();
 
-/* LOAD DATES */
-fetch("/discount/dates")
-  .then(r=>r.text())
-  .then(t=>t.split("\n").filter(x=>x.trim()))
-  .then(renderDates);
+  const mail = `mailto:${emailTo}?cc=${encodeURIComponent(emailCc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById("emailButton").href = mail;
+}
+
+function updateAll() {
+  document.getElementById("commentPreview").textContent = buildComment();
+  document.getElementById("selectedDateNote").textContent = selectedDate ? `Selected stay: ${selectedDate}` : "";
+  updatePreview();
+  updateEmailButton();
+}
+
+function loadFbPost() {
+  fetch("/discount/fbpost.txt", { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error("Could not load fbpost.txt");
+      return response.text();
+    })
+    .then(text => {
+      fbLink = text.trim();
+      document.getElementById("fbPostButton").href = fbLink;
+      updateAll();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+function loadDates() {
+  fetch("/discount/dates", { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error("Could not load dates");
+      return response.text();
+    })
+    .then(text => text.split(/\r?\n/).map(x => x.trim()).filter(x => x))
+    .then(renderDates)
+    .catch(error => {
+      console.error(error);
+      document.getElementById("datesList").innerHTML = "";
+      document.getElementById("datesError").style.display = "block";
+    });
+}
+
+loadFbPost();
+loadDates();
 </script>
