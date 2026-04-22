@@ -226,7 +226,7 @@ permalink: /discount/ig/
 
             <br>
 
-            <button class="discountButtonSecondary discountButton" type="button" onclick="copyComment()">
+            <button class="discountButtonSecondary discountButton" type="button" id="copyCommentButton">
               Copy to clipboard
             </button>
             <span id="copyStatus" class="discountCopyStatus">Copied</span>
@@ -288,6 +288,38 @@ const airbnbUrl = "https://www.airbnb.com/rooms/1626958722930248767?viralityEntr
 const emailTo = "enchantedvillaofwindsorhills@gmail.com";
 const emailCc = "sunstatepropmanagement@gmail.com";
 
+function showCopyStatus() {
+  const status = document.getElementById("copyStatus");
+  status.style.display = "inline";
+  setTimeout(() => {
+    status.style.display = "none";
+  }, 2000);
+}
+
+async function copyTextSafely(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.setAttribute("readonly", "");
+  textArea.style.position = "fixed";
+  textArea.style.top = "-9999px";
+  textArea.style.left = "-9999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  const successful = document.execCommand("copy");
+  document.body.removeChild(textArea);
+
+  if (!successful) {
+    throw new Error("Copy failed");
+  }
+}
+
 function renderDates(dates) {
   const el = document.getElementById("datesList");
   el.innerHTML = "";
@@ -324,12 +356,14 @@ function buildComment() {
 ${selectedDate}`;
 }
 
-function copyComment() {
-  navigator.clipboard.writeText(buildComment());
-  document.getElementById("copyStatus").style.display = "inline";
-  setTimeout(() => {
-    document.getElementById("copyStatus").style.display = "none";
-  }, 2000);
+async function copyComment() {
+  try {
+    await copyTextSafely(buildComment());
+    showCopyStatus();
+  } catch (error) {
+    alert("Copy failed on this browser. Please press and hold to copy the text manually.");
+    console.error(error);
+  }
 }
 
 function buildEmailSubject() {
@@ -400,6 +434,8 @@ function loadDates() {
       document.getElementById("datesError").style.display = "block";
     });
 }
+
+document.getElementById("copyCommentButton").addEventListener("click", copyComment);
 
 loadIgPost();
 loadDates();
