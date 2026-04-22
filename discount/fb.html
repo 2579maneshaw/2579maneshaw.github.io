@@ -226,7 +226,7 @@ permalink: /discount/fb/
 
             <br>
 
-            <button class="discountButtonSecondary discountButton" type="button" onclick="copyComment()">
+            <button class="discountButtonSecondary discountButton" type="button" id="copyCommentButton">
               Copy to clipboard
             </button>
             <span id="copyStatus" class="discountCopyStatus">Copied</span>
@@ -284,13 +284,50 @@ let fbLink = "";
 
 const airbnbTitle = "Our Happily Ever After House 10 Min to Disney";
 const airbnbUrl = "https://www.airbnb.com/rooms/1626958722930248767?viralityEntryPoint=1&s=76&source_impression_id=p3_1771862170_P3u5M5-NH7ujRrFY";
-
 const emailTo = "enchantedvillaofwindsorhills@gmail.com";
 const emailCc = "sunstatepropmanagement@gmail.com";
+
+function showCopyStatus() {
+  const status = document.getElementById("copyStatus");
+  status.style.display = "inline";
+  setTimeout(() => {
+    status.style.display = "none";
+  }, 2000);
+}
+
+async function copyTextSafely(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.setAttribute("readonly", "");
+  textArea.style.position = "fixed";
+  textArea.style.top = "-9999px";
+  textArea.style.left = "-9999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  const successful = document.execCommand("copy");
+  document.body.removeChild(textArea);
+
+  if (!successful) {
+    throw new Error("Copy failed");
+  }
+}
 
 function renderDates(dates) {
   const el = document.getElementById("datesList");
   el.innerHTML = "";
+
+  if (!dates.length) {
+    el.innerHTML = "<div>No dates currently available.</div>";
+    updateAll();
+    return;
+  }
 
   dates.forEach((d, i) => {
     const label = document.createElement("label");
@@ -320,16 +357,19 @@ function renderDates(dates) {
 }
 
 function buildComment() {
-  return `@sunstatevacationhomes @enchanted_villa_windsor_hills Please send me a quote for 'Our Happily Ever After House'
+  return `@sunstatevacationhomes
+@enchantedvillawh
 ${selectedDate}`;
 }
 
-function copyComment() {
-  navigator.clipboard.writeText(buildComment());
-  document.getElementById("copyStatus").style.display = "inline";
-  setTimeout(() => {
-    document.getElementById("copyStatus").style.display = "none";
-  }, 2000);
+async function copyComment() {
+  try {
+    await copyTextSafely(buildComment());
+    showCopyStatus();
+  } catch (error) {
+    alert("Copy failed on this browser. Please press and hold to copy the text manually.");
+    console.error(error);
+  }
 }
 
 function buildEmailSubject() {
@@ -358,7 +398,6 @@ function updatePreview() {
 function updateEmailButton() {
   const subject = buildEmailSubject();
   const body = buildEmailBody();
-
   const mail = `mailto:${emailTo}?cc=${encodeURIComponent(emailCc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   document.getElementById("emailButton").href = mail;
 }
@@ -392,7 +431,12 @@ function loadDates() {
       if (!response.ok) throw new Error("Could not load dates");
       return response.text();
     })
-    .then(text => text.split(/\r?\n/).map(x => x.trim()).filter(x => x))
+    .then(text =>
+      text
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(line => line && !line.startsWith("#"))
+    )
     .then(renderDates)
     .catch(error => {
       console.error(error);
@@ -400,6 +444,8 @@ function loadDates() {
       document.getElementById("datesError").style.display = "block";
     });
 }
+
+document.getElementById("copyCommentButton").addEventListener("click", copyComment);
 
 loadFbPost();
 loadDates();
