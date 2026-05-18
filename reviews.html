@@ -220,44 +220,63 @@ nav: reviews
 
   const carousel = document.getElementById("reviewCarousel");
   const track = document.getElementById("reviewTrack");
-  const slides = Array.from(document.querySelectorAll(".reviewSlide"));
+  let slides = Array.from(document.querySelectorAll(".reviewSlide"));
 
   if(!carousel || !track || !slides.length) return;
 
-  let index = 0;
-  let timer = null;
   let paused = false;
+  let currentIndex = 0;
+  let timer = null;
+  const originalCount = slides.length;
 
-  function centerActiveSlide(){
+  slides.forEach(slide => {
+    const clone = slide.cloneNode(true);
+    clone.classList.remove("active");
+    clone.setAttribute("aria-hidden", "true");
+    track.appendChild(clone);
+  });
+
+  slides = Array.from(document.querySelectorAll(".reviewSlide"));
+
+  function centerSlide(index, instant){
+    slides.forEach(slide => slide.classList.remove("active"));
+
     const active = slides[index];
+
+    if(!active) return;
+
+    active.classList.add("active");
+
     const carouselWidth = carousel.offsetWidth;
     const slideLeft = active.offsetLeft;
     const slideWidth = active.offsetWidth;
 
+    if(instant){
+      track.style.transition = "none";
+    } else {
+      track.style.transition = "transform .85s ease";
+    }
+
     const targetX = (carouselWidth / 2) - slideLeft - (slideWidth / 2);
-    track.style.transform = `translateX(${targetX}px)`;
-  }
-
-  function showSlide(newIndex){
-    slides.forEach(slide => slide.classList.remove("active"));
-
-    index = newIndex;
-
-    if(index >= slides.length){
-      index = 0;
-    }
-
-    if(index < 0){
-      index = slides.length - 1;
-    }
-
-    slides[index].classList.add("active");
-    centerActiveSlide();
+    track.style.transform = "translateX(" + targetX + "px)";
   }
 
   function nextSlide(){
     if(paused) return;
-    showSlide(index + 1);
+
+    currentIndex++;
+    centerSlide(currentIndex, false);
+
+    if(currentIndex >= originalCount){
+      setTimeout(function(){
+        currentIndex = 0;
+        centerSlide(currentIndex, true);
+
+        track.offsetHeight;
+
+        track.style.transition = "transform .85s ease";
+      }, 900);
+    }
   }
 
   function startAutoScroll(){
@@ -282,20 +301,30 @@ nav: reviews
     startAutoScroll();
   });
 
-  slides.forEach((img, slideIndex) => {
+  slides.forEach(function(img, slideIndex){
     img.addEventListener("click", function(){
-      showSlide(slideIndex);
+      currentIndex = slideIndex;
+
+      if(currentIndex >= originalCount){
+        currentIndex = currentIndex - originalCount;
+      }
+
+      centerSlide(currentIndex, false);
       openReviewModal(img.src);
     });
   });
 
-  window.addEventListener("resize", centerActiveSlide);
+  window.addEventListener("resize", function(){
+    centerSlide(currentIndex, true);
+  });
 
-  showSlide(0);
+  centerSlide(0, true);
   startAutoScroll();
 
 })();
+</script>
 
+<script>
 function openReviewModal(src){
   const modal = document.getElementById("reviewModal");
   const img = document.getElementById("reviewModalImg");
