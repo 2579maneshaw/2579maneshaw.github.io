@@ -11,6 +11,60 @@ nav: reviews
   padding:18px 16px 60px;
 }
 
+.reviewsIntro{
+  margin-bottom:18px;
+  padding:18px;
+  border-radius:16px;
+  background:#f7f7f7;
+  border:1px solid #eee;
+  box-shadow:0 10px 26px rgba(0,0,0,0.05);
+}
+
+.reviewsTitle{
+  margin:0 0 8px;
+  font-size:2rem;
+  letter-spacing:-0.03em;
+  color:#111;
+}
+
+.reviewsText{
+  margin:0 0 14px;
+  max-width:800px;
+  color:#444;
+  line-height:1.6;
+}
+
+.reviewsActions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+.airbnbReviewsBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:12px;
+  background:#fff;
+  border:1px solid #e5e5e5;
+  color:#111;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+}
+
+.airbnbReviewsBtn:hover{
+  background:#fcfcfc;
+}
+
+.airbnbLogo{
+  width:20px;
+  height:20px;
+  object-fit:contain;
+}
+
 .reviewCarousel{
   position:relative;
   width:100%;
@@ -74,36 +128,62 @@ nav: reviews
 </style>
 
 <div class="reviewsWrap">
-<div class="reviewCarousel">
 
-{% assign review_files = site.static_files
-| where_exp: "f", "f.path contains '/photos/reviewGallery/'"
-| sort: "path"
-%}
+  <section class="reviewsIntro">
+    <h1 class="reviewsTitle">Guest Reviews</h1>
 
-{% for f in review_files %}
+    <p class="reviewsText">
+      See what guests are saying about their stay, or view our live reviews directly on Airbnb.
+    </p>
 
-{% assign ext = f.extname | downcase %}
+    <div class="reviewsActions">
+      <a
+        class="airbnbReviewsBtn"
+        href="https://www.airbnb.com/rooms/1626958722930248767/reviews?photo_id=2528016015&source_impression_id=p3_1774210873_P3Ys82HvZmi1IEt-&previous_page_section_name=1000"
+        target="_blank"
+        rel="noopener">
 
-{% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
+          alt="Airbnb"
+          class="airbnbLogo"
+        />
 
-<img
-class="reviewSlide {% if forloop.first %}active{% endif %}"
-src="{{ f.path | relative_url }}"
-alt="Guest review {{ forloop.index }}"
-loading="lazy"
-/>
+        <span>View all Airbnb reviews</span>
+      </a>
+    </div>
+  </section>
 
-{% endif %}
+  <div class="reviewCarousel">
 
-{% endfor %}
+    {% assign review_files = site.static_files
+    | where_exp: "f", "f.path contains '/photos/reviewGallery/'"
+    | sort: "path"
+    %}
 
-</div>
+    {% for f in review_files %}
+
+    {% assign ext = f.extname | downcase %}
+
+    {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
+
+    <img
+    class="reviewSlide {% if forloop.first %}active{% endif %}"
+    src="{{ f.path | relative_url }}"
+    alt="Guest review {{ forloop.index }}"
+    loading="lazy"
+    />
+
+    {% endif %}
+
+    {% endfor %}
+
+  </div>
 </div>
 
 <div id="reviewModal" class="reviewModal">
-<button class="reviewModalClose" onclick="closeReviewModal()">×</button>
-<img id="reviewModalImg">
+  <button class="reviewModalClose" onclick="closeReviewModal()">×</button>
+  <img id="reviewModalImg">
 </div>
 
 <script>
@@ -139,20 +219,16 @@ openReviewModal(img.src);
 })();
 
 function openReviewModal(src){
-
 const modal=document.getElementById("reviewModal");
 const img=document.getElementById("reviewModalImg");
 
 img.src=src;
 modal.classList.add("open");
-
 }
 
 function closeReviewModal(){
-
 const modal=document.getElementById("reviewModal");
 modal.classList.remove("open");
-
 }
 
 </script>
