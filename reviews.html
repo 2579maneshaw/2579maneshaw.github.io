@@ -28,325 +28,319 @@ nav: reviews
 }
 
 .reviewsText{
-  margin:0 0 14px;
-  max-width:800px;
+  margin:0;
+  max-width:850px;
+  font-size:1rem;
+  line-height:1.55;
   color:#444;
-  line-height:1.6;
 }
 
-.reviewsActions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  align-items:center;
-}
-
-.airbnbReviewsBtn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 18px;
-  border-radius:12px;
-  background:#fff;
-  border:1px solid #e5e5e5;
-  color:#111;
-  text-decoration:none;
-  font-weight:700;
-  box-shadow:0 6px 18px rgba(0,0,0,0.04);
-}
-
-.airbnbReviewsBtn:hover{
-  background:#fcfcfc;
-}
-
-.airbnbLogo{
-  width:20px;
-  height:20px;
-  object-fit:contain;
-}
-
-.reviewCarousel{
+.reviewCarouselShell{
   position:relative;
-  width:100%;
-  border-radius:16px;
-  border:1px solid #eee;
-  background:#fafafa;
   overflow:hidden;
-  box-shadow:0 10px 26px rgba(0,0,0,0.05);
-  padding:34px 0;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid #eee;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  padding:22px 52px;
 }
 
-.reviewTrack{
+.reviewScroller{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.reviewScroller::-webkit-scrollbar{
+  display:none;
+}
+
+.reviewCard{
+  flex:0 0 auto;
+  width:280px;
+  height:430px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fafafa;
+  border:1px solid #e8e8e8;
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.reviewCard.active{
+  transform:scale(1.04);
+  box-shadow:0 18px 35px rgba(0,0,0,0.22);
+  z-index:2;
+}
+
+.reviewCard img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  background:#fff;
+}
+
+.reviewNav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:10;
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:none;
+  background:rgba(0,0,0,0.68);
+  color:#fff;
+  font-size:2rem;
+  line-height:1;
+  cursor:pointer;
   display:flex;
   align-items:center;
-  gap:26px;
-  padding:0 40px;
-  transition:transform .85s ease;
-  will-change:transform;
+  justify-content:center;
 }
 
-.reviewSlide{
-  flex:0 0 260px;
-  height:360px;
-  object-fit:contain;
-  border-radius:14px;
-  background:#fff;
-  box-shadow:0 8px 22px rgba(0,0,0,.12);
-  cursor:zoom-in;
-  transform:scale(.88);
-  opacity:.62;
-  transition:transform .5s ease, opacity .5s ease, box-shadow .5s ease;
+.reviewPrev{
+  left:8px;
 }
 
-.reviewSlide.active{
-  transform:scale(1.12);
-  opacity:1;
-  z-index:2;
-  box-shadow:0 14px 34px rgba(0,0,0,.22);
+.reviewNext{
+  right:8px;
+}
+
+.reviewNav:hover{
+  background:rgba(0,0,0,0.86);
 }
 
 .reviewModal{
-  display:none;
   position:fixed;
   inset:0;
   z-index:9999;
-  background:rgba(0,0,0,.86);
+  display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  background:rgba(0,0,0,0.82);
+  padding:24px;
 }
 
 .reviewModal.open{
   display:flex;
 }
 
-#reviewModalImg{
+.reviewModal img{
   max-width:95vw;
   max-height:90vh;
+  object-fit:contain;
   border-radius:12px;
   background:#fff;
+  box-shadow:0 20px 60px rgba(0,0,0,0.45);
 }
 
 .reviewModalClose{
-  position:absolute;
-  top:14px;
-  right:16px;
+  position:fixed;
+  top:18px;
+  right:22px;
   width:44px;
   height:44px;
   border-radius:999px;
   border:none;
-  background:rgba(255,255,255,.2);
-  color:#fff;
-  font-size:28px;
+  background:#fff;
+  color:#111;
+  font-size:2rem;
+  line-height:1;
   cursor:pointer;
 }
 
 @media(max-width:700px){
-  .reviewSlide{
-    flex-basis:220px;
-    height:320px;
+  .reviewCarouselShell{
+    padding:18px 42px;
   }
 
-  .reviewTrack{
-    gap:20px;
-    padding:0 28px;
+  .reviewCard{
+    width:230px;
+    height:360px;
+  }
+
+  .reviewNav{
+    width:36px;
+    height:36px;
+    font-size:1.6rem;
   }
 }
 </style>
 
 <div class="reviewsWrap">
-
   <section class="reviewsIntro">
     <h1 class="reviewsTitle">Guest Reviews</h1>
-
     <p class="reviewsText">
-      See what guests are saying about their stay, or view our live reviews directly on Airbnb.
+      See what guests are saying about their stay at Enchanted Villa of Windsor Hills.
     </p>
-
-    <div class="reviewsActions">
-      <a
-        class="airbnbReviewsBtn"
-        href="https://www.airbnb.com/rooms/1626958722930248767/reviews?photo_id=2528016015&source_impression_id=p3_1774210873_P3Ys82HvZmi1IEt-&previous_page_section_name=1000"
-        target="_blank"
-        rel="noopener">
-
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
-          alt="Airbnb"
-          class="airbnbLogo"
-        />
-
-        <span>View all Airbnb reviews</span>
-      </a>
-    </div>
   </section>
 
-  <div class="reviewCarousel" id="reviewCarousel">
-    <div class="reviewTrack" id="reviewTrack">
+  <section class="reviewCarouselShell">
+    <button class="reviewNav reviewPrev" type="button" aria-label="Previous review">‹</button>
 
-      {% assign review_files = site.static_files
-      | where_exp: "f", "f.path contains '/photos/reviewGallery/'"
-      | sort: "path"
-      %}
-
-      {% for f in review_files %}
-
-      {% assign ext = f.extname | downcase %}
-
-      {% if ext == ".webp" or ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".gif" %}
-
-      <img
-        class="reviewSlide {% if forloop.first %}active{% endif %}"
-        src="{{ f.path | relative_url }}"
-        alt="Guest review {{ forloop.index }}"
-        loading="lazy"
-      />
-
-      {% endif %}
-
+    <div class="reviewScroller" id="reviewScroller">
+      {% for file in site.static_files %}
+        {% if file.path contains '/photos/reviewGallery/' %}
+          {% assign ext = file.extname | downcase %}
+          {% if ext == '.jpg' or ext == '.jpeg' or ext == '.png' or ext == '.webp' %}
+            <div class="reviewCard">
+              <img src="{{ file.path | relative_url }}" alt="Guest review">
+            </div>
+          {% endif %}
+        {% endif %}
       {% endfor %}
-
     </div>
-  </div>
+
+    <button class="reviewNav reviewNext" type="button" aria-label="Next review">›</button>
+  </section>
 </div>
 
-<div id="reviewModal" class="reviewModal">
-  <button class="reviewModalClose" onclick="closeReviewModal()">×</button>
-  <img id="reviewModalImg" alt="Expanded guest review">
+<div class="reviewModal" id="reviewModal">
+  <button class="reviewModalClose" type="button" id="reviewModalClose" aria-label="Close review">×</button>
+  <img id="reviewModalImg" src="" alt="Enlarged guest review">
 </div>
 
 <script>
-(function(){
+document.addEventListener("DOMContentLoaded", function () {
+  const scroller = document.getElementById("reviewScroller");
+  const prevBtn = document.querySelector(".reviewPrev");
+  const nextBtn = document.querySelector(".reviewNext");
+  const modal = document.getElementById("reviewModal");
+  const modalImg = document.getElementById("reviewModalImg");
+  const modalClose = document.getElementById("reviewModalClose");
 
-  const carousel = document.getElementById("reviewCarousel");
-  const track = document.getElementById("reviewTrack");
-  let slides = Array.from(document.querySelectorAll(".reviewSlide"));
-
-  if(!carousel || !track || !slides.length) return;
-
-  let paused = false;
+  let cards = Array.from(scroller.querySelectorAll(".reviewCard"));
   let currentIndex = 0;
-  let timer = null;
-  const originalCount = slides.length;
+  let autoTimer = null;
+  let isPaused = false;
 
-  slides.forEach(slide => {
-    const clone = slide.cloneNode(true);
-    clone.classList.remove("active");
-    clone.setAttribute("aria-hidden", "true");
-    track.appendChild(clone);
-  });
+  if (!scroller || cards.length === 0) return;
 
-  slides = Array.from(document.querySelectorAll(".reviewSlide"));
-
-  function centerSlide(index, instant){
-    slides.forEach(slide => slide.classList.remove("active"));
-
-    const active = slides[index];
-
-    if(!active) return;
-
-    active.classList.add("active");
-
-    const carouselWidth = carousel.offsetWidth;
-    const slideLeft = active.offsetLeft;
-    const slideWidth = active.offsetWidth;
-
-    if(instant){
-      track.style.transition = "none";
-    } else {
-      track.style.transition = "transform .85s ease";
-    }
-
-    const targetX = (carouselWidth / 2) - slideLeft - (slideWidth / 2);
-    track.style.transform = "translateX(" + targetX + "px)";
+  function refreshCards() {
+    cards = Array.from(scroller.querySelectorAll(".reviewCard"));
   }
 
-  function nextSlide(){
-    if(paused) return;
+  function setActiveCard(index) {
+    refreshCards();
 
+    cards.forEach(card => card.classList.remove("active"));
+
+    if (cards[index]) {
+      cards[index].classList.add("active");
+      cards[index].scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+      });
+    }
+  }
+
+  function nextReview() {
     currentIndex++;
-    centerSlide(currentIndex, false);
 
-    if(currentIndex >= originalCount){
-      setTimeout(function(){
-        currentIndex = 0;
-        centerSlide(currentIndex, true);
+    if (currentIndex >= cards.length) {
+      currentIndex = 0;
+    }
 
-        track.offsetHeight;
+    setActiveCard(currentIndex);
+  }
 
-        track.style.transition = "transform .85s ease";
-      }, 900);
+  function prevReview() {
+    currentIndex--;
+
+    if (currentIndex < 0) {
+      currentIndex = cards.length - 1;
+    }
+
+    setActiveCard(currentIndex);
+  }
+
+  function startAutoScroll() {
+    stopAutoScroll();
+
+    autoTimer = setInterval(function () {
+      if (!isPaused && !modal.classList.contains("open")) {
+        nextReview();
+      }
+    }, 5000);
+  }
+
+  function stopAutoScroll() {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
     }
   }
 
-  function startAutoScroll(){
-    stopAutoScroll();
-    timer = setInterval(nextSlide, 5000);
-  }
-
-  function stopAutoScroll(){
-    if(timer){
-      clearInterval(timer);
-      timer = null;
-    }
-  }
-
-  carousel.addEventListener("mouseenter", function(){
-    paused = true;
-    stopAutoScroll();
-  });
-
-  carousel.addEventListener("mouseleave", function(){
-    paused = false;
+  nextBtn.addEventListener("click", function () {
+    nextReview();
     startAutoScroll();
   });
 
-  slides.forEach(function(img, slideIndex){
-    img.addEventListener("click", function(){
-      currentIndex = slideIndex;
+  prevBtn.addEventListener("click", function () {
+    prevReview();
+    startAutoScroll();
+  });
 
-      if(currentIndex >= originalCount){
-        currentIndex = currentIndex - originalCount;
-      }
+  scroller.addEventListener("mouseenter", function () {
+    isPaused = true;
+  });
 
-      centerSlide(currentIndex, false);
-      openReviewModal(img.src);
+  scroller.addEventListener("mouseleave", function () {
+    isPaused = false;
+  });
+
+  cards.forEach(function (card, index) {
+    card.addEventListener("click", function () {
+      const img = card.querySelector("img");
+
+      if (!img) return;
+
+      currentIndex = index;
+      modalImg.src = img.src;
+      modal.classList.add("open");
+      isPaused = true;
     });
   });
 
-  window.addEventListener("resize", function(){
-    centerSlide(currentIndex, true);
+  function closeModal() {
+    modal.classList.remove("open");
+    modalImg.src = "";
+    isPaused = false;
+  }
+
+  modalClose.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      closeModal();
+    }
   });
 
-  centerSlide(0, true);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+
+    if (!modal.classList.contains("open")) {
+      if (e.key === "ArrowRight") {
+        nextReview();
+        startAutoScroll();
+      }
+
+      if (e.key === "ArrowLeft") {
+        prevReview();
+        startAutoScroll();
+      }
+    }
+  });
+
+  setActiveCard(currentIndex);
   startAutoScroll();
-
-})();
-</script>
-
-<script>
-function openReviewModal(src){
-  const modal = document.getElementById("reviewModal");
-  const img = document.getElementById("reviewModalImg");
-
-  img.src = src;
-  modal.classList.add("open");
-}
-
-function closeReviewModal(){
-  const modal = document.getElementById("reviewModal");
-  modal.classList.remove("open");
-}
-
-document.getElementById("reviewModal").addEventListener("click", function(e){
-  if(e.target.id === "reviewModal"){
-    closeReviewModal();
-  }
-});
-
-document.addEventListener("keydown", function(e){
-  if(e.key === "Escape"){
-    closeReviewModal();
-  }
 });
 </script>
